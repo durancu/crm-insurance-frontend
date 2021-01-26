@@ -1,0 +1,35 @@
+import React from 'react'
+
+//Components
+import { Container, Row, Col } from 'react-bootstrap'
+import TimeRange from './TimeRange'
+import '../components.css'
+import Customers from './Customers'
+
+//samples values
+import customers_list from '../samples/customers.json'
+import sales_list from '../samples/sales.json'
+import Sales from './Sales'
+
+
+export default function Employees() {
+  return (
+    <Container>
+      <h1 className="heading-title">Employees</h1>
+      <Row>
+        <Col>
+          <TimeRange/>
+        </Col>
+        <Col>
+          <Customers customers={customers_list}/>
+        </Col>
+        <Col>
+          <button className="button-default">Add Sale</button>
+        </Col>
+      </Row>
+      <Row>
+        <Sales sales={sales_list}/>
+      </Row>
+    </Container>
+  )
+}
