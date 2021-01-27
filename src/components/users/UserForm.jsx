@@ -42,10 +42,6 @@ export default function UserForm() {
                 <Form.Control type="password" placeholder="Enter password" name="password" onChange={handleChange} />
               </Form.Group>
             </Form.Row>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Body>
             <Form.Row>
               <Form.Group as={Col}>
                 <Form.Label>Role</Form.Label>
@@ -66,13 +62,13 @@ export default function UserForm() {
                 <Form.Control type="text" placeholder="Sale Bonus Percentage" name="sale_bonus_percentage" onChange={handleChange} />
               </Form.Group>
             </Form.Row>
+            <Form.Row className="justify-content-md-center">
+              <Form.Group as={Col}>
+                <Button type="submit" size="lg" block>Create</Button>
+              </Form.Group>
+            </Form.Row>
           </Card.Body>
         </Card>
-        <Form.Row className="justify-content-md-center">
-          <Form.Group as={Col}>
-            <Button type="submit" size="lg" block>Create</Button>
-          </Form.Group>
-        </Form.Row>
       </Form>
     </div>
   )
