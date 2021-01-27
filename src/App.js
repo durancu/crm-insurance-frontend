@@ -1,12 +1,14 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Employees from "./components/employees/Employees";
+import { Container } from 'react-bootstrap'
+import UserForm from './components/users/UserForm';
+
 
 function App() {
   return (
-    <div >
-        <Employees/>
-    </div>
+    <Container>
+      <UserForm/>
+    </Container>
   );
 }
 

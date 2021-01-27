@@ -23,7 +23,7 @@ export default function Employees() {
         <Col>
           <Customers customers={customers_list}/>
         </Col>
-        <Col>
+        <Col className="justify-content-md-center">
           <button className="button-default">Add Sale</button>
         </Col>
       </Row>

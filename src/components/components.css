@@ -8,6 +8,12 @@
   text-align: left;
 }
 
+/* .danger {
+  background: #bb285c;
+  color: #ffffff;
+  font-family: "Helvetica";
+} */
+
 .button-default {
   width: 110px;
   height: 46px;
