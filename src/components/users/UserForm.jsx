@@ -3,17 +3,39 @@ import React, { useState } from 'react'
 //components
 import { Form, Col, Button, Card } from 'react-bootstrap'
 
-export default function UserForm() {
-  const [form, setForm] = useState({})
+interface IForm {
+  firts_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  password: string;
+  role: number;
+  base_salary: number;
+  sale_bonus_percentage: number;
+}
 
-  const handleChange = ({ target }) => {
-    setForm(form => ({ ...form, [target.name]: target.value }))
+type FormElement = React.FormEvent<HTMLFormElement>
+
+
+export default function UserForm() {
+  const [form, setForm] = useState<IForm>()
+
+  const handleChange = ({ target }:any) => {
+    let dataForm = { ...form, [target.name]: target.value }
+
     console.log(form)
   }
 
+  const handleSubmite = (e: FormElement) => {
+    e.preventDefault()
+
+  }
+
+
+
   return (
     <div>
-      <Form>
+      <Form onSubmit={handleSubmite}>
         <Card>
           <Card.Body>
             <Form.Row>
