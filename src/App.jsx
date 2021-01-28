@@ -1,12 +1,21 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap'
 
+//Assets
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+//Components
+//import {BrowserRouter} from 'react-router-dom'
+import {Provider} from 'react-redux'
+import UserList from './components/users/UserList'
+
+//Store
+import {store} from './store'
 
 function App() {
   return (
-    <Container>
-    </Container>
+    <Provider store={store}>
+        <UserList/>
+    </Provider>
   );
 }
 
