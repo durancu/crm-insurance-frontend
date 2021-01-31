@@ -5,17 +5,17 @@ export const initialState = {
   error: false
 }
 
-const userLoadStatusReducer = (state = initialState, { type }) => {
+const userCreateStatusReducer = (state = initialState, { type }) => {
   switch (type) {
-    case types.LOAD_USER_REQUEST:
+    case types.USER_CREATE_REQUEST:
       return { loading: true, error: false }
-    case types.LOAD_USER_FAIL:
+    case types.USER_CREATE_FAIL:
       return { loading: false, error: true }
-    case types.LOAD_USER_SUCCESS:
+    case types.USER_CREATE_SUCCESS:
       return { loading: false, error: false }
     default:
       return state;
   }
 }
 
-export default userLoadStatusReducer;
+export default userCreateStatusReducer;

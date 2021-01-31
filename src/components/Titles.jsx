@@ -1,13 +1,12 @@
-import { type } from 'os'
 import React from 'react'
 
 //assets
-import "./components.css"
+import "../components/assets/components.css"
 
 
 
-export default function Titles(props:{ title:string }) {
+export default function Titles({ title }) {
   return (
-    <h1 className="heading-title">{props.title}</h1>
+    <h1 className="heading-title">{title}</h1>
   )
 }

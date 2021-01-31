@@ -6,15 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //Components
 //import {BrowserRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
-import UserList from './components/users/UserList'
 
 //Store
-import {store} from './store'
+import {store} from './redux/store'
+import Users from './components/users/Users';
 
 function App() {
   return (
     <Provider store={store}>
-        <UserList/>
+       <Users/>
     </Provider>
   );
 }

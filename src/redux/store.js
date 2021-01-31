@@ -12,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 //DevToolsExtension
 const composeEnhancers = composeWithDevTools({
-  realtime: true
+  realtime: true,
 })
 
 export let store = createStore(reducers, composeEnhancers(applyMiddleware(sagaMiddleware)))

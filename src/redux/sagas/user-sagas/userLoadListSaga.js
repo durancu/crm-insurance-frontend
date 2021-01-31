@@ -5,26 +5,26 @@ import * as types from '../../actions/actionTypes'
 import { userLoadFail, userLoadSuccess } from '../../actions'
 
 //API
-import axios from 'axios'
+import { apiGet } from '../../../api'
 
 const apiCall = () => (
-  axios.get("http://localhost:5000/users").catch(err => console.log(err))
+  apiGet('users').catch(err => console.log(err))
 )
 
 const sagaRequest = function* sagaRequest() {
   try {
     const response = yield call(apiCall);
-    yield put(userLoadSuccess(response.data))
+    yield put(userLoadSuccess(response.data));
   } catch (e) {
     yield put(userLoadFail())
   }
 }
 
-const userGetRequest = function* userGetRequest(){
-  yield takeLatest(types.LOAD_USER_REQUEST,sagaRequest)
+const userGetRequest = function* userGetRequest() {
+  yield takeLatest(types.USER_LOAD_REQUEST, sagaRequest)
 }
 
-const userLoadListSaga = function* userLoadListSaga(){
+const userLoadListSaga = function* userLoadListSaga() {
   yield spawn(userGetRequest)
 }
 

@@ -3,17 +3,17 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 //Actions
-import { userLoadRequest } from '../../actions'
+import { userLoadRequest } from '../../redux/actions'
 
 //assets
 
 //components
-import { Table, Button } from 'react-bootstrap'
+import { Table, Button, Spinner } from 'react-bootstrap'
 import { Trash, Pencil } from 'react-bootstrap-icons'
 
 //example
 
-function UserList({ userLoadRequest, users ,loading}) {
+function UserList({ userLoadRequest, users, loading }) {
   useEffect(() => {
     userLoadRequest()
   }, [userLoadRequest]);
@@ -31,19 +31,24 @@ function UserList({ userLoadRequest, users ,loading}) {
         </tr>
       </thead>
       <tbody>
-        {users.map(user => (
-          <tr key={user._id}>
-            <td>{user.first_name}</td>
-            <td>{user.last_name}</td>
-            <td>{user.email}</td>
-            <td>{user.phone}</td>
-            <td>{user.role}</td>
-            <td>
-              <Button variant="success" ><Pencil /></Button>{' '}
-              <Button variant="danger" ><Trash /></Button>
-            </td>
-          </tr>
-        ))}
+        {
+        loading || users.map(user => (
+            <tr key={user._id}>
+              <td>{user.first_name}</td>
+              <td>{user.last_name}</td>
+              <td>{user.email}</td>
+              <td>{user.phone}</td>
+              <td>{user.role}</td>
+              <td>
+                <Button variant="success" ><Pencil /></Button>{' '}
+                <Button variant="danger" ><Trash /></Button>
+              </td>
+            </tr>
+          ))
+        }
+        {
+          loading && <tr><td colSpan="6" align="center">Loading...</td></tr>
+        }
       </tbody>
     </Table>
   )
@@ -52,7 +57,7 @@ function UserList({ userLoadRequest, users ,loading}) {
 UserList.protoTypes = {
   userLoadRequest: PropTypes.func.isRequired,
   users: PropTypes.array.isRequired,
-  loading:PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({

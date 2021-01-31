@@ -1,17 +1,18 @@
-import React from 'react'
-
-//assets
-import '../components.css'
+import React, { useState } from 'react'
 
 //Components
 import Titles from '../Titles'
 import UserList from './UserList'
+import UserForm from './UserForm'
 
 //sample
-import user_list from '../samples/users.json'
-import { Col, Row,Button } from 'react-bootstrap'
+import { Col, Row, Button } from 'react-bootstrap'
 
 export default function Users() {
+  const [show, setShow] = useState(true)
+
+  const handleModal = () => setShow(show => !show)
+
   return (
     <div>
       <Row>
@@ -19,11 +20,12 @@ export default function Users() {
           <Titles title="Users" />
         </Col>
         <Col>
-          <Button>Create</Button>
+          <Button onClick={handleModal}>Create</Button>
         </Col>
+        <UserForm show={show} handleModal={handleModal}/>
       </Row>
       <Row>
-        <UserList users={user_list} />
+        <UserList />
       </Row>
     </div>
   )

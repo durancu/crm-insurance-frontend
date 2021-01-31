@@ -6,8 +6,10 @@ export const initialState = {
 
 const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case types.LOAD_USER_SUCCESS:
+    case types.USER_LOAD_SUCCESS:
       return { ...state, list: payload }
+    case types.USER_CREATE_SUCCESS:
+      return { ...state, list: state.list.concat(payload) }//Buscar metodo agregar en redux
     default:
       return state;
   }
