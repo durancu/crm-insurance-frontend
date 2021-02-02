@@ -9,12 +9,12 @@ import {Provider} from 'react-redux'
 
 //Store
 import {store} from './redux/store'
-import Users from './components/users/Users';
+import Customers from './components/customers';
 
 function App() {
   return (
     <Provider store={store}>
-       <Users/>
+      <Customers/>
     </Provider>
   );
 }
