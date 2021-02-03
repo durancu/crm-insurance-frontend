@@ -17,12 +17,10 @@ export const userAuthFail = () => ({
 })
 
 /** Action Creator
- * @param {object} payload required
  * @returns {object} action and object
 */
-export const userAuthSuccess = (payload) => ({
-  type: types.USER_AUTH_SUCCESS,
-  payload
+export const userAuthSuccess = () => ({
+  type: types.USER_AUTH_SUCCESS
 })
 
 
