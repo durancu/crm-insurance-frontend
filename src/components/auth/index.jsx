@@ -43,7 +43,7 @@ function Auth({ userAuthRequest, loading }) {
               </Card.Body>
               <Card.Footer>
                 <Form.Group>
-                  <Button type="submit" variant="primary" size="lg" block disabled={loading ? true : false}>{loading ? <Spinner animation="border" /> : `Login`}</Button>
+                  <Button type="submit" variant="primary" size="lg" block disabled={loading}>{loading ? <Spinner animation="border" /> : `Login`}</Button>
                 </Form.Group>
               </Card.Footer>
             </Form>

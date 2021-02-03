@@ -3,7 +3,6 @@ import React from 'react'
 //Components
 import { Container, Row, Col } from 'react-bootstrap'
 import TimeRange from './TimeRange'
-import '../components.css'
 import Customers from './Customers'
 
 //samples values
@@ -15,7 +14,7 @@ import Sales from './Sales'
 export default function Employees() {
   return (
     <Container>
-      <h1 className="heading-title">Employees</h1>
+      <h1>Employees</h1>
       <Row>
         <Col>
           <TimeRange/>

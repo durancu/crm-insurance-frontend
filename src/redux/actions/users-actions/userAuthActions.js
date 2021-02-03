@@ -23,4 +23,25 @@ export const userAuthSuccess = () => ({
   type: types.USER_AUTH_SUCCESS,
 })
 
+/** Action Creator
+ * @returns {string} action
+*/
+export const userCheckAuthRequest = () => ({
+  type: types.USER_CHECK_AUTH_REQUEST,
+})
+
+/** Action Creator
+ * @returns {string} action
+*/
+export const userCheckAuthFail = () => ({
+  type: types.USER_CHECK_AUTH_FAIL,
+})
+
+/** Action Creator
+ * @returns {string} action
+*/
+export const userCheckAuthSuccess = () => ({
+  type: types.USER_CHECK_AUTH_SUCCESS,
+})
+
 

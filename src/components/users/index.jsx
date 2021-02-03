@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 //Components
-import Titles from '../Titles'
 import UserList from './UserList'
 import UserForm from './UserForm'
 
@@ -17,7 +16,7 @@ export default function Users() {
     <div>
       <Row>
         <Col lg="10">
-          <Titles title="Users" />
+          <h3>Users</h3>
         </Col>
         <Col>
           <Button onClick={handleModal}>Create</Button>

@@ -8,7 +8,7 @@ import { userLoadFail, userLoadSuccess } from '../../actions'
 import { apiGet } from '../../../global/apiMethods'
 
 const apiCall = () => (
-  apiGet('users').catch(err => console.log(err))
+  apiGet('users',true).catch(err => console.log(err))
 )
 
 const sagaRequest = function* sagaRequest() {

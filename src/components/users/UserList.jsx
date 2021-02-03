@@ -32,7 +32,7 @@ function UserList({ userLoadRequest, users, loading }) {
       </thead>
       <tbody>
         {
-        loading || users.map(user => (
+          loading || users.map(user => (
             <tr key={user._id}>
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>
@@ -47,7 +47,7 @@ function UserList({ userLoadRequest, users, loading }) {
           ))
         }
         {
-          loading && <tr><td colSpan="6" align="center">Loading...</td></tr>
+          loading && <tr><td colSpan="6" align="center"><Spinner animation="grow" variant="primary" /></td></tr>
         }
       </tbody>
     </Table>

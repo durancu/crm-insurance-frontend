@@ -1,7 +1,10 @@
 export { counterDownAction, counterUpAction } from './testAction'
 
 //User
-export { userAuthRequest, userAuthFail, userAuthSuccess } from './users-actions/userAuthActions'
+export {
+  userAuthRequest, userAuthFail, userAuthSuccess,
+  userCheckAuthRequest, userCheckAuthFail, userCheckAuthSuccess
+} from './users-actions/userAuthActions'
 export { userLoadRequest, userLoadFail, userLoadSuccess } from './users-actions/userLoadActions';
 export { userCreateRequest, userCreateFail, userCreateSuccess } from './users-actions/userCreateActions'
 

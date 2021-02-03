@@ -4,6 +4,7 @@ import testReducer from './testReducer'
 //User
 import userAuthReducer from './users-reducers/userAuthReducer'
 import userAuthStatusReducer from './users-reducers/userAuthStatusReducer'
+import userCheckAuthStatusReducer from './users-reducers/userCheckAuthStatusReducer'
 import userReducer from './users-reducers/userReducers'
 import userLoadStatusReducer from './users-reducers/userLoadStatusReducer'
 import userCreateStatusReducer from './users-reducers/userCreateStatusReducer'
@@ -21,6 +22,7 @@ export default combineReducers({
   //User
   userAuthReducer,
   userAuthStatusReducer,
+  userCheckAuthStatusReducer,
   userReducer,
   userLoadStatusReducer,
   userCreateStatusReducer,

@@ -1,20 +1,25 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
 //Assets
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 //Components
-//import {BrowserRouter} from 'react-router-dom'
-import {Provider} from 'react-redux'
+import { Containers } from './components/globals/Container';
+import Routes from './routes'
 
 //Store
-import {store} from './redux/store'
-import Auth  from './components/auth';
+import { store } from './redux/store'
 
 function App() {
   return (
     <Provider store={store}>
-      <Auth/>
+      <BrowserRouter>
+        <Containers>
+          <Routes/>
+        </Containers>
+      </BrowserRouter>
     </Provider>
   );
 }

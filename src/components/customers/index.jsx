@@ -9,7 +9,7 @@ export default function Customers() {
     <div>
       <Row>
         <Col sm="10">
-          <h1>Custommers</h1>
+          <h1>Customers</h1>
         </Col>
         <Col sm="2">
           <Button>Create</Button>
