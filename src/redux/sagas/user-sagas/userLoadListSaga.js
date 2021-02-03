@@ -5,7 +5,7 @@ import * as types from '../../actions/actionTypes'
 import { userLoadFail, userLoadSuccess } from '../../actions'
 
 //API
-import { apiGet } from '../../../api'
+import { apiGet } from '../../../global/apiMethods'
 
 const apiCall = () => (
   apiGet('users').catch(err => console.log(err))

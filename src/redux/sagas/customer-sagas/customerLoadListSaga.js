@@ -3,7 +3,7 @@ import { call, put, spawn, takeLatest } from 'redux-saga/effects'
 import * as types from '../../actions/actionTypes'
 import { customerLoadFail, customerLoadSuccess } from '../../actions'
 //API
-import { apiGet } from '../../../api'
+import { apiGet } from '../../../global/apiMethods'
 
 const apiCall = () => (
   apiGet('customers').catch(err => console.log(err))

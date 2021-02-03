@@ -10,8 +10,10 @@ const customerGetStatusReducer = (state = initialState, { type, payload }) => {
 
     case types.USER_GET_REQUEST:
       return { loading: true, error: false }
+
     case types.USER_GET_FAIL:
       return { loading: false, error: true }
+
     case types.USER_GET_SUCCESS:
       return { loading: false, error: false }
 

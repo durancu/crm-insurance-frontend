@@ -5,7 +5,7 @@ import * as types from '../../actions/actionTypes'
 import { userCreateFail, userCreateSuccess } from '../../actions'
 
 //API
-import { apiPost } from '../../../api'
+import { apiPost } from '../../../global/apiMethods'
 
 
 const apiCall = (data) => (
