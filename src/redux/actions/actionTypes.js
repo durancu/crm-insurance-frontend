@@ -1,9 +1,16 @@
 //Test
-
 export const COUNTER_UP = "COUNTER_UP"
 export const COUNTER_DOWN = "COUNTER_DOWN"
 
 //USER
+//Auth
+/**@constant {string} USER_AUTH_REQUEST*/
+export const USER_AUTH_REQUEST = "USER_AUTH_REQUEST"
+/**@constant {string} USER_AUTH_FAIL*/
+export const USER_AUTH_FAIL = "USER_AUTH_FAIL"
+/**@constant {string} USER_AUTH_SUCCESS*/
+export const USER_AUTH_SUCCESS = "USER_AUTH_SUCCESS"
+
 //List
 /**@constant {string} USER_LOAD_REQUEST*/
 export const USER_LOAD_REQUEST = "USER_LOAD_REQUEST";

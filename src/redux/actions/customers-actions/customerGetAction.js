@@ -20,7 +20,7 @@ export const customerGetFail = () => ({
  * @param {object} payload
  * @returns {object} payload
 */
-export const customerGetSucces = (payload) => ({
+export const customerGetSuccess = (payload) => ({
   type: types.CUSTOMERS_GET_SUCCESS,
   payload
 })
