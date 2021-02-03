@@ -20,10 +20,10 @@ const sagaRequest = function* sagaRequest(action) {
 }
 
 const userAuthRequest = function* userAuthRequest() {
-  yield takeLatest(types.USER_CREATE_REQUEST, sagaRequest)
+  yield takeLatest(types.USER_AUTH_REQUEST, sagaRequest)
 }
 
-const userAuthSaga = function* userAuthSaga(){
+const userAuthSaga = function* userAuthSaga() {
   yield spawn(userAuthRequest)
 }
 

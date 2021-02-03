@@ -20,7 +20,7 @@ export const userAuthFail = () => ({
  * @returns {object} action and object
 */
 export const userAuthSuccess = () => ({
-  type: types.USER_AUTH_SUCCESS
+  type: types.USER_AUTH_SUCCESS,
 })
 
 

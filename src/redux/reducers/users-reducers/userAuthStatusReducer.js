@@ -8,11 +8,11 @@ const initialState = {
 const userAuthStatusReducer = (state = initialState, { type }) => {
   switch (type) {
 
-    case types.USER_CREATE_REQUEST:
+    case types.USER_AUTH_REQUEST:
       return { loading: true, error: false }
-    case types.USER_CREATE_FAIL:
+    case types.USER_AUTH_FAIL:
       return { loading: false, error: true }
-    case types.USER_CREATE_SUCCESS:
+    case types.USER_AUTH_SUCCESS:
       return { loading: false, error: false }
 
     default:

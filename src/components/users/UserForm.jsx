@@ -26,7 +26,7 @@ function UserForm({ userCreateRequest, loading ,show,handleModal}) {
     setForm(form => ({ ...form, [target.name]: target.value }))
   }
 
-  const handleSubmite = (e) => {
+  const handleSubmit = (e) => {
     userCreateRequest(form)
     e.preventDefault()
   }
@@ -38,7 +38,7 @@ function UserForm({ userCreateRequest, loading ,show,handleModal}) {
           <Modal.Title>Create User {loading && <Spinner animation="border"/>}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmite}>
+          <Form onSubmit={handleSubmit}>
             <Row>
               <Form.Group as={Col}>
                 <Form.Label>Email</Form.Label>

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import testReducer from './testReducer'
 //User
+import userAuthReducer from './users-reducers/userAuthReducer'
 import userAuthStatusReducer from './users-reducers/userAuthStatusReducer'
 import userReducer from './users-reducers/userReducers'
 import userLoadStatusReducer from './users-reducers/userLoadStatusReducer'
@@ -18,6 +19,7 @@ import customerUpdateStatusReducer from './customers-reducers/customerUpdateStat
 export default combineReducers({
   testReducer,
   //User
+  userAuthReducer,
   userAuthStatusReducer,
   userReducer,
   userLoadStatusReducer,
