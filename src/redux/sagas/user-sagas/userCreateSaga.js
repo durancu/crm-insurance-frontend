@@ -1,34 +1,28 @@
-import { call, put, spawn, takeLatest } from 'redux-saga/effects'
+import { call, put, spawn, takeLatest } from "redux-saga/effects";
 
-//actions
-import * as types from '../../actions/actionTypes'
-import { userCreateFail, userCreateSuccess } from '../../actions'
+import * as types from "../../actions/actionTypes";
+import { userCreateFail, userCreateSuccess } from "../../actions";
 
-//API
-import { apiPost } from '../../../global/apiMethods'
+import { apiPost } from "../../../global/apiMethods";
 
+const apiCall = (data) =>
+  apiPost("users", data).catch((err) => console.log(err));
 
-const apiCall = (data) => (
-  apiPost('users',data).catch(err => console.log(err))
-)
-
-const sagaRequest = function* sagaRequest(action) {
-  const {payload} = action;
-
+const sagaRequest = function* sagaRequest({ payload }) {
   try {
-   const response = yield call(apiCall,payload);
+    const response = yield call(apiCall, payload);
     yield put(userCreateSuccess(response.data.user));
   } catch (e) {
-    yield put(userCreateFail())
+    yield put(userCreateFail());
   }
-}
+};
 
 const userCreateRequest = function* userCreateRequest() {
-  yield takeLatest(types.USER_CREATE_REQUEST, sagaRequest)
-}
+  yield takeLatest(types.USER_CREATE_REQUEST, sagaRequest);
+};
 
 const userCreateSaga = function* userCreateSaga() {
-  yield spawn(userCreateRequest)
-}
+  yield spawn(userCreateRequest);
+};
 
-export default userCreateSaga
+export default userCreateSaga;

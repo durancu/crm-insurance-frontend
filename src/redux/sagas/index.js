@@ -1,20 +1,22 @@
-import { spawn } from 'redux-saga/effects'
+import { spawn } from "redux-saga/effects";
 //USER
-import userAuthSaga from './user-sagas/userAuthSaga'
-import userCheckAuthSaga from './user-sagas/userCheckAuthSaga'
-import userLoadListSaga from './user-sagas/userLoadListSaga'
-import userCreateSaga from './user-sagas/userCreateSaga'
+import userAuthSaga from "./user-sagas/userAuthSaga";
+import userCheckAuthSaga from "./user-sagas/userCheckAuthSaga";
+import userLoadListSaga from "./user-sagas/userLoadListSaga";
+import userCreateSaga from "./user-sagas/userCreateSaga";
 //Customers
-import customerLoadListSaga from './customer-sagas/customerLoadListSaga'
+import customerLoadListSaga from "./customer-sagas/customerLoadListSaga";
+import customerCreateSaga from "./customer-sagas/customerCreateSaga";
 
 const sagas = function* sagas() {
   //User
-  yield spawn(userAuthSaga)
-  yield spawn(userCheckAuthSaga)
-  yield spawn(userLoadListSaga)
-  yield spawn(userCreateSaga)
+  yield spawn(userAuthSaga);
+  yield spawn(userCheckAuthSaga);
+  yield spawn(userLoadListSaga);
+  yield spawn(userCreateSaga);
   //Customers
-  yield spawn(customerLoadListSaga)
-}
+  yield spawn(customerLoadListSaga);
+  yield spawn(customerCreateSaga);
+};
 
-export default sagas
+export default sagas;
