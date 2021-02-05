@@ -10,7 +10,7 @@ import { customerCreateRequest } from '../../redux/actions'
 
 
 const CustomerForm = ({ loading, error, customerCreateRequest }) => {
-  const [modal, setModal] = useState(true)
+  const [modal, setModal] = useState(false)
   const [form, setForm] = useState({
     name: "",
     isCompany: "",
@@ -25,8 +25,10 @@ const CustomerForm = ({ loading, error, customerCreateRequest }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     customerCreateRequest(form)
-    error || clearForm()
-    handleModal()
+    if (loading === false && error === false) {
+      clearForm()
+      handleModal()
+    }
   }
 
   const handleModal = () => {
