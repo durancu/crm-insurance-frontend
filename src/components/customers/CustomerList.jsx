@@ -7,14 +7,14 @@ import { connect } from 'react-redux'
 import { customerLoadRequest } from '../../redux/actions'
 
 //components
-import { Table } from 'react-bootstrap'
+import { Spinner, Table } from 'react-bootstrap'
 import CustomerItem from './CustomerItem'
 //import {Table, Button} from 'react-bootstrap'
 
 
 
-function CustomerList({ customerLoadRequest, customers }) {
-
+function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }) {
+  var no = 0;
   useEffect(() => {
     customerLoadRequest()
   }, [customerLoadRequest])
@@ -26,16 +26,18 @@ function CustomerList({ customerLoadRequest, customers }) {
           <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Company</th>
+            <th>Type</th>
             <th>Email</th>
-            <th colSpan="2">Phone</th>
+            <th>Phone</th>
+            <th align="center">{loadingDelete && <Spinner animation="border" variant="danger"/>}</th>
           </tr>
         </thead>
         <tbody>
           {
-            customers.length > 0 && customers.map(customer => (
-              <CustomerItem key={customer._id} customer={customer} />
-            ))
+            loading ? <tr><td align="center" colSpan="5"><Spinner animation="border" variant="primary" /></td></tr> :
+              customers.length > 0 ? customers.map(customer => (
+                <CustomerItem no={no += 1} key={customer._id} customer={customer} />
+              )) : <tr><td align="center" colSpan="5">I not have customers for show</td></tr>
           }
         </tbody>
       </Table>
@@ -45,11 +47,15 @@ function CustomerList({ customerLoadRequest, customers }) {
 
 CustomerList.propTypes = {
   customerLoadRequest: PropTypes.func.isRequired,
-  customers: PropTypes.array,
+  customers: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  loadingDelete: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  customers: state.customerReducers.list
+  customers: state.customerReducer.list,
+  loading: state.customerLoadStatusReducer.loading,
+  loadingDelete: state.customerDeleteStatusReducer.loading,
 })
 
 const mapDispatchToProps = {
