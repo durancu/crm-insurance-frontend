@@ -4,7 +4,7 @@ const initialState = {
   list: []
 }
 
-const customerReducers = (state = initialState, { type, payload }) => {
+const customerReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.CUSTOMERS_LOAD_SUCCESS:
       return { ...state, list: payload }
@@ -26,4 +26,4 @@ const customerReducers = (state = initialState, { type, payload }) => {
   }
 }
 
-export default customerReducers;
+export default customerReducer;

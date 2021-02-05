@@ -1,7 +1,8 @@
 import React from 'react'
 
 //componnets
-import { Row, Col, Button } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
+import CustomerForm  from './CustomerForm'
 import CustomerList from './CustomerList'
 
 export default function Customers() {
@@ -12,7 +13,7 @@ export default function Customers() {
           <h1>Customers</h1>
         </Col>
         <Col sm="2">
-          <Button>Create</Button>
+          <CustomerForm/>
         </Col>
       </Row>
       <Row>

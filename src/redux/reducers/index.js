@@ -9,7 +9,7 @@ import userReducer from './users-reducers/userReducers'
 import userLoadStatusReducer from './users-reducers/userLoadStatusReducer'
 import userCreateStatusReducer from './users-reducers/userCreateStatusReducer'
 //Customer
-import customerReducers from './customers-reducers/customerReducers'
+import customerReducer from './customers-reducers/customerReducer'
 import customerLoadStatusReducer from './customers-reducers/customerLoadStatusReducer'
 import customerCreateStatusReducer from './customers-reducers/customerCreateStatusReducer'
 import customerDeleteStatusReducer from './customers-reducers/customerDeleteStatusReducer'
@@ -27,7 +27,7 @@ export default combineReducers({
   userLoadStatusReducer,
   userCreateStatusReducer,
   //Customer
-  customerReducers,
+  customerReducer,
   customerLoadStatusReducer,
   customerCreateStatusReducer,
   customerDeleteStatusReducer,
