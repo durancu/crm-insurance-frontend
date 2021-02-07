@@ -1,24 +1,18 @@
 import React from 'react'
 
-//componnets
+//components
 import { Row, Col } from 'react-bootstrap'
-import CustomerForm  from './CustomerForm'
 import CustomerList from './CustomerList'
 
 export default function Customers() {
   return (
     <div>
       <Row>
-        <Col sm="10">
-          <h1>Customers</h1>
-        </Col>
-        <Col sm="2">
-          <CustomerForm/>
-        </Col>
+        <h1>Customers</h1>
       </Row>
       <Row>
         <Col sm="12" lg="12">
-          <CustomerList/>
+          <CustomerList />
         </Col>
       </Row>
     </div>

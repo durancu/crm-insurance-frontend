@@ -19,7 +19,7 @@ export const Containers = ({ children }) => {
 }
 
 Container.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({

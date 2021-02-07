@@ -41,12 +41,11 @@ export const apiDelete = (uri, authRequired = false, urlBase = API_BASE_URL) => 
 
 /**API Petition
  * @param {string} uri required
- * @param {string} _id required
  * @param {object} data required
  * @param {boolean} authRequired optional
  * @param {string} urlBase optional
  * @returns {object} promise
  */
-export const apiUpdate = (uri, _id, data, authRequired = false, urlBase = API_BASE_URL) => (
-  axios.put(`${urlBase}${uri}${_id}`, data, { headers: loadToken(authRequired) })
+export const apiUpdate = (uri, data, authRequired = false, urlBase = API_BASE_URL) => (
+  axios.put(`${urlBase}${uri}`, data, { headers: loadToken(authRequired) })
 )

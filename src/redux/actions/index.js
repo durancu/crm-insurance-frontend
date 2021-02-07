@@ -1,5 +1,7 @@
 export { counterDownAction, counterUpAction } from './testAction'
 
+//Global
+
 //User
 export {
   userAuthRequest, userAuthFail, userAuthSuccess,
