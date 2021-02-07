@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 
 import testReducer from './testReducer'
+//Global
+
 //User
 import userAuthReducer from './users-reducers/userAuthReducer'
 import userAuthStatusReducer from './users-reducers/userAuthStatusReducer'
@@ -14,11 +16,12 @@ import customerLoadStatusReducer from './customers-reducers/customerLoadStatusRe
 import customerCreateStatusReducer from './customers-reducers/customerCreateStatusReducer'
 import customerDeleteStatusReducer from './customers-reducers/customerDeleteStatusReducer'
 import customerGetStatusReducer from './customers-reducers/customerGetStatusReducer'
-import customerUpdateStatusReducer from './customers-reducers/customerUpdateStatusReducer'
+import customerUpdateStatusReducer from "./customers-reducers/customerUpdateStatusReducer";
 
 
 export default combineReducers({
   testReducer,
+  //Global
   //User
   userAuthReducer,
   userAuthStatusReducer,

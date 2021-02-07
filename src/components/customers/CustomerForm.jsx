@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -6,17 +6,32 @@ import PropTypes from 'prop-types'
 import { Form, Button, Modal, Col, Row, Spinner } from 'react-bootstrap'
 
 //action
-import { customerCreateRequest } from '../../redux/actions'
+import { customerCreateRequest, customerUpdateRequest } from '../../redux/actions'
 
-
-const CustomerForm = ({ loading, error, customerCreateRequest }) => {
-  const [modal, setModal] = useState(false)
-  const [form, setForm] = useState({
+const CustomerForm = ({
+  loading,
+  loadingGetCustomer,
+  error,
+  customerCreateRequest,
+  customerUpdateRequest,
+  showModal,
+  modal,
+  edit,
+  customer }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  let defaultForm = {
     name: "",
     isCompany: "",
     email: "",
     phone: ""
-  })
+  }
+
+  const [form, setForm] = useState(defaultForm)
+
+  useEffect(() => {
+    edit ? setForm(customer) : setForm(defaultForm)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [edit, customer])
 
   const handleChange = ({ target }) => {
     setForm(form => ({ ...form, [target.name]: target.value }))
@@ -24,36 +39,30 @@ const CustomerForm = ({ loading, error, customerCreateRequest }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    customerCreateRequest(form)
-    if (loading === false && error === false) {
-      clearForm()
-      handleModal()
-    }
-  }
 
-  const handleModal = () => {
-    setModal(form => (!form))
+    edit ? customerUpdateRequest(form, form._id) : customerCreateRequest(form);
+
+    setTimeout(() => {
+      if (!loading && !error) {
+        clearForm();
+        showModal();
+      }
+    }, 1000);
   }
 
   const clearForm = () => {
-    setForm({
-      name: "",
-      isCompany: "",
-      email: "",
-      phone: ""
-    })
+    setForm(defaultForm)
   }
 
   return (
     <Fragment>
-      <Button variant="primary" onClick={handleModal}>Create</Button>
-      <Modal show={modal} onHide={handleModal}>
+      <Modal show={modal} onHide={showModal}>
         <Form onSubmit={handleSubmit}>
-          <fieldset disabled={loading}>
+          <fieldset disabled={loading || loadingGetCustomer}>
             <Modal.Header closeButton>
               <Modal.Title>
-                Customers Create
-          </Modal.Title>
+                Customers {edit ? `Update` : `Create`}
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -64,8 +73,9 @@ const CustomerForm = ({ loading, error, customerCreateRequest }) => {
                       type="text"
                       name="name"
                       value={form.name}
+                      onChange={handleChange}
                       required
-                      onChange={handleChange} />
+                    />
                   </Form.Group>
                 </Col>
               </Row>
@@ -86,12 +96,14 @@ const CustomerForm = ({ loading, error, customerCreateRequest }) => {
                 <Col>
                   <Form.Group>
                     <Form.Label>How type of customers is?</Form.Label>
-                    <Form.Control as="select"
+                    <Form.Control
+                      as="select"
                       name="isCompany"
-                      custom
-                      value={form.isCompany || ""}
+                      value={form.isCompany}
                       onChange={handleChange}
-                      required >
+                      custom
+                      required
+                    >
                       <option value="" disabled >Choose a type</option>
                       <option value="true">Company</option>
                       <option value="false">Person</option>
@@ -110,7 +122,13 @@ const CustomerForm = ({ loading, error, customerCreateRequest }) => {
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button type="submit" block>{loading ? <Spinner animation="border" /> : `Create`}</Button>
+              <Button
+                type="submit"
+                variant={edit ? `success` : `primary`}
+                block
+              >
+                {loading ? <Spinner animation="border" /> : (edit ? `Update` : `Create`)}
+              </Button>
             </Modal.Footer>
           </fieldset>
         </Form>
@@ -122,16 +140,22 @@ const CustomerForm = ({ loading, error, customerCreateRequest }) => {
 CustomerForm.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
-  customerCreateRequest: PropTypes.func.isRequired
+  modalShow: PropTypes.bool,
+  loadingGetCustomer: PropTypes.bool.isRequired,
+  customerCreateRequest: PropTypes.func.isRequired,
+  formModal: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
   loading: state.customerCreateStatusReducer.loading,
   error: state.customerCreateStatusReducer.error,
+  customer: state.customerReducer.item,
+  loadingGetCustomer: state.customerGetStatusReducer.loading
 })
 
 const mapDispatchToProps = {
-  customerCreateRequest
+  customerCreateRequest,
+  customerUpdateRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerForm)

@@ -6,8 +6,10 @@ import userLoadListSaga from "./user-sagas/userLoadListSaga";
 import userCreateSaga from "./user-sagas/userCreateSaga";
 //Customers
 import customerLoadListSaga from "./customer-sagas/customerLoadListSaga";
+import customerGetSaga from "./customer-sagas/customerGetSaga";
 import customerCreateSaga from "./customer-sagas/customerCreateSaga";
 import customerDeleteSaga from "./customer-sagas/customerDeleteSaga";
+import customerUpdateSaga from "./customer-sagas/customerUpdateSaga";
 
 const sagas = function* sagas() {
   //User
@@ -17,8 +19,10 @@ const sagas = function* sagas() {
   yield spawn(userCreateSaga);
   //Customers
   yield spawn(customerLoadListSaga);
+  yield spawn(customerGetSaga);
   yield spawn(customerCreateSaga);
   yield spawn(customerDeleteSaga);
+  yield spawn(customerUpdateSaga);
 };
 
 export default sagas;
