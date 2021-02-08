@@ -1,31 +1,28 @@
-import { call, put, spawn, takeLatest } from 'redux-saga/effects'
-
+import { call, put, spawn, takeLatest } from "redux-saga/effects";
 //actions
-import * as types from '../../actions/actionTypes'
-import { userLoadFail, userLoadSuccess } from '../../actions'
-
+import * as types from "../../actions/actionTypes";
+import { userLoadFail, userLoadSuccess } from "../../actions";
 //API
-import { apiGet } from '../../../global/apiMethods'
+import { apiGet } from "../../../global/apiMethods";
 
-const apiCall = () => (
-  apiGet('users',true).catch(err => console.log(err))
-)
+const apiCall = () =>
+  apiGet("users", true).catch((err) => console.log(err));
 
 const sagaRequest = function* sagaRequest() {
   try {
     const response = yield call(apiCall);
     yield put(userLoadSuccess(response.data));
   } catch (e) {
-    yield put(userLoadFail())
+    yield put(userLoadFail());
   }
-}
+};
 
-const userGetRequest = function* userGetRequest() {
-  yield takeLatest(types.USER_LOAD_REQUEST, sagaRequest)
-}
+const userLoadRequest = function* userLoadRequest() {
+  yield takeLatest(types.USER_LOAD_REQUEST, sagaRequest);
+};
 
 const userLoadListSaga = function* userLoadListSaga() {
-  yield spawn(userGetRequest)
-}
+  yield spawn(userLoadRequest);
+};
 
-export default userLoadListSaga
+export default userLoadListSaga;
