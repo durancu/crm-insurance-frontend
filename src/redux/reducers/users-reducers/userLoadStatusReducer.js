@@ -2,7 +2,7 @@ import * as types from '../../actions/actionTypes'
 
 export const initialState = {
   loading: false,
-  error: false
+  error  : false
 }
 
 const userLoadStatusReducer = (state = initialState, { type }) => {

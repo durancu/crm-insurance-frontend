@@ -1,134 +1,161 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 //components
-import { Form, Col, Button, Row ,Modal, Spinner} from 'react-bootstrap'
+import { Form, Button, Modal, Col, Row, Spinner } from 'react-bootstrap'
 
-//actions
-import { userCreateRequest } from '../../redux/actions'
+//action
+import { userCreateRequest, userUpdateRequest } from '../../redux/actions'
 
-function UserForm({ userCreateRequest, loading ,show,handleModal}) {
-  const [form, setForm] = useState({
-    first_name: "",
-    last_name: "",
+const UserForm = ({
+  loading,
+  loadingGetUser,
+  error,
+  userCreateRequest,
+  userUpdateRequest,
+  showModal,
+  modal,
+  edit,
+  user }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  let defaultForm = {
+    name: "",
+    isCompany: "",
     email: "",
-    password: "",
-    phone: "",
-    position: "",
-    location: "",
-    role: "",
-    base_salary: "",
-    sale_bonus_percentage: "",
-  })
+    phone: ""
+  }
+
+  const [form, setForm] = useState(defaultForm)
+
+  useEffect(() => {
+    edit ? setForm(user) : setForm(defaultForm)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [edit, user])
 
   const handleChange = ({ target }) => {
     setForm(form => ({ ...form, [target.name]: target.value }))
   }
 
   const handleSubmit = (e) => {
-    userCreateRequest(form)
-    e.preventDefault()
+    e.preventDefault();
+
+    edit ? userUpdateRequest(form, form._id) : userCreateRequest(form);
+
+    setTimeout(() => {
+      if (!loading && !error) {
+        clearForm();
+        showModal();
+      }
+    }, 1000);
+  }
+
+  const clearForm = () => {
+    setForm(defaultForm)
   }
 
   return (
-    <div>
-      <Modal show={show} onHide={handleModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create User {loading && <Spinner animation="border"/>}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Row>
-              <Form.Group as={Col}>
+    <Fragment>
+      <Modal show={modal} onHide={showModal}>
+        <Form onSubmit={handleSubmit}>
+          <fieldset disabled={loading || loadingGetUser}>
+            <Modal.Header closeButton>
+              <Modal.Title>
+                Users {edit ? `Update` : `Create`}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>How type of customers is?</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="isCompany"
+                      value={form.isCompany}
+                      onChange={handleChange}
+                      custom
+                      required
+                    >
+                      <option value="" disabled >Choose a type</option>
+                      <option value="true">Company</option>
+                      <option value="false">Person</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Form.Group>
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter Email" name="email" onChange={handleChange} value={form.email} />
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required />
               </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter password" name="password" onChange={handleChange} value={form.password} />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter First Name" name="first_name" onChange={handleChange} value={form.first_name} />
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Last Name" name="last_name" onChange={handleChange} value={form.last_name} />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Phone</Form.Label>
-                <Form.Control type="text" placeholder="Enter Phone" name="phone" onChange={handleChange} value={form.phone} />
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Role</Form.Label>
-                <Form.Control as="select" name="role" onChange={handleChange} value={form.role || ""}>
-                  <option value="" disabled >Choose a Role</option>
-                  <option value="admin">Admin</option>
-                  <option value="employee">Employee</option>
-                  <option value="guest">Guest</option>
-                </Form.Control>
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Location</Form.Label>
-                <Form.Control type="text" placeholder="Enter Location" name="location" onChange={handleChange} value={form.location} />
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Position</Form.Label>
-                <Form.Control as="select" name="position" onChange={handleChange} value={form.position || ""}>
-                  <option value="" disabled >Choose a Position</option>
-                  <option value="manager">Manager</option>
-                  <option value="consultant">Sales Consultant</option>
-                  <option value="agent">Sales Agent</option>
-                  <option value="Clerk">Office Clerk</option>
-                  <option value="other">Other</option>
-                </Form.Control>
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Base Salary</Form.Label>
-                <Form.Control type="text" placeholder="Enter Salary" name="base_salary" onChange={handleChange} value={form.base_salary} />
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Sale Bonus Percentage</Form.Label>
-                <Form.Control type="text" placeholder="Sale Bonus Percentage" name="sale_bonus_percentage" onChange={handleChange} value={form.sale_bonus_percentage} />
-              </Form.Group>
-            </Row>
-            <Row className="justify-content-md-center">
-              <Form.Group as={Col}>
-                <Button type="submit" size="lg" block>Create</Button>
-              </Form.Group>
-            </Row>
-          </Form>
-        </Modal.Body>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                type="submit"
+                variant={edit ? `success` : `primary`}
+                block
+              >
+                {loading ? <Spinner animation="border" /> : (edit ? `Update` : `Create`)}
+              </Button>
+            </Modal.Footer>
+          </fieldset>
+        </Form>
       </Modal>
-    </div>
+    </Fragment>
   )
 }
 
 UserForm.propTypes = {
+  loading          : PropTypes.bool.isRequired,
+  error            : PropTypes.bool.isRequired,
+  modalShow        : PropTypes.bool,
+  loadingGetUser   : PropTypes.bool.isRequired,
   userCreateRequest: PropTypes.func.isRequired,
-  handleModal:PropTypes.func.isRequired,
-  //--------
-  loading: PropTypes.bool.isRequired,
-  show:PropTypes.bool.isRequired,
+  formModal        : PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.userCreateStatusReducer.loading
+  loading       : state.userCreateStatusReducer.loading,
+  error         : state.userCreateStatusReducer.error,
+  user          : state.userReducer.item,
+  loadingGetUser: state.userGetStatusReducer.loading
 })
 
 const mapDispatchToProps = {
-  userCreateRequest
+  userCreateRequest,
+  userUpdateRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserForm)

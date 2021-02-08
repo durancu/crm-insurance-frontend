@@ -2,7 +2,7 @@ import * as types from '../actionTypes'
 
 /** Action creator
  * @param {object} payload
- * @returns {object} action
+ * @returns {object} payload
 */
 export const userCreateRequest = (payload) => ({
   type: types.USER_CREATE_REQUEST,
@@ -18,7 +18,7 @@ export const userCreateFail = () => ({
 
 /** Action creator
  * @param {object} payload
- * @returns {object} action
+ * @returns {object} payload
 */
 export const userCreateSuccess = (payload) => ({
   type: types.USER_CREATE_SUCCESS,

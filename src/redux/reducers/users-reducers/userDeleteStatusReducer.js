@@ -5,16 +5,16 @@ const initialState = {
   error: false
 }
 
-const userCreateStatusReducer = (state = initialState, { type }) => {
+const userDeleteStatusReducer = (state = initialState, { type }) => {
   switch (type) {
 
-    case types.USER_CREATE_REQUEST:
+    case types.USER_DELETE_REQUEST:
       return { loading: true, error: false }
 
-    case types.USER_CREATE_FAIL:
+    case types.USER_DELETE_FAIL:
       return { loading: false, error: true }
 
-    case types.USER_CREATE_SUCCESS:
+    case types.USER_DELETE_SUCCESS:
       return { loading: false, error: false }
 
     default:
@@ -22,4 +22,4 @@ const userCreateStatusReducer = (state = initialState, { type }) => {
   }
 }
 
-export default userCreateStatusReducer
+export default userDeleteStatusReducer
