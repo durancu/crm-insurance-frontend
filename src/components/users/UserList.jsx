@@ -43,9 +43,11 @@ function UserList({ userLoadRequest, users, loading, loadingDelete }) {
           <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Type</th>
+            <th>Location</th>
+            <th>Position</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Details</th>
             <th>{loadingDelete ? <Spinner animation="border" variant="danger" />
               :
               <Fragment>
