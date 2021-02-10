@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import { userDeleteRequest, userGetRequest } from '../../redux/actions'
 
 import { Button } from "react-bootstrap";
-import { Pencil, Trash, Person, Building } from "react-bootstrap-icons";
+import { Pencil, Trash } from "react-bootstrap-icons";
+import UserDetails from "./UserDetails";
 
 export const UserItem = ({ user, no, loading, loadingGetUser, userDeleteRequest, userGetRequest, showModal, editItem }) => {
   const deleteUser = () => {
@@ -26,16 +27,21 @@ export const UserItem = ({ user, no, loading, loadingGetUser, userDeleteRequest,
     <tr>
       <td>{no}</td>
       <td>{user.name}</td>
-      <td>{user.isCompany ? <Building size="25" color="red" /> : <Person size="25" color="blue" />}</td>
+      <td>{user.location}</td>
+      <td>{user.position}</td>
       <td>{user.email}</td>
       <td>{user.phone}</td>
+      <td><UserDetails user={user}/></td>
       <td>
         <Button variant="success" onClick={loadedEditData}>
           <Pencil />
         </Button>{" "}
+        {
+          user.username !== "admin" &&
         <Button disabled={loading} variant="danger" onClick={deleteUser}>
           <Trash />
         </Button>
+        }
       </td>
     </tr>
   );

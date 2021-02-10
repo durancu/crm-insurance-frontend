@@ -20,10 +20,15 @@ const UserForm = ({
   user }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let defaultForm = {
-    name: "",
-    isCompany: "",
+    username: "",
+    firstName: "",
+    lastName: "",
     email: "",
-    phone: ""
+    phone: "",
+    position: "",
+    role: "",
+    location: "",
+    password: ""
   }
 
   const [form, setForm] = useState(defaultForm)
@@ -68,11 +73,23 @@ const UserForm = ({
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label>First Name</Form.Label>
                     <Form.Control
                       type="text"
-                      name="name"
-                      value={form.name}
+                      name="firstName"
+                      value={form.firstName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="lastName"
+                      value={form.lastName}
                       onChange={handleChange}
                       required
                     />
@@ -80,6 +97,19 @@ const UserForm = ({
                 </Col>
               </Row>
               <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="username"
+                      value={form.username}
+                      onChange={handleChange}
+                      disabled={edit}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
                 <Col>
                   <Form.Group>
                     <Form.Label>Phone</Form.Label>
@@ -93,20 +123,61 @@ const UserForm = ({
                     />
                   </Form.Group>
                 </Col>
+              </Row>
+              <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>How type of customers is?</Form.Label>
+                    <Form.Label>Location</Form.Label>
                     <Form.Control
                       as="select"
-                      name="isCompany"
-                      value={form.isCompany}
+                      name="location"
+                      value={form.location}
                       onChange={handleChange}
                       custom
                       required
                     >
                       <option value="" disabled >Choose a type</option>
-                      <option value="true">Company</option>
-                      <option value="false">Person</option>
+                      <option value="USA">USA</option>
+                      <option value="MEXICO">MEXICO</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Position</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="position"
+                      value={form.position}
+                      onChange={handleChange}
+                      custom
+                      required
+                    >
+                      <option value="" disabled >Choose a type</option>
+                      <option value="SALES_AGENT">Sales Agent</option>
+                      <option value="SALES_CONSULTANT">Sales Consultant</option>
+                      <option value="MANAGER">Manager</option>
+                      <option value="OTHER">Other</option>
+                      <option value="SYSTEM_ADMINISTRATOR">System Administrator</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Role</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="role"
+                      value={form.role}
+                      onChange={handleChange}
+                      custom
+                      required
+                    >
+                      <option value="" disabled >Choose a type</option>
+                      <option value="ADMIN">Administrator</option>
+                      <option value="USER">Standard User</option>
                     </Form.Control>
                   </Form.Group>
                 </Col>
@@ -119,6 +190,15 @@ const UserForm = ({
                   value={form.email}
                   onChange={handleChange}
                   required />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  value={edit ? undefined : form.password}
+                  onChange={handleChange}
+                  required={!edit} />
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
@@ -133,23 +213,23 @@ const UserForm = ({
           </fieldset>
         </Form>
       </Modal>
-    </Fragment>
+    </Fragment >
   )
 }
 
 UserForm.propTypes = {
-  loading          : PropTypes.bool.isRequired,
-  error            : PropTypes.bool.isRequired,
-  modalShow        : PropTypes.bool,
-  loadingGetUser   : PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  modalShow: PropTypes.bool,
+  loadingGetUser: PropTypes.bool.isRequired,
   userCreateRequest: PropTypes.func.isRequired,
-  formModal        : PropTypes.func,
+  formModal: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({
-  loading       : state.userCreateStatusReducer.loading,
-  error         : state.userCreateStatusReducer.error,
-  user          : state.userReducer.item,
+  loading: state.userCreateStatusReducer.loading,
+  error: state.userCreateStatusReducer.error,
+  user: state.userReducer.item,
   loadingGetUser: state.userGetStatusReducer.loading
 })
 
