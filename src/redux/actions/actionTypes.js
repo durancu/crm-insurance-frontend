@@ -1,5 +1,5 @@
 //Test
-export const COUNTER_UP = "COUNTER_UP";
+export const COUNTER_UP   = "COUNTER_UP";
 export const COUNTER_DOWN = "COUNTER_DOWN";
 
 //USER
@@ -95,31 +95,62 @@ export const CUSTOMERS_GET_SUCCESS = "CUSTOMERS_GET_SUCCESS";
 //Update
 /** @constant {string} CUSTOMERS_UPDATE_REQUEST*/
 export const CUSTOMERS_UPDATE_REQUEST = "CUSTOMERS_UPDATE_REQUEST";
-
 /** @constant {string} CUSTOMERS_UPDATE_FAIL*/
 export const CUSTOMERS_UPDATE_FAIL = "CUSTOMERS_UPDATE_FAIL";
-
 /** @constant {string} CUSTOMERS_UPDATE_SUCCESS*/
 export const CUSTOMERS_UPDATE_SUCCESS = "CUSTOMERS_UPDATE_SUCCESS";
 
-//Sales
+//INSURERS
+//List
+/** @constant {string} INSURERS_LIST_REQUEST*/
+export const INSURERS_LIST_REQUEST = "INSURERS_LIST_REQUEST";
+/** @constant {string} INSURERS_LIST_FAIL*/
+export const INSURERS_LIST_FAIL = "INSURERS_LIST_FAIL";
+/** @constant {string} INSURERS_LIST_SUCCESS*/
+export const INSURERS_LIST_SUCCESS = "INSURERS_LIST_SUCCESS";
+//Create
+/** @constant {string} INSURERS_CREATE_REQUEST*/
+export const INSURERS_CREATE_REQUEST = "INSURERS_CREATE_REQUEST";
+/** @constant {string} INSURERS_CREATE_FAIL*/
+export const INSURERS_CREATE_FAIL = "INSURERS_CREATE_FAIL";
+/** @constant {string} INSURERS_CREATE_SUCCESS*/
+export const INSURERS_CREATE_SUCCESS = "INSURERS_CREATE_SUCCESS";
+//Delete
+/** @constant {string} INSURERS_DELETE_REQUEST*/
+export const INSURERS_DELETE_REQUEST = "INSURERS_DELETE_REQUEST";
+/** @constant {string} INSURERS_DELETE_FAIL*/
+export const INSURERS_DELETE_FAIL = "INSURERS_DELETE_FAIL";
+/** @constant {string} INSURERS_DELETE_SUCCESS*/
+export const INSURERS_DELETE_SUCCESS = "INSURERS_DELETE_SUCCESS";
+//Get
+/** @constant {string} INSURERS_GET_REQUEST*/
+export const INSURERS_GET_REQUEST = "INSURERS_GET_REQUEST";
+/** @constant {string} INSURERS_GET_FAIL*/
+export const INSURERS_GET_FAIL = "INSURERS_GET_FAIL";
+/** @constant {string} INSURERS_GET_SUCCESS*/
+export const INSURERS_GET_SUCCESS = "INSURERS_GET_SUCCESS";
+//UPDATE
+/** @constant {string} INSURERS_UPDATE_REQUEST*/
+export const INSURERS_UPDATE_REQUEST = "INSURERS_UPDATE_REQUEST";
+/** @constant {string} INSURERS_UPDATE_FAIL*/
+export const INSURERS_UPDATE_FAIL = "INSURERS_UPDATE_FAIL";
+/** @constant {string} INSURERS_UPDATE_SUCCESS*/
+export const INSURERS_UPDATE_SUCCESS = "INSURERS_UPDATE_SUCCESS";
+
+//SALES
+//List
 /**@constant {string} SALES_LIST_REQUEST*/
-export const SALES_LIST_REQUEST = "SALES_LIST_REQUEST"
-
+export const SALES_LIST_REQUEST = "SALES_LIST_REQUEST";
 /**@constant {string} SALES_LIST_FAIL*/
-export const SALES_LIST_FAIL = "SALES_LIST_FAIL"
-
+export const SALES_LIST_FAIL = "SALES_LIST_FAIL";
 /**@constant {string} SALES_LIST_SUCCESS */
-export const SALES_LIST_SUCCESS = "SALES_LIST_SUCCESS"
-
+export const SALES_LIST_SUCCESS = "SALES_LIST_SUCCESS";
 
 //REPORT
-
+//List
 /**@constant {string} REPORT_LIST_REQUEST*/
-export const REPORT_LIST_REQUEST = "REPORT_LIST_REQUEST"
-
+export const REPORT_LIST_REQUEST = "REPORT_LIST_REQUEST";
 /**@constant {string} REPORT_LIST_FAIL*/
-export const REPORT_LIST_FAIL = "REPORT_LIST_FAIL"
-
+export const REPORT_LIST_FAIL = "REPORT_LIST_FAIL";
 /**@constant {string} REPORT_LIST_SUCCESS */
-export const REPORT_LIST_SUCCESS = "REPORT_LIST_SUCCESS"
+export const REPORT_LIST_SUCCESS = "REPORT_LIST_SUCCESS";

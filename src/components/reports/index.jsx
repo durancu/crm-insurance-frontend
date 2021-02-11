@@ -20,7 +20,7 @@ export const Reports = ({ reportListRequest, metrics, loadingReport, errorReport
 
   return (
     <Fragment>
-      <h3>Dashboard</h3>
+      <h1>Dashboard</h1>
       <Table>
         <thead>
           <tr>

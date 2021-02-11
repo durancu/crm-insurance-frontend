@@ -21,6 +21,13 @@ import customerCreateStatusReducer from "./customers-reducers/customerCreateStat
 import customerDeleteStatusReducer from "./customers-reducers/customerDeleteStatusReducer";
 import customerGetStatusReducer from "./customers-reducers/customerGetStatusReducer";
 import customerUpdateStatusReducer from "./customers-reducers/customerUpdateStatusReducer";
+//INSURER
+import insurerReducer from             "./insurers-reducers/insurerReducer";
+import insurerListStatusReducer from   "./insurers-reducers/insurerListStatusReducer";
+import insurerCreateStatusReducer from "./insurers-reducers/insurerCreateStatusReducer";
+import insurerDeleteStatusReducer from "./insurers-reducers/insurerDeleteStatusReducer";
+import insurerGetStatusReducer from    "./insurers-reducers/insurerGetStatusReducer";
+import insurerUpdateStatusReducer from "./insurers-reducers/insurerUpdateStatusReducer";
 
 //SALE
 import saleReducer from "./sales-reducers/saleReducer";
@@ -51,6 +58,13 @@ export default combineReducers({
   customerDeleteStatusReducer,
   customerGetStatusReducer,
   customerUpdateStatusReducer,
+  //INSURER
+  insurerReducer,
+  insurerListStatusReducer,
+  insurerCreateStatusReducer,
+  insurerDeleteStatusReducer,
+  insurerGetStatusReducer,
+  insurerUpdateStatusReducer,
   //REPORT
   saleReducer,
   saleListStatusReducer,

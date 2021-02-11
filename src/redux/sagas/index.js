@@ -10,10 +10,16 @@ import userDeleteSaga from "./user-sagas/userDeleteSaga";
 import userUpdateSaga from "./user-sagas/userUpdateSaga";
 //CUSTOMERS
 import customerLoadListSaga from "./customer-sagas/customerLoadListSaga";
-import customerGetSaga from "./customer-sagas/customerGetSaga";
-import customerCreateSaga from "./customer-sagas/customerCreateSaga";
-import customerDeleteSaga from "./customer-sagas/customerDeleteSaga";
-import customerUpdateSaga from "./customer-sagas/customerUpdateSaga";
+import customerGetSaga from      "./customer-sagas/customerGetSaga";
+import customerCreateSaga from   "./customer-sagas/customerCreateSaga";
+import customerDeleteSaga from   "./customer-sagas/customerDeleteSaga";
+import customerUpdateSaga from   "./customer-sagas/customerUpdateSaga";
+//INSURERS
+import insurerListSaga from     "./insurer-sagas/insurerListSaga";
+import insurerGetSaga from      "./insurer-sagas/insurerGetSaga";
+import insurerCreateSaga from   "./insurer-sagas/insurerCreateSaga";
+import insurerDeleteSaga from   "./insurer-sagas/insurerDeleteSaga";
+import insurerUpdateSaga from   "./insurer-sagas/insurerUpdateSaga";
 //SALES
 import saleListSaga from "./sale-sagas/saleListSaga";
 //REPORTS
@@ -35,6 +41,12 @@ const sagas = function* sagas() {
   yield spawn(customerCreateSaga);
   yield spawn(customerDeleteSaga);
   yield spawn(customerUpdateSaga);
+  //Insurer
+  yield spawn(insurerListSaga);
+  yield spawn(insurerGetSaga);
+  yield spawn(insurerCreateSaga);
+  yield spawn(insurerDeleteSaga);
+  yield spawn(insurerUpdateSaga);
   //SALE
   yield spawn(saleListSaga);
   //REPORT

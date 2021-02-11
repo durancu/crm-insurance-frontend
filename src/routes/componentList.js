@@ -4,6 +4,7 @@ import Customers from '../components/customers'
 import Users from '../components/users'
 import Profile from '../components/profile'
 import Reports from '../components/reports'
+import Insurers from "../components/insurers";
 
 export const COMPONENT_LIST = [
   {
@@ -31,15 +32,27 @@ export const COMPONENT_LIST = [
     protected: true
   },
   {
-    title: 'Profile',
-    url: '/profile',
-    component: Profile,
+    title: 'Customers',
+    url: '/customers',
+    component: Customers,
+    protected: true
+  },
+  {
+    title: 'Insurer',
+    url: '/insurers',
+    component: Insurers,
     protected: true
   },
   {
     title: 'Users',
     url: '/users',
     component: Users,
+    protected: true
+  },
+  {
+    title: 'Profile',
+    url: '/profile',
+    component: Profile,
     protected: true
   },
 ]
