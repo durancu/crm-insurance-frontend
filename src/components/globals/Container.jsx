@@ -1,9 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 //components
-import { Container } from 'react-bootstrap'
 import Header from './Header'
 import Body from './Body'
 
@@ -18,9 +16,6 @@ export const Containers = ({ children }) => {
   )
 }
 
-Container.propTypes = {
-  children: PropTypes.object.isRequired
-}
 
 const mapStateToProps = (state) => ({
 

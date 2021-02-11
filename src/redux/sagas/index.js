@@ -2,7 +2,7 @@ import { spawn } from "redux-saga/effects";
 //AUTH
 import userAuthSaga from "./user-sagas/userAuthSaga";
 import userCheckAuthSaga from "./user-sagas/userCheckAuthSaga";
-//USER
+//USERS
 import userLoadListSaga from "./user-sagas/userLoadListSaga";
 import userGetSaga from "./user-sagas/userGetSaga";
 import userCreateSaga from "./user-sagas/userCreateSaga";
@@ -14,6 +14,10 @@ import customerGetSaga from "./customer-sagas/customerGetSaga";
 import customerCreateSaga from "./customer-sagas/customerCreateSaga";
 import customerDeleteSaga from "./customer-sagas/customerDeleteSaga";
 import customerUpdateSaga from "./customer-sagas/customerUpdateSaga";
+//SALES
+import saleListSaga from "./sale-sagas/saleListSaga";
+//REPORTS
+import reportListSaga from "./report-sagas/reportListSaga";
 
 const sagas = function* sagas() {
   //AUTH
@@ -31,6 +35,10 @@ const sagas = function* sagas() {
   yield spawn(customerCreateSaga);
   yield spawn(customerDeleteSaga);
   yield spawn(customerUpdateSaga);
+  //SALE
+  yield spawn(saleListSaga);
+  //REPORT
+  yield spawn(reportListSaga);
 };
 
 export default sagas;

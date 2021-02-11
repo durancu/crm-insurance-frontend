@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import PropTypes from 'prop-types'
 //Redux
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import { Form, Row, Col, Card, Button, Spinner } from 'react-bootstrap'
 
 
 function Auth({ userAuthRequest, loading }) {
-  const [form, setForm] = useState({ username: "", password: "" })
+  const [form, setForm] = useState({ username: "", password: "password" })
 
   const handleChange = ({ target }) => {
     setForm(form => ({ ...form, [target.name]: target.value }))
@@ -34,7 +34,7 @@ function Auth({ userAuthRequest, loading }) {
               <Card.Body>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
-                  <Form.Control disabled={loading} name="username" type="text" value={form.username} onChange={handleChange} required />
+                  <Form.Control disabled={loading} name="username" type="text" value={form.username} onChange={handleChange} autoFocus required />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Password</Form.Label>
