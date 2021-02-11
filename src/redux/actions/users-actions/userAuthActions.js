@@ -40,8 +40,9 @@ export const userCheckAuthFail = () => ({
 /** Action Creator
  * @returns {string} action
 */
-export const userCheckAuthSuccess = () => ({
+export const userCheckAuthSuccess = (payload) => ({
   type: types.USER_CHECK_AUTH_SUCCESS,
+  payload
 })
 
 

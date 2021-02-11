@@ -101,3 +101,25 @@ export const CUSTOMERS_UPDATE_FAIL = "CUSTOMERS_UPDATE_FAIL";
 
 /** @constant {string} CUSTOMERS_UPDATE_SUCCESS*/
 export const CUSTOMERS_UPDATE_SUCCESS = "CUSTOMERS_UPDATE_SUCCESS";
+
+//Sales
+/**@constant {string} SALES_LIST_REQUEST*/
+export const SALES_LIST_REQUEST = "SALES_LIST_REQUEST"
+
+/**@constant {string} SALES_LIST_FAIL*/
+export const SALES_LIST_FAIL = "SALES_LIST_FAIL"
+
+/**@constant {string} SALES_LIST_SUCCESS */
+export const SALES_LIST_SUCCESS = "SALES_LIST_SUCCESS"
+
+
+//REPORT
+
+/**@constant {string} REPORT_LIST_REQUEST*/
+export const REPORT_LIST_REQUEST = "REPORT_LIST_REQUEST"
+
+/**@constant {string} REPORT_LIST_FAIL*/
+export const REPORT_LIST_FAIL = "REPORT_LIST_FAIL"
+
+/**@constant {string} REPORT_LIST_SUCCESS */
+export const REPORT_LIST_SUCCESS = "REPORT_LIST_SUCCESS"

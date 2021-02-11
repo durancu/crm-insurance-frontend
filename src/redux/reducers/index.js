@@ -22,6 +22,14 @@ import customerDeleteStatusReducer from "./customers-reducers/customerDeleteStat
 import customerGetStatusReducer from "./customers-reducers/customerGetStatusReducer";
 import customerUpdateStatusReducer from "./customers-reducers/customerUpdateStatusReducer";
 
+//SALE
+import saleReducer from "./sales-reducers/saleReducer";
+import saleListStatusReducer from "./sales-reducers/saleListStatusReducer";
+
+//REPORT
+import reportReducer from "./reports-reducers/reportReducer";
+import reportListStatusReducer from "./reports-reducers/reportListStatusReducer";
+
 export default combineReducers({
   testReducer,
   //Global
@@ -43,4 +51,10 @@ export default combineReducers({
   customerDeleteStatusReducer,
   customerGetStatusReducer,
   customerUpdateStatusReducer,
+  //REPORT
+  saleReducer,
+  saleListStatusReducer,
+  //REPORT
+  reportReducer,
+  reportListStatusReducer,
 });
