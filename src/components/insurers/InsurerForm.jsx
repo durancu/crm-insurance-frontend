@@ -1,0 +1,190 @@
+import React, { useState, Fragment, useEffect } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+//components
+import { Form, Button, Modal, Spinner, Row, Col } from 'react-bootstrap'
+
+//action
+import { insurerCreateRequest, insurerUpdateRequest } from '../../redux/actions'
+
+const InsurerForm = ({
+  loading,
+  loadingGetInsurer,
+  error,
+  insurerCreateRequest,
+  insurerUpdateRequest,
+  showModal,
+  modal,
+  edit,
+  insurer }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  let defaultForm = {
+    name: "",
+    email: "",
+    phone: "",
+    liabilityCommission: 0,
+    cargoCommission: 0,
+    physicalDamageCommission: 0,
+    wcGlUmbCommission: 0,
+  }
+
+  const [form, setForm] = useState(defaultForm)
+
+  useEffect(() => {
+    edit ? setForm(insurer) : setForm(defaultForm)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [edit, insurer])
+
+  const handleChange = ({ target }) => {
+    setForm(form => ({ ...form, [target.name]: target.value }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    edit ? insurerUpdateRequest(form, form._id) : insurerCreateRequest(form);
+
+    setTimeout(() => {
+      if (!loading && !error) {
+        clearForm();
+        showModal();
+      }
+    }, 1000);
+  }
+
+  const clearForm = () => {
+    setForm(defaultForm)
+  }
+
+  return (
+    <Fragment>
+      <Modal show={modal} onHide={showModal}>
+        <Form onSubmit={handleSubmit}>
+          <fieldset disabled={loading || loadingGetInsurer}>
+            <Modal.Header closeButton>
+              <Modal.Title>
+                Insurer {edit ? `Update` : `Create`}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  type="tel"
+                  name="phone"
+                  value={form.phone}
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required />
+              </Form.Group>
+              <Row>
+                <Col>
+
+                  <Form.Group>
+                    <Form.Label>Liability Commission</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="liabilityCommission"
+                      value={form.liabilityCommission}
+                      onChange={handleChange}
+                      required />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Cargo Commission</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="cargoCommission"
+                      value={form.cargoCommission}
+                      onChange={handleChange}
+                      required />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+
+                  <Form.Group>
+                    <Form.Label>Physical Damage Commission</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="physicalDamageCommission"
+                      value={form.physicalDamageCommission}
+                      onChange={handleChange}
+                      required />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>WcGlUmb Commission</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="wcGlUmbCommission"
+                      value={form.wcGlUmbCommission}
+                      onChange={handleChange}
+                      required />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                type="submit"
+                variant={edit ? `success` : `primary`}
+                block
+              >
+                {loading ? <Spinner animation="border" /> : (edit ? `Update` : `Create`)}
+              </Button>
+            </Modal.Footer>
+          </fieldset>
+        </Form>
+      </Modal>
+    </Fragment>
+  )
+}
+
+InsurerForm.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+  modalShow: PropTypes.bool,
+  loadingGetInsurer: PropTypes.bool.isRequired,
+  insurerCreateRequest: PropTypes.func.isRequired,
+  formModal: PropTypes.func,
+}
+
+const mapStateToProps = (state) => ({
+  loading: state.insurerCreateStatusReducer.loading,
+  error: state.insurerCreateStatusReducer.error,
+  insurer: state.insurerReducer.item,
+  loadingGetInsurer: state.insurerGetStatusReducer.loading
+})
+
+const mapDispatchToProps = {
+  insurerCreateRequest,
+  insurerUpdateRequest
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InsurerForm)
