@@ -5,7 +5,7 @@ export const initialState = {
   error  : false
 }
 
-const insurerLoadStatusReducer = (state = initialState, { type }) => {
+const insurerListStatusReducer = (state = initialState, { type }) => {
   switch (type) {
     case types.INSURERS_LIST_REQUEST:
       return { loading: true, error: false }
@@ -18,4 +18,4 @@ const insurerLoadStatusReducer = (state = initialState, { type }) => {
   }
 }
 
-export default insurerLoadStatusReducer;
+export default insurerListStatusReducer;

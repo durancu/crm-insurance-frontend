@@ -1,4 +1,4 @@
-import React, { /* useState  */} from 'react'
+import React, { /* useState  */ } from 'react'
 //import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -16,7 +16,9 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link className="nav-link" to="/home">Home</Link>
-            <Link className="nav-link" to="/sales">Sales</Link>
+            <NavDropdown title="Sales" id="basic-nav-dropdown">
+              <Link className="dropdown-item" to="/sales/create">Create</Link>
+            </NavDropdown>
             <Link className="nav-link" to="/customers">Customers</Link>
             <Link className="nav-link" to="/insurers">Insurers</Link>
           </Nav>
