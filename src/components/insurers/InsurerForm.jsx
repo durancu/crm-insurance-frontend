@@ -43,7 +43,12 @@ const InsurerForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    edit ? insurerUpdateRequest(form, form._id) : insurerCreateRequest(form);
+    edit ? insurerUpdateRequest(form, form._id) : insurerCreateRequest({
+      name: "Jorge",
+      email: "jorge@example.com",
+      phone: "456-552-5412",
+      liabilityCommission: 0.3
+    });
 
     setTimeout(() => {
       if (!loading && !error) {
@@ -105,22 +110,22 @@ const InsurerForm = ({
                   <Form.Group>
                     <Form.Label>Liability Commission</Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="liabilityCommission"
                       value={form.liabilityCommission}
                       onChange={handleChange}
-                      required />
+                    />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group>
                     <Form.Label>Cargo Commission</Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="cargoCommission"
                       value={form.cargoCommission}
                       onChange={handleChange}
-                      required />
+                    />
                   </Form.Group>
                 </Col>
               </Row>
@@ -130,22 +135,22 @@ const InsurerForm = ({
                   <Form.Group>
                     <Form.Label>Physical Damage Commission</Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="physicalDamageCommission"
                       value={form.physicalDamageCommission}
                       onChange={handleChange}
-                      required />
+                    />
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group>
                     <Form.Label>WcGlUmb Commission</Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="wcGlUmbCommission"
                       value={form.wcGlUmbCommission}
                       onChange={handleChange}
-                      required />
+                    />
                   </Form.Group>
                 </Col>
               </Row>
