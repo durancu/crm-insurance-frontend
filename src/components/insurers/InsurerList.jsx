@@ -38,17 +38,21 @@ function InsurerList({ insurerListRequest, insurers, loading, loadingDelete }) {
 
   return (
     <div>
-      <Table>
+      <Table striped hover borderless>
         <thead>
+          <tr>
+            <td colspan='4' >&nbsp;</td>
+            <td colspan='4' align='center'><strong>Commission</strong></td>
+          </tr>
           <tr>
             <th>No</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>Liability</th>
-            <th>Cargo</th>
-            <th>Physical Damage</th>
-            <th>WcGlUmb</th>
+            <th width='200px'>Phone</th>
+            <th width='130px'>Liability</th>
+            <th width='130px'>Motor Cargo</th>
+            <th width='130px'>Physical Dmg</th>
+            <th width='130px'>WC/GL/UMB</th>
             <th>{loadingDelete ? <Spinner animation="border" variant="danger" />
               :
               <Fragment>
