@@ -11,7 +11,7 @@ import PrivateRoutes from './PrivateRoutes'
 export default function Routes() {
   return (
     <Switch>
-      <Route path={'/'} exact component={Auth} />
+      <Route path={'/auth'} exact component={Auth} />
       {COMPONENT_LIST.map((item, key) => <PrivateRoutes key={key} exact path={item.url} component={item.component} />)}
     </Switch>
   )
