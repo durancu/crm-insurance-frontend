@@ -32,6 +32,7 @@ import insurerUpdateStatusReducer from "./insurers-reducers/insurerUpdateStatusR
 //SALE
 import saleReducer from "./sales-reducers/saleReducer";
 import saleListStatusReducer from "./sales-reducers/saleListStatusReducer";
+import saleCreateStatusReducer from "./sales-reducers/saleCreateStatusReducer";
 
 //REPORT
 import reportReducer from "./reports-reducers/reportReducer";
@@ -65,9 +66,10 @@ export default combineReducers({
   insurerDeleteStatusReducer,
   insurerGetStatusReducer,
   insurerUpdateStatusReducer,
-  //REPORT
+  //Sale
   saleReducer,
   saleListStatusReducer,
+  saleCreateStatusReducer,
   //REPORT
   reportReducer,
   reportListStatusReducer,

@@ -22,6 +22,7 @@ import insurerDeleteSaga from   "./insurer-sagas/insurerDeleteSaga";
 import insurerUpdateSaga from   "./insurer-sagas/insurerUpdateSaga";
 //SALES
 import saleListSaga from "./sale-sagas/saleListSaga";
+import saleCreateSaga from "./sale-sagas/saleCreateSaga";
 //REPORTS
 import reportListSaga from "./report-sagas/reportListSaga";
 
@@ -49,6 +50,7 @@ const sagas = function* sagas() {
   yield spawn(insurerUpdateSaga);
   //SALE
   yield spawn(saleListSaga);
+  yield spawn(saleCreateSaga);
   //REPORT
   yield spawn(reportListSaga);
 };

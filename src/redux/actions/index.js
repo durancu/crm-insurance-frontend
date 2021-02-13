@@ -38,18 +38,58 @@ export {
 } from "./users-actions/userUpdateActions";
 
 //Customers
-export { customerLoadRequest,   customerLoadFail,   customerLoadSuccess, }from   "./customers-actions/customerLoadActions";
-export { customerCreateRequest, customerCreateFail, customerCreateSuccess,} from "./customers-actions/customerCreateAction";
-export { customerDeleteRequest, customerDeleteFail, customerDeleteSuccess, }from "./customers-actions/customerDeleteAction";
-export { customerGetRequest,    customerGetFail,    customerGetSuccess,} from    "./customers-actions/customerGetAction";
-export { customerUpdateRequest, customerUpdateFail, customerUpdateSuccess, }from "./customers-actions/customerUpdateActions";
+export {
+  customerLoadRequest,
+  customerLoadFail,
+  customerLoadSuccess,
+} from "./customers-actions/customerLoadActions";
+export {
+  customerCreateRequest,
+  customerCreateFail,
+  customerCreateSuccess,
+} from "./customers-actions/customerCreateAction";
+export {
+  customerDeleteRequest,
+  customerDeleteFail,
+  customerDeleteSuccess,
+} from "./customers-actions/customerDeleteAction";
+export {
+  customerGetRequest,
+  customerGetFail,
+  customerGetSuccess,
+} from "./customers-actions/customerGetAction";
+export {
+  customerUpdateRequest,
+  customerUpdateFail,
+  customerUpdateSuccess,
+} from "./customers-actions/customerUpdateActions";
 
 //Insurers
-export { insurerListRequest,   insurerListFail,   insurerListSuccess, }from   "./insurers-actions/insurerListActions";
-export { insurerCreateRequest, insurerCreateFail, insurerCreateSuccess,} from "./insurers-actions/insurerCreateAction";
-export { insurerDeleteRequest, insurerDeleteFail, insurerDeleteSuccess, }from "./insurers-actions/insurerDeleteAction";
-export { insurerGetRequest,    insurerGetFail,    insurerGetSuccess,} from    "./insurers-actions/insurerGetAction";
-export { insurerUpdateRequest, insurerUpdateFail, insurerUpdateSuccess, }from "./insurers-actions/insurerUpdateActions";
+export {
+  insurerListRequest,
+  insurerListFail,
+  insurerListSuccess,
+} from "./insurers-actions/insurerListActions";
+export {
+  insurerCreateRequest,
+  insurerCreateFail,
+  insurerCreateSuccess,
+} from "./insurers-actions/insurerCreateAction";
+export {
+  insurerDeleteRequest,
+  insurerDeleteFail,
+  insurerDeleteSuccess,
+} from "./insurers-actions/insurerDeleteAction";
+export {
+  insurerGetRequest,
+  insurerGetFail,
+  insurerGetSuccess,
+} from "./insurers-actions/insurerGetAction";
+export {
+  insurerUpdateRequest,
+  insurerUpdateFail,
+  insurerUpdateSuccess,
+} from "./insurers-actions/insurerUpdateActions";
 
 //Sales
 export {
@@ -57,6 +97,11 @@ export {
   saleListRequest,
   saleListSuccess,
 } from "./sales-actions/salesListActions";
+export {
+  saleCreateFail,
+  saleCreateRequest,
+  saleCreateSuccess,
+} from "./sales-actions/salesCreateActions";
 
 //REPORTS
 export {
