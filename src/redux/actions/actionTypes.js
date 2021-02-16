@@ -1,5 +1,5 @@
 //Test
-export const COUNTER_UP   = "COUNTER_UP";
+export const COUNTER_UP = "COUNTER_UP";
 export const COUNTER_DOWN = "COUNTER_DOWN";
 
 //USER
@@ -145,6 +145,13 @@ export const SALES_LIST_REQUEST = "SALES_LIST_REQUEST";
 export const SALES_LIST_FAIL = "SALES_LIST_FAIL";
 /**@constant {string} SALES_LIST_SUCCESS */
 export const SALES_LIST_SUCCESS = "SALES_LIST_SUCCESS";
+//Create
+/**@constant {string} SALES_CREATE_REQUEST*/
+export const SALES_CREATE_REQUEST = "SALES_CREATE_REQUEST";
+/**@constant {string} SALES_CREATE_FAIL*/
+export const SALES_CREATE_FAIL = "SALES_CREATE_FAIL";
+/**@constant {string} SALES_CREATE_SUCCESS */
+export const SALES_CREATE_SUCCESS = "SALES_CREATE_SUCCESS";
 
 //REPORT
 //List

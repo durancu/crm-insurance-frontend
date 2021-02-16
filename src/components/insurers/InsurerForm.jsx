@@ -44,10 +44,13 @@ const InsurerForm = ({
     e.preventDefault();
 
     edit ? insurerUpdateRequest(form, form._id) : insurerCreateRequest({
-      name: "Jorge",
-      email: "jorge@example.com",
-      phone: "456-552-5412",
-      liabilityCommission: 0.3
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      liabilityCommission: parseFloat(form.liabilityCommission)/100,
+      cargoCommission: parseFloat(form.cargoCommission)/100,
+      physicalDamageCommission: parseFloat(form.physicalDamageCommission)/100,
+      wcGlUmbCommission: parseFloat(form.wcGlUmbCommission)/100,
     });
 
     setTimeout(() => {
@@ -104,11 +107,11 @@ const InsurerForm = ({
                   onChange={handleChange}
                   required />
               </Form.Group>
+              <Row><Col><br/><h4>Commissions (%)</h4><br/></Col></Row>
               <Row>
                 <Col>
-
                   <Form.Group>
-                    <Form.Label>Liability Commission</Form.Label>
+                    <Form.Label>Liability</Form.Label>
                     <Form.Control
                       type="text"
                       name="liabilityCommission"
@@ -119,7 +122,7 @@ const InsurerForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Cargo Commission</Form.Label>
+                    <Form.Label>Motor Cargo</Form.Label>
                     <Form.Control
                       type="text"
                       name="cargoCommission"
@@ -133,7 +136,7 @@ const InsurerForm = ({
                 <Col>
 
                   <Form.Group>
-                    <Form.Label>Physical Damage Commission</Form.Label>
+                    <Form.Label>Physical Damage</Form.Label>
                     <Form.Control
                       type="text"
                       name="physicalDamageCommission"
@@ -144,7 +147,7 @@ const InsurerForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>WcGlUmb Commission</Form.Label>
+                    <Form.Label>WC/GL/UMB</Form.Label>
                     <Form.Control
                       type="text"
                       name="wcGlUmbCommission"

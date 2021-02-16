@@ -1,73 +1,177 @@
-import React, { Fragment, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import moment from 'moment'
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import moment from "moment";
+import { Link } from "react-router-dom";
 
 //Actions
-import { reportListRequest } from '../../redux/actions'
+import { reportListRequest } from "../../redux/actions";
 //Functions
-import dataTransform from './dataTransform'
-
+import dataTransform from "./dataTransform";
+//Assets
+import "../assets/App.css";
 //Components
-import { Table, Spinner } from 'react-bootstrap'
+import { Spinner, Row, Col } from "react-bootstrap";
 
-
-export const Reports = ({ reportListRequest, metrics, loadingReport, errorReport, sales, }) => {
-
+export const Reports = ({
+  reportListRequest,
+  metrics,
+  loadingReport,
+  errorReport,
+  sales,
+}) => {
   useEffect(() => {
-    reportListRequest()
-  }, [reportListRequest])
+    reportListRequest();
+  }, [reportListRequest]);
 
   return (
-    <Fragment>
-      <h1>Dashboard</h1>
-      <Table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Insurance Company</th>
-            <th>Customer</th>
-            <th>Charge</th>
-            <th>Fee</th>
-            <th>Tip</th>
-            <th>Permits</th>
-            <th>Pending</th>
-            <th>Bonus</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loadingReport ? <tr><td colSpan="9" align="center"><Spinner animation="border" variant="primary"/></td></tr> :sales.length > 0 ? sales.map((sale, key) => (
-            <tr key={key}>
-              <td>{moment(sale.soldAt).format('L')}</td>
-              <td>{dataTransform(sale)}</td>
-              <td>{sale.customer.name}</td>
-              <td>{sale.totalCharge}</td>
-              <td>{sale.fees}</td>
-              <td>{sale.tips}</td>
-              <td>{sale.permits}</td>
-              <td>{sale.amountReceivable}</td>
-              <td>{sale.sellerBonus}</td>
-            </tr>
-          )) : <tr><td colSpan="9" align="center"><h4>No registered sales</h4></td></tr>}
-        </tbody>
-        {
-          loadingReport || (metrics.length > 0 && <thead>
-            <tr>
-              <th>TOTAL</th>
-              <th></th>
-              <th></th>
-              <th>{metrics[0].totalCharge}</th>
-              <th>{metrics[0].fees}</th>
-              <th>{metrics[0].tips}</th>
-              <th>{metrics[0].permits}</th>
-              <th>{metrics[0].amountReceivable}</th>
-              <th>{metrics[0].sellerBonus}</th>
-            </tr>
-          </thead>)}
-      </Table>
-    </Fragment>
-  )
-}
+    <>
+      <Row>
+        <Col sm="10">
+          <h1>Dashboard</h1>
+        </Col>
+        <Col sm="2">
+          <Link to="/sales/create" className="btn btn-primary">
+            Add Sale
+          </Link>
+        </Col>
+      </Row>
+      {loadingReport ? (
+        <Spinner animation="border" variant="primary" />
+      ) : (
+        <Row>
+          <div class="table" id="results">
+            <div class="theader">
+              <div className="table_header">Date</div>
+              <div className="table_header">Insurance Company</div>
+              <div className="table_header">Customer</div>
+              <div className="table_header">Charge</div>
+              <div className="table_header">Fee</div>
+              <div className="table_header">Tip</div>
+              <div className="table_header">Permits</div>
+              <div className="table_header">Pending</div>
+              <div className="table_header">Bonus</div>
+            </div>
+            {sales.map((sale) => (
+              <div key={sale._id} class="table_row">
+                <div class="table_small">
+                  <div class="table_cell">Date</div>
+                  <div class="table_cell">
+                    {moment(sale.soldAt).format("L")}
+                  </div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Insurance Company</div>
+                  <div class="table_cell">{dataTransform(sale)}</div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Customer</div>
+                  <div class="table_cell">{sale.customer.name}</div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Charge</div>
+                  <div class="table_cell">
+                    {sale.totalCharge
+                      ? Math.round(sale.totalCharge * 100) / 100
+                      : "-"}
+                  </div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Fee</div>
+                  <div class="table_cell">
+                    {sale.fees ? Math.round(sale.fees * 100) / 100 : "-"}
+                  </div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Tip</div>
+                  <div class="table_cell">
+                    -0.9919{sale.tips ? Math.round(sale.tips * 100) / 100 : "-"}
+                  </div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Permits</div>
+                  <div class="table_cell">
+                    {sale.permits ? Math.round(sale.permits * 100) / 100 : "-"}
+                  </div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Pending</div>
+                  <div class="table_cell">
+                    {sale.amountReceivable
+                      ? Math.round(sale.amountReceivable * 100) / 100
+                      : "-"}
+                  </div>
+                </div>
+                <div class="table_small">
+                  <div class="table_cell">Bonus</div>
+                  <div class="table_cell">
+                    {sale.sellerBonus
+                      ? Math.round(sale.sellerBonus * 100) / 100
+                      : "-"}
+                  </div>
+                </div>
+              </div>
+            ))}
+            {loadingReport ||
+              (metrics.length > 0 && (
+                <div class="table_row">
+                  <div class="table_small">
+                    <div class="table_cell"></div>
+                    <div class="table_cell"><b>TOTAL</b></div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell"></div>
+                    <div class="table_cell">-</div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell"></div>
+                    <div class="table_cell">-</div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell">Charge</div>
+                    <div class="table_cell">
+                      <b>{metrics[0].totalCharge}</b>
+                    </div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell">Fee</div>
+                    <div class="table_cell">
+                      <b>{metrics[0].fees}</b>
+                    </div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell">Tip</div>
+                    <div class="table_cell">
+                      <b>{metrics[0].tips}</b>
+                    </div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell">Permits</div>
+                    <div class="table_cell">
+                      <b>{metrics[0].permits}</b>
+                    </div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell">Pending</div>
+                    <div class="table_cell">
+                      <b>{metrics[0].amountReceivable}</b>
+                    </div>
+                  </div>
+                  <div class="table_small">
+                    <div class="table_cell">Bonus</div>
+                    <div class="table_cell">
+                      <b>{metrics[0].sellerBonus}</b>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+          {sales.length < 1 && <h4 className="mx">No sales registered</h4>}
+        </Row>
+      )}
+    </>
+  );
+};
 
 Reports.propTypes = {
   sales: PropTypes.array.isRequired,
@@ -75,17 +179,17 @@ Reports.propTypes = {
   loadingReport: PropTypes.bool.isRequired,
   errorReport: PropTypes.bool.isRequired,
   reportListRequest: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = (state) => ({
   sales: state.reportReducer.list.sales,
   metrics: state.reportReducer.list.metrics,
   loadingReport: state.reportListStatusReducer.loading,
   errorReport: state.reportListStatusReducer.error,
-})
+});
 
 const mapDispatchToProps = {
   reportListRequest,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Reports)
+export default connect(mapStateToProps, mapDispatchToProps)(Reports);

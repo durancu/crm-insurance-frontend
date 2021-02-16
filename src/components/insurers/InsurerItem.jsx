@@ -27,12 +27,12 @@ export const InsurerItem = ({ insurer, no, loading, loadingGetInsurer,insurerDel
       <td>{no}</td>
       <td>{insurer.name}</td>
       <td>{insurer.email}</td>
-      <td>{insurer.phone}</td>
-      <td>{insurer.liabilityCommission}</td>
-      <td>{insurer.cargoCommission}</td>
-      <td>{insurer.physicalDamageCommission}</td>
-      <td>{insurer.wcGlUmbCommission}</td>
-      <td>
+      <td align="center" width='150px'>{insurer.phone}</td>
+      <td align="center">{insurer.liabilityCommission ? (Math.round(insurer.liabilityCommission * 100))+'%': '-'}</td>
+      <td align="center">{insurer.cargoCommission ? (Math.round(insurer.cargoCommission * 100))+'%': '-'}</td>
+      <td align="center">{insurer.physicalDamageCommission ? (Math.round(insurer.physicalDamageCommission * 100))+'%': '-'}</td>
+      <td align="center">{insurer.wcGlUmbCommission ? (Math.round(insurer.wcGlUmbCommission * 100))+'%': '-'}</td>
+      <td width='130px'>
         <Button variant="success" onClick={loadedEditData}>
           <Pencil />
         </Button>{" "}

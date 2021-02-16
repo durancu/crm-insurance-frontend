@@ -7,7 +7,16 @@ import Reports from "../components/reports";
 import Insurers from "../components/insurers";
 import CreateSales from "../components/sales/CreateSales";
 
+//examples
+import Tablas from '../components/tablas'
+
 export const COMPONENT_LIST = [
+  {
+    title: "Tablas",
+    url: "/",
+    component: Tablas,
+    protected: false,
+  },
   {
     title: "Login",
     url: "/auth",
