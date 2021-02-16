@@ -9,6 +9,8 @@ const Tablas = () => {
         <div class="table_header">Header Two</div>
         <div class="table_header">Header Three</div>
         <div class="table_header">Header Four</div>
+        <div class="table_header">Header Four</div>
+        <div class="table_header">Header Four</div>
       </div>
       <div class="table_row">
         <div class="table_small">
@@ -22,6 +24,14 @@ const Tablas = () => {
         <div class="table_small">
           <div class="table_cell">Header Three</div>
           <div class="table_cell">-0.4782</div>
+        </div>
+        <div class="table_small">
+          <div class="table_cell">Header Four</div>
+          <div class="table_cell">-0.9919</div>
+        </div>
+        <div class="table_small">
+          <div class="table_cell">Header Four</div>
+          <div class="table_cell">-0.9919</div>
         </div>
         <div class="table_small">
           <div class="table_cell">Header Four</div>
