@@ -9,7 +9,6 @@ const apiCall = (data) =>
   apiPost("sales", data, true).catch((err) => console.log(err));
 
 const sagaRequest = function* sagaRequest({ payload }) {
-  console.log(payload)
   try {
     const response = yield call(apiCall, payload);
     yield put(saleCreateSuccess(response.data));

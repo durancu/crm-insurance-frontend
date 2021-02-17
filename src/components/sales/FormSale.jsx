@@ -8,7 +8,12 @@ import {
   customerLoadRequest,
   saleCreateRequest,
 } from "../../redux/actions";
-
+//Functions
+import {
+  totalChargeFunction,
+  pendingPaymentFunction,
+  bonusFunction,
+} from "../globals/functions";
 //components
 import { Row, Col, Form, Button } from "react-bootstrap";
 
@@ -29,7 +34,7 @@ const defaultForm = {
   chargesPaid: 0,
 };
 
-export const CreateSales = ({
+export const FormSale = ({
   insurers,
   customers,
   loadingInsurer,
@@ -54,47 +59,13 @@ export const CreateSales = ({
 
   //Calculate data
   useEffect(() => {
-    setTotalCharge(
-      parseFloat(form.liabilityCharge) +
-        parseFloat(form.cargoCharge) +
-        parseFloat(form.physicalDamageCharge) +
-        parseFloat(form.wcGlUmbCharge) +
-        parseFloat(form.fees) +
-        parseFloat(form.permits) +
-        parseFloat(form.tips)
-    );
-    setPendingPayment(totalCharge - parseFloat(form.chargesPaid));
-
-    setBonus(
-      (parseFloat(form.liabilityCharge) +
-        parseFloat(form.cargoCharge) +
-        parseFloat(form.physicalDamageCharge) +
-        parseFloat(form.wcGlUmbCharge)) *
-        0.01 +
-        parseFloat(form.fees) * 0.3 +
-        parseFloat(form.permits) * 0.2 +
-        parseFloat(form.tips)
-    );
-  }, [
-    form.liabilityCharge,
-    form.cargoCharge,
-    form.physicalDamageCharge,
-    form.wcGlUmbCharge,
-    form.fees,
-    form.permits,
-    form.tips,
-    form.chargesPaid,
-    totalCharge,
-  ]);
+    setTotalCharge(totalChargeFunction(form));
+    setPendingPayment(pendingPaymentFunction(form));
+    setBonus(bonusFunction(form));
+  }, [form]);
 
   //Load data of form
   const handleChange = ({ target }) => {
-    /* let date;
-    if (target.name === "soldAt") {
-      date = new Date(target.value).toISOString();
-      console.log(date)
-    } */
-
     switch (target.name) {
       case "soldAt":
         setForm((form) => ({
@@ -154,19 +125,10 @@ export const CreateSales = ({
         setForm((form) => ({ ...form, [target.name]: target.value }));
         break;
     }
-
-    /* setForm((form) => ({
-      ...form,
-      [target.name]:
-        target.name === "soldAt"
-          ? new Date(target.value).toISOString()
-          : target.value,
-    })); */
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log(form);
     saleCreateRequest(form);
   };
 
@@ -186,7 +148,7 @@ export const CreateSales = ({
                   <Form.Control
                     type="date"
                     name="soldAt"
-                    value={form.soldAt.toString()}
+                    value={form.soldAt.toString("")}
                     onChange={handleChange}
                   />
                 </Col>
@@ -543,7 +505,7 @@ export const CreateSales = ({
   );
 };
 
-CreateSales.propTypes = {
+FormSale.propTypes = {
   loadingInsurer: PropTypes.bool.isRequired,
   errorInsurer: PropTypes.bool.isRequired,
   loadingCustomer: PropTypes.bool.isRequired,
@@ -570,4 +532,4 @@ const mapDispatchToProps = {
   saleCreateRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateSales);
+export default connect(mapStateToProps, mapDispatchToProps)(FormSale);
