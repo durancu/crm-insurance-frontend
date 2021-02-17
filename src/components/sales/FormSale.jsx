@@ -148,7 +148,7 @@ export const FormSale = ({
                   <Form.Control
                     type="date"
                     name="soldAt"
-                    value={form.soldAt.toString("")}
+
                     onChange={handleChange}
                   />
                 </Col>
