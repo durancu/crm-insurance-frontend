@@ -20,13 +20,13 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 const defaultForm = {
   soldAt: Date,
   customer: "",
-  liabilityInsurer: "N/A",
+  liabilityInsurer: "",
   liabilityCharge: 0,
-  cargoInsurer: "N/A",
+  cargoInsurer: "",
   cargoCharge: 0,
-  physicalDamageInsurer: "N/A",
+  physicalDamageInsurer: "",
   physicalDamageCharge: 0,
-  wcGlUmbInsurer: "N/A",
+  wcGlUmbInsurer: "",
   wcGlUmbCharge: 0,
   fees: 0,
   permits: 0,
@@ -55,14 +55,10 @@ export const FormSale = ({
   useEffect(() => {
     insurerListRequest();
     customerLoadRequest();
-  }, [insurerListRequest, customerLoadRequest]);
-
-  //Calculate data
-  useEffect(() => {
     setTotalCharge(totalChargeFunction(form));
     setPendingPayment(pendingPaymentFunction(form));
     setBonus(bonusFunction(form));
-  }, [form]);
+  }, [insurerListRequest, customerLoadRequest, form]);
 
   //Load data of form
   const handleChange = ({ target }) => {
@@ -148,7 +144,7 @@ export const FormSale = ({
                   <Form.Control
                     type="date"
                     name="soldAt"
-
+                    required
                     onChange={handleChange}
                   />
                 </Col>
@@ -163,10 +159,14 @@ export const FormSale = ({
                   <Form.Control
                     as="select"
                     name="customer"
+                    value={form.customer}
                     custom
+                    required={form.customer !== "" ? false : true}
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="" disabled>
+                      N/A
+                    </option>
                     {customers.map((customer) => (
                       <option key={customer._id} value={customer._id}>
                         {customer.name}
@@ -198,7 +198,7 @@ export const FormSale = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.liabilityCommission !== -1 && (
@@ -217,7 +217,7 @@ export const FormSale = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.liabilityInsurer !== "N/A" && (
+              {form.liabilityInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -227,6 +227,7 @@ export const FormSale = ({
                       type="text"
                       name="liabilityCharge"
                       onChange={handleChange}
+                      required={form.liabilityInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -249,7 +250,7 @@ export const FormSale = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.cargoCommission !== -1 && (
@@ -268,7 +269,7 @@ export const FormSale = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.cargoInsurer !== "N/A" && (
+              {form.cargoInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -278,6 +279,7 @@ export const FormSale = ({
                       type="text"
                       name="cargoCharge"
                       onChange={handleChange}
+                      required={form.cargoInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -300,7 +302,7 @@ export const FormSale = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.physicalDamageCommission !== -1 && (
@@ -319,7 +321,7 @@ export const FormSale = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.physicalDamageInsurer !== "N/A" && (
+              {form.physicalDamageInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -329,6 +331,7 @@ export const FormSale = ({
                       type="text"
                       name="physicalDamageCharge"
                       onChange={handleChange}
+                      required={form.physicalDamageInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -351,7 +354,7 @@ export const FormSale = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.wcGlUmbCommission !== -1 && (
@@ -370,7 +373,7 @@ export const FormSale = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.wcGlUmbInsurer !== "N/A" && (
+              {form.wcGlUmbInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -380,6 +383,7 @@ export const FormSale = ({
                       type="text"
                       name="wcGlUmbCharge"
                       onChange={handleChange}
+                      required={form.wcGlUmbInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -400,6 +404,7 @@ export const FormSale = ({
                     type="text"
                     name="permits"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>
@@ -419,6 +424,7 @@ export const FormSale = ({
                     type="text"
                     name="fees"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>
@@ -438,6 +444,7 @@ export const FormSale = ({
                     type="text"
                     name="tips"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>
@@ -464,6 +471,7 @@ export const FormSale = ({
                     type="text"
                     name="chargesPaid"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>

@@ -10,19 +10,22 @@ import userDeleteSaga from "./user-sagas/userDeleteSaga";
 import userUpdateSaga from "./user-sagas/userUpdateSaga";
 //CUSTOMERS
 import customerLoadListSaga from "./customer-sagas/customerLoadListSaga";
-import customerGetSaga from      "./customer-sagas/customerGetSaga";
-import customerCreateSaga from   "./customer-sagas/customerCreateSaga";
-import customerDeleteSaga from   "./customer-sagas/customerDeleteSaga";
-import customerUpdateSaga from   "./customer-sagas/customerUpdateSaga";
+import customerGetSaga from "./customer-sagas/customerGetSaga";
+import customerCreateSaga from "./customer-sagas/customerCreateSaga";
+import customerDeleteSaga from "./customer-sagas/customerDeleteSaga";
+import customerUpdateSaga from "./customer-sagas/customerUpdateSaga";
 //INSURERS
-import insurerListSaga from     "./insurer-sagas/insurerListSaga";
-import insurerGetSaga from      "./insurer-sagas/insurerGetSaga";
-import insurerCreateSaga from   "./insurer-sagas/insurerCreateSaga";
-import insurerDeleteSaga from   "./insurer-sagas/insurerDeleteSaga";
-import insurerUpdateSaga from   "./insurer-sagas/insurerUpdateSaga";
+import insurerListSaga from "./insurer-sagas/insurerListSaga";
+import insurerGetSaga from "./insurer-sagas/insurerGetSaga";
+import insurerCreateSaga from "./insurer-sagas/insurerCreateSaga";
+import insurerDeleteSaga from "./insurer-sagas/insurerDeleteSaga";
+import insurerUpdateSaga from "./insurer-sagas/insurerUpdateSaga";
 //SALES
 import saleListSaga from "./sale-sagas/saleListSaga";
 import saleCreateSaga from "./sale-sagas/saleCreateSaga";
+import saleGetSaga from "./sale-sagas/saleGetSaga";
+import saleDeleteSaga from "./sale-sagas/saleDeleteSaga";
+import saleUpdateSaga from "./sale-sagas/saleUpdateSaga";
 //REPORTS
 import reportListSaga from "./report-sagas/reportListSaga";
 
@@ -51,6 +54,9 @@ const sagas = function* sagas() {
   //SALE
   yield spawn(saleListSaga);
   yield spawn(saleCreateSaga);
+  yield spawn(saleGetSaga);
+  yield spawn(saleDeleteSaga);
+  yield spawn(saleUpdateSaga);
   //REPORT
   yield spawn(reportListSaga);
 };

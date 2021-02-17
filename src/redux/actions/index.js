@@ -96,12 +96,27 @@ export {
   saleListFail,
   saleListRequest,
   saleListSuccess,
-} from "./sales-actions/salesListActions";
+} from "./sales-actions/saleListActions";
 export {
   saleCreateFail,
   saleCreateRequest,
   saleCreateSuccess,
-} from "./sales-actions/salesCreateActions";
+} from "./sales-actions/saleCreateActions";
+export {
+  saleGetFail,
+  saleGetRequest,
+  saleGetSuccess,
+} from "./sales-actions/saleGetActions";
+export {
+  saleDeleteFail,
+  saleDeleteRequest,
+  saleDeleteSuccess,
+} from "./sales-actions/saleDeleteActions";
+export {
+  saleUpdateFail,
+  saleUpdateRequest,
+  saleUpdateSuccess,
+} from "./sales-actions/saleUpdateActions";
 
 //REPORTS
 export {

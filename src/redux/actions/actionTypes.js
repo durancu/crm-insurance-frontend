@@ -152,6 +152,27 @@ export const SALES_CREATE_REQUEST = "SALES_CREATE_REQUEST";
 export const SALES_CREATE_FAIL = "SALES_CREATE_FAIL";
 /**@constant {string} SALES_CREATE_SUCCESS */
 export const SALES_CREATE_SUCCESS = "SALES_CREATE_SUCCESS";
+//Get
+/**@constant {string} SALES_GET_REQUEST*/
+export const SALES_GET_REQUEST = "SALES_GET_REQUEST";
+/**@constant {string} SALES_GET_FAIL*/
+export const SALES_GET_FAIL = "SALES_GET_FAIL";
+/**@constant {string} SALES_GET_SUCCESS */
+export const SALES_GET_SUCCESS = "SALES_GET_SUCCESS";
+//Delete
+/**@constant {string} SALES_DELETE_REQUEST*/
+export const SALES_DELETE_REQUEST = "SALES_DELETE_REQUEST";
+/**@constant {string} SALES_DELETE_FAIL*/
+export const SALES_DELETE_FAIL = "SALES_DELETE_FAIL";
+/**@constant {string} SALES_DELETE_SUCCESS */
+export const SALES_DELETE_SUCCESS = "SALES_DELETE_SUCCESS";
+//Update
+/**@constant {string} SALES_UPDATE_REQUEST*/
+export const SALES_UPDATE_REQUEST = "SALES_UPDATE_REQUEST";
+/**@constant {string} SALES_UPDATE_FAIL*/
+export const SALES_UPDATE_FAIL = "SALES_UPDATE_FAIL";
+/**@constant {string} SALES_UPDATE_SUCCESS */
+export const SALES_UPDATE_SUCCESS = "SALES_UPDATE_SUCCESS";
 
 //REPORT
 //List
