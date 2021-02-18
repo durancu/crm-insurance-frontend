@@ -1,29 +1,33 @@
-/**
- * Save token cookies
+/** Save token cookies
+ * @param {string} name
  * @param {string} data
  * @returns {object} Message and Status
  */
-export const setTokenAuth = (data) => {
-  sessionStorage.setItem('token', data);
+export const setSessionData = (name, payload) => {
+  sessionStorage.setItem(name, payload);
   return {
-    message: "Token saved success",
-    error: false
-  }
-}
+    message: "Saved success",
+    error: false,
+  };
+};
 
 /**Get token cookies
+ * @param {string} name
  *@returns {object} data
  */
-export const getTokenAuth = () => ({
-  message: "Token loaded success",
+export const getSessionData = (name) => ({
+  message: "Loaded success",
   error: false,
-  token: sessionStorage.getItem('token')
-})
+  data: sessionStorage.getItem(name),
+});
 
 /**Delete token cookies
  * @returns {object} Message and Status
-*/
-export const deleteTokenAuth = () => ({
-  message: "Token delete success",
-  error: false
-})
+ */
+export const deleteSessionData = (name) => {
+  sessionStorage.removeItem(name);
+  return {
+    message: "Delete success",
+    error: false,
+  };
+};

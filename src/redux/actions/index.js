@@ -7,10 +7,18 @@ export {
   userAuthRequest,
   userAuthFail,
   userAuthSuccess,
-  userCheckAuthRequest,
-  userCheckAuthFail,
-  userCheckAuthSuccess,
+  userLogoutRequest,
+  userLogoutFail,
+  userLogoutSuccess,
 } from "./users-actions/userAuthActions";
+export {
+  userProfileSetRequest,
+  userProfileSetSuccess,
+  userProfileSetFail,
+  userProfileGetRequest,
+  userProfileGetFail,
+  userProfileGetSuccess,
+} from "./users-actions/userProfileActions";
 export {
   userLoadRequest,
   userLoadFail,
@@ -36,7 +44,6 @@ export {
   userUpdateFail,
   userUpdateSuccess,
 } from "./users-actions/userUpdateActions";
-
 //Customers
 export {
   customerLoadRequest,
@@ -63,7 +70,6 @@ export {
   customerUpdateFail,
   customerUpdateSuccess,
 } from "./customers-actions/customerUpdateActions";
-
 //Insurers
 export {
   insurerListRequest,
@@ -90,19 +96,32 @@ export {
   insurerUpdateFail,
   insurerUpdateSuccess,
 } from "./insurers-actions/insurerUpdateActions";
-
 //Sales
 export {
   saleListFail,
   saleListRequest,
   saleListSuccess,
-} from "./sales-actions/salesListActions";
+} from "./sales-actions/saleListActions";
 export {
   saleCreateFail,
   saleCreateRequest,
   saleCreateSuccess,
-} from "./sales-actions/salesCreateActions";
-
+} from "./sales-actions/saleCreateActions";
+export {
+  saleGetFail,
+  saleGetRequest,
+  saleGetSuccess,
+} from "./sales-actions/saleGetActions";
+export {
+  saleDeleteFail,
+  saleDeleteRequest,
+  saleDeleteSuccess,
+} from "./sales-actions/saleDeleteActions";
+export {
+  saleUpdateFail,
+  saleUpdateRequest,
+  saleUpdateSuccess,
+} from "./sales-actions/saleUpdateActions";
 //REPORTS
 export {
   reportListRequest,

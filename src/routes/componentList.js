@@ -5,7 +5,8 @@ import Users from "../components/users";
 import Profile from "../components/profile";
 import Reports from "../components/reports";
 import Insurers from "../components/insurers";
-import CreateSales from "../components/sales/CreateSales";
+import FormSale from "../components/sales/FormSale";
+import Sales from "../components/sales";
 
 //examples
 import Tablas from '../components/tablas'
@@ -13,7 +14,7 @@ import Tablas from '../components/tablas'
 export const COMPONENT_LIST = [
   {
     title: "Tablas",
-    url: "/",
+    url: "/tablas",
     component: Tablas,
     protected: false,
   },
@@ -25,14 +26,20 @@ export const COMPONENT_LIST = [
   },
   {
     title: "Reports",
-    url: "/home",
+    url: "/",
     component: Reports,
     protected: true,
   },
   {
     title: "Create Sales",
     url: "/sales/create",
-    component: CreateSales,
+    component: FormSale,
+    protected: true,
+  },
+  {
+    title: "Sales",
+    url: "/sales",
+    component: Sales,
     protected: true,
   },
   {

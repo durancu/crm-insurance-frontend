@@ -41,8 +41,8 @@ function InsurerList({ insurerListRequest, insurers, loading, loadingDelete }) {
       <Table striped hover borderless>
         <thead>
           <tr>
-            <td colspan='4' >&nbsp;</td>
-            <td colspan='4' align='center'><strong>Commission</strong></td>
+            <td colSpan='4' >&nbsp;</td>
+            <td colSpan='4' align='center'><strong>Commission</strong></td>
           </tr>
           <tr>
             <th>No</th>

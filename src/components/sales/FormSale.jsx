@@ -8,20 +8,25 @@ import {
   customerLoadRequest,
   saleCreateRequest,
 } from "../../redux/actions";
-
+//Functions
+import {
+  totalChargeFunction,
+  pendingPaymentFunction,
+  bonusFunction,
+} from "../globals/functions";
 //components
 import { Row, Col, Form, Button } from "react-bootstrap";
 
 const defaultForm = {
   soldAt: Date,
   customer: "",
-  liabilityInsurer: "N/A",
+  liabilityInsurer: "",
   liabilityCharge: 0,
-  cargoInsurer: "N/A",
+  cargoInsurer: "",
   cargoCharge: 0,
-  physicalDamageInsurer: "N/A",
+  physicalDamageInsurer: "",
   physicalDamageCharge: 0,
-  wcGlUmbInsurer: "N/A",
+  wcGlUmbInsurer: "",
   wcGlUmbCharge: 0,
   fees: 0,
   permits: 0,
@@ -29,7 +34,7 @@ const defaultForm = {
   chargesPaid: 0,
 };
 
-export const CreateSales = ({
+export const FormSale = ({
   insurers,
   customers,
   loadingInsurer,
@@ -50,51 +55,13 @@ export const CreateSales = ({
   useEffect(() => {
     insurerListRequest();
     customerLoadRequest();
-  }, [insurerListRequest, customerLoadRequest]);
-
-  //Calculate data
-  useEffect(() => {
-    setTotalCharge(
-      parseFloat(form.liabilityCharge) +
-        parseFloat(form.cargoCharge) +
-        parseFloat(form.physicalDamageCharge) +
-        parseFloat(form.wcGlUmbCharge) +
-        parseFloat(form.fees) +
-        parseFloat(form.permits) +
-        parseFloat(form.tips)
-    );
-    setPendingPayment(totalCharge - parseFloat(form.chargesPaid));
-
-    setBonus(
-      (parseFloat(form.liabilityCharge) +
-        parseFloat(form.cargoCharge) +
-        parseFloat(form.physicalDamageCharge) +
-        parseFloat(form.wcGlUmbCharge)) *
-        0.01 +
-        parseFloat(form.fees) * 0.3 +
-        parseFloat(form.permits) * 0.2 +
-        parseFloat(form.tips)
-    );
-  }, [
-    form.liabilityCharge,
-    form.cargoCharge,
-    form.physicalDamageCharge,
-    form.wcGlUmbCharge,
-    form.fees,
-    form.permits,
-    form.tips,
-    form.chargesPaid,
-    totalCharge,
-  ]);
+    setTotalCharge(totalChargeFunction(form));
+    setPendingPayment(pendingPaymentFunction(form));
+    setBonus(bonusFunction(form));
+  }, [insurerListRequest, customerLoadRequest, form]);
 
   //Load data of form
   const handleChange = ({ target }) => {
-    /* let date;
-    if (target.name === "soldAt") {
-      date = new Date(target.value).toISOString();
-      console.log(date)
-    } */
-
     switch (target.name) {
       case "soldAt":
         setForm((form) => ({
@@ -154,19 +121,10 @@ export const CreateSales = ({
         setForm((form) => ({ ...form, [target.name]: target.value }));
         break;
     }
-
-    /* setForm((form) => ({
-      ...form,
-      [target.name]:
-        target.name === "soldAt"
-          ? new Date(target.value).toISOString()
-          : target.value,
-    })); */
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log(form);
     saleCreateRequest(form);
   };
 
@@ -186,7 +144,7 @@ export const CreateSales = ({
                   <Form.Control
                     type="date"
                     name="soldAt"
-                    value={form.soldAt.toString()}
+                    required
                     onChange={handleChange}
                   />
                 </Col>
@@ -201,10 +159,14 @@ export const CreateSales = ({
                   <Form.Control
                     as="select"
                     name="customer"
+                    value={form.customer}
                     custom
+                    required={form.customer !== "" ? false : true}
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="" disabled>
+                      N/A
+                    </option>
                     {customers.map((customer) => (
                       <option key={customer._id} value={customer._id}>
                         {customer.name}
@@ -236,7 +198,7 @@ export const CreateSales = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.liabilityCommission !== -1 && (
@@ -255,7 +217,7 @@ export const CreateSales = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.liabilityInsurer !== "N/A" && (
+              {form.liabilityInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -265,6 +227,7 @@ export const CreateSales = ({
                       type="text"
                       name="liabilityCharge"
                       onChange={handleChange}
+                      required={form.liabilityInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -287,7 +250,7 @@ export const CreateSales = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.cargoCommission !== -1 && (
@@ -306,7 +269,7 @@ export const CreateSales = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.cargoInsurer !== "N/A" && (
+              {form.cargoInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -316,6 +279,7 @@ export const CreateSales = ({
                       type="text"
                       name="cargoCharge"
                       onChange={handleChange}
+                      required={form.cargoInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -338,7 +302,7 @@ export const CreateSales = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.physicalDamageCommission !== -1 && (
@@ -357,7 +321,7 @@ export const CreateSales = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.physicalDamageInsurer !== "N/A" && (
+              {form.physicalDamageInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -367,6 +331,7 @@ export const CreateSales = ({
                       type="text"
                       name="physicalDamageCharge"
                       onChange={handleChange}
+                      required={form.physicalDamageInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -389,7 +354,7 @@ export const CreateSales = ({
                     custom
                     onChange={handleChange}
                   >
-                    <option value="N/A">N/A</option>
+                    <option value="">N/A</option>
                     {insurers.map(
                       (insurer) =>
                         insurer.wcGlUmbCommission !== -1 && (
@@ -408,7 +373,7 @@ export const CreateSales = ({
               </Form.Row>
             </Col>
             <Col>
-              {form.wcGlUmbInsurer !== "N/A" && (
+              {form.wcGlUmbInsurer !== "" && (
                 <Form.Row>
                   <Form.Label style={{ textAlign: "right" }} column lg={2}>
                     Charge:
@@ -418,6 +383,7 @@ export const CreateSales = ({
                       type="text"
                       name="wcGlUmbCharge"
                       onChange={handleChange}
+                      required={form.wcGlUmbInsurer !== "" && true}
                     />
                   </Col>
                 </Form.Row>
@@ -438,6 +404,7 @@ export const CreateSales = ({
                     type="text"
                     name="permits"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>
@@ -457,6 +424,7 @@ export const CreateSales = ({
                     type="text"
                     name="fees"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>
@@ -476,6 +444,7 @@ export const CreateSales = ({
                     type="text"
                     name="tips"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>
@@ -502,6 +471,7 @@ export const CreateSales = ({
                     type="text"
                     name="chargesPaid"
                     onChange={handleChange}
+                    required
                   />
                 </Col>
               </Form.Row>
@@ -543,7 +513,7 @@ export const CreateSales = ({
   );
 };
 
-CreateSales.propTypes = {
+FormSale.propTypes = {
   loadingInsurer: PropTypes.bool.isRequired,
   errorInsurer: PropTypes.bool.isRequired,
   loadingCustomer: PropTypes.bool.isRequired,
@@ -570,4 +540,4 @@ const mapDispatchToProps = {
   saleCreateRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateSales);
+export default connect(mapStateToProps, mapDispatchToProps)(FormSale);

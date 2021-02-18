@@ -7,6 +7,10 @@ import testReducer from "./testReducer";
 import userAuthReducer from "./users-reducers/userAuthReducer";
 import userAuthStatusReducer from "./users-reducers/userAuthStatusReducer";
 import userCheckAuthStatusReducer from "./users-reducers/userCheckAuthStatusReducer";
+//Profile
+import userProfileReducer from './users-reducers/userProfileReducer'
+import userProfileStatusReducer from './users-reducers/userProfileStatusReducer'
+import userProfileGetStatusReducer from './users-reducers/userProfileGetStatusReducer'
 //USER
 import userReducer from "./users-reducers/userReducer";
 import userLoadStatusReducer from "./users-reducers/userLoadStatusReducer";
@@ -22,17 +26,20 @@ import customerDeleteStatusReducer from "./customers-reducers/customerDeleteStat
 import customerGetStatusReducer from "./customers-reducers/customerGetStatusReducer";
 import customerUpdateStatusReducer from "./customers-reducers/customerUpdateStatusReducer";
 //INSURER
-import insurerReducer from             "./insurers-reducers/insurerReducer";
-import insurerListStatusReducer from   "./insurers-reducers/insurerListStatusReducer";
+import insurerReducer from "./insurers-reducers/insurerReducer";
+import insurerListStatusReducer from "./insurers-reducers/insurerListStatusReducer";
 import insurerCreateStatusReducer from "./insurers-reducers/insurerCreateStatusReducer";
 import insurerDeleteStatusReducer from "./insurers-reducers/insurerDeleteStatusReducer";
-import insurerGetStatusReducer from    "./insurers-reducers/insurerGetStatusReducer";
+import insurerGetStatusReducer from "./insurers-reducers/insurerGetStatusReducer";
 import insurerUpdateStatusReducer from "./insurers-reducers/insurerUpdateStatusReducer";
 
 //SALE
 import saleReducer from "./sales-reducers/saleReducer";
 import saleListStatusReducer from "./sales-reducers/saleListStatusReducer";
 import saleCreateStatusReducer from "./sales-reducers/saleCreateStatusReducer";
+import saleGetStatusReducer from "./sales-reducers/saleGetStatusReducer";
+import saleDeleteStatusReducer from "./sales-reducers/saleDeleteStatusReducer";
+import saleUpdateStatusReducer from "./sales-reducers/saleUpdateStatusReducer";
 
 //REPORT
 import reportReducer from "./reports-reducers/reportReducer";
@@ -45,6 +52,10 @@ export default combineReducers({
   userAuthReducer,
   userAuthStatusReducer,
   userCheckAuthStatusReducer,
+  //Profile
+  userProfileReducer,
+  userProfileStatusReducer,
+  userProfileGetStatusReducer,
   //USER
   userReducer,
   userLoadStatusReducer,
@@ -70,6 +81,9 @@ export default combineReducers({
   saleReducer,
   saleListStatusReducer,
   saleCreateStatusReducer,
+  saleGetStatusReducer,
+  saleDeleteStatusReducer,
+  saleUpdateStatusReducer,
   //REPORT
   reportReducer,
   reportListStatusReducer,

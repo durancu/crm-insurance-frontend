@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 //Actions
 import { reportListRequest } from "../../redux/actions";
 //Functions
-import dataTransform from "./dataTransform";
+import {dataTransform} from "../globals/functions";
 //Assets
 import "../assets/App.css";
 //Components
@@ -40,8 +40,8 @@ export const Reports = ({
         <Spinner animation="border" variant="primary" />
       ) : (
         <Row>
-          <div class="table" id="results">
-            <div class="theader">
+          <div className="table" id="results">
+            <div className="theader">
               <div className="table_header">Date</div>
               <div className="table_header">Insurance Company</div>
               <div className="table_header">Customer</div>
@@ -53,58 +53,58 @@ export const Reports = ({
               <div className="table_header">Bonus</div>
             </div>
             {sales.map((sale) => (
-              <div key={sale._id} class="table_row">
-                <div class="table_small">
-                  <div class="table_cell">Date</div>
-                  <div class="table_cell">
+              <div key={sale._id} className="table_row">
+                <div className="table_small">
+                  <div className="table_cell">Date</div>
+                  <div className="table_cell">
                     {moment(sale.soldAt).format("L")}
                   </div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Insurance Company</div>
-                  <div class="table_cell">{dataTransform(sale)}</div>
+                <div className="table_small">
+                  <div className="table_cell">Insurance Company</div>
+                  <div className="table_cell">{dataTransform(sale)}</div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Customer</div>
-                  <div class="table_cell">{sale.customer.name}</div>
+                <div className="table_small">
+                  <div className="table_cell">Customer</div>
+                  <div className="table_cell">{sale.customer.name}</div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Charge</div>
-                  <div class="table_cell">
+                <div className="table_small">
+                  <div className="table_cell">Charge</div>
+                  <div className="table_cell">
                     {sale.totalCharge
                       ? Math.round(sale.totalCharge * 100) / 100
                       : "-"}
                   </div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Fee</div>
-                  <div class="table_cell">
+                <div className="table_small">
+                  <div className="table_cell">Fee</div>
+                  <div className="table_cell">
                     {sale.fees ? Math.round(sale.fees * 100) / 100 : "-"}
                   </div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Tip</div>
-                  <div class="table_cell">
+                <div className="table_small">
+                  <div className="table_cell">Tip</div>
+                  <div className="table_cell">
                     -0.9919{sale.tips ? Math.round(sale.tips * 100) / 100 : "-"}
                   </div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Permits</div>
-                  <div class="table_cell">
+                <div className="table_small">
+                  <div className="table_cell">Permits</div>
+                  <div className="table_cell">
                     {sale.permits ? Math.round(sale.permits * 100) / 100 : "-"}
                   </div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Pending</div>
-                  <div class="table_cell">
+                <div className="table_small">
+                  <div className="table_cell">Pending</div>
+                  <div className="table_cell">
                     {sale.amountReceivable
                       ? Math.round(sale.amountReceivable * 100) / 100
                       : "-"}
                   </div>
                 </div>
-                <div class="table_small">
-                  <div class="table_cell">Bonus</div>
-                  <div class="table_cell">
+                <div className="table_small">
+                  <div className="table_cell">Bonus</div>
+                  <div className="table_cell">
                     {sale.sellerBonus
                       ? Math.round(sale.sellerBonus * 100) / 100
                       : "-"}
@@ -114,52 +114,52 @@ export const Reports = ({
             ))}
             {loadingReport ||
               (metrics.length > 0 && (
-                <div class="table_row">
-                  <div class="table_small">
-                    <div class="table_cell"></div>
-                    <div class="table_cell"><b>TOTAL</b></div>
+                <div className="table_row">
+                  <div className="table_small">
+                    <div className="table_cell"></div>
+                    <div className="table_cell"><b>TOTAL</b></div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell"></div>
-                    <div class="table_cell">-</div>
+                  <div className="table_small">
+                    <div className="table_cell"></div>
+                    <div className="table_cell">-</div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell"></div>
-                    <div class="table_cell">-</div>
+                  <div className="table_small">
+                    <div className="table_cell"></div>
+                    <div className="table_cell">-</div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell">Charge</div>
-                    <div class="table_cell">
+                  <div className="table_small">
+                    <div className="table_cell">Charge</div>
+                    <div className="table_cell">
                       <b>{metrics[0].totalCharge}</b>
                     </div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell">Fee</div>
-                    <div class="table_cell">
+                  <div className="table_small">
+                    <div className="table_cell">Fee</div>
+                    <div className="table_cell">
                       <b>{metrics[0].fees}</b>
                     </div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell">Tip</div>
-                    <div class="table_cell">
+                  <div className="table_small">
+                    <div className="table_cell">Tip</div>
+                    <div className="table_cell">
                       <b>{metrics[0].tips}</b>
                     </div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell">Permits</div>
-                    <div class="table_cell">
+                  <div className="table_small">
+                    <div className="table_cell">Permits</div>
+                    <div className="table_cell">
                       <b>{metrics[0].permits}</b>
                     </div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell">Pending</div>
-                    <div class="table_cell">
+                  <div className="table_small">
+                    <div className="table_cell">Pending</div>
+                    <div className="table_cell">
                       <b>{metrics[0].amountReceivable}</b>
                     </div>
                   </div>
-                  <div class="table_small">
-                    <div class="table_cell">Bonus</div>
-                    <div class="table_cell">
+                  <div className="table_small">
+                    <div className="table_cell">Bonus</div>
+                    <div className="table_cell">
                       <b>{metrics[0].sellerBonus}</b>
                     </div>
                   </div>
