@@ -1,7 +1,10 @@
 import { spawn } from "redux-saga/effects";
 //AUTH
 import userAuthSaga from "./user-sagas/userAuthSaga";
-import userCheckAuthSaga from "./user-sagas/userCheckAuthSaga";
+import userLogoutSaga from "./user-sagas/userLogoutSaga";
+//PROFILE
+import userProfileSaga from "./user-sagas/userProfileSaga";
+import userProfileGetSaga from "./user-sagas/userProfileGetSaga";
 //USERS
 import userLoadListSaga from "./user-sagas/userLoadListSaga";
 import userGetSaga from "./user-sagas/userGetSaga";
@@ -32,7 +35,10 @@ import reportListSaga from "./report-sagas/reportListSaga";
 const sagas = function* sagas() {
   //AUTH
   yield spawn(userAuthSaga);
-  yield spawn(userCheckAuthSaga);
+  yield spawn(userLogoutSaga);
+  //Profile
+  yield spawn(userProfileSaga);
+  yield spawn(userProfileGetSaga);
   //USER
   yield spawn(userLoadListSaga);
   yield spawn(userGetSaga);

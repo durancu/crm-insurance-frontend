@@ -7,10 +7,18 @@ export {
   userAuthRequest,
   userAuthFail,
   userAuthSuccess,
-  userCheckAuthRequest,
-  userCheckAuthFail,
-  userCheckAuthSuccess,
+  userLogoutRequest,
+  userLogoutFail,
+  userLogoutSuccess,
 } from "./users-actions/userAuthActions";
+export {
+  userProfileSetRequest,
+  userProfileSetSuccess,
+  userProfileSetFail,
+  userProfileGetRequest,
+  userProfileGetFail,
+  userProfileGetSuccess,
+} from "./users-actions/userProfileActions";
 export {
   userLoadRequest,
   userLoadFail,
@@ -36,7 +44,6 @@ export {
   userUpdateFail,
   userUpdateSuccess,
 } from "./users-actions/userUpdateActions";
-
 //Customers
 export {
   customerLoadRequest,
@@ -63,7 +70,6 @@ export {
   customerUpdateFail,
   customerUpdateSuccess,
 } from "./customers-actions/customerUpdateActions";
-
 //Insurers
 export {
   insurerListRequest,
@@ -90,7 +96,6 @@ export {
   insurerUpdateFail,
   insurerUpdateSuccess,
 } from "./insurers-actions/insurerUpdateActions";
-
 //Sales
 export {
   saleListFail,
@@ -117,7 +122,6 @@ export {
   saleUpdateRequest,
   saleUpdateSuccess,
 } from "./sales-actions/saleUpdateActions";
-
 //REPORTS
 export {
   reportListRequest,

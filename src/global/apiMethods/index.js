@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { getTokenAuth } from '../sessionStore'
+import { getSessionData } from '../sessionStore'
 import { API_BASE_URL } from '../config';
 
 
 const loadToken = (authRequired = false) => (
-  authRequired ? { Authorization: `Bearer ${getTokenAuth().token}` } : {}
+  authRequired ? { Authorization: `Bearer ${getSessionData('token').data}` } : {}
 )
 
 /** API Petition

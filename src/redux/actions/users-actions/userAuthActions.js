@@ -26,22 +26,22 @@ export const userAuthSuccess = () => ({
 /** Action Creator
  * @returns {string} action
 */
-export const userCheckAuthRequest = () => ({
-  type: types.USER_CHECK_AUTH_REQUEST,
+export const userLogoutRequest = () => ({
+  type: types.USER_LOGOUT_REQUEST,
 })
 
 /** Action Creator
  * @returns {string} action
 */
-export const userCheckAuthFail = () => ({
-  type: types.USER_CHECK_AUTH_FAIL,
+export const userLogoutFail = () => ({
+  type: types.USER_LOGOUT_FAIL,
 })
 
 /** Action Creator
  * @returns {string} action
 */
-export const userCheckAuthSuccess = (payload) => ({
-  type: types.USER_CHECK_AUTH_SUCCESS,
+export const userLogoutSuccess = (payload) => ({
+  type: types.USER_LOGOUT_SUCCESS,
   payload
 })
 

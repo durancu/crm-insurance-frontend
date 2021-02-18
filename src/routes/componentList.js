@@ -6,6 +6,7 @@ import Profile from "../components/profile";
 import Reports from "../components/reports";
 import Insurers from "../components/insurers";
 import FormSale from "../components/sales/FormSale";
+import Sales from "../components/sales";
 
 //examples
 import Tablas from '../components/tablas'
@@ -33,6 +34,12 @@ export const COMPONENT_LIST = [
     title: "Create Sales",
     url: "/sales/create",
     component: FormSale,
+    protected: true,
+  },
+  {
+    title: "Sales",
+    url: "/sales",
+    component: Sales,
     protected: true,
   },
   {

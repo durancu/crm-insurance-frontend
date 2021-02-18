@@ -7,6 +7,10 @@ import testReducer from "./testReducer";
 import userAuthReducer from "./users-reducers/userAuthReducer";
 import userAuthStatusReducer from "./users-reducers/userAuthStatusReducer";
 import userCheckAuthStatusReducer from "./users-reducers/userCheckAuthStatusReducer";
+//Profile
+import userProfileReducer from './users-reducers/userProfileReducer'
+import userProfileStatusReducer from './users-reducers/userProfileStatusReducer'
+import userProfileGetStatusReducer from './users-reducers/userProfileGetStatusReducer'
 //USER
 import userReducer from "./users-reducers/userReducer";
 import userLoadStatusReducer from "./users-reducers/userLoadStatusReducer";
@@ -48,6 +52,10 @@ export default combineReducers({
   userAuthReducer,
   userAuthStatusReducer,
   userCheckAuthStatusReducer,
+  //Profile
+  userProfileReducer,
+  userProfileStatusReducer,
+  userProfileGetStatusReducer,
   //USER
   userReducer,
   userLoadStatusReducer,
