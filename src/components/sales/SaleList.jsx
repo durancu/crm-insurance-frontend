@@ -8,7 +8,7 @@ import "../assets/App.css";
 import { saleListRequest, saleDeleteRequest } from "../../redux/actions";
 //Components
 import SaleItem from "./SaleItem";
-import { Spinner,Badge } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 export const SaleList = ({
   list,

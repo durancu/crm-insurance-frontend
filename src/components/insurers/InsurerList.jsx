@@ -37,7 +37,7 @@ function InsurerList({ insurerListRequest, insurers, loading, loadingDelete }) {
   }, [insurerListRequest]);
 
   return (
-    <div>
+    <>
       <Table striped hover borderless>
         <thead>
           <tr>
@@ -76,7 +76,7 @@ function InsurerList({ insurerListRequest, insurers, loading, loadingDelete }) {
           }
         </tbody>
       </Table>
-    </div>
+    </>
   )
 }
 

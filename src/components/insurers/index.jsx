@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
 //components
-import { Row, Col } from 'react-bootstrap'
-import InsurerList from './InsurerList'
+import { Row, Col } from "react-bootstrap";
+import InsurerList from "./InsurerList";
 
 export default function Insurers() {
   return (
-    <div>
-      <Row>
+    <>
+      <Row className="mt-3">
         <h1>Insurers</h1>
       </Row>
       <Row>
@@ -15,6 +15,6 @@ export default function Insurers() {
           <InsurerList />
         </Col>
       </Row>
-    </div>
-  )
+    </>
+  );
 }

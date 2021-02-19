@@ -6,8 +6,8 @@ import CustomerList from './CustomerList'
 
 export default function Customers() {
   return (
-    <div>
-      <Row>
+    <>
+      <Row className="mt-3">
         <h1>Customers</h1>
       </Row>
       <Row>
@@ -15,6 +15,6 @@ export default function Customers() {
           <CustomerList />
         </Col>
       </Row>
-    </div>
+    </>
   )
 }

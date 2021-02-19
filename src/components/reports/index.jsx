@@ -26,7 +26,7 @@ export const Reports = ({
 
   return (
     <>
-      <Row>
+      <Row className="mt-3">
         <Col sm="10">
           <h1>Dashboard</h1>
         </Col>

@@ -37,7 +37,7 @@ function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }
   }, [customerLoadRequest]);
 
   return (
-    <div>
+    <>
       <Table>
         <thead>
           <tr>
@@ -69,7 +69,7 @@ function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }
           }
         </tbody>
       </Table>
-    </div>
+    </>
   )
 }
 
