@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 //Actions
 import { reportListRequest } from "../../redux/actions";
 //Functions
-import {dataTransform} from "../globals/functions";
+import { dataTransform } from "../globals/functions";
 //Assets
 import "../assets/App.css";
 //Components
@@ -37,7 +37,11 @@ export const Reports = ({
         </Col>
       </Row>
       {loadingReport ? (
-        <Spinner animation="border" variant="primary" />
+        <Row>
+          {" "}
+          <Spinner animation="border" variant="primary" />
+          <h3>Loading...</h3>
+        </Row>
       ) : (
         <Row>
           <div className="table" id="results">
@@ -117,7 +121,9 @@ export const Reports = ({
                 <div className="table_row">
                   <div className="table_small">
                     <div className="table_cell"></div>
-                    <div className="table_cell"><b>TOTAL</b></div>
+                    <div className="table_cell">
+                      <b>TOTAL</b>
+                    </div>
                   </div>
                   <div className="table_small">
                     <div className="table_cell"></div>

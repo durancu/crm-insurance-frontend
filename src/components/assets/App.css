@@ -1,48 +1,11 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .table {
   display: table;
   text-align: center;
   width: 100%;
   border-collapse: separate;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
 
@@ -88,9 +51,10 @@
   padding-bottom: 10px;
 }
 
-.table_row > .table_small > .table_cell { /* Verificar con liuver */
-  padding-top: 3px;
-  padding-bottom: 3px;
+.table_row > .table_small > .table_cell {
+  /* Verificar con liuver */
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: #5b5b5b;
   border-bottom: #ccc 1px solid;
 }
@@ -111,13 +75,13 @@
   border-bottom-left-radius: 5px;
 }
 
-.table_row:nth-child(2n+3) {
+.table_row:nth-child(2n + 3) {
   background: #e9e9e9;
 }
 
 @media screen and (max-width: 900px) {
   .table {
-    width: 100%
+    width: 100%;
   }
 }
 
@@ -125,7 +89,7 @@
   .table {
     display: block;
   }
-  .table_row:nth-child(2n+3) {
+  .table_row:nth-child(2n + 3) {
     background: none;
   }
   .theader {

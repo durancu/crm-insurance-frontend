@@ -9,7 +9,7 @@ const apiCall = (data) =>
   apiUpdate(`users/${data.id}`, data, true).catch((err) => console.log(err));
 
 const sagaRequest = function* sagaRequest(action) {
-  const { payload, _id } = action;
+  const { payload } = action;
   try {
     const response = yield call(apiCall, payload);
     yield put(userUpdateSuccess(response.data));
