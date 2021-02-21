@@ -1,28 +1,29 @@
 export const dataTransform = (element) => {
   let insurers = [];
-  let insurers_simp = [];
 
   element.hasOwnProperty("liabilityInsurer") &&
     insurers.push(`${element.liabilityInsurer.name}`);
-  element.hasOwnProperty("liabilityCharge") &&
-    insurers.push(`${element.liabilityCharge.name}`);
+  element.hasOwnProperty("cargoInsurer") &&
+    insurers.push(`${element.cargoInsurer.name}`);
   element.hasOwnProperty("physicalDamageInsurer") &&
     insurers.push(`${element.physicalDamageInsurer.name}`);
-  element.hasOwnProperty("physicalDamageCharge") &&
-    insurers.push(`${element.physicalDamageCharge.name}`);
+  element.hasOwnProperty("wcGlUmbInsurer") &&
+    insurers.push(`${element.wcGlUmbInsurer.name}`);
 
   const uniq = insurers.filter((valor, index) => {
     return insurers.indexOf(valor) === index;
-  });
+  }).join(' / ');
 
-  let n = 1;
+  console.log("Insurance: "+uniq);
+
+  /* let n = 1;
   uniq.map(
     (x) =>
       x !== "undefined" &&
       insurers_simp.push(`${x} ${uniq.length !== ++n ? "/ " : ""}`)
-  );
+  ); */
 
-  return insurers_simp;
+  return uniq;
 };
 
 const transformNumber = (number) => (isNaN(number) ? 0 : number);

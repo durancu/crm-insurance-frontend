@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 
 export default function Body({ children }) {
   return (
-    <Container>
+    <Container fluid >
       {children}
     </Container>
   )

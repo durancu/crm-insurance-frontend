@@ -23,7 +23,7 @@ export const Reports = ({
   useEffect(() => {
     reportListRequest();
   }, [reportListRequest]);
-
+  
   return (
     <>
       <Row className="mt-3">
@@ -47,14 +47,14 @@ export const Reports = ({
           <div className="table" id="results">
             <div className="theader">
               <div className="table_header">Date</div>
-              <div className="table_header">Insurance Company</div>
+              <div className="table_header">Insurer</div>
               <div className="table_header">Customer</div>
-              <div className="table_header">Charge</div>
-              <div className="table_header">Fee</div>
-              <div className="table_header">Tip</div>
+              <div className="table_header">Premium</div>              
+              <div className="table_header">Fees</div>
+              <div className="table_header">Tips</div>
               <div className="table_header">Permits</div>
-              <div className="table_header">Pending</div>
-              <div className="table_header">Bonus</div>
+              <div className="table_header">Charges</div>
+              <div className="table_header">Paid</div>              
             </div>
             {sales.map((sale) => (
               <div key={sale._id} className="table_row">
@@ -65,7 +65,7 @@ export const Reports = ({
                   </div>
                 </div>
                 <div className="table_small">
-                  <div className="table_cell">Insurance Company</div>
+                  <div className="table_cell">Insurer</div>
                   <div className="table_cell">{dataTransform(sale)}</div>
                 </div>
                 <div className="table_small">
@@ -73,23 +73,21 @@ export const Reports = ({
                   <div className="table_cell">{sale.customer.name}</div>
                 </div>
                 <div className="table_small">
-                  <div className="table_cell">Charge</div>
+                  <div className="table_cell">Premium</div>
                   <div className="table_cell">
-                    {sale.totalCharge
-                      ? Math.round(sale.totalCharge * 100) / 100
-                      : "-"}
+                    { Math.round((sale.premium) * 100) / 100 }
                   </div>
                 </div>
                 <div className="table_small">
-                  <div className="table_cell">Fee</div>
+                  <div className="table_cell">Fees</div>
                   <div className="table_cell">
                     {sale.fees ? Math.round(sale.fees * 100) / 100 : "-"}
                   </div>
                 </div>
                 <div className="table_small">
-                  <div className="table_cell">Tip</div>
+                  <div className="table_cell">Tips</div>
                   <div className="table_cell">
-                    -0.9919{sale.tips ? Math.round(sale.tips * 100) / 100 : "-"}
+                    {sale.tips ? Math.round(sale.tips * 100) / 100 : "-"}
                   </div>
                 </div>
                 <div className="table_small">
@@ -99,18 +97,16 @@ export const Reports = ({
                   </div>
                 </div>
                 <div className="table_small">
-                  <div className="table_cell">Pending</div>
+                  <div className="table_cell">Charges</div>
                   <div className="table_cell">
-                    {sale.amountReceivable
-                      ? Math.round(sale.amountReceivable * 100) / 100
-                      : "-"}
+                    { Math.round(sale.downPayment * 100) / 100 }
                   </div>
                 </div>
                 <div className="table_small">
-                  <div className="table_cell">Bonus</div>
+                  <div className="table_cell">Paid</div>
                   <div className="table_cell">
-                    {sale.sellerBonus
-                      ? Math.round(sale.sellerBonus * 100) / 100
+                    {sale.amountReceivable
+                      ? Math.round(sale.chargesPaid * 100) / 100
                       : "-"}
                   </div>
                 </div>
@@ -134,39 +130,41 @@ export const Reports = ({
                     <div className="table_cell">-</div>
                   </div>
                   <div className="table_small">
-                    <div className="table_cell">Charge</div>
+                    <div className="table_cell">Premium</div>
                     <div className="table_cell">
-                      <b>{metrics[0].totalCharge}</b>
+                      <b>
+                        {Math.round(metrics[0].premium * 100) / 100}
+                        </b>
                     </div>
                   </div>
                   <div className="table_small">
-                    <div className="table_cell">Fee</div>
+                    <div className="table_cell">Fees</div>
                     <div className="table_cell">
-                      <b>{metrics[0].fees}</b>
+                    <b>{Math.round(metrics[0].fees * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
-                    <div className="table_cell">Tip</div>
+                    <div className="table_cell">Tips</div>
                     <div className="table_cell">
-                      <b>{metrics[0].tips}</b>
+                    <b>{Math.round(metrics[0].tips * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
                     <div className="table_cell">Permits</div>
                     <div className="table_cell">
-                      <b>{metrics[0].permits}</b>
+                    <b>{Math.round(metrics[0].permits * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
-                    <div className="table_cell">Pending</div>
+                    <div className="table_cell">Charges</div>
                     <div className="table_cell">
-                      <b>{metrics[0].amountReceivable}</b>
+                    <b>{Math.round(metrics[0].downPayment * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
-                    <div className="table_cell">Bonus</div>
+                    <div className="table_cell">Paid</div>
                     <div className="table_cell">
-                      <b>{metrics[0].sellerBonus}</b>
+                    <b>{Math.round(metrics[0].chargesPaid * 100) / 100}</b>
                     </div>
                   </div>
                 </div>
