@@ -12,7 +12,7 @@ import {
   reportListRequest,
 } from "../../redux/actions";
 
-export const Filter = ({
+export const SaleFilters = ({
   sellers,
   userLoadRequest,
   customers,
@@ -74,67 +74,76 @@ export const Filter = ({
 
   useEffect(() => {
     reportListRequest(`${dateRange}${filterTypeParam}${filterValueParam}`);
-  },[dateRange, filterTypeParam, filterValueParam, reportListRequest]);
+  }, [dateRange, filterTypeParam, filterValueParam, reportListRequest]);
 
   return (
-    <Form>
-      <Form.Row className="mb-2">
-        <Col>
-          <Form.Control
-            name="date_range"
-            as="select"
-            onChange={handleDateRange}
-          >
-            <option value="">All</option>
-            <option value="TODAY">Today</option>
-            <option value="YESTERDAY">Yesterday</option>
-            <option value="WTD">This Week</option>
-            <option value="LAST_WEEK">Last Week</option>
-            <option value="MTD">This Month</option>
-            <option value="LAST_MONTH">Last Month</option>
-            <option value="YTD">This Year</option>
-            <option value="LAST_YEAR">Last Year</option>
-          </Form.Control>
-        </Col>
-        <Form.Label style={{ textAlign: "right" }} column sm="1">
+    <Form inline>
+      <Form.Row>
+        <Form.Label htmlFor="dateRangeFilter" className="my-1 mr-2">
+          Date Range: 
+        </Form.Label>
+
+        <Form.Control
+          id="dateRange"
+          name="date_range"
+          as="select"
+          onChange={handleDateRange}
+          className="my-2 mr-sm-2"
+          custom
+        >
+          <option value="">All</option>
+          <option value="TODAY">Today</option>
+          <option value="YESTERDAY">Yesterday</option>
+          <option value="WTD">This Week</option>
+          <option value="LAST_WEEK">Last Week</option>
+          <option value="MTD">This Month</option>
+          <option value="LAST_MONTH">Last Month</option>
+          <option value="YTD">This Year</option>
+          <option value="LAST_YEAR">Last Year</option>
+        </Form.Control>
+
+        <Form.Label htmlFor="filterBy" className="my-1 mr-2">
           Filter By:
         </Form.Label>
-        <Col>
-          <Form.Control
-            name="filter_field"
-            as="select"
-            onChange={handleFilterType}
-            defaultValue=""
-          >
-            <option value="">Select your choice</option>
-            <option value="seller">Seller</option>
-            <option value="customer">Customer</option>
-            <option value="location">Location</option>
-          </Form.Control>
-        </Col>
-        <Col>
-          <Form.Control
-            name="filter_field"
-            as="select"
-            defaultValue=""
-            onChange={handleFilterValue}
-          >
-            <option value="">All</option>
-            {filterValues.length > 0 &&
-              filterValues.map((element) => (
-                <option
-                  key={element._id}
-                  value={element._id}
-                >{`${element.firstName} ${element.lastName}`}</option>
-              ))}
-          </Form.Control>
-        </Col>
+
+        <Form.Control
+          id="filterBy"
+          name="filter_field"
+          as="select"
+          onChange={handleFilterType}
+          defaultValue=""
+          className="my-2 mr-sm-2"
+        >
+          <option value="">Select your choice</option>
+          <option value="seller">Seller</option>
+          <option value="customer">Customer</option>
+          <option value="location">Location</option>
+        </Form.Control>
+
+
+        <Form.Control
+          name="filter_field"
+          as="select"
+          defaultValue=""
+          onChange={handleFilterValue}
+          className="my-2 mr-sm-2"
+        >
+          <option value="">All</option>
+          {filterValues.length > 0 &&
+            filterValues.map((element) => (
+              <option
+                key={element._id}
+                value={element._id}
+              >{`${element.firstName} ${element.lastName}`}</option>
+            ))}
+        </Form.Control>
+
       </Form.Row>
     </Form>
   );
 };
 
-Filter.propTypes = {
+SaleFilters.propTypes = {
   sellers: PropTypes.array.isRequired,
   userLoadRequest: PropTypes.func.isRequired,
   customers: PropTypes.array.isRequired,
@@ -153,4 +162,4 @@ const mapDispatchToProps = {
   reportListRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(SaleFilters);
