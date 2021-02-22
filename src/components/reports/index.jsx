@@ -12,6 +12,7 @@ import { dataTransform } from "../globals/functions";
 import "../assets/App.css";
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
+import  Filter  from "./Filter";
 
 export const Reports = ({
   reportListRequest,
@@ -23,7 +24,7 @@ export const Reports = ({
   useEffect(() => {
     reportListRequest();
   }, [reportListRequest]);
-  
+
   return (
     <>
       <Row className="mt-3">
@@ -36,7 +37,8 @@ export const Reports = ({
           </Link>
         </Col>
       </Row>
-      {loadingReport ? (
+      <Filter/>
+         {loadingReport ? (
         <Row>
           {" "}
           <Spinner animation="border" variant="primary" />
@@ -46,15 +48,15 @@ export const Reports = ({
         <Row>
           <div className="table" id="results">
             <div className="theader">
-              <div className="table_header">Date</div>
-              <div className="table_header">Insurer</div>
-              <div className="table_header">Customer</div>
-              <div className="table_header">Premium</div>              
-              <div className="table_header">Fees</div>
-              <div className="table_header">Tips</div>
-              <div className="table_header">Permits</div>
-              <div className="table_header">Charges</div>
-              <div className="table_header">Paid</div>              
+              <div className="table_header" >Date</div>
+              <div className="table_header" >Insurer</div>
+              <div className="table_header" >Customer</div>
+              <div className="table_header" style={{ textAlign: "right" }}>Premium</div>
+              <div className="table_header" style={{ textAlign: "right" }}>Fees</div>
+              <div className="table_header" style={{ textAlign: "right" }}>Tips</div>
+              <div className="table_header" style={{ textAlign: "right" }}>Permits</div>
+              <div className="table_header" style={{ textAlign: "right" }}>Charges</div>
+              <div className="table_header" style={{ textAlign: "right" }}>Paid</div>
             </div>
             {sales.map((sale) => (
               <div key={sale._id} className="table_row">
@@ -74,37 +76,37 @@ export const Reports = ({
                 </div>
                 <div className="table_small">
                   <div className="table_cell">Premium</div>
-                  <div className="table_cell">
-                    { Math.round((sale.premium) * 100) / 100 }
+                  <div className="table_cell" style={{ textAlign: "right" }}>
+                    {Math.round(sale.premium * 100) / 100}
                   </div>
                 </div>
                 <div className="table_small">
                   <div className="table_cell">Fees</div>
-                  <div className="table_cell">
+                  <div className="table_cell" style={{ textAlign: "right" }}>
                     {sale.fees ? Math.round(sale.fees * 100) / 100 : "-"}
                   </div>
                 </div>
                 <div className="table_small">
                   <div className="table_cell">Tips</div>
-                  <div className="table_cell">
+                  <div className="table_cell" style={{ textAlign: "right" }}>
                     {sale.tips ? Math.round(sale.tips * 100) / 100 : "-"}
                   </div>
                 </div>
                 <div className="table_small">
                   <div className="table_cell">Permits</div>
-                  <div className="table_cell">
+                  <div className="table_cell" style={{ textAlign: "right" }}>
                     {sale.permits ? Math.round(sale.permits * 100) / 100 : "-"}
                   </div>
                 </div>
                 <div className="table_small">
                   <div className="table_cell">Charges</div>
-                  <div className="table_cell">
-                    { Math.round(sale.downPayment * 100) / 100 }
+                  <div className="table_cell" style={{ textAlign: "right" }}>
+                    {Math.round(sale.downPayment * 100) / 100}
                   </div>
                 </div>
                 <div className="table_small">
                   <div className="table_cell">Paid</div>
-                  <div className="table_cell">
+                  <div className="table_cell" style={{ textAlign: "right" }}>
                     {sale.amountReceivable
                       ? Math.round(sale.chargesPaid * 100) / 100
                       : "-"}
@@ -132,39 +134,37 @@ export const Reports = ({
                   <div className="table_small">
                     <div className="table_cell">Premium</div>
                     <div className="table_cell">
-                      <b>
-                        {Math.round(metrics[0].premium * 100) / 100}
-                        </b>
+                      <b>{Math.round(metrics[0].premium * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
                     <div className="table_cell">Fees</div>
                     <div className="table_cell">
-                    <b>{Math.round(metrics[0].fees * 100) / 100}</b>
+                      <b>{Math.round(metrics[0].fees * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
                     <div className="table_cell">Tips</div>
                     <div className="table_cell">
-                    <b>{Math.round(metrics[0].tips * 100) / 100}</b>
+                      <b>{Math.round(metrics[0].tips * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
                     <div className="table_cell">Permits</div>
                     <div className="table_cell">
-                    <b>{Math.round(metrics[0].permits * 100) / 100}</b>
+                      <b>{Math.round(metrics[0].permits * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
                     <div className="table_cell">Charges</div>
                     <div className="table_cell">
-                    <b>{Math.round(metrics[0].downPayment * 100) / 100}</b>
+                      <b>{Math.round(metrics[0].downPayment * 100) / 100}</b>
                     </div>
                   </div>
                   <div className="table_small">
                     <div className="table_cell">Paid</div>
                     <div className="table_cell">
-                    <b>{Math.round(metrics[0].chargesPaid * 100) / 100}</b>
+                      <b>{Math.round(metrics[0].chargesPaid * 100) / 100}</b>
                     </div>
                   </div>
                 </div>

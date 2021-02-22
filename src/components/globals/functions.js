@@ -10,22 +10,17 @@ export const dataTransform = (element) => {
   element.hasOwnProperty("wcGlUmbInsurer") &&
     insurers.push(`${element.wcGlUmbInsurer.name}`);
 
-  const uniq = insurers.filter((valor, index) => {
-    return insurers.indexOf(valor) === index;
-  }).join(' / ');
-
-  console.log("Insurance: "+uniq);
-
-  /* let n = 1;
-  uniq.map(
-    (x) =>
-      x !== "undefined" &&
-      insurers_simp.push(`${x} ${uniq.length !== ++n ? "/ " : ""}`)
-  ); */
-
-  return uniq;
+  return insurers
+    .filter((valor, index) => {
+      return insurers.indexOf(valor) === index;
+    })
+    .join(" / ");
 };
 
+/** Return number 
+ * @param {number} number
+ * @return {number} number
+*/
 const transformNumber = (number) => (isNaN(number) ? 0 : number);
 
 /**Calc totalCharge
