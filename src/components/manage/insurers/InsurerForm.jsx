@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { Form, Button, Modal, Spinner, Row, Col } from 'react-bootstrap'
 
 //action
-import { insurerCreateRequest, insurerUpdateRequest } from '../../redux/actions'
+import { insurerCreateRequest, insurerUpdateRequest } from '../../../redux/actions'
 
 const InsurerForm = ({
   loading,

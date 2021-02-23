@@ -32,20 +32,20 @@ export const SaleItem = ({
           <div className="table_cell">{sale.customer.name}</div>
         </div>
         <div className="table_small">
-          <div className="table_cell">Liability</div>
-          <div className="table_cell">{sale.liabilityInsurer.name}</div>
+          <div className="table_cell">Premium</div>
+          <div className="table_cell">{sale.liabilityInsurer?sale.liabilityInsurer.name:'-'}</div>
         </div>
         <div className="table_small">
           <div className="table_cell">Motor Charge</div>
-          <div className="table_cell">{sale.cargoInsurer.name}</div>
+          <div className="table_cell">{sale.cargoInsurer?sale.cargoInsurer.name:'-'}</div>
         </div>
         <div className="table_small">
           <div className="table_cell">Physical Damage</div>
-          <div className="table_cell">{sale.physicalDamageInsurer.name}</div>
+          <div className="table_cell">{sale.physicalDamageInsurer?sale.physicalDamageInsurer.name:'-'}</div>
         </div>
         <div className="table_small">
           <div className="table_cell">WC,GL,UMB</div>
-          <div className="table_cell">{sale.wcGlUmbInsurer.name}</div>
+          <div className="table_cell">{sale.wcGlUmbInsurer ? sale.wcGlUmbInsurer.name : '-'}</div>
         </div>
         <div className="table_small">
           <div className="table_cell">Permits</div>

@@ -20,11 +20,11 @@ function Containers({
   }, [userProfileGetRequest]);
 
   return (
-    <div>
+    <>
       {authCheck && <Redirect to="/" />}
       {authCheck && <Header/>}
       <Body>{children}</Body>
-    </div>
+    </>
   );
 }
 

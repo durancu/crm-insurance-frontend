@@ -1,39 +1,30 @@
 import Auth from "../components/auth";
-import Employees from "../components/employees/Employees";
-import Customers from "../components/customers";
-import Users from "../components/users";
-import Profile from "../components/profile";
-import Reports from "../components/reports";
-import Insurers from "../components/insurers";
-import FormSale from "../components/sales/FormSale";
+import Dashboard from "../components/dashboard";
 import Sales from "../components/sales";
+import FormSale from "../components/sales/FormSale";
+import ReportSales from "../components/reports/reportsales";
+import Profitability from "../components/reports/profitability";
+import Bonus from "../components/reports/bonus";
+import Salaries from "../components/reports/salaries";
+import Customers from "../components/manage/customers";
+import Users from "../components/manage/users";
+import Insurers from "../components/manage/insurers";
+import Company from "../components/manage/company";
+import Profile from "../components/account/profile";
 
-//examples
-import Tablas from '../components/tablas'
 
 export const COMPONENT_LIST = [
-  {
-    title: "Tablas",
-    url: "/tablas",
-    component: Tablas,
-    protected: false,
-  },
   {
     title: "Login",
     url: "/auth",
     component: Auth,
     protected: false,
   },
+
   {
-    title: "Reports",
+    title: "Dashboard",
     url: "/",
-    component: Reports,
-    protected: true,
-  },
-  {
-    title: "Create Sales",
-    url: "/sales/create",
-    component: FormSale,
+    component: Dashboard,
     protected: true,
   },
   {
@@ -43,15 +34,33 @@ export const COMPONENT_LIST = [
     protected: true,
   },
   {
-    title: "Employee",
-    url: "/employee",
-    component: Employees,
+    title: "Create Sales",
+    url: "/sales/create",
+    component: FormSale,
     protected: true,
   },
   {
-    title: "Customers",
-    url: "/customers",
-    component: Customers,
+    title: "Reports Sales",
+    url: "/reports-sales",
+    component: ReportSales,
+    protected: true,
+  },
+  {
+    title: "Profitability",
+    url: "/profitability",
+    component: Profitability,
+    protected: true,
+  },
+  {
+    title: "Bonus",
+    url: "/bonus",
+    component: Bonus,
+    protected: true,
+  },
+  {
+    title: "Salaries",
+    url: "/salaries",
+    component: Salaries,
     protected: true,
   },
   {
@@ -64,6 +73,12 @@ export const COMPONENT_LIST = [
     title: "Insurer",
     url: "/insurers",
     component: Insurers,
+    protected: true,
+  },
+  {
+    title: "Company",
+    url: "/company",
+    component: Company,
     protected: true,
   },
   {

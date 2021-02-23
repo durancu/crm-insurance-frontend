@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
 //components
-import { Row, Col } from 'react-bootstrap'
-import UserList from './UserList'
+import { Row, Col } from "react-bootstrap";
+import UserList from "./UserList";
 
 export default function Users() {
   return (
-    <div>
-      <Row>
+    <>
+      <Row className="mt-3">
         <h1>Users</h1>
       </Row>
       <Row>
@@ -15,6 +15,6 @@ export default function Users() {
           <UserList />
         </Col>
       </Row>
-    </div>
-  )
+    </>
+  );
 }

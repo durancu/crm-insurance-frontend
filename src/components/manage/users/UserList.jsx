@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 //Actions
-import { userLoadRequest } from '../../redux/actions'
+import { userLoadRequest } from '../../../redux/actions'
 
 //components
 import { Spinner, Table, Button } from 'react-bootstrap'

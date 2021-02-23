@@ -1,30 +1,81 @@
+import moment from "moment";
+
 export const dataTransform = (element) => {
   let insurers = [];
-  let insurers_simp = [];
 
   element.hasOwnProperty("liabilityInsurer") &&
     insurers.push(`${element.liabilityInsurer.name}`);
-  element.hasOwnProperty("liabilityCharge") &&
-    insurers.push(`${element.liabilityCharge.name}`);
+  element.hasOwnProperty("cargoInsurer") &&
+    insurers.push(`${element.cargoInsurer.name}`);
   element.hasOwnProperty("physicalDamageInsurer") &&
     insurers.push(`${element.physicalDamageInsurer.name}`);
-  element.hasOwnProperty("physicalDamageCharge") &&
-    insurers.push(`${element.physicalDamageCharge.name}`);
+  element.hasOwnProperty("wcGlUmbInsurer") &&
+    insurers.push(`${element.wcGlUmbInsurer.name}`);
 
-  const uniq = insurers.filter((valor, index) => {
-    return insurers.indexOf(valor) === index;
-  });
-
-  let n = 1;
-  uniq.map(
-    (x) =>
-      x !== "undefined" &&
-      insurers_simp.push(`${x} ${uniq.length !== ++n ? "/ " : ""}`)
-  );
-
-  return insurers_simp;
+  return insurers
+    .filter((valor, index) => {
+      return insurers.indexOf(valor) === index;
+    })
+    .join(" / ");
 };
 
+
+export function priceFormatter(cell, row) {
+  if (cell) {
+    return (
+      <span>
+        {Math.round(cell * 100) / 100}
+      </span>
+    );
+  }
+
+  return (
+    <span>-</span>
+  );
+}
+
+export function footerPriceFormatter(column, colIndex, { text }) {
+  return (
+    <strong>{Math.round(text * 100) / 100}</strong>
+  );
+}
+
+export function dateFormatter(cell, row) {  
+  return (
+    <span>{moment(cell).format("L")}</span>
+  );
+}
+
+export function fullNameFormatter(cell, row) {  
+  return (
+    <span>{row.seller.firstName} {row.seller.lastName}</span>
+  );
+}
+
+export function insurerNameFormatter(cell, row) {  
+  let insurers = [];
+
+  row.hasOwnProperty("liabilityInsurer") &&
+  insurers.push(`${row.liabilityInsurer.name}`);
+  row.hasOwnProperty("cargoInsurer") &&
+  insurers.push(`${row.cargoInsurer.name}`);
+  row.hasOwnProperty("physicalDamageInsurer") &&
+  insurers.push(`${row.physicalDamageInsurer.name}`);
+  row.hasOwnProperty("wcGlUmbInsurer") &&
+  insurers.push(`${row.wcGlUmbInsurer.name}`);
+
+return insurers
+  .filter((valor, index) => {
+    return insurers.indexOf(valor) === index;
+  })
+  .join(" / ");
+}
+
+
+/** Return number 
+ * @param {number} number
+ * @return {number} number
+*/
 const transformNumber = (number) => (isNaN(number) ? 0 : number);
 
 /**Calc totalCharge

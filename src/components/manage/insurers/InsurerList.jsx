@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 //Actions
-import { insurerListRequest } from '../../redux/actions'
+import { insurerListRequest } from '../../../redux/actions'
 
 //components
 import { Spinner, Table, Button } from 'react-bootstrap'
@@ -37,7 +37,7 @@ function InsurerList({ insurerListRequest, insurers, loading, loadingDelete }) {
   }, [insurerListRequest]);
 
   return (
-    <div>
+    <>
       <Table striped hover borderless>
         <thead>
           <tr>
@@ -76,7 +76,7 @@ function InsurerList({ insurerListRequest, insurers, loading, loadingDelete }) {
           }
         </tbody>
       </Table>
-    </div>
+    </>
   )
 }
 

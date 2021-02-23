@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 //Actions
-import { customerLoadRequest } from '../../redux/actions'
+import { customerLoadRequest } from '../../../redux/actions'
 
 //components
 import { Spinner, Table, Button } from 'react-bootstrap'
@@ -37,7 +37,7 @@ function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }
   }, [customerLoadRequest]);
 
   return (
-    <div>
+    <>
       <Table>
         <thead>
           <tr>
@@ -69,7 +69,7 @@ function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }
           }
         </tbody>
       </Table>
-    </div>
+    </>
   )
 }
 

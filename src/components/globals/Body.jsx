@@ -1,10 +1,10 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 export default function Body({ children }) {
   return (
-    <Container>
-      {children}
+    <Container fluid style={{maxWidth: "98%"}}>
+          {children}
     </Container>
   )
 }

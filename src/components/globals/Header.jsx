@@ -1,16 +1,16 @@
 import React /* useState  */ from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 //Actions
-import { userLogoutRequest } from '../../redux/actions'
+import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 const Header = ({ user, userLogoutRequest }) => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
+      <Container fluid style={{ maxWidth: "98%" }}>
         <Link className="navbar-brand" to="/">
           Insurance VL17
         </Link>
@@ -18,25 +18,40 @@ const Header = ({ user, userLogoutRequest }) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link className="nav-link" to="/">
-              Home
+              Dashboard
             </Link>
             <Link className="nav-link" to="/sales">
               Sales
             </Link>
-            <Link className="nav-link" to="/customers">
-              Customers
-            </Link>
-            <Link className="nav-link" to="/insurers">
-              Insurers
-            </Link>
+            <NavDropdown title="Reports" id="collasible-nav-dropdown">
+              <Link className="dropdown-item" to="/reports-sales">Sales</Link>
+              <Link className="dropdown-item" to="/profitability">Profitability</Link>
+              <Link className="dropdown-item" to="/bonus">Bonus</Link>
+              <NavDropdown.Divider />
+              <Link className="dropdown-item" to="/salaries">Salaries</Link>
+            </NavDropdown>
           </Nav>
           <Nav className="ml-auto">
-            <NavDropdown title={user.username} id="basic-nav-dropdown">
-              {/* <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
+            <NavDropdown title="Manage" id="basic-nav-dropdown">
+              <Link className="dropdown-item" to="/customers">
+                Customers
+              </Link>
               <Link className="dropdown-item" to="/users">
                 Users
               </Link>
+              <Link className="dropdown-item" to="/insurers">
+                Insurers
+              </Link>
               <NavDropdown.Divider />
+              <Link className="dropdown-item" to="/company">
+                Company
+              </Link>
+            </NavDropdown>
+            <NavDropdown title="Account" id="basic-nav-dropdown">
+              <Link className="dropdown-item" to="/profile">
+                My Profile
+                <NavDropdown.Divider />
+              </Link>
               <NavDropdown.Item href="#" onClick={userLogoutRequest}>
                 Logout
               </NavDropdown.Item>
@@ -58,7 +73,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  userLogoutRequest
+  userLogoutRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

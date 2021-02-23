@@ -1,16 +1,19 @@
 import { call, put, takeLatest, spawn } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
-import { reportListSuccess, reportListFail,saleListRequest } from "../../actions";
+import {
+  reportListSuccess,
+  reportListFail,
+} from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
 
-const apiCall = () =>
-  apiGet(`reports/sales`, true).catch((error) => console.log(error));
+const apiCall = (param = "") =>
+  apiGet(`reports/sales?${param}`, true).catch((error) => console.log(error));
 
 const sagaRequest = function* sagaRequest({ payload }) {
+  console.log(payload)
   try {
-    const response = yield call(apiCall);
+    const response = yield call(apiCall, payload);
     yield put(reportListSuccess(response.data));
-    yield put(saleListRequest());
   } catch (e) {
     yield put(reportListFail());
   }
