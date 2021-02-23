@@ -1,8 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-export const Dashboard = (props) => {
+export const Dashboard = () => {
     return (
         <div>
             <h4>Dashboard</h4>
@@ -11,7 +11,6 @@ export const Dashboard = (props) => {
 }
 
 Dashboard.propTypes = {
-    props: PropTypes
 }
 
 const mapStateToProps = (state) => ({
