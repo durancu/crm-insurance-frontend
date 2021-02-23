@@ -3,12 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 export default function Body({ children }) {
   return (
-    <Container fluid>
-      <Row className="mw-90">
-        <Col>
+    <Container fluid style={{maxWidth: "98%"}}>
           {children}
-        </Col>
-      </Row>
     </Container>
   )
 }
