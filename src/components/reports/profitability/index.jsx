@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-export const Profitability = (props) => {
+export const Profitability = () => {
   return (
     <div>
       <h2>Profitability</h2>
@@ -11,7 +11,6 @@ export const Profitability = (props) => {
 };
 
 Profitability.propTypes = {
-  props: PropTypes,
 };
 
 const mapStateToProps = (state) => ({});
