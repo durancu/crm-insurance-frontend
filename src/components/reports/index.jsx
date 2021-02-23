@@ -39,6 +39,8 @@ const columns = [
     text: 'Location',
     headerStyle: () => { return { width: "10%" };}, 
     sort: true,
+    align: 'left',
+    headerAlign: 'left', 
     footer: '',
     filter: textFilter({placeholder: 'Search'}),
   }, {
