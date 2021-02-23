@@ -31,9 +31,10 @@ const columns = [
     formatter: fullNameFormatter,
     headerStyle: () => { return { width: "10%" };}, 
     sort: true,
+    align: 'left',
+    headerAlign: 'left', 
     footer: columnData => `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
     filter: textFilter({placeholder: 'Search'}),
-    
   }, {
     dataField: 'seller.location',
     text: 'Location',
