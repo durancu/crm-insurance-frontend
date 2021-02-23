@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { insurerDeleteRequest, insurerGetRequest } from '../../redux/actions'
+import { insurerDeleteRequest, insurerGetRequest } from '../../../redux/actions'
 
 import { Button } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";

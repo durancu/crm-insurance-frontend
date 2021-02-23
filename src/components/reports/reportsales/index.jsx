@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 //Actions
-import { reportListRequest } from "../../redux/actions";
+import { reportListRequest } from "../../../redux/actions";
 //Functions
-import { dateFormatter, insurerNameFormatter, priceFormatter, fullNameFormatter, footerPriceFormatter } from "../globals/functions";
+import { dateFormatter, insurerNameFormatter, priceFormatter, fullNameFormatter, footerPriceFormatter } from "../../globals/functions";
 //Assets
-import "../assets/App.css";
+import "../../assets/App.css";
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
 import SaleFilters from "./SaleFilters";

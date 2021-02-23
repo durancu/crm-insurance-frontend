@@ -10,11 +10,9 @@ import {
   userLoadRequest,
   customerLoadRequest,
   reportListRequest,
-} from "../../redux/actions";
+} from "../../../redux/actions";
 
-export const SaleFilters = ({
-  reportListRequest,
-}) => {
+export const SaleFilters = ({ reportListRequest }) => {
   const [dateRange, setDateRange] = useState("");
 
   const handleDateRange = ({ target }) => {
@@ -29,7 +27,7 @@ export const SaleFilters = ({
     <Form inline>
       <Form.Row>
         <Form.Label htmlFor="dateRangeFilter" className="my-1 mr-2">
-          Date Range: 
+          Date Range:
         </Form.Label>
 
         <Form.Control

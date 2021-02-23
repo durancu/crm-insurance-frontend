@@ -24,13 +24,11 @@ const Header = ({ user, userLogoutRequest }) => {
               Sales
             </Link>
             <NavDropdown title="Reports" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="reports-sales">Sales</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Profitability
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Bonus</NavDropdown.Item>
+              <Link className="dropdown-item" to="/reports-sales">Sales</Link>
+              <Link className="dropdown-item" to="/profitability">Profitability</Link>
+              <Link className="dropdown-item" to="/bonus">Bonus</Link>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Salaries</NavDropdown.Item>
+              <Link className="dropdown-item" to="/salaries">Salaries</Link>
             </NavDropdown>
           </Nav>
           <Nav className="ml-auto">
@@ -50,9 +48,9 @@ const Header = ({ user, userLogoutRequest }) => {
               </Link>
             </NavDropdown>
             <NavDropdown title="Account" id="basic-nav-dropdown">
-              <Link className="dropdown-item" to="#profile">
+              <Link className="dropdown-item" to="/profile">
                 My Profile
-              <NavDropdown.Divider />
+                <NavDropdown.Divider />
               </Link>
               <NavDropdown.Item href="#" onClick={userLogoutRequest}>
                 Logout

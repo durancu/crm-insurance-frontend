@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { Form, Button, Modal, Col, Row, Spinner } from 'react-bootstrap'
 
 //action
-import { userCreateRequest, userUpdateRequest } from '../../redux/actions'
+import { userCreateRequest, userUpdateRequest } from '../../../redux/actions'
 
 const UserForm = ({
   loading,

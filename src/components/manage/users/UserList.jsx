@@ -4,16 +4,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 //Actions
-import { customerLoadRequest } from '../../redux/actions'
+import { userLoadRequest } from '../../../redux/actions'
 
 //components
 import { Spinner, Table, Button } from 'react-bootstrap'
-import CustomerItem from './CustomerItem'
-import CustomerForm from './CustomerForm'
+import UserItem from './UserItem'
+import UserForm from './UserForm'
 
 
 
-function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }) {
+function UserList({ userLoadRequest, users, loading, loadingDelete }) {
   //States
   const [modal, setModal] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -33,24 +33,26 @@ function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }
   }
 
   useEffect(() => {
-    customerLoadRequest();
-  }, [customerLoadRequest]);
+    userLoadRequest();
+  }, [userLoadRequest]);
 
   return (
-    <>
+    <div>
       <Table>
         <thead>
           <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Type</th>
+            <th>Location</th>
+            <th>Position</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Details</th>
             <th>{loadingDelete ? <Spinner animation="border" variant="danger" />
               :
               <Fragment>
                 <Button variant="primary" onClick={showModal}>Create</Button>
-                <CustomerForm
+                <UserForm
                   showModal={showModal}
                   modal={modal}
                   edit={edit}
@@ -63,31 +65,31 @@ function CustomerList({ customerLoadRequest, customers, loading, loadingDelete }
         <tbody>
           {
             loading ? <tr><td align="center" colSpan="5"><Spinner animation="border" variant="primary" /></td></tr> :
-              customers.length > 0 ? customers.map(customer => (
-                <CustomerItem no={no += 1} key={customer._id} customer={customer} showModal={showModal} edit={edit} editItem={editItem} />
-              )) : <tr><td align="center" colSpan="5">I not have customers for show</td></tr>
+              users.length > 0 ? users.map(user => (
+                <UserItem no={no += 1} key={user._id} user={user} showModal={showModal} edit={edit} editItem={editItem} />
+              )) : <tr><td align="center" colSpan="5">I not have users for show</td></tr>
           }
         </tbody>
       </Table>
-    </>
+    </div>
   )
 }
 
-CustomerList.propTypes = {
-  customerLoadRequest: PropTypes.func.isRequired,
-  customers: PropTypes.array.isRequired,
+UserList.propTypes = {
+  userLoadRequest: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   loadingDelete: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  customers: state.customerReducer.list,
-  loading: state.customerLoadStatusReducer.loading,
-  loadingDelete: state.customerDeleteStatusReducer.loading,
+  users: state.userReducer.list,
+  loading: state.userLoadStatusReducer.loading,
+  loadingDelete: state.userDeleteStatusReducer.loading,
 })
 
 const mapDispatchToProps = {
-  customerLoadRequest
+  userLoadRequest
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomerList)
+export default connect(mapStateToProps, mapDispatchToProps)(UserList)

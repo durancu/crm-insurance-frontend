@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { customerDeleteRequest, customerGetRequest } from '../../redux/actions'
+import { customerDeleteRequest, customerGetRequest } from '../../../redux/actions'
 
 import { Button } from "react-bootstrap";
 import { Pencil, Trash, Person, Building } from "react-bootstrap-icons";
