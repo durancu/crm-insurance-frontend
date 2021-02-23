@@ -1,4 +1,4 @@
-import React /* useState  */ from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,6 +8,10 @@ import { userLogoutRequest } from "../../redux/actions";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 const Header = ({ user, userLogoutRequest }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
+  });
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
       <Container fluid style={{ maxWidth: "98%" }}>
@@ -24,11 +28,23 @@ const Header = ({ user, userLogoutRequest }) => {
               Sales
             </Link>
             <NavDropdown title="Reports" id="collasible-nav-dropdown">
-              <Link className="dropdown-item" to="/reports-sales">Sales</Link>
-              <Link className="dropdown-item" to="/profitability">Profitability</Link>
-              <Link className="dropdown-item" to="/bonus">Bonus</Link>
-              <NavDropdown.Divider />
-              <Link className="dropdown-item" to="/salaries">Salaries</Link>
+              <Link className="dropdown-item" to="/reports-sales">
+                Sales
+              </Link>
+              {isAdmin && (
+                <>
+                  <Link className="dropdown-item" to="/profitability">
+                    Profitability
+                  </Link>
+                  <Link className="dropdown-item" to="/bonus">
+                    Bonus
+                  </Link>
+                  <NavDropdown.Divider />
+                  <Link className="dropdown-item" to="/salaries">
+                    Salaries
+                  </Link>
+                </>
+              )}
             </NavDropdown>
           </Nav>
           <Nav className="ml-auto">
@@ -36,16 +52,20 @@ const Header = ({ user, userLogoutRequest }) => {
               <Link className="dropdown-item" to="/customers">
                 Customers
               </Link>
-              <Link className="dropdown-item" to="/users">
-                Users
-              </Link>
-              <Link className="dropdown-item" to="/insurers">
-                Insurers
-              </Link>
-              <NavDropdown.Divider />
-              <Link className="dropdown-item" to="/company">
-                Company
-              </Link>
+              {isAdmin && (
+                <>
+                  <Link className="dropdown-item" to="/users">
+                    Users
+                  </Link>
+                  <Link className="dropdown-item" to="/insurers">
+                    Insurers
+                  </Link>
+                  <NavDropdown.Divider />
+                  <Link className="dropdown-item" to="/company">
+                    Company
+                  </Link>
+                </>
+              )}
             </NavDropdown>
             <NavDropdown title="Account" id="basic-nav-dropdown">
               <Link className="dropdown-item" to="/profile">
