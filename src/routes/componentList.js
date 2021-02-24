@@ -2,7 +2,7 @@ import Auth from "../components/auth";
 import Dashboard from "../components/dashboard";
 import Sales from "../components/sales";
 import FormSale from "../components/sales/FormSale";
-import ReportSales from "../components/reports/reportsales";
+import SalesReport from "../components/reports/sales";
 import Profitability from "../components/reports/profitability";
 import Bonus from "../components/reports/bonus";
 import Salaries from "../components/reports/salaries";
@@ -42,7 +42,7 @@ export const COMPONENT_LIST = [
   {
     title: "Reports Sales",
     url: "/reports-sales",
-    component: ReportSales,
+    component: SalesReport,
     protected: true,
   },
   {
