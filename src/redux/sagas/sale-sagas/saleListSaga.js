@@ -7,7 +7,6 @@ const apiCall = (param = "") =>
   apiGet(`sales?${param}`, true).catch((error) => console.log(error));
 
 const sagaRequest = function* sagaRequest({ payload }) {
-  console.log(payload)
   try {
     const response = yield call(apiCall);
     yield put(saleListSuccess(response.data));

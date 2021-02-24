@@ -3,16 +3,18 @@ import {
     dateFormatter,
     insurerNameFormatter,
     priceFormatter,
-    fullNameFormatter,
+    sellerFormatter,
     footerPriceFormatter,
+    customerFormatter,
 } from "../globals/functions";
 
 //Components
 
-import { textFilter } from "react-bootstrap-table2-filter";
+import { textFilter, selectFilter } from "react-bootstrap-table2-filter";
 import { Type } from "react-bootstrap-table2-editor";
 
-export const salesTableColumns = (isAdmin = false) =>
+
+export const salesTableColumns = (isAdmin = false, customers = [], sellers = []) =>
     [
         {
             dataField: "soldAt",
@@ -28,28 +30,26 @@ export const salesTableColumns = (isAdmin = false) =>
             },
         },
         {
-            dataField: "seller.firstName",
+            dataField: "seller._id",
             text: "Employee",
-            formatter: fullNameFormatter,
+            formatter: sellerFormatter,
             headerStyle: () => {
                 return { width: "10%" };
             },
             sort: true,
-            hidden: !isAdmin, 
+            hidden: !isAdmin,
             align: "left",
             headerAlign: "left",
             footer: (columnData) =>
                 `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
-            filter: textFilter({ placeholder: "Search" }),
-            editable: isAdmin, 
+            filter: selectFilter({ 
+                placeholder: "Search",
+                options: sellersOptions(sellers),
+            }),
+            editable: isAdmin,
             editor: {
                 type: Type.SELECT,
-                options: [
-                    { value: "Mark", label: "Mark Sailor" },
-                    { value: "Mary", label: "Mary Lumber" },
-                    { value: "Lis", label: "Lis Clinton" },
-                    { value: "Mark", label: "Mark Rock" },
-                ],
+                options: sellersOptions(sellers),
             },
         },
         {
@@ -64,11 +64,12 @@ export const salesTableColumns = (isAdmin = false) =>
             headerAlign: "left",
             footer: "",
             filter: textFilter({ placeholder: "Search" }),
-            editable: false, // No es editable, porque es una property del seller
+            editable: false, // Not editable, because is a sell
         },
         {
-            dataField: "customer.name",
+            dataField: "customer._id",
             text: "Customer",
+            formatter: customerFormatter,
             headerStyle: () => {
                 return { width: "14%" };
             },
@@ -76,19 +77,14 @@ export const salesTableColumns = (isAdmin = false) =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: selectFilter({ 
+                placeholder: "Search",
+                options: customersOptions(customers),
+            }),
             editable: true,
             editor: {
                 type: Type.SELECT,
-                options: [
-                    { value: "Leffler and Sons", label: "Leffler and Sons" },
-                    {
-                        value: "Harber, Gaylord and Langworth",
-                        label: "Harber, Gaylord and Langworth",
-                    },
-                    { value: "Luis Gusikowski", label: "Luis Gusikowski" },
-                    { value: "Kunde LLC", label: "Kunde LLC" },
-                ],
+                options: customersOptions(customers),
             },
         },
         {
@@ -159,6 +155,17 @@ export const salesTableColumns = (isAdmin = false) =>
             footerAlign: "right",
         },
     ];
+
+export const customersOptions = (customers) => customers.map((customer) => (
+    { value: customer._id, label: customer.name }
+))
+
+export const sellersOptions = (sellers) => sellers.map((seller) => (
+    { value: seller._id, label: `${seller.firstName} ${seller.lastName}` }
+))
+
+
+
 
 
 export const salesDefaultSorted = () => [{ dataField: "soldAt", order: "desc" }];
