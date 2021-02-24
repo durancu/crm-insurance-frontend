@@ -11,7 +11,7 @@ import { reportListRequest } from "../../../redux/actions";
 import "../../assets/App.css";
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
-import SaleFilters from "./SaleFilters";
+import SalesReportFilters from "./SalesReportFilters";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import cellEditFactory from "react-bootstrap-table2-editor";
@@ -39,7 +39,7 @@ export const Reports = ({
       </Row>
       <Row>
         <Col lg="10" sm="6">
-          <SaleFilters />
+          <SalesReportFilters />
         </Col>
         <Col lg="2" sm="6" align="right">
           <Link to="/sales/create" className="btn btn-primary">

@@ -1,9 +1,6 @@
 import { call, put, takeLatest, spawn } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
-import {
-  reportListSuccess,
-  reportListFail,
-} from "../../actions";
+import { reportListSuccess, reportListFail} from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
 
 const apiCall = (param = "") =>

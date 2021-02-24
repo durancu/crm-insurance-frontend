@@ -3,13 +3,11 @@ import * as types from "../../actions/actionTypes";
 import { saleListSuccess, saleListFail } from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
 
-const apiCall = () =>
-  apiGet(
-    `sales?withInsurers=true&withCustomer=true&withSeller=true`,
-    true
-  ).catch((error) => console.log(error));
+const apiCall = (param = "") =>
+  apiGet(`sales?${param}`, true).catch((error) => console.log(error));
 
 const sagaRequest = function* sagaRequest({ payload }) {
+  console.log(payload)
   try {
     const response = yield call(apiCall);
     yield put(saleListSuccess(response.data));
