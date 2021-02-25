@@ -1,11 +1,14 @@
 //Functions
 import {
     dateFormatter,
-    insurerNameFormatter,
     priceFormatter,
     sellerFormatter,
     footerPriceFormatter,
     customerFormatter,
+    liabilityInsurerFormatter,
+    cargoInsurerFormatter,
+    physicalDamageInsurerFormatter,
+    wcGlUmbInsurerFormatter,
 } from "../globals/functions";
 
 //Components
@@ -14,14 +17,14 @@ import { textFilter, selectFilter } from "react-bootstrap-table2-filter";
 import { Type } from "react-bootstrap-table2-editor";
 
 
-export const salesTableColumns = (isAdmin = false, customers = [], sellers = []) =>
+export const salesTableColumns = (isAdmin = false, customers = [], sellers = [], insurers = []) =>
     [
         {
             dataField: "soldAt",
             text: "Date",
             formatter: dateFormatter,
             headerStyle: () => {
-                return { width: "9%" };
+                return { width: "7%" };
             },
             sort: true,
             footer: "TOTALS",
@@ -37,12 +40,12 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [])
                 return { width: "10%" };
             },
             sort: true,
-            hidden: !isAdmin,
+            hidden: true,//!isAdmin,
             align: "left",
             headerAlign: "left",
             footer: (columnData) =>
                 `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
-            filter: selectFilter({ 
+            filter: selectFilter({
                 placeholder: "Search",
                 options: sellersOptions(sellers),
             }),
@@ -59,7 +62,7 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [])
                 return { width: "10%" };
             },
             sort: true,
-            hidden: !isAdmin,
+            hidden: true,//!isAdmin,
             align: "left",
             headerAlign: "left",
             footer: "",
@@ -71,13 +74,13 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [])
             text: "Customer",
             formatter: customerFormatter,
             headerStyle: () => {
-                return { width: "14%" };
+                return { width: "10%" };
             },
             sort: true,
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: selectFilter({ 
+            filter: selectFilter({
                 placeholder: "Search",
                 options: customersOptions(customers),
             }),
@@ -88,19 +91,155 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [])
             },
         },
         {
-            dataField: "liabilityInsurer.name",
-            text: "Insurance Company",
-            formatter: insurerNameFormatter,
+            dataField: "liabilityInsurer._id",
+            text: "Liability Insurer",
+            formatter: liabilityInsurerFormatter,
             headerStyle: () => {
-                return { width: "28%" };
+                return { width: "8%" };
             },
             align: "left",
             headerAlign: "left",
             footer: "",
+            filter: selectFilter({
+                placeholder: "Search",
+                options: insurersOptions(insurers),
+            }),
+            editable: true,
+            editor: {
+                type: Type.SELECT,
+                options: insurersOptions(insurers),
+            },
+        },
+        {
+            dataField: "liabilityCharge",
+            text: "Charge",
+            headerAlign: "right",
+            formatter: priceFormatter,
+            headerStyle: () => {
+                return { width: "5%" };
+            },
+            sort: true,
+            align: "right",
+            footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
+            footerFormatter: footerPriceFormatter,
+            footerAlign: "right",
+        },
+        {
+            dataField: "cargoInsurer._id",
+            text: "Cargo Insurer",
+            formatter: cargoInsurerFormatter,
+            headerStyle: () => {
+                return { width: "8%" };
+            },
+            align: "left",
+            headerAlign: "left",
+            footer: "",
+            filter: selectFilter({
+                placeholder: "Search",
+                options: insurersOptions(insurers),
+            }),
+            editable: true,
+            editor: {
+                type: Type.SELECT,
+                options: insurersOptions(insurers),
+            },
+        },
+        {
+            dataField: "cargoCharge",
+            text: "Charge",
+            headerAlign: "right",
+            formatter: priceFormatter,
+            headerStyle: () => {
+                return { width: "5%" };
+            },
+            sort: true,
+            align: "right",
+            footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
+            footerFormatter: footerPriceFormatter,
+            footerAlign: "right",
+        },
+        {
+            dataField: "physicalDamageInsurer._id",
+            text: "Damage Insurer",
+            formatter: physicalDamageInsurerFormatter,
+            headerStyle: () => {
+                return { width: "8%" };
+            },
+            align: "left",
+            headerAlign: "left",
+            footer: "",
+            filter: selectFilter({
+                placeholder: "Search",
+                options: insurersOptions(insurers),
+            }),
+            editable: true,
+            editor: {
+                type: Type.SELECT,
+                options: insurersOptions(insurers),
+            },
+        },
+        {
+            dataField: "physicalDamageCharge",
+            text: "Charge",
+            headerAlign: "right",
+            formatter: priceFormatter,
+            headerStyle: () => {
+                return { width: "5%" };
+            },
+            sort: true,
+            align: "right",
+            footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
+            footerFormatter: footerPriceFormatter,
+            footerAlign: "right",
+        },
+        {
+            dataField: "wcGlUmbInsurer._id",
+            text: "WCGLUMB Insurer",
+            formatter: wcGlUmbInsurerFormatter,
+            headerStyle: () => {
+                return { width: "8%" };
+            },
+            align: "left",
+            headerAlign: "left",
+            footer: "",
+            filter: selectFilter({
+                placeholder: "Search",
+                options: insurersOptions(insurers),
+            }),
+            editable: true,
+            editor: {
+                type: Type.SELECT,
+                options: insurersOptions(insurers),
+            },
+        },
+        {
+            dataField: "wcGlUmbCharge",
+            text: "Charge",
+            headerAlign: "right",
+            formatter: priceFormatter,
+            headerStyle: () => {
+                return { width: "5%" };
+            },
+            sort: true,
+            align: "right",
+            footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
+            footerFormatter: footerPriceFormatter,
+            footerAlign: "right",
+        },
+        {
+            dataField: "premium",
+            text: "Premium",
+            headerAlign: "right",
+            formatter: priceFormatter,
+            sort: true,
+            align: "right",
+            footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
+            footerFormatter: footerPriceFormatter,
+            footerAlign: "right",
             editable: false,
         },
         {
-            dataField: "fees",
+            dataFieldśqs: "fees",
             text: "Fees",
             headerAlign: "right",
             formatter: priceFormatter,
@@ -162,6 +301,10 @@ export const customersOptions = (customers) => customers.map((customer) => (
 
 export const sellersOptions = (sellers) => sellers.map((seller) => (
     { value: seller._id, label: `${seller.firstName} ${seller.lastName}` }
+))
+
+export const insurersOptions = (insurers) => insurers.map((insurer) => (
+    { value: insurer._id, label: `${insurer.name}` }
 ))
 
 

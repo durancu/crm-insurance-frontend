@@ -60,6 +60,22 @@ export function sellerFormatter(cell, row) {
   return `${row.seller.firstName} ${row.seller.lastName}`;
 }
 
+export function liabilityInsurerFormatter(cell, row) {  
+  return row.liabilityInsurer.name;
+}
+
+export function cargoInsurerFormatter(cell, row) {  
+  return row.cargoInsurer.name;
+}
+
+export function physicalDamageInsurerFormatter(cell, row) {  
+  return row.physicalDamageInsurer.name;
+}
+
+export function wcGlUmbInsurerFormatter(cell, row) {  
+  return row.wcGlUmbInsurer.name;
+}
+
 export function insurerNameFormatter(cell, row) {  
   let insurers = [];
 

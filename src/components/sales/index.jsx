@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 //Actions
-import { saleListRequest, customerLoadRequest, userLoadRequest, saleUpdateRequest } from "../../redux/actions";
+import { saleListRequest, customerLoadRequest, userLoadRequest, insurerListRequest, saleUpdateRequest } from "../../redux/actions";
 
 //Assets
 import "../assets/App.css";
@@ -23,21 +23,24 @@ export const Sales = ({
   saleUpdateRequest,
   customerLoadRequest,
   userLoadRequest,
+  insurerListRequest,
   loadingSale,
   errorSale,
   sales,
   user,
   customers,
   sellers,
+  insurers,
 }) => {
 
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     saleListRequest();
     customerLoadRequest();
+    insurerListRequest();
     userLoadRequest();
     user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
-  }, [saleListRequest, customerLoadRequest, userLoadRequest, user.roles]);
+  }, [saleListRequest, customerLoadRequest, userLoadRequest, insurerListRequest, user.roles]);
 
   return (
     <>
@@ -69,7 +72,7 @@ export const Sales = ({
               bootstrap4
               keyField="_id"
               data={sales}
-              columns={salesTableColumns(isAdmin, customers, sellers)}
+              columns={salesTableColumns(isAdmin, customers, sellers, insurers)}
               striped
               hover
               condensed={true}
@@ -88,7 +91,7 @@ export const Sales = ({
                     "_id": sale._id,
                   }
 
-                  const numericFields = ['fees', 'permits', 'tips', 'liabilityCharge', 'cargoCharge', 'physicalDamageCharge', 'wcGlUmbCharge', 'downPayment', 'chargesPaid'];
+                  const numericFields = ['fees', 'permits', 'tips', 'liabilityCharge', 'cargoCharge', 'physicalDamageCharge', 'wcGlUmbCharge', 'downPayment', 'chargesPaid', 'premium'];
                   const referenceFields = ['customer._id', 'seller._id', 'liabilityInsurer._id', 'cargoInsurer._id', 'physicalDamageInsurer._id', 'wcGlUmbInsurer._id'];
 
                   if (numericFields.includes(fieldName)) {
@@ -97,7 +100,6 @@ export const Sales = ({
 
                   if (referenceFields.includes(fieldName)) {
                     const referenceField = fieldName.split(".")[0];
-                    console.log(referenceField);
                     payload = { ...payload, [referenceField]: newValue };
                   }
 
@@ -121,12 +123,14 @@ Sales.propTypes = {
   saleUpdateRequest: PropTypes.func.isRequired,
   customers: PropTypes.array.isRequired,
   sellers: PropTypes.array.isRequired,
+  insurers: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   sales: state.saleReducer.list,
   customers: state.customerReducer.list,
   sellers: state.userReducer.list,
+  insurers: state.insurerReducer.list,
   loadingSale: state.saleListStatusReducer.loading,
   errorSale: state.saleListStatusReducer.error,
   user: state.userProfileReducer.user,
@@ -136,7 +140,8 @@ const mapDispatchToProps = {
   saleListRequest,
   saleUpdateRequest,
   customerLoadRequest,
-  userLoadRequest
+  userLoadRequest, 
+  insurerListRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sales);
