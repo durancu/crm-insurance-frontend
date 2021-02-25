@@ -1,87 +1,142 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import { Link } from "react-router-dom";
+
+//Actions
+import { saleListRequest, customerLoadRequest, userLoadRequest, insurerListRequest, saleUpdateRequest } from "../../redux/actions";
+
 //Assets
 import "../assets/App.css";
-//Actions
-import { saleListRequest, saleDeleteRequest } from "../../redux/actions";
 //Components
-import SaleItem from "./SaleItem";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Row, Col } from "react-bootstrap";
+import SalesFilters from "./SalesFilters";
+import BootstrapTable from "react-bootstrap-table-next";
+import filterFactory from "react-bootstrap-table2-filter";
+import cellEditFactory from "react-bootstrap-table2-editor";
+import { salesTableColumns, salesDefaultSorted } from "./config";
+
 
 export const SaleList = ({
-  list,
-  loading,
-  error,
-  loadingDelete,
-  errorDelete,
+  userLoadRequest,
   saleListRequest,
-  saleDeleteRequest,
+  saleUpdateRequest,
+  customerLoadRequest,
+  insurerListRequest,
+  loading,
+  errorSale,
+  sales,
+  customers,
+  sellers,
+  insurers,
+  user,
 }) => {
-  let no = 0;
-
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
+    userLoadRequest();
+    customerLoadRequest();
+    insurerListRequest();
     saleListRequest();
-  }, [saleListRequest]);
+    user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
+  }, [saleListRequest, customerLoadRequest, userLoadRequest, insurerListRequest, user.roles]);
 
-  return loading ? (
-    <><Spinner variant="primary" animation="border" /><h3>Loading...</h3></>
-  ) : (
-    <div className="table">
-      <div className="theader">
-        <div className="table_header">No</div>
-        <div className="table_header">Sold At</div>
-        <div className="table_header">Customer</div>
-        <div className="table_header">Liability</div>
-        <div className="table_header">Motor Charge</div>
-        <div className="table_header">Physical Damage</div>
-        <div className="table_header">WC,GL,UMB</div>
-        <div className="table_header">Permits</div>
-        <div className="table_header">Fees</div>
-        <div className="table_header">Tips</div>
-        <div className="table_header">Total Charge</div>
-        <div className="table_header">{` `}</div>
-      </div>
-      {list.map((sale) => (
-        <SaleItem
-          key={sale._id}
-          sale={sale}
-          no={++no}
-          saleDeleteRequest={saleDeleteRequest}
-          loadingDelete={loadingDelete}
-          errorDelete={errorDelete}
-        />
-      ))}
-    </div>
+  return (
+    <>
+      <Row>
+        <Col lg="10" sm="6">
+          <SalesFilters />
+        </Col>
+        <Col lg="2" sm="6" align="right">
+          <Link to="/sales/create" className="btn btn-primary">
+            Add New Sale
+          </Link>
+        </Col>
+      </Row>
+
+      {loading ? (
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <Spinner animation="border" variant="primary" />
+          </Col>
+        </Row>
+      ) : (
+          <Row>
+            <BootstrapTable
+              bootstrap4
+              keyField="_id"
+              data={sales}
+              columns={salesTableColumns(isAdmin, customers, sellers, insurers)}
+              striped
+              hover
+              condensed={true}
+              bordered={false}
+              responsive
+              filter={filterFactory()}
+              defaultSorted={salesDefaultSorted()}
+              noDataIndication="No registered sales"
+              cellEdit={cellEditFactory({
+                mode: "click",
+                afterSaveCell: (oldValue, newValue, sale, column) => {
+
+                  const fieldName = column.dataField;
+
+                  let payload = {
+                    "_id": sale._id,
+                  }
+
+                  const numericFields = ['fees', 'permits', 'tips', 'liabilityCharge', 'cargoCharge', 'physicalDamageCharge', 'wcGlUmbCharge', 'downPayment', 'chargesPaid', 'premium'];
+                  const referenceFields = ['customer._id', 'seller._id', 'liabilityInsurer._id', 'cargoInsurer._id', 'physicalDamageInsurer._id', 'wcGlUmbInsurer._id'];
+
+                  if (numericFields.includes(fieldName)) {
+                    payload = { ...payload, [fieldName]: Math.round(newValue * 100) / 100 }
+                  }
+
+                  if (referenceFields.includes(fieldName)) {
+                    const referenceField = fieldName.split(".")[0];
+                    payload = { ...payload, [referenceField]: newValue };
+                  }
+
+                  saleUpdateRequest(payload);
+                }
+              })}
+
+            />
+          </Row>
+        )}
+    </>
   );
 };
 
 SaleList.propTypes = {
-  //LIST
-  list: PropTypes.array.isRequired,
   saleListRequest: PropTypes.func.isRequired,
+  saleUpdateRequest: PropTypes.func.isRequired,
+  userLoadRequest: PropTypes.func.isRequired,
+  customers: PropTypes.array.isRequired,
+  sellers: PropTypes.array.isRequired,
+  insurers: PropTypes.array.isRequired,
+  sales: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
-  //DELETE
-  saleDeleteRequest: PropTypes.func.isRequired,
-  loadingDelete: PropTypes.bool.isRequired,
-  errorDelete: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  errorSale: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  //LIST
-  list: state.saleReducer.list,
+  sales: state.saleReducer.list,
+  customers: state.customerReducer.list,
+  sellers: state.userReducer.list,
+  insurers: state.insurerReducer.list,
   loading: state.saleListStatusReducer.loading,
-  error: state.saleListStatusReducer.error,
-  //DELETE
-  loadingDelete: state.saleDeleteStatusReducer.error,
-  errorDelete: state.saleDeleteStatusReducer.error,
+  errorSale: state.saleListStatusReducer.error,
+  user: state.userProfileReducer.user,
 });
 
 const mapDispatchToProps = {
   saleListRequest,
-  saleDeleteRequest,
+  saleUpdateRequest,
+  customerLoadRequest,
+  userLoadRequest, 
+  insurerListRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaleList);

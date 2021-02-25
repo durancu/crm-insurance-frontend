@@ -67,7 +67,7 @@ export const Reports = ({
             bordered={false}
             responsive
             filter={filterFactory()}
-            defaultSorted={salesReportDefaultSorted}
+            defaultSorted={salesReportDefaultSorted()}
             noDataIndication="No registered sales"
             cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
           />
