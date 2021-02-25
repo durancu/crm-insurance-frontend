@@ -454,7 +454,7 @@ export const FormSale = ({
         {/* ROW 9 Total Amount to charge:*/}
         <Row className="mb-4 mt-5">
           <p style={{ textAlign: "right" }}>
-            Total Amount to charge: ${totalCharge}
+            Total Policy Premium  : ${totalCharge}
             {/* Total To Charge = Sum(insuranceCharges+Permits+Fees+Tips */}
           </p>
         </Row>
@@ -464,7 +464,7 @@ export const FormSale = ({
             <Col md="6">
               <Form.Row>
                 <Form.Label style={{ textAlign: "right" }} column md={5}>
-                  Total Charged:
+                  Total Charge:
                 </Form.Label>
                 <Col md={6}>
                   <Form.Control
