@@ -1,7 +1,6 @@
 import Auth from "../components/auth";
 import Dashboard from "../components/dashboard";
 import Sales from "../components/sales";
-import FormSale from "../components/sales/FormSale";
 import SalesReport from "../components/reports/sales";
 import Profitability from "../components/reports/profitability";
 import Bonus from "../components/reports/bonus";
@@ -31,12 +30,6 @@ export const COMPONENT_LIST = [
     title: "Sales",
     url: "/sales",
     component: Sales,
-    protected: true,
-  },
-  {
-    title: "Create Sales",
-    url: "/sales/create",
-    component: FormSale,
     protected: true,
   },
   {

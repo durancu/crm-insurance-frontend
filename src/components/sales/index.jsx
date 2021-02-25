@@ -11,6 +11,7 @@ import { saleListRequest, customerLoadRequest, userLoadRequest, insurerListReque
 import "../assets/App.css";
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
+import  SaleForm  from "./SaleForm";
 import SalesFilters from "./SalesFilters";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
@@ -54,9 +55,7 @@ export const Sales = ({
           <SalesFilters />
         </Col>
         <Col lg="2" sm="6" align="right">
-          <Link to="/sales/create" className="btn btn-primary">
-            Add New Sale
-          </Link>
+          <SaleForm/>
         </Col>
       </Row>
 
