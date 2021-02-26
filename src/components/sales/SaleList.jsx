@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 //Actions
-import { saleListRequest, customerLoadRequest, userLoadRequest, insurerListRequest, saleUpdateRequest } from "../../redux/actions";
+import {
+  saleListRequest,
+  customerLoadRequest,
+  userLoadRequest,
+  insurerListRequest,
+  saleUpdateRequest,
+} from "../../redux/actions";
 
 //Assets
 import "../assets/App.css";
@@ -14,8 +20,6 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import { salesTableColumns, salesDefaultSorted } from "./config";
-import  SaleForm  from "./SaleForm";
-
 
 export const SaleList = ({
   userLoadRequest,
@@ -31,23 +35,28 @@ export const SaleList = ({
   insurers,
   user,
 }) => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin] = useState(false);
   useEffect(() => {
     userLoadRequest();
     customerLoadRequest();
     insurerListRequest();
     saleListRequest();
-    user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
-  }, [saleListRequest, customerLoadRequest, userLoadRequest, insurerListRequest, user.roles]);
+    //user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
+  }, [
+    saleListRequest,
+    customerLoadRequest,
+    userLoadRequest,
+    insurerListRequest,
+    user.roles,
+  ]);
 
   return (
     <>
-      <Row>
+      <Row className="mb-2">
         <Col lg="10" sm="6">
           <SalesFilters />
         </Col>
         <Col lg="2" sm="6" align="right">
-          <SaleForm/>
         </Col>
       </Row>
 
@@ -58,49 +67,68 @@ export const SaleList = ({
           </Col>
         </Row>
       ) : (
-          <Row>
-            <BootstrapTable
-              bootstrap4
-              keyField="_id"
-              data={sales}
-              columns={salesTableColumns(isAdmin, customers, sellers, insurers)}
-              striped
-              hover
-              condensed={true}
-              bordered={false}
-              responsive
-              filter={filterFactory()}
-              defaultSorted={salesDefaultSorted()}
-              noDataIndication="No registered sales"
-              cellEdit={cellEditFactory({
-                mode: "click",
-                afterSaveCell: (oldValue, newValue, sale, column) => {
+        <Row>
+          <BootstrapTable
+            bootstrap4
+            keyField="_id"
+            data={sales}
+            columns={salesTableColumns(isAdmin, customers, sellers, insurers)}
+            striped
+            hover
+            condensed={true}
+            bordered={false}
+            responsive
+            filter={filterFactory()}
+            defaultSorted={salesDefaultSorted()}
+            noDataIndication="No registered sales"
+            cellEdit={cellEditFactory({
+              mode: "click",
+              afterSaveCell: (oldValue, newValue, sale, column) => {
+                const fieldName = column.dataField;
 
-                  const fieldName = column.dataField;
+                let payload = {
+                  _id: sale._id,
+                };
 
-                  let payload = {
-                    "_id": sale._id,
-                  }
+                const numericFields = [
+                  "fees",
+                  "permits",
+                  "tips",
+                  "liabilityCharge",
+                  "cargoCharge",
+                  "physicalDamageCharge",
+                  "wcGlUmbCharge",
+                  "downPayment",
+                  "chargesPaid",
+                  "premium",
+                ];
+                const referenceFields = [
+                  "customer._id",
+                  "seller._id",
+                  "liabilityInsurer._id",
+                  "cargoInsurer._id",
+                  "physicalDamageInsurer._id",
+                  "wcGlUmbInsurer._id",
+                ];
 
-                  const numericFields = ['fees', 'permits', 'tips', 'liabilityCharge', 'cargoCharge', 'physicalDamageCharge', 'wcGlUmbCharge', 'downPayment', 'chargesPaid', 'premium'];
-                  const referenceFields = ['customer._id', 'seller._id', 'liabilityInsurer._id', 'cargoInsurer._id', 'physicalDamageInsurer._id', 'wcGlUmbInsurer._id'];
-
-                  if (numericFields.includes(fieldName)) {
-                    payload = { ...payload, [fieldName]: Math.round(newValue * 100) / 100 }
-                  }
-
-                  if (referenceFields.includes(fieldName)) {
-                    const referenceField = fieldName.split(".")[0];
-                    payload = { ...payload, [referenceField]: newValue };
-                  }
-
-                  saleUpdateRequest(payload);
+                if (numericFields.includes(fieldName)) {
+                  payload = {
+                    ...payload,
+                    [fieldName]: Math.round(newValue * 100) / 100,
+                  };
                 }
-              })}
 
-            />
-          </Row>
-        )}
+                if (referenceFields.includes(fieldName)) {
+                  const referenceField = fieldName.split(".")[0];
+                  payload = { ...payload, [referenceField]: newValue };
+                }
+
+                saleUpdateRequest(payload);
+              },
+            })}
+          />
+        </Row>
+      )}
     </>
   );
 };
@@ -132,7 +160,7 @@ const mapDispatchToProps = {
   saleListRequest,
   saleUpdateRequest,
   customerLoadRequest,
-  userLoadRequest, 
+  userLoadRequest,
   insurerListRequest,
 };
 

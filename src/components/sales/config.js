@@ -27,7 +27,9 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
                 return { width: "7%" };
             },
             sort: true,
-            footer: "TOTALS",
+            footer: (columnData) =>
+            `
+            ${columnData.reduce((acc, item) => acc + 1, 0)} sales`,
             editor: {
                 type: Type.DATE,
             },
@@ -43,8 +45,7 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
             hidden: true,//!isAdmin,
             align: "left",
             headerAlign: "left",
-            footer: (columnData) =>
-                `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
+            footer: '',
             filter: selectFilter({
                 placeholder: "Search",
                 options: sellersOptions(sellers),
@@ -239,7 +240,7 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
             editable: false,
         },
         {
-            dataFieldśqs: "fees",
+            dataField: "fees",
             text: "Fees",
             headerAlign: "right",
             formatter: priceFormatter,
