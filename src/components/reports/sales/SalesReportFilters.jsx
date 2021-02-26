@@ -15,8 +15,8 @@ import {
 export const SalesReportFilters = ({ reportListRequest }) => {
   const [dateRange, setDateRange] = useState("");
 
-  const handleDateRange = ({ target }) => {
-    setDateRange(`date_range=${target.value}`);
+  const handleDateRange = () => {
+    setDateRange(`date_range=${dateRange}`);
   };
 
   useEffect(() => {
