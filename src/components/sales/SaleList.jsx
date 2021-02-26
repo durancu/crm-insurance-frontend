@@ -20,6 +20,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import { salesTableColumns, salesDefaultSorted } from "./config";
+import SaleForm from "./SaleForm";
 
 export const SaleList = ({
   userLoadRequest,
@@ -57,6 +58,7 @@ export const SaleList = ({
           <SalesFilters />
         </Col>
         <Col lg="2" sm="6" align="right">
+          <SaleForm />
         </Col>
       </Row>
 
