@@ -2,7 +2,7 @@ import React from "react";
 
 //Components
 import { Row, Col } from "react-bootstrap";
-import { SaleList } from "./SaleList";
+import SaleList from "./SaleList";
 
 
 export default function Sales() {

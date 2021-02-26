@@ -20,19 +20,6 @@ import CustomerForm from "../manage/customers/CustomerForm";
 
 const defaultForm = {
   soldAt: moment().format("YYYY-MM-DD"),
-  customer: "",
-  liabilityInsurer: "",
-  liabilityCharge: 0,
-  cargoInsurer: "",
-  cargoCharge: 0,
-  physicalDamageInsurer: "",
-  physicalDamageCharge: 0,
-  wcGlUmbInsurer: "",
-  wcGlUmbCharge: 0,
-  fees: 0,
-  permits: 0,
-  tips: 0,
-  chargesPaid: 0,
 };
 
 export const SaleForm = ({
@@ -53,6 +40,7 @@ export const SaleForm = ({
   const [pendingPayment, setPendingPayment] = useState(0);
   const [modalSale, setModalSale] = useState(false);
   const [modalCustomer, setModalCustomer] = useState(false);
+
   //Load Insurer List
   useEffect(() => {
     insurerListRequest();
@@ -124,7 +112,11 @@ export const SaleForm = ({
         }));
         break;
       default:
-        setForm((form) => ({ ...form, [target.name]: target.value }));
+        console.log("form initial", form);
+        if (target.value)
+          setForm((form) => ({ ...form, [target.name]: target.value }));
+        else delete form[target.name];
+        console.log("form final", form);
         break;
     }
   };
@@ -142,6 +134,11 @@ export const SaleForm = ({
   const handleModalCustomer = () => {
     setModalCustomer(!modalCustomer);
   };
+
+  console.log(
+    ' form.hasOwnProperty("liabilityInsurer") ',
+    form.hasOwnProperty("liabilityInsurer")
+  );
   return (
     <>
       <Button onClick={handleModalSale}>Add Sales</Button>
@@ -178,10 +175,10 @@ export const SaleForm = ({
                   </Col>
                   <Col>
                     <Form.Row>
-                      <Form.Label style={{ textAlign: "right" }} column lg={2}>
+                      <Form.Label style={{ textAlign: "right" }} column lg={3}>
                         Customer:
                       </Form.Label>
-                      <Col>
+                      <Col lg={5}>
                         <Form.Control
                           as="select"
                           name="customer"
@@ -243,25 +240,26 @@ export const SaleForm = ({
                     </Form.Row>
                   </Col>
                   <Col>
-                    {form.liabilityInsurer !== "" && (
-                      <Form.Row>
-                        <Form.Label
-                          style={{ textAlign: "right" }}
-                          column
-                          lg={2}
-                        >
-                          Charge:
-                        </Form.Label>
-                        <Col sm="5">
-                          <Form.Control
-                            type="text"
-                            name="liabilityCharge"
-                            onChange={handleChange}
-                            required={form.liabilityInsurer !== "" && true}
-                          />
-                        </Col>
-                      </Form.Row>
-                    )}
+                    {form.hasOwnProperty("liabilityInsurer") &&
+                      form.liabilityInsurer && (
+                        <Form.Row>
+                          <Form.Label
+                            style={{ textAlign: "right" }}
+                            column
+                            lg={3}
+                          >
+                            Charge:
+                          </Form.Label>
+                          <Col sm="5">
+                            <Form.Control
+                              type="text"
+                              name="liabilityCharge"
+                              onChange={handleChange}
+                              required={form.liabilityInsurer !== "" && true}
+                            />
+                          </Col>
+                        </Form.Row>
+                      )}
                   </Col>
                 </Row>
               </Form.Group>
@@ -299,7 +297,7 @@ export const SaleForm = ({
                         <Form.Label
                           style={{ textAlign: "right" }}
                           column
-                          lg={2}
+                          lg={3}
                         >
                           Charge:
                         </Form.Label>
@@ -350,7 +348,7 @@ export const SaleForm = ({
                         <Form.Label
                           style={{ textAlign: "right" }}
                           column
-                          lg={2}
+                          lg={3}
                         >
                           Charge:
                         </Form.Label>
@@ -401,7 +399,7 @@ export const SaleForm = ({
                         <Form.Label
                           style={{ textAlign: "right" }}
                           column
-                          lg={2}
+                          lg={3}
                         >
                           Charge:
                         </Form.Label>
@@ -429,10 +427,46 @@ export const SaleForm = ({
                       <Col md={6}>
                         <Form.Control
                           type="text"
-                          name="downPayment"
+                          name="premium"
                           onChange={handleChange}
                           value={totalCharge}
                           disabled
+                        />
+                      </Col>
+                    </Form.Row>
+                  </Col>
+                </Row>
+              </Form.Group>
+              <hr />
+              {/* ROW 10 Down Payment:*/}
+              <Form.Group>
+                <Row>
+                  <Col md="6">
+                    <Form.Row>
+                      <Form.Label style={{ textAlign: "right" }} column md={5}>
+                        Down Payment:
+                      </Form.Label>
+                      <Col lg={6}>
+                        <Form.Control
+                          type="text"
+                          name="downPayment"
+                          onChange={handleChange}
+                          required
+                        />
+                      </Col>
+                    </Form.Row>
+                  </Col>
+                  <Col md="6">
+                    <Form.Row>
+                      <Form.Label style={{ textAlign: "right" }} column md={3}>
+                        Fees:
+                      </Form.Label>
+                      <Col sm={5}>
+                        <Form.Control
+                          type="text"
+                          name="fees"
+                          onChange={handleChange}
+                          required
                         />
                       </Col>
                     </Form.Row>
@@ -457,37 +491,12 @@ export const SaleForm = ({
                       </Col>
                     </Form.Row>
                   </Col>
-                </Row>
-              </Form.Group>
-              {/* ROW 7   Fees:*/}
-              <Form.Group>
-                <Row>
                   <Col md="6">
                     <Form.Row>
-                      <Form.Label style={{ textAlign: "right" }} column md={5}>
-                        Fees:
-                      </Form.Label>
-                      <Col md={6}>
-                        <Form.Control
-                          type="text"
-                          name="fees"
-                          onChange={handleChange}
-                          required
-                        />
-                      </Col>
-                    </Form.Row>
-                  </Col>
-                </Row>
-              </Form.Group>
-              {/* ROW 8 Tips:*/}
-              <Form.Group>
-                <Row>
-                  <Col md="6">
-                    <Form.Row>
-                      <Form.Label style={{ textAlign: "right" }} column md={5}>
+                      <Form.Label style={{ textAlign: "right" }} column md={3}>
                         Tips:
                       </Form.Label>
-                      <Col md={6}>
+                      <Col md={5}>
                         <Form.Control
                           type="text"
                           name="tips"
@@ -499,19 +508,55 @@ export const SaleForm = ({
                   </Col>
                 </Row>
               </Form.Group>
-              {/* ROW 10 Total Charged:*/}
+              <hr />
+              {/* TOTAL CHARGE */}
               <Form.Group>
                 <Row>
                   <Col md="6">
                     <Form.Row>
                       <Form.Label style={{ textAlign: "right" }} column md={5}>
-                        Total Charge:
+                        Total charge:
                       </Form.Label>
                       <Col md={6}>
                         <Form.Control
                           type="text"
-                          name="chargesPaid"
-                          onChange={handleChange}
+                          name="totalCharge"
+                          value={totalCharge}
+                          disabled
+                        />
+                      </Col>
+                    </Form.Row>
+                  </Col>
+                  <Col md="6">
+                    <Form.Row>
+                      <Form.Label style={{ textAlign: "right" }} column md={3}>
+                        Pending Amount:
+                      </Form.Label>
+                      <Col md={5}>
+                        <Form.Control
+                          type="text"
+                          name="pendingAmount"
+                          value={pendingPayment}
+                          disabled
+                        />
+                      </Col>
+                    </Form.Row>
+                  </Col>
+                </Row>
+              </Form.Group>
+              {/* TOTAL Paid */}
+              <Form.Group>
+                <Row>
+                  <Col md="6">
+                    <Form.Row>
+                      <Form.Label style={{ textAlign: "right" }} column md={5}>
+                        Charges Paid:
+                      </Form.Label>
+                      <Col md={6}>
+                        <Form.Control
+                          type="text"
+                          name="chargePai"
+                          /* value={}  Define Value*/
                           required
                         />
                       </Col>
@@ -519,23 +564,18 @@ export const SaleForm = ({
                   </Col>
                 </Row>
               </Form.Group>
-              {/* ROW 11 Pending Amount to pay:*/}
-              <Row className="mb-4 mt-5">
-                <Col>
-                  <h4 style={{ textAlign: "center" }}>
-                    Pending Amount to pay: ${pendingPayment}
-                    {/* Pending Payment = Total To Charge - Total Charged */}
-                  </h4>
-                </Col>
-                <Col></Col>
-              </Row>
             </Container>
           </Modal.Body>
           <Modal.Footer>
             <Container>
               <Row className="justify-content-center">
                 <Col lg="4">
-                  <Button size="lg" variant="secondary" block>
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    block
+                    onClick={handleModalSale}
+                  >
                     Cancel
                   </Button>
                 </Col>
