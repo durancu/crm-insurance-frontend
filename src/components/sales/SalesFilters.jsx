@@ -18,7 +18,6 @@ export const SalesFilters = ({ saleListRequest }) => {
 
   const defaultDateRange = dateRangeByName(DateRange.MONTH_TO_DATE);
 
-  console.log(DateRange.MONTH_TO_DATE);
   const defaultForm = {
     dateRange: DateRange.MONTH_TO_DATE,
     startDate: defaultDateRange.start,
@@ -27,20 +26,18 @@ export const SalesFilters = ({ saleListRequest }) => {
 
   const [startDate, setStartDate] = useState(defaultForm.startDate);
   const [endDate, setEndDate] = useState(defaultForm.endDate);
+  const [dateRange, setDateRange] = useState(defaultForm.dateRange)
+  const [currentDateRange, setCurrentDateRange] = useState("")
+  const [previousDate, setPreviousDate] = useState("")
 
   const calculateDatesByRange = ({ target }) => {
     console.log(target.value);
-    const currentDateRange = dateRangeByName(target.value);
-    //setStartDate(`${currentDateRange.start}`);
-    setStartDate(currentDateRange.startDate);
-    setEndDate(currentDateRange.endDate);
+    setDateRange(target.value);
+    setCurrentDateRange(dateRangeByName(target.value));
   };
 
   //Load data of form
-  const handleDateChange = ({ target }) => {
-    console.log(target.name)
-    console.log(target.value)
-
+  const handleChangeDate = ({ target }) => {
     switch (target.name) {
       case "startDate":
         setStartDate(moment(target.value).format("YYYY-MM-DD"));
@@ -48,12 +45,34 @@ export const SalesFilters = ({ saleListRequest }) => {
       case "endDate":
         setEndDate(moment(target.value).format("YYYY-MM-DD"));
         break;
-/*       case "dateRange":
-        const currentDateRange = dateRangeByName(target.value);
-        setStartDate(moment(currentDateRange.startDate).format("YYYY-MM-DD"));
-        setEndDate(moment(currentDateRange.endDate).format("YYYY-MM-DD"));
-        break; */
-        default:
+      /*       case "dateRange":
+              const currentDateRange = dateRangeByName(target.value);
+              setStartDate(moment(currentDateRange.startDate).format("YYYY-MM-DD"));
+              setEndDate(moment(currentDateRange.endDate).format("YYYY-MM-DD"));
+              break; */
+      default:
+    }
+  }
+
+    //Load data of form
+  const handleFocusDate = ({ target }) => {
+    setPreviousDate(target.value)
+  }
+
+  //Load data of form
+  const handleBlurDate = ({ target }) => {
+    switch (target.name) {
+      case "startDate":
+        if (previousDate !== target.value) {
+          setDateRange('CUSTOM');
+        }
+        break;
+      case "endDate":
+        if (previousDate !== target.value) {
+          setDateRange('CUSTOM');
+        }
+        break;
+      default:
     }
   }
 
@@ -64,8 +83,9 @@ export const SalesFilters = ({ saleListRequest }) => {
   };
 
   useEffect(() => {
-
-  });
+    setStartDate(currentDateRange.start);
+    setEndDate(currentDateRange.end);
+  }, [currentDateRange]);
 
   return (
     <Form inline onSubmit={handleSubmit}>
@@ -79,6 +99,7 @@ export const SalesFilters = ({ saleListRequest }) => {
           name="dateRange"
           as="select"
           onChange={calculateDatesByRange}
+          value={dateRange}
           className="my-2 mr-sm-2"
           custom
         >
@@ -91,6 +112,7 @@ export const SalesFilters = ({ saleListRequest }) => {
           <option value="LAST_MONTH">Last Month</option>
           <option value="YTD">This Year</option>
           <option value="LAST_YEAR">Last Year</option>
+          <option value="CUSTOM">Custom</option>
         </Form.Control>
 
         <Form.Group>
@@ -99,7 +121,9 @@ export const SalesFilters = ({ saleListRequest }) => {
             type="date"
             name="startDate"
             value={startDate}
-            onChange={handleDateChange}
+            onChange={handleChangeDate}
+            onBlur={handleBlurDate}
+            onFocus={handleFocusDate}
             className="my-1 mr-2"
             required
           />
@@ -110,7 +134,9 @@ export const SalesFilters = ({ saleListRequest }) => {
             type="date"
             name="endDate"
             value={endDate}
-            onChange={handleDateChange}
+            onChange={handleChangeDate}
+            onBlur={handleBlurDate}
+            onFocus={handleFocusDate}
             className="my-1 mr-2"
             required
           />
