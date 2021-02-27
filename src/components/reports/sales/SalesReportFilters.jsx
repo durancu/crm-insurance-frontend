@@ -45,6 +45,8 @@ export const SalesReportFilters = ({ reportListRequest }) => {
           <option value="LAST_WEEK">Last Week</option>
           <option value="MTD">This Month</option>
           <option value="LAST_MONTH">Last Month</option>
+          <option value="QTD">This Quarter</option>
+          <option value="LAST_QUARTER">Last Quarter</option>
           <option value="YTD">This Year</option>
           <option value="LAST_YEAR">Last Year</option>
         </Form.Control>
