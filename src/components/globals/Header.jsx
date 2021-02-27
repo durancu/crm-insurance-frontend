@@ -10,7 +10,8 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
+    user.hasOwnProperty("roles") &&
+      user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
   });
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">

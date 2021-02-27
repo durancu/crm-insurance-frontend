@@ -3,7 +3,7 @@ import * as types from "../../actions/actionTypes";
 import {
   userAuthFail,
   userAuthSuccess,
-  userProfileSetRequest,
+  userAuthCheckRequest,
 } from "../../actions";
 import { apiPost } from "../../../global/apiMethods";
 import { setSessionData } from "../../../global/sessionStore";
@@ -16,8 +16,8 @@ const sagaRequest = function* sagaRequest(action) {
   try {
     const response = yield call(apiCall, payload);
     setSessionData("token", response.data.access_token);
+    yield put(userAuthCheckRequest());
     yield put(userAuthSuccess());
-    yield put(userProfileSetRequest());
   } catch (e) {
     yield put(userAuthFail());
   }

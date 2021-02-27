@@ -20,6 +20,11 @@ export {
   userProfileGetSuccess,
 } from "./users-actions/userProfileActions";
 export {
+  userAuthCheckFail,
+  userAuthCheckRequest,
+  userAuthCheckSuccess,
+} from "./users-actions/userAuthCheckActions";
+export {
   userLoadRequest,
   userLoadFail,
   userLoadSuccess,

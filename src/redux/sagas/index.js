@@ -5,6 +5,7 @@ import userLogoutSaga from "./user-sagas/userLogoutSaga";
 //PROFILE
 import userProfileSaga from "./user-sagas/userProfileSaga";
 import userProfileGetSaga from "./user-sagas/userProfileGetSaga";
+import userCheckAuthSaga from "./user-sagas/userCheckAuthSaga";
 //USERS
 import userLoadListSaga from "./user-sagas/userLoadListSaga";
 import userGetSaga from "./user-sagas/userGetSaga";
@@ -39,6 +40,7 @@ const sagas = function* sagas() {
   //Profile
   yield spawn(userProfileSaga);
   yield spawn(userProfileGetSaga);
+  yield spawn(userCheckAuthSaga);
   //USER
   yield spawn(userLoadListSaga);
   yield spawn(userGetSaga);
