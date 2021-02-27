@@ -37,11 +37,6 @@ export const SalesFilters = ({ saleListRequest }) => {
     );
   }, [defaultForm.endDate, defaultForm.startDate, saleListRequest]);
 
-  /* useEffect(() => {
-    setStartDate(currentDateRange.start);
-    setEndDate(currentDateRange.end);
-  }, [currentDateRange]); */
-
   const calculateDatesByRange = ({ target }) => {
     setDateRange(target.value);
     setCurrentDateRange(dateRangeByName(target.value));
