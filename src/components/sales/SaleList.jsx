@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 //Actions
 import {
-  saleListRequest,
   customerLoadRequest,
   userLoadRequest,
   insurerListRequest,
@@ -41,7 +40,6 @@ export const SaleList = ({
     userLoadRequest();
     customerLoadRequest();
     insurerListRequest();
-    saleListRequest();
     //user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
   }, [
     saleListRequest,
@@ -136,7 +134,6 @@ export const SaleList = ({
 };
 
 SaleList.propTypes = {
-  saleListRequest: PropTypes.func.isRequired,
   saleUpdateRequest: PropTypes.func.isRequired,
   userLoadRequest: PropTypes.func.isRequired,
   customers: PropTypes.array.isRequired,
@@ -159,7 +156,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  saleListRequest,
   saleUpdateRequest,
   customerLoadRequest,
   userLoadRequest,

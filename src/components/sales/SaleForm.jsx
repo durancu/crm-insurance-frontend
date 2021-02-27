@@ -135,10 +135,6 @@ export const SaleForm = ({
     setModalCustomer(!modalCustomer);
   };
 
-  console.log(
-    ' form.hasOwnProperty("liabilityInsurer") ',
-    form.hasOwnProperty("liabilityInsurer")
-  );
   return (
     <>
       <Button onClick={handleModalSale}>Add Sales</Button>

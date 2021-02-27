@@ -15,20 +15,32 @@ import {
 import { DateRange, dateRangeByName } from "../globals/date-factory";
 
 export const SalesFilters = ({ saleListRequest }) => {
-
   const defaultDateRange = dateRangeByName(DateRange.MONTH_TO_DATE);
 
   const defaultForm = {
     dateRange: DateRange.MONTH_TO_DATE,
     startDate: defaultDateRange.start,
     endDate: defaultDateRange.end,
-  }
+  };
 
+  const [inputDateStart, setInputDateStart] = useState(defaultForm.startDate);
+  const [inputDateEnd, setInputDateEnd] = useState(defaultForm.endDate);
   const [startDate, setStartDate] = useState(defaultForm.startDate);
   const [endDate, setEndDate] = useState(defaultForm.endDate);
-  const [dateRange, setDateRange] = useState(defaultForm.dateRange)
-  const [currentDateRange, setCurrentDateRange] = useState("")
-  const [previousDate, setPreviousDate] = useState("")
+  const [dateRange, setDateRange] = useState(defaultForm.dateRange);
+  const [currentDateRange, setCurrentDateRange] = useState("");
+  const [previousDate, setPreviousDate] = useState("");
+
+  useEffect(() => {
+    saleListRequest(
+      `start_date=${defaultForm.startDate}&end_date=${defaultForm.endDate}`
+    );
+  }, [defaultForm.endDate, defaultForm.startDate, saleListRequest]);
+
+  useEffect(() => {
+    setStartDate(currentDateRange.start);
+    setEndDate(currentDateRange.end);
+  }, [currentDateRange]);
 
   const calculateDatesByRange = ({ target }) => {
     console.log(target.value);
@@ -41,9 +53,11 @@ export const SalesFilters = ({ saleListRequest }) => {
     switch (target.name) {
       case "startDate":
         setStartDate(moment(target.value).format("YYYY-MM-DD"));
+        setInputDateStart(moment(target.value).format("YYYY-MM-DD"));
         break;
       case "endDate":
         setEndDate(moment(target.value).format("YYYY-MM-DD"));
+        setInputDateEnd(moment(target.value).format("YYYY-MM-DD"));
         break;
       /*       case "dateRange":
               const currentDateRange = dateRangeByName(target.value);
@@ -52,45 +66,38 @@ export const SalesFilters = ({ saleListRequest }) => {
               break; */
       default:
     }
-  }
+  };
 
-    //Load data of form
+  //Load data of form
   const handleFocusDate = ({ target }) => {
-    setPreviousDate(target.value)
-  }
+    setPreviousDate(target.value);
+  };
 
   //Load data of form
   const handleBlurDate = ({ target }) => {
     switch (target.name) {
       case "startDate":
         if (previousDate !== target.value) {
-          setDateRange('CUSTOM');
+          setDateRange("CUSTOM");
         }
         break;
       case "endDate":
         if (previousDate !== target.value) {
-          setDateRange('CUSTOM');
+          setDateRange("CUSTOM");
         }
         break;
       default:
     }
-  }
-
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     saleListRequest(`start_date=${startDate}&end_date=${endDate}`);
   };
 
-  useEffect(() => {
-    setStartDate(currentDateRange.start);
-    setEndDate(currentDateRange.end);
-  }, [currentDateRange]);
-
   return (
     <Form inline onSubmit={handleSubmit}>
       <Form.Row>
-
         <Form.Label htmlFor="dateRange" className="my-1 mr-2">
           Date:
         </Form.Label>
@@ -116,11 +123,13 @@ export const SalesFilters = ({ saleListRequest }) => {
         </Form.Control>
 
         <Form.Group>
-          <Form.Label htmlFor="startDate" className="my-1 mr-2">From: </Form.Label>
+          <Form.Label htmlFor="startDate" className="my-1 mr-2">
+            From:{" "}
+          </Form.Label>
           <Form.Control
             type="date"
             name="startDate"
-            value={startDate}
+            value={inputDateStart}
             onChange={handleChangeDate}
             onBlur={handleBlurDate}
             onFocus={handleFocusDate}
@@ -129,11 +138,14 @@ export const SalesFilters = ({ saleListRequest }) => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor="endDate" className="my-1 mr-2"> To:</Form.Label>
+          <Form.Label htmlFor="endDate" className="my-1 mr-2">
+            {" "}
+            To:
+          </Form.Label>
           <Form.Control
             type="date"
             name="endDate"
-            value={endDate}
+            value={inputDateEnd}
             onChange={handleChangeDate}
             onBlur={handleBlurDate}
             onFocus={handleFocusDate}
@@ -143,9 +155,10 @@ export const SalesFilters = ({ saleListRequest }) => {
         </Form.Group>
 
         <Form.Group>
-          <Button type="submit" variant="dark">Apply</Button>
+          <Button type="submit" variant="dark">
+            Apply
+          </Button>
         </Form.Group>
-
       </Form.Row>
     </Form>
   );
