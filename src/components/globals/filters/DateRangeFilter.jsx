@@ -11,10 +11,11 @@ import {
   userLoadRequest,
   customerLoadRequest,
   saleListRequest,
-} from "../../redux/actions";
-import { DateRange, dateRangeByName } from "../globals/date-factory";
+  reportListRequest,
+} from "../../../redux/actions";
+import { DateRange, dateRangeByName } from "../date-factory";
 
-export const SalesFilters = ({ saleListRequest }) => {
+const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
   const defaultDateRange = dateRangeByName(DateRange.MONTH_TO_DATE);
 
   const defaultForm = {
@@ -23,8 +24,6 @@ export const SalesFilters = ({ saleListRequest }) => {
     endDate: defaultDateRange.end,
   };
 
-  const [inputDateStart, setInputDateStart] = useState(defaultForm.startDate);
-  const [inputDateEnd, setInputDateEnd] = useState(defaultForm.endDate);
   const [startDate, setStartDate] = useState(defaultForm.startDate);
   const [endDate, setEndDate] = useState(defaultForm.endDate);
   const [dateRange, setDateRange] = useState(defaultForm.dateRange);
@@ -32,22 +31,37 @@ export const SalesFilters = ({ saleListRequest }) => {
   const [previousDate, setPreviousDate] = useState("");
 
   useEffect(() => {
-    saleListRequest(
-      `start_date=${defaultForm.startDate}&end_date=${defaultForm.endDate}`
-    );
-  }, [defaultForm.endDate, defaultForm.startDate, saleListRequest]);
+    switch (model) {
+      case "sale":
+        saleListRequest(
+          `start_date=${defaultForm.startDate}&end_date=${defaultForm.endDate}`
+        );
+        break;
+      case "report":
+        reportListRequest(
+          `start_date=${defaultForm.startDate}&end_date=${defaultForm.endDate}`
+        );
+        break;
 
-  /* useEffect(() => {
+      default:
+        break;
+    }
+  }, [
+    defaultForm.endDate,
+    defaultForm.startDate,
+    model,
+    reportListRequest,
+    saleListRequest,
+  ]);
+
+  useEffect(() => {
     setStartDate(currentDateRange.start);
     setEndDate(currentDateRange.end);
-  }, [currentDateRange]); */
+  }, [currentDateRange]);
 
   const calculateDatesByRange = ({ target }) => {
     setDateRange(target.value);
     setCurrentDateRange(dateRangeByName(target.value));
-    setStartDate(currentDateRange.start);
-    setEndDate(currentDateRange.end);
-    console.log('startDate', currentDateRange)
   };
 
   //Load data of form
@@ -55,11 +69,9 @@ export const SalesFilters = ({ saleListRequest }) => {
     switch (target.name) {
       case "startDate":
         setStartDate(moment(target.value).format("YYYY-MM-DD"));
-        setInputDateStart(moment(target.value).format("YYYY-MM-DD"));
         break;
       case "endDate":
         setEndDate(moment(target.value).format("YYYY-MM-DD"));
-        setInputDateEnd(moment(target.value).format("YYYY-MM-DD"));
         break;
       default:
         break;
@@ -90,7 +102,15 @@ export const SalesFilters = ({ saleListRequest }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saleListRequest(`start_date=${startDate}&end_date=${endDate}`);
+    switch (model) {
+      case "sale":
+        saleListRequest(`start_date=${startDate}&end_date=${endDate}`);
+        break;
+      case "report":
+        reportListRequest(`start_date=${startDate}&end_date=${endDate}`);
+        break;
+      default:
+    }
   };
 
   return (
@@ -122,7 +142,7 @@ export const SalesFilters = ({ saleListRequest }) => {
 
         <Form.Group>
           <Form.Label htmlFor="startDate" className="my-1 mr-2">
-            From:{" "}
+            From:
           </Form.Label>
           <Form.Control
             type="date"
@@ -137,13 +157,12 @@ export const SalesFilters = ({ saleListRequest }) => {
         </Form.Group>
         <Form.Group>
           <Form.Label htmlFor="endDate" className="my-1 mr-2">
-            {" "}
             To:
           </Form.Label>
           <Form.Control
             type="date"
             name="endDate"
-            value={inputDateEnd}
+            value={endDate}
             onChange={handleChangeDate}
             onBlur={handleBlurDate}
             onFocus={handleFocusDate}
@@ -162,12 +181,15 @@ export const SalesFilters = ({ saleListRequest }) => {
   );
 };
 
-SalesFilters.propTypes = {
+DateRangeFilter.propTypes = {
   userLoadRequest: PropTypes.func.isRequired,
   sellers: PropTypes.array.isRequired,
   customers: PropTypes.array.isRequired,
   customerLoadRequest: PropTypes.func.isRequired,
+  model: PropTypes.string.isRequired,
+  //Functions
   saleListRequest: PropTypes.func.isRequired,
+  reportListRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -179,6 +201,7 @@ const mapDispatchToProps = {
   userLoadRequest,
   customerLoadRequest,
   saleListRequest,
+  reportListRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SalesFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(DateRangeFilter);

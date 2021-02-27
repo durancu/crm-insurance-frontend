@@ -14,12 +14,13 @@ import {
 import "../assets/App.css";
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
-import SalesFilters from "./SalesFilters";
+//import SalesFilters from "./SalesFilters";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import { salesTableColumns, salesDefaultSorted } from "./config";
 import SaleForm from "./SaleForm";
+import DateRangeFilter from "../globals/filters/DateRangeFilter";
 
 export const SaleList = ({
   userLoadRequest,
@@ -53,7 +54,8 @@ export const SaleList = ({
     <>
       <Row className="mb-2">
         <Col lg="10" sm="6">
-          <SalesFilters />
+         {/*  <SalesFilters model={'sale'}/> */}
+          <DateRangeFilter model={'sale'}/>
         </Col>
         <Col lg="2" sm="6" align="right">
           <SaleForm />

@@ -15,7 +15,7 @@ export default function Sales() {
       </Row>
       <Row>
         <Col sm="12" lg="12">
-          <SaleList />
+          <SaleList model={'sale'}/>
         </Col>
       </Row>
     </>
