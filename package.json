@@ -20,6 +20,7 @@
     "react-bootstrap-table2-filter": "^1.3.3",
     "react-bootstrap-table2-overlay": "^2.0.0",
     "react-bootstrap-table2-toolkit": "^2.1.3",
+    "react-chartjs-2": "^2.11.1",
     "react-dom": "^16.0.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",

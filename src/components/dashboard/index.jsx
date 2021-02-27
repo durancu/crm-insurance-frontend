@@ -2,6 +2,7 @@ import React from 'react'
 //import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { Row, Col } from "react-bootstrap";
+import BarChartDashboard from './sales/BarChartDashboard';
 
 export const Dashboard = () => {
     return (
@@ -11,6 +12,7 @@ export const Dashboard = () => {
                     <h2>Dashboard</h2>
                 </Col>
             </Row>
+            <BarChartDashboard />
 
         </>
     )}

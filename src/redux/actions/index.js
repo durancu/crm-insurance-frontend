@@ -128,3 +128,10 @@ export {
   reportListFail,
   reportListSuccess,
 } from "./reports-actions/reportListActions";
+//DASHBOARDS
+export {
+  dashboardGetRequest,
+  dashboardGetFail,
+  dashboardGetSuccess,
+} from "./dashboards-actions/dashboardGetActions";
+
