@@ -12,7 +12,7 @@ const DashboardConfig = {
         {
             id: 1,
             model: "sales",
-            chart_type: "line",
+            chart_type: "bar",
             title: "Sales By Day This Month",
             query_params: {
                 data_criteria: "totalCharge",
@@ -60,13 +60,11 @@ const DashboardConfig = {
                 start_date: mtd.start,
                 end_date: mtd.end,
             }
-        } 
+        }
     ]
 }
 
 export const Dashboard = () => {
-
-    let count = 0;
 
     return (
         <>
@@ -76,12 +74,13 @@ export const Dashboard = () => {
                 </Col>
             </Row>
             <Row>
-                {DashboardConfig['System Administrator'].map(chartConfig => (
-                    <Col sm="6" key={chartConfig.id}>
-                        <DashboardChart chartConfig={chartConfig} counter={count++} />
-                    </Col>
-                ))
-                }
+                <Col sm="6" key={DashboardConfig['System Administrator'][0].id}>
+                    <DashboardChart chartConfig={DashboardConfig['System Administrator'][0]} />
+                </Col>
+                <Col sm="6" key={DashboardConfig['System Administrator'][1].id}>
+                    <DashboardChart chartConfig={DashboardConfig['System Administrator'][1]} />
+                </Col>
+
             </Row>
         </>
     )

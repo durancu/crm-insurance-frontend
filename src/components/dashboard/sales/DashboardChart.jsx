@@ -7,7 +7,7 @@ import {dashboardGetRequest} from '../../../redux/actions';
 //Components
 import {Card} from "react-bootstrap";
 
-const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list,counter}) => {
+const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig}) => {
 
   const [query] = useState(chartConfig);
 
@@ -15,19 +15,15 @@ const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list,coun
     dashboardGetRequest(query);
   }, [dashboardGetRequest, query]);
 
-  console.log(list);
-  //console.log(counter);
-
   switch (chartData.chartType) {
 
     case "line":
-      //  console.log(chartData.data)
         return (
           <>
-            <Card id={Math.random()*10/10}>
+            <Card>
               <Card.Body>
                 <Card.Title>{chartConfig.title}</Card.Title>
-                { list.length > 0 && <Line data={list[counter].data} />   }           
+                <Line data={chartData} />
               </Card.Body>
             </Card>
           </>
@@ -35,13 +31,12 @@ const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list,coun
 
     case "bar":
     default:
-    //  console.log(chartData.data)
       return (
         <>
-          <Card id={Math.random()*10/10}>
+          <Card>
             <Card.Body>
               <Card.Title>{chartConfig.title}</Card.Title>
-              { list.length > 0 && <Bar data={list[counter].data} />   }           
+              <Bar data={chartData.data} />
             </Card.Body>
           </Card>
         </>
@@ -55,13 +50,13 @@ const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list,coun
 
 DashboardChart.propTypes = {
   chartConfig: PropTypes.object.isRequired,
-  list:PropTypes.array.isRequired
+  
 };
 
 const mapStateToProps = (state) => ({
   //customers: state.customerReducer.list,
   chartData: state.dashboardReducer.config,
-  list: state.dashboardReducer.list,
+  
 });
 
 const mapDispatchToProps = {
