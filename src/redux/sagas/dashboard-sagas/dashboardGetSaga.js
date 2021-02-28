@@ -3,12 +3,13 @@ import * as types from "../../actions/actionTypes";
 import { dashboardGetSuccess, dashboardGetFail } from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
 
-const apiCall = (queryParams = "") =>
-  apiGet(`dashboards?${queryParams}`, true).catch((error) => console.log(error.response.data));
+const apiCall = (payload = {}) =>
+  apiGet(`dashboards/${payload.model}/${payload.chart_type}?${queryStringFromObject(payload.query_params)}`, true).catch((error) => console.log(error.response.data));
 
-const sagaRequest = function* sagaRequest({ queryParams }) {
+const sagaRequest = function* sagaRequest({ payload }) {
   try {
-    const response = yield call(apiCall, queryParams);
+    const response = yield call(apiCall, payload);
+    console.log(response.data);
     yield put(dashboardGetSuccess(response.data));
   } catch (err) {
     yield put(dashboardGetFail());
@@ -16,7 +17,7 @@ const sagaRequest = function* sagaRequest({ queryParams }) {
 };
 
 const dashboardGetRequest = function* dashboardGetRequest() {
-  yield takeLatest(types.DASHBOARDS_LIST_REQUEST, sagaRequest);
+  yield takeLatest(types.DASHBOARD_GET_REQUEST, sagaRequest);
 };
 
 const dashboardGetSaga = function* dashboardGetSaga() {
@@ -24,3 +25,15 @@ const dashboardGetSaga = function* dashboardGetSaga() {
 };
 
 export default dashboardGetSaga;
+
+
+const queryStringFromObject = function (object) {
+  var parameters = [];
+  for (var property in object) {
+    if (object.hasOwnProperty(property)) {
+      parameters.push(encodeURI(property + '=' + object[property]));
+    }
+  }
+
+  return parameters.join('&');
+}

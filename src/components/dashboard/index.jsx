@@ -2,20 +2,90 @@ import React from 'react'
 //import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { Row, Col } from "react-bootstrap";
-import BarChartDashboard from './sales/BarChartDashboard';
+import DashboardChart from './sales/DashboardChart';
+import { DateRange, dateRangeByName } from '../globals/date-factory';
+
+const mtd = dateRangeByName(DateRange.MONTH_TO_DATE);
+
+const DashboardConfig = {
+    "System Administrator": [
+        {
+            id: 1,
+            model: "sales",
+            chart_type: "bar",
+            title: "Sales By Day This Month",
+            query_params: {
+                data_criteria: "totalCharge",
+                grouping_criteria: "day",
+                aggregation: "count",
+                start_date: mtd.startDate,
+                end_date: mtd.endDate
+            },
+
+
+        },
+        {
+            id: 2,
+            model: "sales",
+            chart_type: "bar",
+            title: "Total Sales Amount By Location This Month",
+            query_params: {
+                data_criteria: "totalCharge",
+                grouping_criteria: "location",
+                aggregation: "sum",
+                start_date: mtd.startDate,
+                end_date: mtd.endDate,
+            }
+        },
+        {
+            id: 3,
+            model: "sales",
+            title: "Total Sales Amount By Seller This Month",
+            chart_type: "bar",
+            query_params: {
+                data_criteria: "totalCharge",
+                grouping_criteria: "seller",
+                aggregation: "sum",
+                start_date: mtd.startDate,
+                end_date: mtd.endDate,
+            }
+        },
+/*         {
+            id: 4,
+            model: "sales",
+            title: "Total Sales Amount By Seller In Mexico This Month",
+            chart_type: "bar",
+            query_params: {
+                data_criteria: "charges",
+                grouping_criteria: "seller",
+                aggregation: "sum",
+                start_date: mtd.startDate,
+                end_date: mtd.endDate,
+                location: "MEXICO",
+            }
+        } */
+    ]
+}
 
 export const Dashboard = () => {
     return (
         <>
             <Row className="mt-3 mb-3">
-                <Col sm="8">
+                <Col sm="6">
                     <h2>Dashboard</h2>
                 </Col>
             </Row>
-            <BarChartDashboard />
-
+            <Row>
+                {DashboardConfig['System Administrator'].map(chartConfig => (
+                    <Col sm="6" key={chartConfig.id}>
+                        <DashboardChart chartConfig={chartConfig} />
+                    </Col>
+                ))
+                }
+            </Row>
         </>
-    )}
+    )
+}
 
 Dashboard.propTypes = {
 }

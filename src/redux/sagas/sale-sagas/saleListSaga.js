@@ -4,13 +4,13 @@ import { saleListSuccess, saleListFail } from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
 
 const apiCall = (queryParams = "") =>
-  apiGet(`sales?${queryParams}`, true).catch((error) => console.log(error.response.data));
+  apiGet(`sales?${queryParams}`, true).catch((error) => console.log(error));
 
 const sagaRequest = function* sagaRequest({ queryParams }) {
   try {
     const response = yield call(apiCall, queryParams);
     yield put(saleListSuccess(response.data));
-  } catch (err) {
+  } catch (e) {
     yield put(saleListFail());
   }
 };

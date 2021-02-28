@@ -135,8 +135,8 @@ export {
 } from "./reports-actions/reportListActions";
 //DASHBOARDS
 export {
-  dashboardGetRequest,
   dashboardGetFail,
   dashboardGetSuccess,
+  dashboardGetRequest
 } from "./dashboards-actions/dashboardGetActions";
 
