@@ -13,7 +13,8 @@ const initialState = {
 const dashboardReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.DASHBOARD_GET_SUCCESS:
-      return { ...state, config: payload, list: state.list.push(payload) };
+      
+      return { ...state, config: payload, list: state.list.concat(payload) };
 
     default:
       return state;

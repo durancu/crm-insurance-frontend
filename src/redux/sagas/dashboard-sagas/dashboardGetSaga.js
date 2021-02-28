@@ -1,4 +1,4 @@
-import { call, put, takeLatest, spawn } from "redux-saga/effects";
+import { call, put, takeLatest, spawn, takeEvery } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
 import { dashboardGetSuccess, dashboardGetFail } from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
@@ -17,7 +17,7 @@ const sagaRequest = function* sagaRequest({ payload }) {
 };
 
 const dashboardGetRequest = function* dashboardGetRequest() {
-  yield takeLatest(types.DASHBOARD_GET_REQUEST, sagaRequest);
+  yield takeEvery(types.DASHBOARD_GET_REQUEST, sagaRequest);
 };
 
 const dashboardGetSaga = function* dashboardGetSaga() {

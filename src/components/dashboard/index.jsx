@@ -12,17 +12,15 @@ const DashboardConfig = {
         {
             id: 1,
             model: "sales",
-            chart_type: "bar",
+            chart_type: "line",
             title: "Sales By Day This Month",
             query_params: {
                 data_criteria: "totalCharge",
                 grouping_criteria: "day",
                 aggregation: "count",
-                start_date: mtd.startDate,
-                end_date: mtd.endDate
+                start_date: mtd.start,
+                end_date: mtd.end
             },
-
-
         },
         {
             id: 2,
@@ -33,8 +31,8 @@ const DashboardConfig = {
                 data_criteria: "totalCharge",
                 grouping_criteria: "location",
                 aggregation: "sum",
-                start_date: mtd.startDate,
-                end_date: mtd.endDate,
+                start_date: mtd.start,
+                end_date: mtd.end,
             }
         },
         {
@@ -46,28 +44,30 @@ const DashboardConfig = {
                 data_criteria: "totalCharge",
                 grouping_criteria: "seller",
                 aggregation: "sum",
-                start_date: mtd.startDate,
-                end_date: mtd.endDate,
+                start_date: mtd.start,
+                end_date: mtd.end,
             }
         },
-/*         {
+        {
             id: 4,
             model: "sales",
-            title: "Total Sales Amount By Seller In Mexico This Month",
+            title: "Total Debt Amount By Seller This Month",
             chart_type: "bar",
             query_params: {
-                data_criteria: "charges",
+                data_criteria: "receivableAmount",
                 grouping_criteria: "seller",
                 aggregation: "sum",
-                start_date: mtd.startDate,
-                end_date: mtd.endDate,
-                location: "MEXICO",
+                start_date: mtd.start,
+                end_date: mtd.end,
             }
-        } */
+        } 
     ]
 }
 
 export const Dashboard = () => {
+
+    let count = 0;
+
     return (
         <>
             <Row className="mt-3 mb-3">
@@ -78,7 +78,7 @@ export const Dashboard = () => {
             <Row>
                 {DashboardConfig['System Administrator'].map(chartConfig => (
                     <Col sm="6" key={chartConfig.id}>
-                        <DashboardChart chartConfig={chartConfig} />
+                        <DashboardChart chartConfig={chartConfig} counter={count++} />
                     </Col>
                 ))
                 }

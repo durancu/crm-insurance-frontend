@@ -1,13 +1,13 @@
 import React, { useEffect, useState, } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import {dashboardGetRequest} from '../../../redux/actions';
 
 //Components
 import {Card} from "react-bootstrap";
 
-const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list}) => {
+const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list,counter}) => {
 
   const [query] = useState(chartConfig);
 
@@ -16,19 +16,32 @@ const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list}) =>
   }, [dashboardGetRequest, query]);
 
   console.log(list);
+  //console.log(counter);
 
   switch (chartData.chartType) {
 
+    case "line":
+      //  console.log(chartData.data)
+        return (
+          <>
+            <Card id={Math.random()*10/10}>
+              <Card.Body>
+                <Card.Title>{chartConfig.title}</Card.Title>
+                { list.length > 0 && <Line data={list[counter].data} />   }           
+              </Card.Body>
+            </Card>
+          </>
+        );
+
     case "bar":
     default:
-      console.log(chartData.data)
+    //  console.log(chartData.data)
       return (
         <>
-
           <Card id={Math.random()*10/10}>
             <Card.Body>
               <Card.Title>{chartConfig.title}</Card.Title>
-              <Bar data={chartData.data} />              
+              { list.length > 0 && <Bar data={list[counter].data} />   }           
             </Card.Body>
           </Card>
         </>
@@ -42,6 +55,7 @@ const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig, list}) =>
 
 DashboardChart.propTypes = {
   chartConfig: PropTypes.object.isRequired,
+  list:PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
