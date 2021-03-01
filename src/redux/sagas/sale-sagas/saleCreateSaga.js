@@ -25,4 +25,4 @@ const saleCreateSaga = function* saleCreateSaga(){
   yield spawn(saleCreateRequest)
 }
 
-export default saleCreateSaga
+export default saleCreateSaga;

@@ -1,24 +1,25 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
 
 //Components
+import { Row, Col } from "react-bootstrap";
 import SaleList from "./SaleList";
-import { Button } from "react-bootstrap";
+
 
 export default function Sales() {
   return (
     <>
-      <Row className="mt-3">
-        <Col sm="10">
-          <h1>Sales</h1>
-        </Col>
-        <Col sm="2">
-          <Button variant="primary">Add Sale</Button>
+      <Row className="mt-3 mb-3">
+        <Col sm="8">
+          <h2>Sales</h2>
         </Col>
       </Row>
       <Row>
-        <SaleList />
+        <Col sm="12" lg="12">
+          <SaleList model={'sale'}/>
+        </Col>
       </Row>
     </>
   );
 }
+
+

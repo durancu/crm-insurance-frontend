@@ -12,11 +12,11 @@ import {
   reportListRequest,
 } from "../../../redux/actions";
 
-export const SaleFilters = ({ reportListRequest }) => {
+export const SalesReportFilters = ({ reportListRequest }) => {
   const [dateRange, setDateRange] = useState("");
 
-  const handleDateRange = ({ target }) => {
-    setDateRange(`date_range=${target.value}`);
+  const handleDateRange = () => {
+    setDateRange(`date_range=${dateRange}`);
   };
 
   useEffect(() => {
@@ -45,6 +45,8 @@ export const SaleFilters = ({ reportListRequest }) => {
           <option value="LAST_WEEK">Last Week</option>
           <option value="MTD">This Month</option>
           <option value="LAST_MONTH">Last Month</option>
+          <option value="QTD">This Quarter</option>
+          <option value="LAST_QUARTER">Last Quarter</option>
           <option value="YTD">This Year</option>
           <option value="LAST_YEAR">Last Year</option>
         </Form.Control>
@@ -53,7 +55,7 @@ export const SaleFilters = ({ reportListRequest }) => {
   );
 };
 
-SaleFilters.propTypes = {
+SalesReportFilters.propTypes = {
   userLoadRequest: PropTypes.func.isRequired,
   sellers: PropTypes.array.isRequired,
   customers: PropTypes.array.isRequired,
@@ -72,4 +74,4 @@ const mapDispatchToProps = {
   reportListRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SaleFilters);
+export default connect(mapStateToProps, mapDispatchToProps)(SalesReportFilters);

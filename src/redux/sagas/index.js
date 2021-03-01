@@ -5,6 +5,7 @@ import userLogoutSaga from "./user-sagas/userLogoutSaga";
 //PROFILE
 import userProfileSaga from "./user-sagas/userProfileSaga";
 import userProfileGetSaga from "./user-sagas/userProfileGetSaga";
+import userCheckAuthSaga from "./user-sagas/userCheckAuthSaga";
 //USERS
 import userLoadListSaga from "./user-sagas/userLoadListSaga";
 import userGetSaga from "./user-sagas/userGetSaga";
@@ -31,6 +32,8 @@ import saleDeleteSaga from "./sale-sagas/saleDeleteSaga";
 import saleUpdateSaga from "./sale-sagas/saleUpdateSaga";
 //REPORTS
 import reportListSaga from "./report-sagas/reportListSaga";
+//REPORTS
+import dashboardGetSaga from "./dashboard-sagas/dashboardGetSaga";
 
 const sagas = function* sagas() {
   //AUTH
@@ -39,6 +42,7 @@ const sagas = function* sagas() {
   //Profile
   yield spawn(userProfileSaga);
   yield spawn(userProfileGetSaga);
+  yield spawn(userCheckAuthSaga);
   //USER
   yield spawn(userLoadListSaga);
   yield spawn(userGetSaga);
@@ -65,6 +69,8 @@ const sagas = function* sagas() {
   yield spawn(saleUpdateSaga);
   //REPORT
   yield spawn(reportListSaga);
+  //DASHBOARD
+  yield spawn(dashboardGetSaga);
 };
 
 export default sagas;

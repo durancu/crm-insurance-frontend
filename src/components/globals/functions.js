@@ -52,6 +52,30 @@ export function fullNameFormatter(cell, row) {
   );
 }
 
+export function customerFormatter(cell, row) {  
+  return row.customer.name;
+}
+
+export function sellerFormatter(cell, row) {  
+  return `${row.seller.firstName} ${row.seller.lastName}`;
+}
+
+export function liabilityInsurerFormatter(cell, row) {  
+  return row.liabilityInsurer.name;
+}
+
+export function cargoInsurerFormatter(cell, row) {  
+  return row.cargoInsurer.name;
+}
+
+export function physicalDamageInsurerFormatter(cell, row) {  
+  return row.physicalDamageInsurer.name;
+}
+
+export function wcGlUmbInsurerFormatter(cell, row) {  
+  return row.wcGlUmbInsurer.name;
+}
+
 export function insurerNameFormatter(cell, row) {  
   let insurers = [];
 
@@ -62,7 +86,7 @@ export function insurerNameFormatter(cell, row) {
   row.hasOwnProperty("physicalDamageInsurer") &&
   insurers.push(`${row.physicalDamageInsurer.name}`);
   row.hasOwnProperty("wcGlUmbInsurer") &&
-  insurers.push(`${row.wcGlUmbInsurer.name}`);
+  insurers.push(`${row.wcGlUmbInsurer.name}`);  
 
 return insurers
   .filter((valor, index) => {

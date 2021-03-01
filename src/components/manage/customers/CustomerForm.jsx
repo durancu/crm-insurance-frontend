@@ -88,6 +88,7 @@ const CustomerForm = ({
                       name="phone"
                       value={form.phone}
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      placeholder="123-456-7890"
                       onChange={handleChange}
                       required
                     />
@@ -95,7 +96,7 @@ const CustomerForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>How type of customers is?</Form.Label>
+                    <Form.Label>Customer type</Form.Label>
                     <Form.Control
                       as="select"
                       name="isCompany"
@@ -105,8 +106,8 @@ const CustomerForm = ({
                       required
                     >
                       <option value="" disabled >Choose a type</option>
-                      <option value="true">Company</option>
-                      <option value="false">Person</option>
+                      <option value="true">Business</option>
+                      <option value="false">Individual</option>
                     </Form.Control>
                   </Form.Group>
                 </Col>
