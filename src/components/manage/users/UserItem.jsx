@@ -2,26 +2,36 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { userDeleteRequest, userGetRequest } from '../../../redux/actions'
+import { userDeleteRequest, userGetRequest } from "../../../redux/actions";
 
 import { Button } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import UserDetails from "./UserDetails";
+import { USER_SETTINGS } from "../../../config/user";
 
-export const UserItem = ({ user, no, loading, loadingGetUser, userDeleteRequest, userGetRequest, showModal, editItem }) => {
+export const UserItem = ({
+  user,
+  no,
+  loading,
+  loadingGetUser,
+  userDeleteRequest,
+  userGetRequest,
+  showModal,
+  editItem,
+}) => {
   const deleteUser = () => {
-    userDeleteRequest(user._id)
+    userDeleteRequest(user._id);
   };
 
   const loadedEditData = () => {
-    userGetRequest(user._id)
+    userGetRequest(user._id);
     setTimeout(() => {
       if (!loadingGetUser) {
-        editItem()
+        editItem();
         showModal();
       }
     }, 1000);
-  }
+  };
 
   return (
     <tr>
@@ -31,17 +41,18 @@ export const UserItem = ({ user, no, loading, loadingGetUser, userDeleteRequest,
       <td>{user.position}</td>
       <td>{user.email}</td>
       <td>{user.phone}</td>
-      <td><UserDetails user={user}/></td>
+      <td>
+        <UserDetails user={user} />
+      </td>
       <td>
         <Button variant="success" onClick={loadedEditData}>
           <Pencil />
         </Button>{" "}
-        {
-          user.username !== "admin" &&
-        <Button disabled={loading} variant="danger" onClick={deleteUser}>
-          <Trash />
-        </Button>
-        }
+        {user.username !== "admin" && (
+          <Button disabled={loading} variant="danger" onClick={deleteUser}>
+            <Trash />
+          </Button>
+        )}
       </td>
     </tr>
   );
@@ -64,7 +75,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   userDeleteRequest,
-  userGetRequest
+  userGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserItem);

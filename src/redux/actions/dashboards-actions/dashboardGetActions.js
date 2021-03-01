@@ -1,8 +1,9 @@
 import * as types from "../actionTypes";
 
-export const dashboardGetRequest = (payload) => ({
+export const dashboardGetRequest = (payload,queryParams={}) => ({
   type: types.DASHBOARD_GET_REQUEST,
-  payload
+  payload,
+  queryParams
 });
 
 export const dashboardGetFail = () => ({

@@ -1,12 +1,14 @@
-import React, { useState, Fragment, useEffect } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import React, { useState, Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 //components
-import { Form, Button, Modal, Col, Row, Spinner } from 'react-bootstrap'
+import { Form, Button, Modal, Col, Row, Spinner } from "react-bootstrap";
 
 //action
-import { userCreateRequest, userUpdateRequest } from '../../../redux/actions'
+import { userCreateRequest, userUpdateRequest } from "../../../redux/actions";
+import { USER_SETTINGS } from "../../../config/user";
+import { BUSINESS_SETTINGS } from "../../../config/company";
 
 const UserForm = ({
   loading,
@@ -17,7 +19,8 @@ const UserForm = ({
   showModal,
   modal,
   edit,
-  user }) => {
+  user,
+}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let defaultForm = {
     username: "",
@@ -28,19 +31,19 @@ const UserForm = ({
     position: "",
     role: "",
     location: "",
-    password: ""
-  }
+    password: "",
+  };
 
-  const [form, setForm] = useState(defaultForm)
+  const [form, setForm] = useState(defaultForm);
 
   useEffect(() => {
-    edit ? setForm(user) : setForm(defaultForm)
+    edit ? setForm(user) : setForm(defaultForm);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [edit, user])
+  }, [edit, user]);
 
   const handleChange = ({ target }) => {
-    setForm(form => ({ ...form, [target.name]: target.value }))
-  }
+    setForm((form) => ({ ...form, [target.name]: target.value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,11 +56,11 @@ const UserForm = ({
         showModal();
       }
     }, 1000);
-  }
+  };
 
   const clearForm = () => {
-    setForm(defaultForm)
-  }
+    setForm(defaultForm);
+  };
 
   return (
     <Fragment>
@@ -65,9 +68,7 @@ const UserForm = ({
         <Form onSubmit={handleSubmit}>
           <fieldset disabled={loading || loadingGetUser}>
             <Modal.Header closeButton>
-              <Modal.Title>
-                Users {edit ? `Update` : `Create`}
-              </Modal.Title>
+              <Modal.Title>Users {edit ? `Update` : `Create`}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -112,13 +113,14 @@ const UserForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Phone</Form.Label>
+                    <Form.Label>Phone number</Form.Label>
                     <Form.Control
                       type="tel"
                       name="phone"
                       value={form.phone}
                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       onChange={handleChange}
+                      placeholder="123-456-7890"
                       required
                     />
                   </Form.Group>
@@ -136,9 +138,12 @@ const UserForm = ({
                       custom
                       required
                     >
-                      <option value="" disabled >Choose a type</option>
-                      <option value="USA">USA</option>
-                      <option value="MEXICO">MEXICO</option>
+                      <option value="" disabled>
+                        Choose a role
+                      </option>
+                      {BUSINESS_SETTINGS.locations.map((location) => (
+                        <option key={location.id} value={location.id}>{location.name}</option>
+                      ))}
                     </Form.Control>
                   </Form.Group>
                 </Col>
@@ -153,12 +158,14 @@ const UserForm = ({
                       custom
                       required
                     >
-                      <option value="" disabled >Choose a type</option>
-                      <option value="SALES_AGENT">Sales Agent</option>
-                      <option value="SALES_CONSULTANT">Sales Consultant</option>
-                      <option value="MANAGER">Manager</option>
-                      <option value="OTHER">Other</option>
-                      <option value="SYSTEM_ADMINISTRATOR">System Administrator</option>
+                      <option value="" disabled>
+                        Choose a position
+                      </option>
+                      {USER_SETTINGS.positions.map((position) => (
+                        <option key={position.id} value={position.id}>
+                          {position.name}
+                        </option>
+                      ))}
                     </Form.Control>
                   </Form.Group>
                 </Col>
@@ -175,9 +182,14 @@ const UserForm = ({
                       custom
                       required
                     >
-                      <option value="" disabled >Choose a type</option>
-                      <option value="ADMIN">Administrator</option>
-                      <option value="USER">Standard User</option>
+                      <option value="" disabled>
+                        Choose a role
+                      </option>
+                      {USER_SETTINGS.roles.map((role) => (
+                        <option key={role.id} value={role.id}>
+                          {role.name}
+                        </option>
+                      ))}
                     </Form.Control>
                   </Form.Group>
                 </Col>
@@ -189,7 +201,8 @@ const UserForm = ({
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  required />
+                  required
+                />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Password</Form.Label>
@@ -198,7 +211,8 @@ const UserForm = ({
                   name="password"
                   value={edit ? undefined : form.password}
                   onChange={handleChange}
-                  required={!edit} />
+                  required={!edit}
+                />
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
@@ -207,15 +221,21 @@ const UserForm = ({
                 variant={edit ? `success` : `primary`}
                 block
               >
-                {loading ? <Spinner animation="border" /> : (edit ? `Update` : `Create`)}
+                {loading ? (
+                  <Spinner animation="border" />
+                ) : edit ? (
+                  `Update`
+                ) : (
+                  `Create`
+                )}
               </Button>
             </Modal.Footer>
           </fieldset>
         </Form>
       </Modal>
-    </Fragment >
-  )
-}
+    </Fragment>
+  );
+};
 
 UserForm.propTypes = {
   loading: PropTypes.bool.isRequired,
@@ -224,18 +244,18 @@ UserForm.propTypes = {
   loadingGetUser: PropTypes.bool.isRequired,
   userCreateRequest: PropTypes.func.isRequired,
   formModal: PropTypes.func,
-}
+};
 
 const mapStateToProps = (state) => ({
   loading: state.userCreateStatusReducer.loading,
   error: state.userCreateStatusReducer.error,
   user: state.userReducer.item,
-  loadingGetUser: state.userGetStatusReducer.loading
-})
+  loadingGetUser: state.userGetStatusReducer.loading,
+});
 
 const mapDispatchToProps = {
   userCreateRequest,
-  userUpdateRequest
-}
+  userUpdateRequest,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserForm)
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm);

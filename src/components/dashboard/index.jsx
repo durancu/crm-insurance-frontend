@@ -5,75 +5,22 @@ import { Row, Col } from "react-bootstrap";
 import DashboardChart from "./sales/DashboardChart";
 import { DateRange, dateRangeByName } from "../globals/date-factory";
 import { dashboardGetRequest } from "../../redux/actions";
+import { DASHBOARD_SETS } from "../../config/dashboard";
 
 const mtd = dateRangeByName(DateRange.MONTH_TO_DATE);
 
-const adminDashboardConfig = {
-  "System Administrator": {
-    queries: [
-      {
-        id: 1,
-        model: "sales",
-        type: "line",
-        title: "Sales By Day This Month",
-        queryParams: {
-          dataCriteria: "totalCharge",
-          groupingCriteria: "day",
-          aggregation: "count",
-          startDate: mtd.start,
-          endDate: mtd.end,
-        },
-      },
-      {
-        id: 2,
-        model: "sales",
-        type: "bar",
-        title: "Total Sales Amount By Location This Month",
-        queryParams: {
-          dataCriteria: "totalCharge",
-          groupingCriteria: "location",
-          aggregation: "sum",
-          startDate: mtd.start,
-          endDate: mtd.end,
-        },
-      },
-      {
-        id: 3,
-        model: "sales",
-        title: "Total Sales Amount By Seller This Month",
-        type: "bar",
-        queryParams: {
-          dataCriteria: "totalCharge",
-          groupingCriteria: "seller",
-          aggregation: "sum",
-          startDate: mtd.start,
-          endDate: mtd.end,
-        },
-      },
-      {
-        id: 4,
-        model: "sales",
-        title: "Total Debt Amount By Seller This Month",
-        type: "bar",
-        queryParams: {
-          dataCriteria: "receivableAmount",
-          groupingCriteria: "seller",
-          aggregation: "sum",
-          startDate: mtd.start,
-          endDate: mtd.end,
-        },
-      },
-    ],
-  },
-};
-
-export const Dashboard = ({ dashboardGetRequest, charts }) => {
-  const [query] = useState(adminDashboardConfig["System Administrator"]);
+export const Dashboard = ({ dashboardGetRequest, charts, user }) => {
+  const [query] = useState(DASHBOARD_SETS.ADMIN);
+  const [params] = useState({
+    start_date: mtd.start,
+    end_date: mtd.end
+  });
+  
 
   console.log("query", query);
   useEffect(() => {
-    dashboardGetRequest(query);
-  }, [dashboardGetRequest, query]);
+    dashboardGetRequest(query,params);
+  }, [dashboardGetRequest, params, query]);
 
   return (
     <>
@@ -99,6 +46,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => ({
   charts: state.dashboardReducer.charts,
+  user: state.userProfileReducer.user,
 });
 
 const mapDispatchToProps = {
