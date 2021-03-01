@@ -1,8 +1,5 @@
-import React, { useEffect, useState, } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from "react";
 import { Bar, Line } from 'react-chartjs-2';
-import {dashboardGetRequest} from '../../../redux/actions';
 
 //Components
 import {Card} from "react-bootstrap";
@@ -16,9 +13,9 @@ const DashboardChart = ({ chartData, title}) => {
     case "line":
         return (
           <>
-            <Card>
+            <Card className="mt-4">
               <Card.Body>
-                <Card.Title>{title}</Card.Title>
+                <Card.Title>{title}Ejemplo</Card.Title>
                 <Line data={chartData.data} />
               </Card.Body>
             </Card>
@@ -29,9 +26,9 @@ const DashboardChart = ({ chartData, title}) => {
     default:
       return (
         <>
-          <Card>
+          <Card className="mt-4">
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{title}Ejemplo</Card.Title>
               <Bar data={chartData.data} />
             </Card.Body>
           </Card>
@@ -47,4 +44,4 @@ const DashboardChart = ({ chartData, title}) => {
 DashboardChart.propTypes = {  
 };
 
-export default connect()(DashboardChart);
+export default DashboardChart;
