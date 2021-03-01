@@ -7,23 +7,19 @@ import {dashboardGetRequest} from '../../../redux/actions';
 //Components
 import {Card} from "react-bootstrap";
 
-const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig}) => {
+const DashboardChart = ({ chartData, title}) => {
 
-  const [query] = useState(chartConfig);
+  console.log(chartData)
 
-  useEffect(() => {
-    dashboardGetRequest(query);
-  }, [dashboardGetRequest, query]);
-
-  switch (chartData.chartType) {
+  switch (chartData.type) {
 
     case "line":
         return (
           <>
             <Card>
               <Card.Body>
-                <Card.Title>{chartConfig.title}</Card.Title>
-                <Line data={chartData} />
+                <Card.Title>{title}</Card.Title>
+                <Line data={chartData.data} />
               </Card.Body>
             </Card>
           </>
@@ -35,7 +31,7 @@ const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig}) => {
         <>
           <Card>
             <Card.Body>
-              <Card.Title>{chartConfig.title}</Card.Title>
+              <Card.Title>{title}</Card.Title>
               <Bar data={chartData.data} />
             </Card.Body>
           </Card>
@@ -48,19 +44,7 @@ const DashboardChart = ({ dashboardGetRequest, chartData, chartConfig}) => {
 
 
 
-DashboardChart.propTypes = {
-  chartConfig: PropTypes.object.isRequired,
-  
+DashboardChart.propTypes = {  
 };
 
-const mapStateToProps = (state) => ({
-  //customers: state.customerReducer.list,
-  chartData: state.dashboardReducer.config,
-  
-});
-
-const mapDispatchToProps = {
-  dashboardGetRequest
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardChart);
+export default connect()(DashboardChart);
