@@ -8,7 +8,7 @@ const userProfileReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.USER_PROFILE_GET_SUCCESS:
       return { ...state, user: payload, authCheck: true };
-    case types.USER_AUTH_REQUEST:
+    case types.USER_AUTH_SUCCESS:
       return { ...state, authCheck: true };
     case types.USER_CHECK_AUTH_SUCCESS:
       return { ...state, user: payload, authCheck: true };

@@ -9,18 +9,16 @@ import { DASHBOARD_SETS } from "../../config/dashboard";
 
 const mtd = dateRangeByName(DateRange.MONTH_TO_DATE);
 
-export const Dashboard = ({ dashboardGetRequest, charts, user }) => {
+export const Dashboard = ({ dashboardGetRequest, charts, user}) => {
   const [query] = useState(DASHBOARD_SETS.ADMIN);
   const [params] = useState({
     start_date: mtd.start,
-    end_date: mtd.end
+    end_date: mtd.end,
   });
-  
 
-  console.log("query", query);
   useEffect(() => {
-    dashboardGetRequest(query,params);
-  }, [dashboardGetRequest, params, query]);
+    dashboardGetRequest(query, params);
+  }, [ dashboardGetRequest, params, query]);
 
   return (
     <>

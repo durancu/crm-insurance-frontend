@@ -4,15 +4,16 @@ import { dashboardGetSuccess, dashboardGetFail } from "../../actions";
 import { apiPost } from "../../../global/apiMethods";
 
 const apiCall = (payload, queryParams = {}) => {
-  return apiPost(`dashboards/sales/batch?${queryStringFromObject(queryParams)}`, payload, true).catch((error) =>
-    console.log(error)
-  );
+  return apiPost(
+    `dashboards/sales/batch?${queryStringFromObject(queryParams)}`,
+    payload,
+    true
+  ).catch((error) => console.log(error));
 };
 
 const sagaRequest = function* sagaRequest({ payload, queryParams }) {
   try {
     const response = yield call(apiCall, payload, queryParams);
-    console.log(response.data);
     yield put(dashboardGetSuccess(response.data));
   } catch (err) {
     yield put(dashboardGetFail());
@@ -38,4 +39,4 @@ const queryStringFromObject = function (object) {
   }
 
   return parameters.join("&");
-}; 
+};
