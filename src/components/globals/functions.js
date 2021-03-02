@@ -19,135 +19,106 @@ export const dataTransform = (element) => {
     .join(" / ");
 };
 
-
 export function priceFormatter(cell, row) {
   if (cell) {
-    return (
-      <span>
-        {Math.round(cell * 100) / 100}
-      </span>
-    );
+    return <span>{Math.round(cell * 100) / 100}</span>;
   }
 
-  return (
-    <span>-</span>
-  );
+  return <span>-</span>;
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
+  return <strong>{Math.round(text * 100) / 100}</strong>;
+}
+
+export function dateFormatter(cell, row) {
+  return <span>{moment(cell).format("L")}</span>;
+}
+
+export function fullNameFormatter(cell, row) {
   return (
-    <strong>{Math.round(text * 100) / 100}</strong>
+    <span>
+      {row.seller.firstName} {row.seller.lastName}
+    </span>
   );
 }
 
-export function dateFormatter(cell, row) {  
-  return (
-    <span>{moment(cell).format("L")}</span>
-  );
-}
-
-export function fullNameFormatter(cell, row) {  
-  return (
-    <span>{row.seller.firstName} {row.seller.lastName}</span>
-  );
-}
-
-export function customerFormatter(cell, row) {  
+export function customerFormatter(cell, row) {
   return row.customer.name;
 }
 
-export function sellerFormatter(cell, row) {  
+export function sellerFormatter(cell, row) {
   return `${row.seller.firstName} ${row.seller.lastName}`;
 }
 
-export function liabilityInsurerFormatter(cell, row) {  
+export function liabilityInsurerFormatter(cell, row) {
   return row.liabilityInsurer.name;
 }
 
-export function cargoInsurerFormatter(cell, row) {  
+export function cargoInsurerFormatter(cell, row) {
   return row.cargoInsurer.name;
 }
 
-export function physicalDamageInsurerFormatter(cell, row) {  
+export function physicalDamageInsurerFormatter(cell, row) {
   return row.physicalDamageInsurer.name;
 }
 
-export function wcGlUmbInsurerFormatter(cell, row) {  
+export function wcGlUmbInsurerFormatter(cell, row) {
   return row.wcGlUmbInsurer.name;
 }
 
-export function insurerNameFormatter(cell, row) {  
+export function insurerNameFormatter(cell, row) {
   let insurers = [];
 
   row.hasOwnProperty("liabilityInsurer") &&
-  insurers.push(`${row.liabilityInsurer.name}`);
+    insurers.push(`${row.liabilityInsurer.name}`);
   row.hasOwnProperty("cargoInsurer") &&
-  insurers.push(`${row.cargoInsurer.name}`);
+    insurers.push(`${row.cargoInsurer.name}`);
   row.hasOwnProperty("physicalDamageInsurer") &&
-  insurers.push(`${row.physicalDamageInsurer.name}`);
+    insurers.push(`${row.physicalDamageInsurer.name}`);
   row.hasOwnProperty("wcGlUmbInsurer") &&
-  insurers.push(`${row.wcGlUmbInsurer.name}`);  
+    insurers.push(`${row.wcGlUmbInsurer.name}`);
 
-return insurers
-  .filter((valor, index) => {
-    return insurers.indexOf(valor) === index;
-  })
-  .join(" / ");
+  return insurers
+    .filter((valor, index) => {
+      return insurers.indexOf(valor) === index;
+    })
+    .join(" / ");
 }
 
-
-/** Return number 
+/** Return number
  * @param {number} number
  * @return {number} number
-*/
+ */
 const transformNumber = (number) => (isNaN(number) ? 0 : number);
+
+export const premiumCalculate = ({
+  liabilityCharge,
+  cargoCharge,
+  physicalDamageCharge,
+  wcGlUmbCharge,
+}) =>
+  transformNumber(parseFloat(liabilityCharge)) +
+  transformNumber(parseFloat(cargoCharge)) +
+  transformNumber(parseFloat(physicalDamageCharge)) +
+  transformNumber(parseFloat(wcGlUmbCharge));
 
 /**Calc totalCharge
  * @param {object} formData
  * @returns {number} totalCharge
  */
-export const totalChargeFunction = ({
-  liabilityCharge,
-  cargoCharge,
-  physicalDamageCharge,
-  wcGlUmbCharge,
+export const totalChargeCalculate = ({
   fees,
   permits,
-  tips,
+  downPayment
 }) =>
-  transformNumber(parseFloat(liabilityCharge)) +
-  transformNumber(parseFloat(cargoCharge)) +
-  transformNumber(parseFloat(physicalDamageCharge)) +
-  transformNumber(parseFloat(wcGlUmbCharge)) +
+  transformNumber(parseFloat(downPayment)) +
   transformNumber(parseFloat(fees)) +
-  transformNumber(parseFloat(permits)) +
-  transformNumber(parseFloat(tips));
+  transformNumber(parseFloat(permits));
 
 /**Calc pendingPayment
  * @param {object} formData
  * @returns {number} pendingPayment
  */
-export const pendingPaymentFunction = (form) =>
-  totalChargeFunction(form) - transformNumber(parseFloat(form.chargesPaid));
-
-/**Calc bonus
- * @param {object} formData
- * @returns {number} bonus
- */
-export const bonusFunction = ({
-  liabilityCharge,
-  cargoCharge,
-  physicalDamageCharge,
-  wcGlUmbCharge,
-  fees,
-  permits,
-  tips,
-}) =>
-  (transformNumber(parseFloat(liabilityCharge)) +
-    transformNumber(parseFloat(cargoCharge)) +
-    transformNumber(parseFloat(physicalDamageCharge)) +
-    transformNumber(parseFloat(wcGlUmbCharge))) *
-    0.01 +
-  transformNumber(parseFloat(fees)) * 0.3 +
-  transformNumber(parseFloat(permits)) * 0.2 +
-  transformNumber(parseFloat(tips));
+export const pendingPaymentCalculate = (form) =>
+  totalChargeCalculate(form) - transformNumber(parseFloat(form.chargesPaid));

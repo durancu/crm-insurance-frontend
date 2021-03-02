@@ -19,8 +19,8 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import { salesTableColumns, salesDefaultSorted } from "./config";
-import SaleForm from "./SaleForm";
 import DateRangeFilter from "../globals/filters/DateRangeFilter";
+import  SaleCreate  from "./SaleCreate";
 
 export const SaleList = ({
   userLoadRequest,
@@ -58,7 +58,7 @@ export const SaleList = ({
           <DateRangeFilter model={'sale'}/>
         </Col>
         <Col lg="2" sm="6" align="right">
-          <SaleForm />
+          <SaleCreate />
         </Col>
       </Row>
 
