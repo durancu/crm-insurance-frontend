@@ -8,9 +8,9 @@ import userAuthReducer from "./users-reducers/userAuthReducer";
 import userAuthStatusReducer from "./users-reducers/userAuthStatusReducer";
 import userCheckAuthStatusReducer from "./users-reducers/userCheckAuthStatusReducer";
 //Profile
-import userProfileReducer from './users-reducers/userProfileReducer'
-import userProfileStatusReducer from './users-reducers/userProfileStatusReducer'
-import userProfileGetStatusReducer from './users-reducers/userProfileGetStatusReducer'
+import userProfileReducer from "./users-reducers/userProfileReducer";
+import userProfileStatusReducer from "./users-reducers/userProfileStatusReducer";
+import userProfileGetStatusReducer from "./users-reducers/userProfileGetStatusReducer";
 //USER
 import userReducer from "./users-reducers/userReducer";
 import userLoadStatusReducer from "./users-reducers/userLoadStatusReducer";
@@ -48,6 +48,8 @@ import reportListStatusReducer from "./reports-reducers/reportListStatusReducer"
 //DASHBOARD
 import dashboardReducer from "./dashboard-reducers/dashboardReducer";
 import dashboardStatusReducer from "./dashboard-reducers/dashboardStatusReducer";
+
+import filterReducer from "./filter-reducers/filterReducer";
 
 export default combineReducers({
   testReducer,
@@ -94,4 +96,6 @@ export default combineReducers({
   //DASHBOARD
   dashboardReducer,
   dashboardStatusReducer,
+  //FIlter
+  filterReducer,
 });

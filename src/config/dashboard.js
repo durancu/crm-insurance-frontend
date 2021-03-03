@@ -86,7 +86,6 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
         ],
-        dateRange: "MTD"
     },
     "OWNER": {
         queries: [
@@ -95,28 +94,24 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
         ],
-        dateRange: "MTD"
     },
     "ENDORSEMENTS": {
         queries: [
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
         ],
-        dateRange: "MTD"
     },
     "CERTIFICATES": {
         queries: [
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR
         ],
-        dateRange: "MTD"
     },
     "TRAINEE": {
         queries: [
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_DAY_BAR,
         ],
-        dateRange: "MTD"
     },
     "SELLER": {
         queries: [
@@ -125,7 +120,6 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
         ],
-        dateRange: "MTD"
     },
     "MANAGER": {
         queries: [
@@ -134,7 +128,6 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_BAR,
         ],
-        dateRange: "MTD"
     },
     "LEGAL": {
         queries: [
@@ -143,7 +136,6 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_BAR,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
         ],
-        dateRange: "MTD"
     },
 }
 

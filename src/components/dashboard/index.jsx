@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
@@ -6,15 +6,17 @@ import DashboardChart from "./sales/DashboardChart";
 import { DASHBOARD_SETS } from "../../config/dashboard";
 import DateRangeFilter from "../globals/filters/DateRangeFilter";
 
-export const Dashboard = ({ charts, user }) => {
-  console.log(user.position);
-  const [query] = useState(
+import { dashboardGetRequest } from "../../redux/actions";
+
+export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
+  const [dashboardConfig] = useState(
     DASHBOARD_SETS.hasOwnProperty(user.roles[0]) &&
       DASHBOARD_SETS[user.roles[0]]
   );
 
-  console.log(user);
-  console.log(query);
+  useEffect(() => {
+    params && dashboardGetRequest(dashboardConfig, params);
+  }, [dashboardGetRequest, dashboardConfig, params]);
 
   return (
     <>
@@ -34,7 +36,7 @@ export const Dashboard = ({ charts, user }) => {
       </Row>
       <Row className="mb-2">
         <Col lg="10" sm="6">
-          <DateRangeFilter model={"dashboard"} config={query} />
+          <DateRangeFilter />
         </Col>
       </Row>
       <Row>
@@ -55,8 +57,11 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => ({
   charts: state.dashboardReducer.charts,
   user: state.userProfileReducer.user,
+  params: state.filterReducer.params,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  dashboardGetRequest,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

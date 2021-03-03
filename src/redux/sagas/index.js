@@ -34,6 +34,8 @@ import saleUpdateSaga from "./sale-sagas/saleUpdateSaga";
 import reportListSaga from "./report-sagas/reportListSaga";
 //REPORTS
 import dashboardGetSaga from "./dashboard-sagas/dashboardGetSaga";
+//FILTER
+import filterSaga from "./filter-sagas/filterSaga";
 
 const sagas = function* sagas() {
   //AUTH
@@ -71,6 +73,8 @@ const sagas = function* sagas() {
   yield spawn(reportListSaga);
   //DASHBOARD
   yield spawn(dashboardGetSaga);
+  //FILTER
+  yield spawn(filterSaga);
 };
 
 export default sagas;

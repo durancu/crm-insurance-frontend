@@ -3,6 +3,8 @@ import * as types from "../../actions/actionTypes";
 import { dashboardGetSuccess, dashboardGetFail } from "../../actions";
 import { apiPost } from "../../../global/apiMethods";
 
+import { queryStringFromObject } from '../../../global/utils'
+
 const apiCall = (payload, queryParams = {}) => {
   return apiPost(
     `dashboards/sales/batch?${queryStringFromObject(queryParams)}`,
@@ -30,13 +32,3 @@ const dashboardGetSaga = function* dashboardGetSaga() {
 
 export default dashboardGetSaga;
 
-const queryStringFromObject = function (object) {
-  var parameters = [];
-  for (var property in object) {
-    if (object.hasOwnProperty(property)) {
-      parameters.push(encodeURI(property + "=" + object[property]));
-    }
-  }
-
-  return parameters.join("&");
-};

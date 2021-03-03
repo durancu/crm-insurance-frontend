@@ -3,12 +3,14 @@ import * as types from "../../actions/actionTypes";
 import { reportListSuccess, reportListFail} from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
 
-const apiCall = (param = "") =>
-  apiGet(`reports/sales?${param}`, true).catch((error) => console.log(error));
+import { queryStringFromObject } from '../../../global/utils'
 
-const sagaRequest = function* sagaRequest({ payload }) {
+const apiCall = (queryParams) =>
+  apiGet(`reports/sales?${queryStringFromObject(queryParams)}`, true).catch((error) => console.log(error));
+
+const sagaRequest = function* sagaRequest({queryParams}) {
   try {
-    const response = yield call(apiCall, payload);
+    const response = yield call(apiCall, queryParams);
     yield put(reportListSuccess(response.data));
   } catch (e) {
     yield put(reportListFail());
@@ -24,3 +26,4 @@ const reportListSaga = function* reportListSaga() {
 };
 
 export default reportListSaga;
+

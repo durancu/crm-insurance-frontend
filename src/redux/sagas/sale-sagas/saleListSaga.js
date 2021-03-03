@@ -2,9 +2,10 @@ import { call, put, takeLatest, spawn } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
 import { saleListSuccess, saleListFail } from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
+import { queryStringFromObject } from '../../../global/utils'
 
-const apiCall = (queryParams = "") =>
-  apiGet(`sales?${queryParams}`, true).catch((error) => console.log(error));
+const apiCall = (queryParams = {}) =>
+  apiGet(`sales?${queryStringFromObject(queryParams)}`, true).catch((error) => console.log(error));
 
 const sagaRequest = function* sagaRequest({ queryParams }) {
   try {

@@ -137,6 +137,12 @@ export {
 export {
   dashboardGetFail,
   dashboardGetSuccess,
-  dashboardGetRequest
+  dashboardGetRequest,
 } from "./dashboards-actions/dashboardGetActions";
 
+//FILTER
+export {
+  filterGetRequest,
+  filterGetFail,
+  filterGetSuccess,
+} from "./filters-actions/filterActions";
