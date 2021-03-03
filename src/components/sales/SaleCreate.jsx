@@ -29,6 +29,11 @@ import CustomerForm from "../manage/customers/CustomerForm";
 
 const defaultForm = {
   soldAt: moment().format("YYYY-MM-DD"),
+  fees: 0,
+  permits: 0,
+  downPayment: 0,
+  chargesPaid: 0,
+  tips: 0,
 };
 
 const defaultFormStates = {
@@ -49,15 +54,21 @@ export const SaleCreate = ({
   customerLoadRequest,
   saleCreateRequest,
 }) => {
-  //States
+  //--STATES--//
+  //Modals
+  const [modalSale, setModalSale] = useState(false);
+  const [modalCustomer, setModalCustomer] = useState(false);
+  //Date and Values
   const [soldAt, setSoldAt] = useState(defaultForm.soldAt);
   const [formValues, setFormValues] = useState(defaultForm);
   const [formStates, setFormStates] = useState(defaultFormStates);
-  const [errors, setErrors] = useState({ errors: [] });
+  //Auto Calculate
   const [totalCharge, setTotalCharge] = useState(0);
   const [pendingPayment, setPendingPayment] = useState(0);
-  const [modalSale, setModalSale] = useState(false);
-  const [modalCustomer, setModalCustomer] = useState(false);
+  const [premium, setPremium] = useState(0);
+  //ValidateForms
+  const [validate, setValidate] = useState(false);
+  const [errors, setErrors] = useState({ errors: [] });
 
   //Load Insurer List
   useEffect(() => {
@@ -78,9 +89,10 @@ export const SaleCreate = ({
     switch (target.name) {
       case "soldAt":
         setSoldAt(moment(target.value).format("YYYY-MM-DD"));
+
         setFormValues((formValues) => ({
           ...formValues,
-          [target.name]: new Date(target.value).toISOString(),
+          [target.name]: new Date(target.value).toISOString(), //preguntarle a Liuver como evaluar una fuecha correctamente
         }));
         break;
       case "liabilityCharge":
@@ -114,7 +126,11 @@ export const SaleCreate = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      //   setValidate(true);
+    }
     const result = salesCreateValidate(formValues);
     setErrors(result);
 
@@ -141,7 +157,7 @@ export const SaleCreate = ({
         showModal={handleModalCustomer}
       />
       <Modal size="xl" show={modalSale} onHide={handleModalSale}>
-        <Form onSubmit={handleSubmit} noValidate validate={true}>
+        <Form onSubmit={handleSubmit} noValidate validated={validate}>
           <Modal.Header closeButton>
             <Modal.Title>Create New Sale</Modal.Title>
           </Modal.Header>
@@ -161,8 +177,8 @@ export const SaleCreate = ({
                     onChange={handleChange}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {errors.soldAt}
-                  </Form.Control.Feedback>
+                      {errors.soldAt}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col}>
