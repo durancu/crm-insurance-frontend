@@ -7,7 +7,6 @@ import { userDeleteRequest, userGetRequest } from "../../../redux/actions";
 import { Button } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import UserDetails from "./UserDetails";
-import { USER_SETTINGS } from "../../../config/user";
 
 export const UserItem = ({
   user,

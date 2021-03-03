@@ -142,7 +142,9 @@ const UserForm = ({
                         Choose a role
                       </option>
                       {BUSINESS_SETTINGS.locations.map((location) => (
-                        <option key={location.id} value={location.id}>{location.name}</option>
+                        <option key={location.id} value={location.id}>
+                          {location.name}
+                        </option>
                       ))}
                     </Form.Control>
                   </Form.Group>
@@ -151,22 +153,14 @@ const UserForm = ({
                   <Form.Group>
                     <Form.Label>Position</Form.Label>
                     <Form.Control
-                      as="select"
+                      type="text"
                       name="position"
                       value={form.position}
-                      onChange={handleChange}
+                      disabled={edit}
+                      placeholder="Business role/position"
                       custom
                       required
-                    >
-                      <option value="" disabled>
-                        Choose a position
-                      </option>
-                      {USER_SETTINGS.positions.map((position) => (
-                        <option key={position.id} value={position.id}>
-                          {position.name}
-                        </option>
-                      ))}
-                    </Form.Control>
+                    />
                   </Form.Group>
                 </Col>
               </Row>

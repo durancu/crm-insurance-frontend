@@ -1,30 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import DashboardChart from "./sales/DashboardChart";
-import { DateRange, dateRangeByName } from "../globals/date-factory";
-import { dashboardGetRequest } from "../../redux/actions";
 import { DASHBOARD_SETS } from "../../config/dashboard";
+import DateRangeFilter from "../globals/filters/DateRangeFilter";
 
-const mtd = dateRangeByName(DateRange.MONTH_TO_DATE);
+export const Dashboard = ({ charts, user }) => {
+  console.log(user.position);
+  const [query] = useState(
+    DASHBOARD_SETS.hasOwnProperty(user.roles[0]) &&
+      DASHBOARD_SETS[user.roles[0]]
+  );
 
-export const Dashboard = ({ dashboardGetRequest, charts, user}) => {
-  const [query] = useState(DASHBOARD_SETS.ADMIN);
-  const [params] = useState({
-    start_date: mtd.start,
-    end_date: mtd.end,
-  });
-
-  useEffect(() => {
-    dashboardGetRequest(query, params);
-  }, [ dashboardGetRequest, params, query]);
+  console.log(user);
+  console.log(query);
 
   return (
     <>
       <Row className="mt-3 mb-3">
         <Col sm="6">
           <h2>Dashboard</h2>
+        </Col>
+      </Row>
+      <Row className="mt-3 mb-3">
+        <Col sm="12">
+          <h4>Sales Summary</h4>
+          <p>
+            This dashboards shows a summary of the company's sales stats. Change
+            the date range filter above to get stats for a specific time period.
+          </p>
+        </Col>
+      </Row>
+      <Row className="mb-2">
+        <Col lg="10" sm="6">
+          <DateRangeFilter model={"dashboard"} config={query} />
         </Col>
       </Row>
       <Row>
@@ -47,8 +57,6 @@ const mapStateToProps = (state) => ({
   user: state.userProfileReducer.user,
 });
 
-const mapDispatchToProps = {
-  dashboardGetRequest,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

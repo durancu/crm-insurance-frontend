@@ -52,19 +52,19 @@ export function sellerFormatter(cell, row) {
 }
 
 export function liabilityInsurerFormatter(cell, row) {
-  return row.liabilityInsurer.name;
+  return row.liabilityInsurer ? row.liabilityInsurer.name : '-';
 }
 
 export function cargoInsurerFormatter(cell, row) {
-  return row.cargoInsurer.name;
+  return row.cargoInsurer ? row.cargoInsurer.name : '-';
 }
 
 export function physicalDamageInsurerFormatter(cell, row) {
-  return row.physicalDamageInsurer.name;
+  return row.physicalDamageInsurer ? row.physicalDamageInsurer.name : '-';
 }
 
 export function wcGlUmbInsurerFormatter(cell, row) {
-  return row.wcGlUmbInsurer.name;
+  return row.wcGlUmbInsurer ? row.wcGlUmbInsurer.name : '-';
 }
 
 export function insurerNameFormatter(cell, row) {
@@ -92,27 +92,22 @@ export function insurerNameFormatter(cell, row) {
  */
 const transformNumber = (number) => (isNaN(number) ? 0 : number);
 
-export const premiumCalculate = ({
-  liabilityCharge,
-  cargoCharge,
-  physicalDamageCharge,
-  wcGlUmbCharge,
-}) =>
-  transformNumber(parseFloat(liabilityCharge)) +
-  transformNumber(parseFloat(cargoCharge)) +
-  transformNumber(parseFloat(physicalDamageCharge)) +
-  transformNumber(parseFloat(wcGlUmbCharge));
-
 /**Calc totalCharge
  * @param {object} formData
  * @returns {number} totalCharge
  */
 export const totalChargeCalculate = ({
+  liabilityCharge,
+  cargoCharge,
+  physicalDamageCharge,
+  wcGlUmbCharge,
   fees,
-  permits,
-  downPayment
+  permits
 }) =>
-  transformNumber(parseFloat(downPayment)) +
+  transformNumber(parseFloat(liabilityCharge)) +
+  transformNumber(parseFloat(cargoCharge)) +
+  transformNumber(parseFloat(physicalDamageCharge)) +
+  transformNumber(parseFloat(wcGlUmbCharge)) +
   transformNumber(parseFloat(fees)) +
   transformNumber(parseFloat(permits));
 
