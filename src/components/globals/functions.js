@@ -52,19 +52,19 @@ export function sellerFormatter(cell, row) {
 }
 
 export function liabilityInsurerFormatter(cell, row) {
-  return row.liabilityInsurer.name;
+  return row.liabilityInsurer ? row.liabilityInsurer.name : '-';
 }
 
 export function cargoInsurerFormatter(cell, row) {
-  return row.cargoInsurer.name;
+  return row.cargoInsurer ? row.cargoInsurer.name : '-';
 }
 
 export function physicalDamageInsurerFormatter(cell, row) {
-  return row.physicalDamageInsurer.name;
+  return row.physicalDamageInsurer ? row.physicalDamageInsurer.name : '-';
 }
 
 export function wcGlUmbInsurerFormatter(cell, row) {
-  return row.wcGlUmbInsurer.name;
+  return row.wcGlUmbInsurer ? row.wcGlUmbInsurer.name : '-';
 }
 
 export function insurerNameFormatter(cell, row) {

@@ -83,7 +83,7 @@ const DateRangeFilter = ({
     setEndDate(currentDateRange.end);
   }, [currentDateRange]);
 
-  const calculateDatesByRange = ({ target }) => {
+  const handleDateRangeDropdownChange = ({ target }) => {
     setDateRange(target.value);
     setCurrentDateRange(dateRangeByName(target.value));
     handleSubmit();
@@ -129,15 +129,17 @@ const DateRangeFilter = ({
 
   const handleSubmit = () => {
     
+    setParams({
+      start_date: startDate,
+      end_date: endDate,
+    });
+
     switch (model) {
       case "sale":
         saleListRequest(`start_date=${startDate}&end_date=${endDate}`);
         break;
       case "dashboard":
-        setParams({
-          start_date: startDate,
-          end_date: endDate,
-        });
+        console.log(params); 
         dashboardGetRequest(config, params);
         break;
       case "report":
@@ -157,7 +159,7 @@ const DateRangeFilter = ({
         <Form.Control
           name="dateRange"
           as="select"
-          onChange={calculateDatesByRange}
+          onChange={handleDateRangeDropdownChange}
           value={dateRange}
           className="my-2 mr-sm-2"
           custom

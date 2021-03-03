@@ -18,13 +18,11 @@ import {
 import { salesCreateValidate } from "./saleCreateValidate";
 //components
 import {
-  Row,
   Col,
   Form,
   Button,
   Modal,
   Container,
-  Badge,
   InputGroup,
 } from "react-bootstrap";
 import CustomerForm from "../manage/customers/CustomerForm";
@@ -47,10 +45,6 @@ const defaultFormStates = {
 export const SaleCreate = ({
   insurers,
   customers,
-  loadingInsurer,
-  errorInsurer,
-  loadingCustomer,
-  errorCustomer,
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
@@ -64,7 +58,6 @@ export const SaleCreate = ({
   const [pendingPayment, setPendingPayment] = useState(0);
   const [modalSale, setModalSale] = useState(false);
   const [modalCustomer, setModalCustomer] = useState(false);
-  const [premium, setPremium] = useState(0);
 
   //Load Insurer List
   useEffect(() => {
@@ -150,399 +143,355 @@ export const SaleCreate = ({
       <Modal size="xl" show={modalSale} onHide={handleModalSale}>
         <Form onSubmit={handleSubmit} noValidate validate={true}>
           <Modal.Header closeButton>
-            <Modal.Title>Sales Create</Modal.Title>
+            <Modal.Title>Create New Sale</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Container>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span> Sale Date:
-                    </Form.Label>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span> Sale Date:
+                  </Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="soldAt"
+                    value={soldAt}
+                    required
+                    isInvalid={errors.soldAt}
+                    onChange={handleChange}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.soldAt}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span> Customer:
+                  </Form.Label>
+                  <InputGroup className="mb-3">
                     <Form.Control
-                      type="date"
-                      name="soldAt"
-                      value={soldAt}
+                      as="select"
+                      name="customer"
+                      value={formValues.customer}
+                      defaultValue=""
+                      custom
                       required
-                      isInvalid={errors.soldAt}
+                      isInvalid={errors.customer}
                       onChange={handleChange}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.soldAt}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span> Customer:
-                    </Form.Label>
-                    <InputGroup className="mb-3">
-                      <Form.Control
-                        as="select"
-                        name="customer"
-                        value={formValues.customer}
-                        defaultValue=""
-                        custom
-                        required
-                        isInvalid={errors.customer}
-                        onChange={handleChange}
+                    >
+                      <option value="">N/A</option>
+                      {customers.map((customer) => (
+                        <option key={customer._id} value={customer._id}>
+                          {customer.name}
+                        </option>
+                      ))}
+                    </Form.Control>
+                    <InputGroup.Append>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          setModalCustomer(!modalCustomer);
+                        }}
                       >
-                        <option value="">N/A</option>
-                        {customers.map((customer) => (
-                          <option key={customer._id} value={customer._id}>
-                            {customer.name}
+                        <b>+</b>
+                      </Button>
+                    </InputGroup.Append>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.customer}
+                    </Form.Control.Feedback>
+                  </InputGroup>
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Premium:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="premium"
+                    defaultValue="0"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.premium}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <Col>
+                  <hr></hr>
+                  <p className="mb-3">
+                  <strong>Insurance Charges:</strong>
+                  </p>
+                </Col>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>
+                    Liability Insurer:
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="liabilityInsurer"
+                    custom
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    <option value="">N/A</option>
+                    {insurers.map(
+                      (insurer) =>
+                        insurer.liabilityCommission !== -1 && (
+                          <option key={insurer._id} value={insurer._id}>
+                            {insurer.name}
                           </option>
-                        ))}
-                      </Form.Control>
-                      <InputGroup.Append>
-                        <Button
-                          variant="primary"
-                          onClick={() => {
-                            setModalCustomer(!modalCustomer);
-                          }}
-                        >
-                          <b>+</b>
-                        </Button>
-                      </InputGroup.Append>
-                      <Form.Control.Feedback type="invalid">
-                        {errors.customer}
-                      </Form.Control.Feedback>
-                    </InputGroup>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
+                        )
+                    )}
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group hidden={formStates.liabilityInsurer === ""}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Liability Charge:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="liabilityCharge"
+                    defaultValue="0"
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>
+                    Motor Cargo Insurer:
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="cargoInsurer"
+                    custom
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    <option value="">N/A</option>
+                    {insurers.map(
+                      (insurer) =>
+                        insurer.cargoCommission !== -1 && (
+                          <option key={insurer._id} value={insurer._id}>
+                            {insurer.name}
+                          </option>
+                        )
+                    )}
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group hidden={formStates.cargoInsurer === ""}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span> Motor Cargo Charge:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="cargoCharge"
+                    defaultValue="0"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Physical Damage
+                    Insurer:
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="physicalDamageInsurer"
+                    custom
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    <option value="">N/A</option>
+                    {insurers.map(
+                      (insurer) =>
+                        insurer.physicalDamageCommission !== -1 && (
+                          <option key={insurer._id} value={insurer._id}>
+                            {insurer.name}
+                          </option>
+                        )
+                    )}
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group hidden={formStates.physicalDamageInsurer === ""}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Physical Damage
+                    Charge:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="physicalDamageCharge"
+                    defaultValue="0"
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>WC/GL/UMB Insurer:
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="wcGlUmbInsurer"
+                    custom
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    <option value="">N/A</option>
+                    {insurers.map(
+                      (insurer) =>
+                        insurer.wcGlUmbCommission !== -1 && (
+                          <option key={insurer._id} value={insurer._id}>
+                            {insurer.name}
+                          </option>
+                        )
+                    )}
+                  </Form.Control>
+                </Form.Group>
+
+                <Form.Group hidden={formStates.wcGlUmbInsurer === ""}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>WC/GL/UMB Charge:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="wcGlUmbCharge"
+                    value={formStates.wcGlUmbCharge}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
                 <Col>
-                  <Badge variant="info">Choice one at least Insurer</Badge>
+                  <hr></hr>
+                  <p className="mb-3">
+                  <strong>Summary:</strong>
+                  </p>
                 </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>
-                      Liability Insurer:
-                    </Form.Label>
-                    <Form.Control
-                      as="select"
-                      name="liabilityInsurer"
-                      custom
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="">N/A</option>
-                      {insurers.map(
-                        (insurer) =>
-                          insurer.liabilityCommission !== -1 && (
-                            <option key={insurer._id} value={insurer._id}>
-                              {insurer.name}
-                            </option>
-                          )
-                      )}
-                    </Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group hidden={formStates.liabilityInsurer === ""}>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Liability Charge:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="liabilityCharge"
-                      defaultValue="0"
-                      onChange={handleChange}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>
-                      Motor Cargo Insurer:
-                    </Form.Label>
-                    <Form.Control
-                      as="select"
-                      name="cargoInsurer"
-                      custom
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="">N/A</option>
-                      {insurers.map(
-                        (insurer) =>
-                          insurer.cargoCommission !== -1 && (
-                            <option key={insurer._id} value={insurer._id}>
-                              {insurer.name}
-                            </option>
-                          )
-                      )}
-                    </Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group hidden={formStates.cargoInsurer === ""}>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span> Motor Cargo
-                      Charge:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="cargoCharge"
-                      defaultValue="0"
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Physical Damage
-                      Insurer:
-                    </Form.Label>
-                    <Form.Control
-                      as="select"
-                      name="physicalDamageInsurer"
-                      custom
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="">N/A</option>
-                      {insurers.map(
-                        (insurer) =>
-                          insurer.physicalDamageCommission !== -1 && (
-                            <option key={insurer._id} value={insurer._id}>
-                              {insurer.name}
-                            </option>
-                          )
-                      )}
-                    </Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group hidden={formStates.physicalDamageInsurer === ""}>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Physical Damage
-                      Charge:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="physicalDamageCharge"
-                      defaultValue="0"
-                      onChange={handleChange}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>WC/GL/UMB Insurer:
-                    </Form.Label>
-                    <Form.Control
-                      as="select"
-                      name="wcGlUmbInsurer"
-                      custom
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    >
-                      <option value="">N/A</option>
-                      {insurers.map(
-                        (insurer) =>
-                          insurer.wcGlUmbCommission !== -1 && (
-                            <option key={insurer._id} value={insurer._id}>
-                              {insurer.name}
-                            </option>
-                          )
-                      )}
-                    </Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group hidden={formStates.wcGlUmbInsurer === ""}>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>WC/GL/UMB Charge:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="wcGlUmbCharge"
-                      value={formStates.wcGlUmbCharge}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col sm="6">
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      Premium:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={premium}
-                      disabled
-                      size="sm"
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Fees:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="fees"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required={formValues.fees === ""}
+                    isInvalid={errors.fees}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.fees}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Permits:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="permits"
+                    defaultValue="0"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Tips:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="tips"
+                    defaultValue="0"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  />
+                </Form.Group>
+              </Form.Row>
               <hr />
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Premium:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="premium"
-                      defaultValue="0"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.premium}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Fees:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="fees"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      required={formValues.fees === ""}
-                      isInvalid={errors.fees}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.fees}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Permits:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="permits"
-                      defaultValue="0"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Tips:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="tips"
-                      defaultValue="0"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <hr />
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      Total charge:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="totalCharge"
-                      value={totalCharge}
-                      disabled
-                      size="sm"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      Pending Amount:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="pendingAmount"
-                      value={pendingPayment}
-                      disabled
-                      size="sm"
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col sm="6">
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Charges Paid:
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="chargesPaid"
-                      defaultValue="0"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    <span style={{ color: "red" }}>* </span>Charges Paid:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="chargesPaid"
+                    defaultValue="0"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    Total charge:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="totalCharge"
+                    value={totalCharge}
+                    disabled
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>
+                    Pending Amount:
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="pendingAmount"
+                    value={pendingPayment}
+                    disabled
+                  />
+                </Form.Group>
+              </Form.Row>
             </Container>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="mt-5 pt-4">
             <Container>
-              <Row className="justify-content-center">
-                <Col lg="2">
-                  <Button
-                    size="lg"
-                    variant="secondary"
-                    block
-                    onClick={handleModalSale}
-                  >
+              <Form.Row className="justify-content-center">
+                <Col sm="2">
+                  <Button variant="secondary" block onClick={handleModalSale}>
                     Cancel
                   </Button>
                 </Col>
                 <Col />
                 <Col lg="3">
-                  <Button size="lg" variant="outline-secondary" block>
+                  <Button variant="outline-secondary" block>
                     Save and New
                   </Button>
                 </Col>
                 <Col lg="3">
-                  <Button size="lg" type="submit" variant="primary" block>
+                  <Button type="submit" variant="primary" block>
                     Save
                   </Button>
                 </Col>
-              </Row>
+              </Form.Row>
             </Container>
           </Modal.Footer>
         </Form>
