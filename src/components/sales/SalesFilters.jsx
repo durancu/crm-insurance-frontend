@@ -19,8 +19,8 @@ export const SalesFilters = ({ saleListRequest }) => {
 
   const defaultForm = {
     dateRange: DateRange.MONTH_TO_DATE,
-    startDate: defaultDateRange.start,
-    endDate: defaultDateRange.end,
+    startDate: defaultDateRange.startDate,
+    endDate: defaultDateRange.endDate,
   };
 
   const [inputDateStart, setInputDateStart] = useState(defaultForm.startDate);
@@ -40,8 +40,8 @@ export const SalesFilters = ({ saleListRequest }) => {
   const calculateDatesByRange = ({ target }) => {
     setDateRange(target.value);
     setCurrentDateRange(dateRangeByName(target.value));
-    setStartDate(currentDateRange.start);
-    setEndDate(currentDateRange.end);
+    setStartDate(currentDateRange.startDate);
+    setEndDate(currentDateRange.endDate);
   };
 
   //Load data of form

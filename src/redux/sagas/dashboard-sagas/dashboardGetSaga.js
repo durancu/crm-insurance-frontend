@@ -5,9 +5,12 @@ import { apiPost } from "../../../global/apiMethods";
 
 import { queryStringFromObject } from '../../../global/utils'
 
-const apiCall = (payload, queryParams = {}) => {
+const apiCall = (payload, queryParams) => {
+
+  const queryStr = queryStringFromObject(queryParams);
+
   return apiPost(
-    `dashboards/sales/batch?${queryStringFromObject(queryParams)}`,
+    `dashboards/sales/batch?${queryStr}`,
     payload,
     true
   ).catch((error) => console.log(error));

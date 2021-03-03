@@ -13,9 +13,10 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
     DASHBOARD_SETS.hasOwnProperty(user.roles[0]) &&
       DASHBOARD_SETS[user.roles[0]]
   );
-
+ 
   useEffect(() => {
-    params && dashboardGetRequest(dashboardConfig, params);
+    dashboardGetRequest(dashboardConfig, params);
+    
   }, [dashboardGetRequest, dashboardConfig, params]);
 
   return (
