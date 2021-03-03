@@ -15,6 +15,8 @@ import {
   totalChargeCalculate,
   pendingPaymentCalculate,
 } from "../globals/functions";
+
+import { salesCreateValidate } from "./saleCreateValidate";
 //components
 import {
   Row,
@@ -24,11 +26,23 @@ import {
   Modal,
   Container,
   Badge,
+  InputGroup,
 } from "react-bootstrap";
 import CustomerForm from "../manage/customers/CustomerForm";
 
 const defaultForm = {
   soldAt: moment().format("YYYY-MM-DD"),
+};
+
+const defaultFormStates = {
+  liabilityInsurer: "",
+  cargoInsurer: "",
+  physicalDamageInsurer: "",
+  wcGlUmbInsurer: "",
+  liabilityCharge: "0",
+  cargoCharge: "0",
+  physicalDamageCharge: "0",
+  wcGlUmbCharge: "0",
 };
 
 export const SaleCreate = ({
@@ -44,7 +58,9 @@ export const SaleCreate = ({
 }) => {
   //States
   const [soldAt, setSoldAt] = useState(defaultForm.soldAt);
-  const [form, setForm] = useState(defaultForm);
+  const [formValues, setFormValues] = useState(defaultForm);
+  const [formStates, setFormStates] = useState(defaultFormStates);
+  const [errors, setErrors] = useState({ errors: [] });
   const [totalCharge, setTotalCharge] = useState(0);
   const [pendingPayment, setPendingPayment] = useState(0);
   const [modalSale, setModalSale] = useState(false);
@@ -59,19 +75,20 @@ export const SaleCreate = ({
 
   //Calculate totalCharge pendingPayment
   useEffect(() => {
-    //console.log("formUseEffect", form);
-    setPremium(premiumCalculate(form));
-    setTotalCharge(totalChargeCalculate(form));
-    setPendingPayment(pendingPaymentCalculate(form));
-  }, [form]);
+    //console.log("formUseEffect", formValues);
+    setPremium(premiumCalculate(formValues));
+    setTotalCharge(totalChargeCalculate(formValues));
+    setPendingPayment(pendingPaymentCalculate(formValues));
+  }, [formValues]);
 
-  //Load data of form
+  //Load data of formValues
   const handleChange = ({ target }) => {
+    setFormStates({ ...formStates, [target.name]: target.value });
     switch (target.name) {
       case "soldAt":
         setSoldAt(moment(target.value).format("YYYY-MM-DD"));
-        setForm((form) => ({
-          ...form,
+        setFormValues((formValues) => ({
+          ...formValues,
           [target.name]: new Date(target.value).toISOString(),
         }));
         break;
@@ -84,32 +101,40 @@ export const SaleCreate = ({
       case "tips":
       case "chargesPaid":
       case "downPayment":
-        setForm((form) => ({
-          ...form,
-          [target.name]: parseFloat(target.value),
-        }));
+        target.value !== 0 &&
+          setFormValues((formValues) => ({
+            ...formValues,
+            [target.name]: parseFloat(target.value),
+          }));
         break;
       default:
-        setForm((form) => ({ ...form, [target.name]: target.value }));
+        setFormValues((formValues) => ({
+          ...formValues,
+          [target.name]: target.value,
+        }));
         break;
     }
   };
 
   const handleBlur = ({ target }) => {
-    if (target.value === "0" || target.value === "") {
-      delete form[target.name];
-      //  console.log(form[`${target.name}`]);
-    }
+    (target.value === "0" || target.value === "") &&
+      delete formValues[target.name];
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // saleCreateRequest(form);
-    console.log("formSubmit", form);
+
+    const result = salesCreateValidate(formValues);
+    setErrors(result);
+
+    if (!Object.keys(result).length) {
+    }
+    console.log(errors);
   };
 
   const handleModalSale = () => {
     setModalSale(!modalSale);
-    setForm(defaultForm);
+    setFormValues(defaultForm);
   };
 
   const handleModalCustomer = () => {
@@ -125,7 +150,7 @@ export const SaleCreate = ({
         showModal={handleModalCustomer}
       />
       <Modal size="xl" show={modalSale} onHide={handleModalSale}>
-        <Form onSubmit={handleSubmit} name="salesForm">
+        <Form onSubmit={handleSubmit} noValidate validate={true}>
           <Modal.Header closeButton>
             <Modal.Title>Sales Create</Modal.Title>
           </Modal.Header>
@@ -134,42 +159,46 @@ export const SaleCreate = ({
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>Date:</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>*</span> Sale Date:
+                    </Form.Label>
                     <Form.Control
                       type="date"
                       name="soldAt"
                       value={soldAt}
                       required
+                      isInvalid={errors.soldAt}
                       onChange={handleChange}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.soldAt}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Customer:
+                      <span style={{ color: "red" }}>*</span> Customer:
                     </Form.Label>
-                    <Row>
-                      <Col sm="10">
-                        <Form.Control
-                          as="select"
-                          name="customer"
-                          value={form.customer}
-                          custom
-                          required={form.customer !== "" ? false : true}
-                          onChange={handleChange}
-                        >
-                          <option value="" disabled>
-                            N/A
+                    <InputGroup className="mb-3">
+                      <Form.Control
+                        as="select"
+                        name="customer"
+                        value={formValues.customer}
+                        defaultValue=""
+                        custom
+                        required
+                        isInvalid={errors.customer}
+                        onChange={handleChange}
+                      >
+                        <option value="">N/A</option>
+                        {customers.map((customer) => (
+                          <option key={customer._id} value={customer._id}>
+                            {customer.name}
                           </option>
-                          {customers.map((customer) => (
-                            <option key={customer._id} value={customer._id}>
-                              {customer.name}
-                            </option>
-                          ))}
-                        </Form.Control>
-                      </Col>
-                      <Col sm="1">
+                        ))}
+                      </Form.Control>
+                      <InputGroup.Append>
                         <Button
                           variant="primary"
                           onClick={() => {
@@ -178,8 +207,11 @@ export const SaleCreate = ({
                         >
                           <b>+</b>
                         </Button>
-                      </Col>
-                    </Row>
+                      </InputGroup.Append>
+                      <Form.Control.Feedback type="invalid">
+                        {errors.customer}
+                      </Form.Control.Feedback>
+                    </InputGroup>
                   </Form.Group>
                 </Col>
               </Row>
@@ -192,8 +224,8 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Liability
-                      Insurance:
+                      <span style={{ color: "red" }}>*</span>
+                      Liability Insurer:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -215,17 +247,16 @@ export const SaleCreate = ({
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group>
+                  <Form.Group hidden={formStates.liabilityInsurer === ""}>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Charge:
+                      <span style={{ color: "red" }}>*</span>Liability Charge:
                     </Form.Label>
                     <Form.Control
                       type="text"
                       name="liabilityCharge"
                       defaultValue="0"
                       onChange={handleChange}
-                      onBlur={handleBlur}
-                      required={form.liabilityInsurer !== "" && true}
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -234,8 +265,8 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Motor Cargo
-                      Insurance:
+                      <span style={{ color: "red" }}>*</span>
+                      Motor Cargo Insurer:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -257,17 +288,18 @@ export const SaleCreate = ({
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>*</span>Charge:
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="cargoCharge"
-                    defaultValue="0"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required={form.cargoInsurer !== "" && true}
-                  />
+                  <Form.Group hidden={formStates.cargoInsurer === ""}>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>*</span> Motor Cargo
+                      Charge:
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="cargoCharge"
+                      defaultValue="0"
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
                 </Col>
               </Row>
               <Row>
@@ -275,7 +307,7 @@ export const SaleCreate = ({
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>*</span>Physical Damage
-                      Insurance:
+                      Insurer:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -297,17 +329,17 @@ export const SaleCreate = ({
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group>
+                  <Form.Group hidden={formStates.physicalDamageInsurer === ""}>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Charge:
+                      <span style={{ color: "red" }}>*</span>Physical Damage
+                      Charge:
                     </Form.Label>
                     <Form.Control
                       type="text"
                       name="physicalDamageCharge"
                       defaultValue="0"
                       onChange={handleChange}
-                      onBlur={handleBlur}
-                      required={form.physicalDamageInsurer !== "" && true}
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -316,8 +348,7 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>WC,GL,UMB
-                      Insurance:
+                      <span style={{ color: "red" }}>*</span>WC/GL/UMB Insurer:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -339,17 +370,16 @@ export const SaleCreate = ({
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group>
+                  <Form.Group hidden={formStates.wcGlUmbInsurer === ""}>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Charge:
+                      <span style={{ color: "red" }}>*</span>WC/GL/UMB Charge:
                     </Form.Label>
                     <Form.Control
                       type="text"
                       name="wcGlUmbCharge"
-                      defaultValue="0"
+                      value={formStates.wcGlUmbCharge}
                       onChange={handleChange}
-                      onBlur={handleBlur}
-                      required={form.wcGlUmbInsurer !== "" && true}
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -358,9 +388,14 @@ export const SaleCreate = ({
                 <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      Total Policy Premium:
+                      Premium:
                     </Form.Label>
-                    <Form.Control type="text" value={premium} disabled  size="sm"/>
+                    <Form.Control
+                      type="text"
+                      value={premium}
+                      disabled
+                      size="sm"
+                    />
                   </Form.Group>
                 </Col>
               </Row>
@@ -379,6 +414,9 @@ export const SaleCreate = ({
                       onBlur={handleBlur}
                       required
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.downPayment}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -389,11 +427,14 @@ export const SaleCreate = ({
                     <Form.Control
                       type="text"
                       name="fees"
-                      defaultValue="0"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      required
+                      required={formValues.fees === ""}
+                      isInvalid={errors.fees}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.fees}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -440,7 +481,8 @@ export const SaleCreate = ({
                       type="text"
                       name="totalCharge"
                       value={totalCharge}
-                      disabled size="sm"
+                      disabled
+                      size="sm"
                     />
                   </Form.Group>
                 </Col>
@@ -453,7 +495,8 @@ export const SaleCreate = ({
                       type="text"
                       name="pendingAmount"
                       value={pendingPayment}
-                      disabled size="sm"
+                      disabled
+                      size="sm"
                     />
                   </Form.Group>
                 </Col>
