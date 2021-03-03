@@ -56,16 +56,21 @@ export const SaleCreate = ({
   customerLoadRequest,
   saleCreateRequest,
 }) => {
-  //States
+  //--STATES--//
+  //Modals
+  const [modalSale, setModalSale] = useState(false);
+  const [modalCustomer, setModalCustomer] = useState(false);
+  //Date and Values
   const [soldAt, setSoldAt] = useState(defaultForm.soldAt);
   const [formValues, setFormValues] = useState(defaultForm);
   const [formStates, setFormStates] = useState(defaultFormStates);
-  const [errors, setErrors] = useState({ errors: [] });
+  //Auto Calculate
   const [totalCharge, setTotalCharge] = useState(0);
   const [pendingPayment, setPendingPayment] = useState(0);
-  const [modalSale, setModalSale] = useState(false);
-  const [modalCustomer, setModalCustomer] = useState(false);
   const [premium, setPremium] = useState(0);
+  //ValidateForms
+  const [validate, setValidate] = useState(false);
+  const [errors, setErrors] = useState({ errors: [] });
 
   //Load Insurer List
   useEffect(() => {
@@ -87,9 +92,10 @@ export const SaleCreate = ({
     switch (target.name) {
       case "soldAt":
         setSoldAt(moment(target.value).format("YYYY-MM-DD"));
+
         setFormValues((formValues) => ({
           ...formValues,
-          [target.name]: new Date(target.value).toISOString(),
+          [target.name]: new Date(target.value).toISOString(), //preguntarle a Liuver como evaluar una fuecha correctamente
         }));
         break;
       case "liabilityCharge":
@@ -101,11 +107,10 @@ export const SaleCreate = ({
       case "tips":
       case "chargesPaid":
       case "downPayment":
-        target.value !== 0 &&
-          setFormValues((formValues) => ({
-            ...formValues,
-            [target.name]: parseFloat(target.value),
-          }));
+        setFormValues((formValues) => ({
+          ...formValues,
+          [target.name]: parseFloat(target.value),
+        }));
         break;
       default:
         setFormValues((formValues) => ({
@@ -123,7 +128,11 @@ export const SaleCreate = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      //   setValidate(true);
+    }
     const result = salesCreateValidate(formValues);
     setErrors(result);
 
@@ -150,7 +159,7 @@ export const SaleCreate = ({
         showModal={handleModalCustomer}
       />
       <Modal size="xl" show={modalSale} onHide={handleModalSale}>
-        <Form onSubmit={handleSubmit} noValidate validate={true}>
+        <Form onSubmit={handleSubmit} noValidate validated={validate}>
           <Modal.Header closeButton>
             <Modal.Title>Sales Create</Modal.Title>
           </Modal.Header>
@@ -217,15 +226,14 @@ export const SaleCreate = ({
               </Row>
               <Row>
                 <Col>
-                  <Badge variant="info">Choice one at least Insurer</Badge>
+                  <Badge variant="danger">{errors.insurers}</Badge>
                 </Col>
               </Row>
               <Row>
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>
-                      Liability Insurer:
+                      <span style={{ color: "red" }}>*</span> Liability Insurer:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -233,6 +241,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      isInvalid={errors.insurers}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -244,20 +253,27 @@ export const SaleCreate = ({
                           )
                       )}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.liabilityInsurer}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group hidden={formStates.liabilityInsurer === ""}>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Liability Charge:
+                      <span style={{ color: "red" }}>*</span> Liability Charge:
                     </Form.Label>
                     <Form.Control
                       type="text"
                       name="liabilityCharge"
                       defaultValue="0"
+                      isInvalid={errors.liabilityCharge}
                       onChange={handleChange}
                       required
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.liabilityCharge}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -265,8 +281,8 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>
-                      Motor Cargo Insurer:
+                      <span style={{ color: "red" }}>*</span> Motor Cargo
+                      Insurer:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -274,6 +290,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      isInvalid={errors.insurers}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -285,6 +302,9 @@ export const SaleCreate = ({
                           )
                       )}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.cargoInsurer}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -298,7 +318,11 @@ export const SaleCreate = ({
                       name="cargoCharge"
                       defaultValue="0"
                       onChange={handleChange}
+                      isInvalid={errors.cargoCharge}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.cargoCharge}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -306,7 +330,7 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Physical Damage
+                      <span style={{ color: "red" }}>*</span> Physical Damage
                       Insurer:
                     </Form.Label>
                     <Form.Control
@@ -315,6 +339,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      isInvalid={errors.insurers}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -326,12 +351,15 @@ export const SaleCreate = ({
                           )
                       )}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.physicalDamageInsurer}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group hidden={formStates.physicalDamageInsurer === ""}>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Physical Damage
+                      <span style={{ color: "red" }}>*</span> Physical Damage
                       Charge:
                     </Form.Label>
                     <Form.Control
@@ -340,7 +368,11 @@ export const SaleCreate = ({
                       defaultValue="0"
                       onChange={handleChange}
                       required
+                      isInvalid={errors.physicalDamageCharge}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.physicalDamageCharge}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -348,7 +380,7 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>WC/GL/UMB Insurer:
+                      <span style={{ color: "red" }}>*</span> WC/GL/UMB Insurer:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -356,6 +388,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      isInvalid={errors.insurers}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -367,12 +400,15 @@ export const SaleCreate = ({
                           )
                       )}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.wcGlUmbInsurer}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group hidden={formStates.wcGlUmbInsurer === ""}>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>WC/GL/UMB Charge:
+                      <span style={{ color: "red" }}>*</span> WC/GL/UMB Charge:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -380,7 +416,11 @@ export const SaleCreate = ({
                       value={formStates.wcGlUmbCharge}
                       onChange={handleChange}
                       required
+                      isInvalid={errors.wcGlUmbCharge}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.wcGlUmbCharge}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -404,7 +444,7 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Down Payment:
+                      <span style={{ color: "red" }}>*</span> Down Payment:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -413,6 +453,7 @@ export const SaleCreate = ({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       required
+                      isInvalid={errors.downPayment}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.downPayment}
@@ -422,13 +463,14 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Fees:
+                      <span style={{ color: "red" }}>*</span> Fees:
                     </Form.Label>
                     <Form.Control
                       type="text"
                       name="fees"
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      defaultValue="0"
                       required={formValues.fees === ""}
                       isInvalid={errors.fees}
                     />
@@ -442,7 +484,7 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Permits:
+                      <span style={{ color: "red" }}>*</span> Permits:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -451,13 +493,17 @@ export const SaleCreate = ({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       required
+                      isInvalid={errors.permits}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.permits}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Tips:
+                      <span style={{ color: "red" }}>*</span> Tips:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -466,7 +512,11 @@ export const SaleCreate = ({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       required
+                      isInvalid={errors.tips}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.tips}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -493,7 +543,6 @@ export const SaleCreate = ({
                     </Form.Label>
                     <Form.Control
                       type="text"
-                      name="pendingAmount"
                       value={pendingPayment}
                       disabled
                       size="sm"
@@ -505,7 +554,7 @@ export const SaleCreate = ({
                 <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Charges Paid:
+                      <span style={{ color: "red" }}>*</span> Charges Paid:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -514,7 +563,11 @@ export const SaleCreate = ({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       required
+                      isInvalid={errors.chargesPaid}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.chargesPaid}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
