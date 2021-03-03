@@ -4,8 +4,8 @@ import { userAuthCheckFail, userAuthCheckSuccess ,userLogoutRequest} from "../..
 import { apiGet } from "../../../global/apiMethods";
 import {setSessionData} from '../../../global/sessionStore'
 
-const apiCall = () =>
-  apiGet("profile", true).catch((err) => console.log("err", err));
+const apiCall = async() =>
+ await apiGet("profile", true).catch((err) => console.log("err", err));
 
 const sagaRequest = function* sagaRequest() {
   try {
