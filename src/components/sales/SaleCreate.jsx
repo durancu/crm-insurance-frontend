@@ -32,6 +32,11 @@ import CustomerForm from "../manage/customers/CustomerForm";
 
 const defaultForm = {
   soldAt: moment().format("YYYY-MM-DD"),
+  fees: 0,
+  permits: 0,
+  downPayment: 0,
+  chargesPaid: 0,
+  tips: 0,
 };
 
 const defaultFormStates = {
