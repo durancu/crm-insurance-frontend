@@ -11,7 +11,6 @@ import {
 } from "../../redux/actions";
 //Functions
 import {
-  premiumCalculate,
   totalChargeCalculate,
   pendingPaymentCalculate,
 } from "../globals/functions";
@@ -76,7 +75,6 @@ export const SaleCreate = ({
   //Calculate totalCharge pendingPayment
   useEffect(() => {
     //console.log("formUseEffect", formValues);
-    setPremium(premiumCalculate(formValues));
     setTotalCharge(totalChargeCalculate(formValues));
     setPendingPayment(pendingPaymentCalculate(formValues));
   }, [formValues]);
@@ -100,7 +98,7 @@ export const SaleCreate = ({
       case "permits":
       case "tips":
       case "chargesPaid":
-      case "downPayment":
+      case "premium":
         target.value !== 0 &&
           setFormValues((formValues) => ({
             ...formValues,
@@ -404,18 +402,18 @@ export const SaleCreate = ({
                 <Col>
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>*</span>Down Payment:
+                      <span style={{ color: "red" }}>*</span>Premium:
                     </Form.Label>
                     <Form.Control
                       type="text"
-                      name="downPayment"
+                      name="premium"
                       defaultValue="0"
                       onChange={handleChange}
                       onBlur={handleBlur}
                       required
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.downPayment}
+                      {errors.premium}
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Col>

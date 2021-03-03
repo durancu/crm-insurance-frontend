@@ -18,7 +18,7 @@ export const salesCreateValidate = (inputs) => {
     (errors.wcGlUmbInsurer = "WC/GL/UMB Insurer is required");
   !inputs.wcGlUmbCharge &&
     (errors.wcGlUmbCharge = "WC/GL/UMB Charge is required");
-  !inputs.downPayment && (errors.downPayment = "Down Payment is required");
+  !inputs.premium && (errors.premium = "Premium is required");
   !inputs.fees && (errors.fees = "Fees is required");
   !inputs.permits && (errors.permits = "Permits is required");
   !inputs.tips && (errors.tips = "Tips is required");

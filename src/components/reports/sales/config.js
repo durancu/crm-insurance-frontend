@@ -135,8 +135,8 @@ export const salesReportTableColumns = (isAdmin = false) =>
             footerAlign: "right",
         },
         {
-            dataField: "downPayment",
-            text: "Charges",
+            dataField: "premium",
+            text: "Premium",
             headerAlign: "right",
             formatter: priceFormatter,
             sort: true,

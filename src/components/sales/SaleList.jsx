@@ -100,7 +100,7 @@ export const SaleList = ({
                   "cargoCharge",
                   "physicalDamageCharge",
                   "wcGlUmbCharge",
-                  "downPayment",
+                  "premium",
                   "chargesPaid",
                   "premium",
                 ];

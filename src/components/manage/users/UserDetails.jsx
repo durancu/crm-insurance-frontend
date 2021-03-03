@@ -20,7 +20,6 @@ export default function UserDetails({ user }) {
           <ul>
             <li>{`Roles: ${user.roles}`}</li>
             <li>{`Base Salary: $${user.baseSalary}`}</li>
-            <li>{`Sale Bonus Percentage: ${user.saleBonusPercentage}%`}</li>
           </ul>
         </Modal.Body>
       </Modal>
