@@ -12,7 +12,6 @@ const apiCall = (payload, queryParams = {}) => {
 const sagaRequest = function* sagaRequest({ payload, queryParams }) {
   try {
     const response = yield call(apiCall, payload, queryParams);
-    console.log(response.data);
     yield put(dashboardGetSuccess(response.data));
   } catch (err) {
     yield put(dashboardGetFail());

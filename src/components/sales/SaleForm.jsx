@@ -112,11 +112,9 @@ export const SaleForm = ({
         }));
         break;
       default:
-        console.log("form initial", form);
         if (target.value)
           setForm((form) => ({ ...form, [target.name]: target.value }));
         else delete form[target.name];
-        console.log("form final", form);
         break;
     }
   };

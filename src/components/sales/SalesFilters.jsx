@@ -42,7 +42,6 @@ export const SalesFilters = ({ saleListRequest }) => {
     setCurrentDateRange(dateRangeByName(target.value));
     setStartDate(currentDateRange.start);
     setEndDate(currentDateRange.end);
-    console.log('startDate', currentDateRange)
   };
 
   //Load data of form

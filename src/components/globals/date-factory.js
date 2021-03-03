@@ -3,20 +3,21 @@ import * as moment from 'moment';
 export const DEFAULT_FORMAT = 'YYYY-MM-DD';
 
 export const DateRange = {
-    YESTERDAY : 'YESTERDAY',
-    TODAY : 'TODAY',
-    WEEK_TO_DATE : 'WTD',
-    LAST_WEEK : 'LAST_WEEK',
-    MONTH_TO_DATE : 'MTD',
-    LAST_MONTH : 'LAST_MONTH',
-    QUARTER_TO_DATE : 'QTD',
-    LAST_QUARTER : 'LAST_QUARTER',
-    YEAR_TO_DATE : 'YTD',
-    LAST_YEAR : 'LAST_YEAR',
-    CUSTOM : 'CUSTOM',
-  }
+    ALL: '',
+    YESTERDAY: 'YESTERDAY',
+    TODAY: 'TODAY',
+    WEEK_TO_DATE: 'WTD',
+    LAST_WEEK: 'LAST_WEEK',
+    MONTH_TO_DATE: 'MTD',
+    LAST_MONTH: 'LAST_MONTH',
+    QUARTER_TO_DATE: 'QTD',
+    LAST_QUARTER: 'LAST_QUARTER',
+    YEAR_TO_DATE: 'YTD',
+    LAST_YEAR: 'LAST_YEAR',
+    CUSTOM: 'CUSTOM',
+}
 
-export function dateRangeByName(rangeName=DateRange.MONTH_TO_DATE, format='YYYY-MM-DD') {
+export function dateRangeByName(rangeName = DateRange.MONTH_TO_DATE, format = 'YYYY-MM-DD') {
 
     switch (rangeName) {
 
@@ -40,6 +41,7 @@ export function dateRangeByName(rangeName=DateRange.MONTH_TO_DATE, format='YYYY-
             return lastYear(format);
         case DateRange.TODAY:
             return today(format);
+        case DateRange.ALL:
         default:
             return {
                 "start": '',
@@ -49,49 +51,49 @@ export function dateRangeByName(rangeName=DateRange.MONTH_TO_DATE, format='YYYY-
 
 }
 
-export function today(format=DateRange.MONTH_TO_DATE) {
+export function today(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('day').format(format ? format : DEFAULT_FORMAT),
         "end": moment().startOf('day').format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function yesterday(format=DateRange.MONTH_TO_DATE) {
+export function yesterday(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('day').subtract(1, 'day').format(format ? format : DEFAULT_FORMAT),
         "end": moment().startOf('day').subtract(1, 'day').format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function weekToDate(format=DateRange.MONTH_TO_DATE) {
+export function weekToDate(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('week').format(format ? format : DEFAULT_FORMAT),
         "end": moment().format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function lastWeek(format=DateRange.MONTH_TO_DATE) {
+export function lastWeek(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('week').subtract(1, 'week').format(format ? format : DEFAULT_FORMAT),
         "end": moment().endOf('week').subtract(1, 'week').endOf('week').format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function monthToDate(format=DateRange.MONTH_TO_DATE) {
+export function monthToDate(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('month').format(format ? format : DEFAULT_FORMAT),
         "end": moment().format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function lastMonth(format=DateRange.MONTH_TO_DATE) {
+export function lastMonth(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('month').subtract(1, 'month').format(format ? format : DEFAULT_FORMAT),
         "end": moment().endOf('month').subtract(1, 'month').endOf('month').format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function quarterToDate(format=DateRange.MONTH_TO_DATE) {
+export function quarterToDate(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('quarter').format(format ? format : DEFAULT_FORMAT),
         "end": moment().format(format ? format : DEFAULT_FORMAT)
@@ -99,21 +101,21 @@ export function quarterToDate(format=DateRange.MONTH_TO_DATE) {
 }
 
 
-export function lastQuarter(format=DateRange.MONTH_TO_DATE) {
+export function lastQuarter(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('quarter').subtract(1, 'quarter').format(format ? format : DEFAULT_FORMAT),
         "end": moment().endOf('quarter').subtract(1, 'quarter').endOf('quarter').format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function yearToDate(format=DateRange.MONTH_TO_DATE) {
+export function yearToDate(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('year').format(format ? format : DEFAULT_FORMAT),
         "end": moment().format(format ? format : DEFAULT_FORMAT)
     };
 }
 
-export function lastYear(format=DateRange.MONTH_TO_DATE) {
+export function lastYear(format = DateRange.MONTH_TO_DATE) {
     return {
         "start": moment().startOf('year').subtract(1, 'year').format(format ? format : DEFAULT_FORMAT),
         "end": moment().endOf('year').subtract(1, 'year').endOf('year').format(format ? format : DEFAULT_FORMAT),

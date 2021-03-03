@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 //Components
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 //Actions
 import {
@@ -12,10 +12,17 @@ import {
   customerLoadRequest,
   saleListRequest,
   reportListRequest,
+  dashboardGetRequest,
 } from "../../../redux/actions";
 import { DateRange, dateRangeByName } from "../date-factory";
 
-const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
+const DateRangeFilter = ({
+  saleListRequest,
+  reportListRequest,
+  dashboardGetRequest,
+  model,
+  config,
+}) => {
   const defaultDateRange = dateRangeByName(DateRange.MONTH_TO_DATE);
 
   const defaultForm = {
@@ -29,6 +36,10 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
   const [dateRange, setDateRange] = useState(defaultForm.dateRange);
   const [currentDateRange, setCurrentDateRange] = useState("");
   const [previousDate, setPreviousDate] = useState("");
+  const [params, setParams] = useState({
+    start_date: defaultForm.startDate,
+    end_date: defaultForm.endDate,
+  });
 
   useEffect(() => {
     switch (model) {
@@ -36,6 +47,14 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
         saleListRequest(
           `start_date=${defaultForm.startDate}&end_date=${defaultForm.endDate}`
         );
+        break;
+      case "dashboard":
+        console.log(config);
+        console.log(params);
+        if (config) {
+          dashboardGetRequest(config, params);
+        }
+
         break;
       case "report":
         reportListRequest(
@@ -50,8 +69,13 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
     defaultForm.endDate,
     defaultForm.startDate,
     model,
+    config,
     reportListRequest,
     saleListRequest,
+    startDate,
+    endDate,
+    dashboardGetRequest,
+    params,
   ]);
 
   useEffect(() => {
@@ -62,6 +86,7 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
   const calculateDatesByRange = ({ target }) => {
     setDateRange(target.value);
     setCurrentDateRange(dateRangeByName(target.value));
+    handleSubmit();
   };
 
   //Load data of form
@@ -98,13 +123,22 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
         break;
       default:
     }
+
+    handleSubmit();
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    
     switch (model) {
       case "sale":
         saleListRequest(`start_date=${startDate}&end_date=${endDate}`);
+        break;
+      case "dashboard":
+        setParams({
+          start_date: startDate,
+          end_date: endDate,
+        });
+        dashboardGetRequest(config, params);
         break;
       case "report":
         reportListRequest(`start_date=${startDate}&end_date=${endDate}`);
@@ -114,7 +148,7 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
   };
 
   return (
-    <Form inline onSubmit={handleSubmit}>
+    <Form inline>
       <Form.Row>
         <Form.Label htmlFor="dateRange" className="my-1 mr-2">
           Date:
@@ -140,7 +174,7 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
           <option value="CUSTOM">Custom</option>
         </Form.Control>
 
-        <Form.Group>
+        <Form.Group hidden={dateRange===""}>
           <Form.Label htmlFor="startDate" className="my-1 mr-2">
             From:
           </Form.Label>
@@ -155,7 +189,7 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
             required
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group hidden={dateRange===""} >
           <Form.Label htmlFor="endDate" className="my-1 mr-2">
             To:
           </Form.Label>
@@ -171,11 +205,11 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
           />
         </Form.Group>
 
-        <Form.Group>
+        {/* <Form.Group>
           <Button type="submit" variant="dark">
             Apply
           </Button>
-        </Form.Group>
+        </Form.Group> */}
       </Form.Row>
     </Form>
   );
@@ -202,6 +236,7 @@ const mapDispatchToProps = {
   customerLoadRequest,
   saleListRequest,
   reportListRequest,
+  dashboardGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DateRangeFilter);
