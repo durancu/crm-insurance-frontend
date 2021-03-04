@@ -4,15 +4,18 @@ import {
   userLogoutFail,
   userLogoutSuccess,
   userProfileGetRequest,
+  filterGetFail,
 } from "../../actions";
 import { deleteSessionData } from "../../../global/sessionStore";
 
+
 const sagaRequest = function* sagaRequest() {
-  deleteSessionData("token");
-  deleteSessionData("profile");
   try {
+    yield deleteSessionData("token");
+    yield deleteSessionData("profile");
     yield put(userProfileGetRequest());
     yield put(userLogoutSuccess());
+    yield put(filterGetFail());
   } catch (e) {
     yield put(userLogoutFail());
   }

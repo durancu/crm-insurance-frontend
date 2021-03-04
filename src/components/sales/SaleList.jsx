@@ -8,6 +8,7 @@ import {
   userLoadRequest,
   insurerListRequest,
   saleUpdateRequest,
+  saleListRequest,
 } from "../../redux/actions";
 
 //Assets
@@ -28,6 +29,7 @@ export const SaleList = ({
   saleUpdateRequest,
   customerLoadRequest,
   insurerListRequest,
+  params,
   loading,
   errorSale,
   sales,
@@ -41,14 +43,13 @@ export const SaleList = ({
     userLoadRequest();
     customerLoadRequest();
     insurerListRequest();
-    //user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
-  }, [
-    saleListRequest,
-    customerLoadRequest,
-    userLoadRequest,
-    insurerListRequest,
-    user.roles,
-  ]);
+    //user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
+  }, [saleListRequest, customerLoadRequest, userLoadRequest, insurerListRequest, user.roles, user]);
+
+  useEffect(() => {
+    saleListRequest({}, params);
+    
+  }, [params, saleListRequest]);
 
   return (
     <>
@@ -155,6 +156,7 @@ const mapStateToProps = (state) => ({
   loading: state.saleListStatusReducer.loading,
   errorSale: state.saleListStatusReducer.error,
   user: state.userProfileReducer.user,
+  params: state.filterReducer.params,
 });
 
 const mapDispatchToProps = {
@@ -162,6 +164,7 @@ const mapDispatchToProps = {
   customerLoadRequest,
   userLoadRequest,
   insurerListRequest,
+  saleListRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaleList);

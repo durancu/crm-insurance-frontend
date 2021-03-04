@@ -31,6 +31,7 @@ const defaultForm = {
   soldAt: moment().format("YYYY-MM-DD"),
   fees: 0,
   permits: 0,
+  premium: 0,
   downPayment: 0,
   chargesPaid: 0,
   tips: 0,
@@ -53,6 +54,8 @@ export const SaleCreate = ({
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
+  lastCustomer
+  
 }) => {
   //--STATES--//
   //Modals
@@ -65,7 +68,6 @@ export const SaleCreate = ({
   //Auto Calculate
   const [totalCharge, setTotalCharge] = useState(0);
   const [pendingPayment, setPendingPayment] = useState(0);
-  const [premium, setPremium] = useState(0);
   //ValidateForms
   const [validate, setValidate] = useState(false);
   const [errors, setErrors] = useState({ errors: [] });
@@ -104,7 +106,7 @@ export const SaleCreate = ({
       case "tips":
       case "chargesPaid":
       case "premium":
-        target.value !== 0 &&
+        
           setFormValues((formValues) => ({
             ...formValues,
             [target.name]: parseFloat(target.value),
@@ -135,6 +137,9 @@ export const SaleCreate = ({
     setErrors(result);
 
     if (!Object.keys(result).length) {
+      saleCreateRequest(formValues);
+      handleModalSale()
+      e.target.reset()
     }
     console.log(errors);
   };
@@ -150,7 +155,7 @@ export const SaleCreate = ({
 
   return (
     <>
-      <Button onClick={handleModalSale}>Add Sales</Button>
+      <Button onClick={handleModalSale}>Add New Sale</Button>
       <CustomerForm
         edit={false}
         modal={modalCustomer}
@@ -159,7 +164,7 @@ export const SaleCreate = ({
       <Modal size="xl" show={modalSale} onHide={handleModalSale}>
         <Form onSubmit={handleSubmit} noValidate validated={validate}>
           <Modal.Header closeButton>
-            <Modal.Title>Create New Sale</Modal.Title>
+            <Modal.Title>Add New Sale</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Container>
@@ -172,7 +177,7 @@ export const SaleCreate = ({
                     type="date"
                     name="soldAt"
                     value={soldAt}
-                    required
+                    
                     isInvalid={errors.soldAt}
                     onChange={handleChange}
                   />
@@ -189,10 +194,11 @@ export const SaleCreate = ({
                     <Form.Control
                       as="select"
                       name="customer"
-                      value={formValues.customer}
                       defaultValue=""
+                      /* value={formValues.customer ? formValues.customer : lastCustomer._id} */
+                      value={formValues.customer}
                       custom
-                      required
+                      
                       isInvalid={errors.customer}
                       onChange={handleChange}
                     >
@@ -229,7 +235,8 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required
+                    isInvalid={errors.premium}
+                    
                   />
                   <Form.Control.Feedback type="invalid">
                     {errors.premium}
@@ -278,7 +285,7 @@ export const SaleCreate = ({
                     name="liabilityCharge"
                     defaultValue="0"
                     onChange={handleChange}
-                    required
+                    
                   />
                 </Form.Group>
 
@@ -352,7 +359,7 @@ export const SaleCreate = ({
                     name="physicalDamageCharge"
                     defaultValue="0"
                     onChange={handleChange}
-                    required
+                    
                   />
                 </Form.Group>
 
@@ -388,7 +395,7 @@ export const SaleCreate = ({
                     name="wcGlUmbCharge"
                     value={formStates.wcGlUmbCharge}
                     onChange={handleChange}
-                    required
+                    
                   />
                 </Form.Group>
               </Form.Row>
@@ -408,9 +415,10 @@ export const SaleCreate = ({
                   <Form.Control
                     type="text"
                     name="fees"
+                    defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required={formValues.fees === ""}
+                    
                     isInvalid={errors.fees}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -428,7 +436,7 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required
+                    
                   />
                 </Form.Group>
 
@@ -442,7 +450,7 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required
+                    
                   />
                 </Form.Group>
               </Form.Row>
@@ -458,7 +466,7 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    required
+                    
                   />
                 </Form.Group>
 
@@ -535,6 +543,7 @@ const mapStateToProps = (state) => ({
   errorCustomer: state.customerLoadStatusReducer.error,
   insurers: state.insurerReducer.list,
   customers: state.customerReducer.list,
+  lastCustomer: state.customerReducer.item,
 });
 
 const mapDispatchToProps = {

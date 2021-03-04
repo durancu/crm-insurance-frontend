@@ -9,6 +9,7 @@ import {
     cargoInsurerFormatter,
     physicalDamageInsurerFormatter,
     wcGlUmbInsurerFormatter,
+    totalPriceFormatter,
 } from "../globals/functions";
 
 //Components
@@ -228,10 +229,10 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
             footerAlign: "right",
         },
         {
-            dataField: "premium",
-            text: "Premium",
+            dataField: "totalCharge",
+            text: "TOTAL",
             headerAlign: "right",
-            formatter: priceFormatter,
+            formatter: totalPriceFormatter,
             sort: true,
             align: "right",
             footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),

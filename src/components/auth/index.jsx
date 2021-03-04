@@ -27,7 +27,8 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
           <Form onSubmit={handleSubmit}>
             <Card.Header>
               <Card.Title align="center">
-                <h2>Insurance VL17</h2>
+                <h2>VL17 Insurance Agency</h2>
+                <h4>Sales Management System</h4>
               </Card.Title>
             </Card.Header>
             <Card.Body>

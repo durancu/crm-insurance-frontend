@@ -155,10 +155,6 @@ const UserForm = ({
                     <Form.Control
                       type="text"
                       name="position"
-                      value={form.position}
-                      disabled={edit}
-                      placeholder="Business role/position"
-                      custom
                       required
                     />
                   </Form.Group>

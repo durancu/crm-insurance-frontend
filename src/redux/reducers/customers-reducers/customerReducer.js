@@ -11,7 +11,7 @@ const customerReducer = (state = initialState, { type, payload }) => {
       return { ...state, list: payload };
 
     case types.CUSTOMERS_CREATE_SUCCESS:
-      return { ...state, list: state.list.concat(payload) };
+      return { ...state, list: state.list.concat(payload),item:payload };
 
     case types.CUSTOMERS_DELETE_SUCCESS:
       return {

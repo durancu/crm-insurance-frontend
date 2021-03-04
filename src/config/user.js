@@ -11,3 +11,5 @@ export const USER_SETTINGS = {
     ]
 };
 
+export const SELLER_ROLES = ["SELLER", "TRAINEE"]
+export const ADMIN_ROLES = ["OWNER", "ADMIN", "MANAGER"]

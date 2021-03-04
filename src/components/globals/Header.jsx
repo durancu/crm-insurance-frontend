@@ -6,18 +6,19 @@ import { Link } from "react-router-dom";
 import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { ADMIN_ROLES } from "../../config/user";
 
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    user.hasOwnProperty("roles") &&
-      user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
+    user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true)
+        
   });
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
       <Container fluid style={{ maxWidth: "98%" }}>
         <Link className="navbar-brand" to="/">
-          Insurance VL17
+          VL17 Insurance Agency
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

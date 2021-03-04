@@ -6,14 +6,13 @@ const initialState = {
     data: {},
     options: {}
   },
-  charts:[]
+  charts: []
 };
 
 
 const dashboardReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.DASHBOARD_GET_SUCCESS:
-      
       return { ...state, charts: payload };
 
     default:

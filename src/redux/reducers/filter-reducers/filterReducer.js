@@ -7,8 +7,9 @@ const initialState = {
 const filterReducer = (state = initialState, { type, params }) => {
   switch (type) {
     case types.FILTER_SET_SUCCESS:
-      //console.log(params);
       return { ...state, params:params};
+    case types.FILTER_SET_FAIL:
+      return state;
     default:
       return state;
   }

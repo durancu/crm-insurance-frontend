@@ -9,7 +9,7 @@ export const DASHBOARD_TEMPLATES = {
         width: 6,
         queryParams: {
             dataCriteria: "totalCharge",
-            groupingCriteria: "day",
+            groupingCriteria: "month",
             aggregation: "count"
         }
     },

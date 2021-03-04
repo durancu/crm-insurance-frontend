@@ -27,6 +27,14 @@ export function priceFormatter(cell, row) {
   return <span>-</span>;
 }
 
+export function totalPriceFormatter(cell, row) {
+  if (cell) {
+    return <span><strong>{Math.round(cell * 100) / 100}</strong></span>;
+  }
+
+  return <span>-</span>;
+}
+
 export function footerPriceFormatter(column, colIndex, { text }) {
   return <strong>{Math.round(text * 100) / 100}</strong>;
 }

@@ -41,7 +41,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
         </Col>
       </Row>
       <Row>
-        {charts.map((chartData, key) => (
+        {charts && charts.map((chartData, key) => (
           <Col sm="6" key={key}>
             <DashboardChart chartData={chartData} />
           </Col>
