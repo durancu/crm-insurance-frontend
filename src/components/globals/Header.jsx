@@ -11,9 +11,10 @@ import { ADMIN_ROLES } from "../../config/user";
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true)
-        
-  });
+    user.hasOwnProperty("roles") &&
+      ADMIN_ROLES.includes(user.roles[0]) &&
+      setIsAdmin(true);
+  }, [user]);
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
       <Container fluid style={{ maxWidth: "98%" }}>
