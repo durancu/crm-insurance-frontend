@@ -9,15 +9,17 @@ import DateRangeFilter from "../globals/filters/DateRangeFilter";
 import { dashboardGetRequest } from "../../redux/actions";
 
 export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
-  const [dashboardConfig] = useState(
-    DASHBOARD_SETS.hasOwnProperty(user.roles[0]) &&
-      DASHBOARD_SETS[user.roles[0]]
-  );
- 
+  const [dashboardConfig, setDashboardConfig] = useState();
+
+  useEffect(() => {
+    setDashboardConfig(
+      user.hasOwnProperty("roles") && DASHBOARD_SETS[user.roles[0]]
+    );
+  }, [user]);
+
   useEffect(() => {
     dashboardGetRequest(dashboardConfig, params);
-    
-  }, [dashboardGetRequest, dashboardConfig, params]);
+  }, [dashboardConfig, dashboardGetRequest, params]);
 
   return (
     <>
@@ -41,11 +43,12 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
         </Col>
       </Row>
       <Row>
-        {charts && charts.map((chartData, key) => (
-          <Col sm="6" key={key}>
-            <DashboardChart chartData={chartData} />
-          </Col>
-        ))}
+        {charts &&
+          charts.map((chartData, key) => (
+            <Col sm="6" key={key}>
+              <DashboardChart chartData={chartData} />
+            </Col>
+          ))}
       </Row>
     </>
   );

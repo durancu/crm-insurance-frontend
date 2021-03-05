@@ -10,7 +10,7 @@ import { userAuthCheckRequest } from "../redux/actions";
 export const PrivateRoutes = ({ component: Component, authCheck, ...rest }) => {
   useEffect(() => {
     userAuthCheckRequest();
-  });
+  },[authCheck]);
   return (
     <Route
       {...rest}
@@ -29,7 +29,8 @@ const mapStateToProps = (state) => ({
   authCheck: state.userProfileReducer.authCheck,
 });
 
-/* const mapDispatchToProps = {
-}; */
+const mapDispatchToProps = {
+  userAuthCheckRequest,
+};
 
-export default connect(mapStateToProps)(PrivateRoutes);
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoutes);

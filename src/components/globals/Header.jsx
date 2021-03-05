@@ -74,7 +74,7 @@ const Header = ({ user, userLogoutRequest }) => {
                 My Profile
                 <NavDropdown.Divider />
               </Link>
-              <NavDropdown.Item href="#" onClick={userLogoutRequest}>
+              <NavDropdown.Item href="/" onClick={userLogoutRequest}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>

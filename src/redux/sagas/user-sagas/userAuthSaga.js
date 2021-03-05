@@ -16,8 +16,8 @@ const sagaRequest = function* sagaRequest(action) {
   try {
     const response = yield call(apiCall, payload);
     yield setSessionData("token", response.data.access_token);
-    yield put(userProfileSetRequest());
     yield put(userAuthSuccess());
+    yield put(userProfileSetRequest());
   } catch (e) {
     yield put(userAuthFail());
   }
