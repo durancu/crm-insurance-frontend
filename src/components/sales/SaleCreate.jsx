@@ -54,8 +54,7 @@ export const SaleCreate = ({
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
-  lastCustomer
-  
+  lastCustomer,
 }) => {
   //--STATES--//
   //Modals
@@ -106,11 +105,10 @@ export const SaleCreate = ({
       case "tips":
       case "chargesPaid":
       case "premium":
-        
-          setFormValues((formValues) => ({
-            ...formValues,
-            [target.name]: parseFloat(target.value),
-          }));
+        setFormValues((formValues) => ({
+          ...formValues,
+          [target.name]: parseFloat(target.value),
+        }));
         break;
       default:
         setFormValues((formValues) => ({
@@ -138,8 +136,8 @@ export const SaleCreate = ({
 
     if (!Object.keys(result).length) {
       saleCreateRequest(formValues);
-      handleModalSale()
-      e.target.reset()
+      handleModalSale();
+      e.target.reset();
     }
     console.log(errors);
   };
@@ -161,9 +159,10 @@ export const SaleCreate = ({
         modal={modalCustomer}
         showModal={handleModalCustomer}
       />
-      <Modal size="xl" show={modalSale} onHide={handleModalSale}>
+      <Modal hidden={modalCustomer} size="xl" show={modalSale} onHide={handleModalSale} backdrop={'static'}>
+        <fieldset >
         <Form onSubmit={handleSubmit} noValidate validated={validate}>
-          <Modal.Header closeButton>
+          <Modal.Header >
             <Modal.Title>Add New Sale</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -177,13 +176,12 @@ export const SaleCreate = ({
                     type="date"
                     name="soldAt"
                     value={soldAt}
-                    
                     isInvalid={errors.soldAt}
                     onChange={handleChange}
                   />
                   <Form.Control.Feedback type="invalid">
-                      {errors.soldAt}
-                    </Form.Control.Feedback>
+                    {errors.soldAt}
+                  </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group as={Col}>
@@ -198,7 +196,6 @@ export const SaleCreate = ({
                       /* value={formValues.customer ? formValues.customer : lastCustomer._id} */
                       value={formValues.customer}
                       custom
-                      
                       isInvalid={errors.customer}
                       onChange={handleChange}
                     >
@@ -236,7 +233,6 @@ export const SaleCreate = ({
                     onChange={handleChange}
                     onBlur={handleBlur}
                     isInvalid={errors.premium}
-                    
                   />
                   <Form.Control.Feedback type="invalid">
                     {errors.premium}
@@ -247,7 +243,7 @@ export const SaleCreate = ({
                 <Col>
                   <hr></hr>
                   <p className="mb-3">
-                  <strong>Insurance Charges:</strong>
+                    <strong>Insurance Charges:</strong>
                   </p>
                 </Col>
               </Form.Row>
@@ -285,7 +281,6 @@ export const SaleCreate = ({
                     name="liabilityCharge"
                     defaultValue="0"
                     onChange={handleChange}
-                    
                   />
                 </Form.Group>
 
@@ -359,7 +354,6 @@ export const SaleCreate = ({
                     name="physicalDamageCharge"
                     defaultValue="0"
                     onChange={handleChange}
-                    
                   />
                 </Form.Group>
 
@@ -395,7 +389,6 @@ export const SaleCreate = ({
                     name="wcGlUmbCharge"
                     value={formStates.wcGlUmbCharge}
                     onChange={handleChange}
-                    
                   />
                 </Form.Group>
               </Form.Row>
@@ -403,7 +396,7 @@ export const SaleCreate = ({
                 <Col>
                   <hr></hr>
                   <p className="mb-3">
-                  <strong>Summary:</strong>
+                    <strong>Summary:</strong>
                   </p>
                 </Col>
               </Form.Row>
@@ -418,7 +411,6 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    
                     isInvalid={errors.fees}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -436,7 +428,6 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    
                   />
                 </Form.Group>
 
@@ -450,7 +441,6 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    
                   />
                 </Form.Group>
               </Form.Row>
@@ -466,7 +456,6 @@ export const SaleCreate = ({
                     defaultValue="0"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    
                   />
                 </Form.Group>
 
@@ -500,13 +489,13 @@ export const SaleCreate = ({
             <Container>
               <Form.Row className="justify-content-center">
                 <Col sm="2">
-                  <Button variant="secondary" block onClick={handleModalSale}>
+                  <Button variant="light" block onClick={handleModalSale}>
                     Cancel
                   </Button>
                 </Col>
                 <Col />
                 <Col lg="3">
-                  <Button variant="outline-secondary" block>
+                  <Button variant="outline-dark" block>
                     Save and New
                   </Button>
                 </Col>
@@ -519,6 +508,7 @@ export const SaleCreate = ({
             </Container>
           </Modal.Footer>
         </Form>
+        </fieldset>
       </Modal>
     </>
   );

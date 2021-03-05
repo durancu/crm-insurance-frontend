@@ -3,7 +3,15 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 //components
-import { Form, Button, Modal, Col, Row, Spinner } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Modal,
+  Col,
+  Row,
+  Spinner,
+  Container,
+} from "react-bootstrap";
 
 //action
 import { userCreateRequest, userUpdateRequest } from "../../../redux/actions";
@@ -32,6 +40,7 @@ const UserForm = ({
     role: "",
     location: "",
     password: "",
+    baseSalary: "",
   };
 
   const [form, setForm] = useState(defaultForm);
@@ -64,17 +73,19 @@ const UserForm = ({
 
   return (
     <Fragment>
-      <Modal show={modal} onHide={showModal}>
+      <Modal show={modal} onHide={showModal} backdrop={"static"}>
         <Form onSubmit={handleSubmit}>
           <fieldset disabled={loading || loadingGetUser}>
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title>Users {edit ? `Update` : `Create`}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>First Name</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>First Name
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="firstName"
@@ -86,7 +97,9 @@ const UserForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Last Name</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Last Name
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="lastName"
@@ -100,7 +113,9 @@ const UserForm = ({
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Username
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="username"
@@ -113,7 +128,9 @@ const UserForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Phone number</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Phone number
+                    </Form.Label>
                     <Form.Control
                       type="tel"
                       name="phone"
@@ -129,7 +146,9 @@ const UserForm = ({
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Location</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Location
+                    </Form.Label>
                     <Form.Control
                       as="select"
                       name="location"
@@ -151,19 +170,19 @@ const UserForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Position</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="position"
-                      required
-                    />
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Position
+                    </Form.Label>
+                    <Form.Control type="text" name="position" required />
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Role</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Role
+                    </Form.Label>
                     <Form.Control
                       as="select"
                       name="role"
@@ -185,7 +204,21 @@ const UserForm = ({
                 </Col>
               </Row>
               <Form.Group>
-                <Form.Label>Email</Form.Label>
+                <Form.Label style={{ fontSize: "small" }}>
+                  <span style={{ color: "red" }}>* </span>Base Salary
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="baseSalary"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label style={{ fontSize: "small" }}>
+                  <span style={{ color: "red" }}>* </span>Email
+                </Form.Label>
                 <Form.Control
                   type="email"
                   name="email"
@@ -195,7 +228,9 @@ const UserForm = ({
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Password</Form.Label>
+                <Form.Label style={{ fontSize: "small" }}>
+                  <span style={{ color: "red" }}>* </span>Password
+                </Form.Label>
                 <Form.Control
                   type="password"
                   name="password"
@@ -206,19 +241,38 @@ const UserForm = ({
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button
-                type="submit"
-                variant={edit ? `success` : `primary`}
-                block
-              >
-                {loading ? (
-                  <Spinner animation="border" />
-                ) : edit ? (
-                  `Update`
-                ) : (
-                  `Create`
-                )}
-              </Button>
+              <Container>
+                <Form.Row className="justify-content-center">
+                  <Col sm="3">
+                    <Button variant="light" block onClick={showModal}>
+                      Cancel
+                    </Button>
+                  </Col>
+                  <Col />
+                  {edit || (
+                    <Col lg="4">
+                      <Button variant="outline-dark" block>
+                        Save and New
+                      </Button>
+                    </Col>
+                  )}
+                  <Col lg="4">
+                    <Button
+                      type="submit"
+                      variant={edit ? `success` : `primary`}
+                      block
+                    >
+                      {loading ? (
+                        <Spinner animation="border" />
+                      ) : edit ? (
+                        `Update`
+                      ) : (
+                        `Create`
+                      )}
+                    </Button>
+                  </Col>
+                </Form.Row>
+              </Container>
             </Modal.Footer>
           </fieldset>
         </Form>
