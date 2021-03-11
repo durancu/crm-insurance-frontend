@@ -21,7 +21,7 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
   return loadingAuthCheck ? (
     <Spinner animation="border" variant="primary"/>
   ) : (
-    <Row style={{ marginTop: "20%" }}>
+    <Row style={{ marginTop: "10%" }}>
       <Col md={{ span: 4, offset: 4 }}>
         <Card>
           <Form onSubmit={handleSubmit}>
