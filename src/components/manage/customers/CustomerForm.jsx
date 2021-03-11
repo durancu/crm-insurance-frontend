@@ -1,12 +1,23 @@
-import React, { useState, Fragment, useEffect } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import React, { useState, Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 //components
-import { Form, Button, Modal, Col, Row, Spinner } from 'react-bootstrap'
+import {
+  Form,
+  Button,
+  Modal,
+  Col,
+  Row,
+  Spinner,
+  Container,
+} from "react-bootstrap";
 
 //action
-import { customerCreateRequest, customerUpdateRequest } from '../../../redux/actions'
+import {
+  customerCreateRequest,
+  customerUpdateRequest,
+} from "../../../redux/actions";
 
 const CustomerForm = ({
   loading,
@@ -17,25 +28,26 @@ const CustomerForm = ({
   showModal,
   modal,
   edit,
-  customer }) => {
+  customer,
+}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let defaultForm = {
     name: "",
     isCompany: "",
     email: "",
-    phone: ""
-  }
+    phone: "",
+  };
 
-  const [form, setForm] = useState(defaultForm)
+  const [form, setForm] = useState(defaultForm);
 
   useEffect(() => {
-    edit ? setForm(customer) : setForm(defaultForm)
+    edit ? setForm(customer) : setForm(defaultForm);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [edit, customer])
+  }, [edit, customer]);
 
   const handleChange = ({ target }) => {
-    setForm(form => ({ ...form, [target.name]: target.value }))
-  }
+    setForm((form) => ({ ...form, [target.name]: target.value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,27 +60,25 @@ const CustomerForm = ({
         showModal();
       }
     }, 1000);
-  }
+  };
 
   const clearForm = () => {
-    setForm(defaultForm)
-  }
+    setForm(defaultForm);
+  };
 
   return (
     <Fragment>
-      <Modal show={modal} onHide={showModal}>
+      <Modal show={modal} onHide={showModal} backdrop="static" >
         <Form onSubmit={handleSubmit}>
           <fieldset disabled={loading || loadingGetCustomer}>
-            <Modal.Header closeButton>
-              <Modal.Title>
-                Customers {edit ? `Update` : `Create`}
-              </Modal.Title>
+            <Modal.Header>
+              <Modal.Title>Customers {edit ? `Update` : `Create`}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}><span style={{ color: "red" }}>* </span>Name</Form.Label>
                     <Form.Control
                       type="text"
                       name="name"
@@ -82,7 +92,7 @@ const CustomerForm = ({
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Phone</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}><span style={{ color: "red" }}>* </span>Phone</Form.Label>
                     <Form.Control
                       type="tel"
                       name="phone"
@@ -96,7 +106,7 @@ const CustomerForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Customer type</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}><span style={{ color: "red" }}>* </span>Customer type</Form.Label>
                     <Form.Control
                       as="select"
                       name="isCompany"
@@ -105,7 +115,9 @@ const CustomerForm = ({
                       custom
                       required
                     >
-                      <option value="" disabled >Choose a type</option>
+                      <option value="" disabled>
+                        Choose a type
+                      </option>
                       <option value="true">Business</option>
                       <option value="false">Individual</option>
                     </Form.Control>
@@ -113,30 +125,49 @@ const CustomerForm = ({
                 </Col>
               </Row>
               <Form.Group>
-                <Form.Label>Email</Form.Label>
+                <Form.Label style={{ fontSize: "small" }}><span style={{ color: "red" }}>* </span>Email</Form.Label>
                 <Form.Control
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  required />
+                  required
+                />
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button
-                type="submit"
-                variant={edit ? `success` : `primary`}
-                block
-              >
-                {loading ? <Spinner animation="border" /> : (edit ? `Update` : `Create`)}
-              </Button>
+              <Container>
+                <Form.Row className="justify-content-center">
+                  <Col sm="4">
+                    <Button variant="light" block onClick={showModal}>
+                      Cancel
+                    </Button>
+                  </Col>
+                  <Col />
+                  <Col lg="4">
+                    <Button
+                      type="submit"
+                      variant={edit ? `success` : `primary`}
+                      block
+                    >
+                      {loading ? (
+                        <Spinner animation="border" />
+                      ) : edit ? (
+                        `Update`
+                      ) : (
+                        `Create`
+                      )}
+                    </Button>
+                  </Col>
+                </Form.Row>
+              </Container>
             </Modal.Footer>
           </fieldset>
         </Form>
       </Modal>
     </Fragment>
-  )
-}
+  );
+};
 
 CustomerForm.propTypes = {
   loading: PropTypes.bool.isRequired,
@@ -145,18 +176,18 @@ CustomerForm.propTypes = {
   loadingGetCustomer: PropTypes.bool.isRequired,
   customerCreateRequest: PropTypes.func.isRequired,
   formModal: PropTypes.func,
-}
+};
 
 const mapStateToProps = (state) => ({
   loading: state.customerCreateStatusReducer.loading,
   error: state.customerCreateStatusReducer.error,
   customer: state.customerReducer.item,
-  loadingGetCustomer: state.customerGetStatusReducer.loading
-})
+  loadingGetCustomer: state.customerGetStatusReducer.loading,
+});
 
 const mapDispatchToProps = {
   customerCreateRequest,
-  customerUpdateRequest
-}
+  customerUpdateRequest,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomerForm)
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerForm);
