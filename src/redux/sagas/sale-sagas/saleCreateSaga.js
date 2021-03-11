@@ -15,7 +15,7 @@ const apiCall = (data) =>
 const sagaRequest = function* sagaRequest({ payload }) {
   try {
     const response = yield call(apiCall, payload);
-    yield put(saleCreateSuccess());
+   // yield put(saleCreateSuccess());
     yield put(saleListRequest());
   } catch (e) {
     yield put(saleCreateFail());

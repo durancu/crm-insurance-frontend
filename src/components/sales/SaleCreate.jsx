@@ -126,6 +126,13 @@ export const SaleCreate = ({
 
     if (!Object.keys(result).length) {
       //console.log("formValues", formValues);
+      setFormValues({
+        ...formValues,
+        soldAt:new Date(formStates.soldAt).toISOString(),
+      });
+
+      console.log('soldAt', new Date(formValues.soldAt).toISOString())
+      console.log('formValues', formValues)
       saleCreateRequest(formValues);
       !addMore && handleModalSale();
       clearForm();
