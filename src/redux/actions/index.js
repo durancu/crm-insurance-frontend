@@ -133,6 +133,11 @@ export {
   reportListFail,
   reportListSuccess,
 } from "./reports-actions/reportListActions";
+export {
+  reportSalaryRequest,
+  reportSalaryFail,
+  reportSalarySuccess,
+} from "./reports-actions/reportSalaryActions";
 //DASHBOARDS
 export {
   dashboardGetFail,

@@ -11,11 +11,9 @@ import "../../assets/App.css";
 import { Spinner, Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import cellEditFactory from "react-bootstrap-table2-editor";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import DateRangeFilter from "../../globals/filters/DateRangeFilter";
 import { ADMIN_ROLES } from "../../../config/user";
-import { SaleCreate } from "../../sales/SaleCreate";
 
 export const Reports = ({
   reportListRequest,
@@ -32,9 +30,9 @@ export const Reports = ({
 
   useEffect(() => {
     reportListRequest({}, params);
-    
   }, [params, reportListRequest]);
 
+  console.log(sales)
   return (
     <>
       <Row className="mt-3 mb-3">
@@ -44,8 +42,7 @@ export const Reports = ({
       </Row>
       <Row className="mb-2">
         <Col lg="10" sm="6">
-         {/*  <SalesFilters model={'sale'}/> */}
-          <DateRangeFilter model={'sale'}/>
+          <DateRangeFilter/>
         </Col>
       </Row>
 
@@ -70,7 +67,7 @@ export const Reports = ({
             filter={filterFactory()}
             defaultSorted={salesReportDefaultSorted()}
             noDataIndication="No registered sales"
-            cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
+           // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
           />
         </Row>
       )}

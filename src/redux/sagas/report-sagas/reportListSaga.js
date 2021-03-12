@@ -1,16 +1,26 @@
 import { call, put, takeLatest, spawn } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
-import { reportListSuccess, reportListFail} from "../../actions";
+import { reportListSuccess, reportListFail } from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
 
-import { queryStringFromObject } from '../../../global/utils'
+import { queryStringFromObject } from "../../../global/utils";
 
-const apiCall = (queryParams) =>
-  apiGet(`reports/sales?${queryStringFromObject(queryParams)}`, true).catch((error) => console.log(error));
+const apiCall = (queryParams) => {
+  queryParams["with_sales"] = 'true';
+  queryParams["fields"] = "totalCharge";
 
-const sagaRequest = function* sagaRequest({queryParams}) {
+  console.log('queryParams', queryParams)
+  console.log(queryStringFromObject(queryParams));
+  
+  return apiGet(
+    `reports/sales?${queryStringFromObject(queryParams)}`,
+    true
+  ).catch((error) => console.log(error));
+};
+const sagaRequest = function* sagaRequest({ queryParams }) {
   try {
     const response = yield call(apiCall, queryParams);
+    console.log("response", response);
     yield put(reportListSuccess(response.data));
   } catch (e) {
     yield put(reportListFail());
@@ -26,4 +36,3 @@ const reportListSaga = function* reportListSaga() {
 };
 
 export default reportListSaga;
-
