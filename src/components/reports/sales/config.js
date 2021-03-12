@@ -28,9 +28,8 @@ export const salesReportTableColumns = (isAdmin = false) =>
             },
         },
         {
-            dataField: "seller.firstName",
+            dataField: "sellerName",
             text: "Employee",
-            formatter: fullNameFormatter,
             headerStyle: () => {
                 return { width: "10%" };
             },
@@ -41,18 +40,9 @@ export const salesReportTableColumns = (isAdmin = false) =>
                 `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
             filter: textFilter({ placeholder: "Search" }),
             editable: isAdmin, 
-            editor: {
-                type: Type.SELECT,
-                options: [
-                    { value: "Mark", label: "Mark Sailor" },
-                    { value: "Mary", label: "Mary Lumber" },
-                    { value: "Lis", label: "Lis Clinton" },
-                    { value: "Mark", label: "Mark Rock" },
-                ],
-            },
         },
         {
-            dataField: "seller.location",
+            dataField: "locationName",
             text: "Location",
             headerStyle: () => {
                 return { width: "10%" };
@@ -65,7 +55,7 @@ export const salesReportTableColumns = (isAdmin = false) =>
             editable: false, // No es editable, porque es una property del seller
         },
         {
-            dataField: "customer.name",
+            dataField: "customerName",
             text: "Customer",
             headerStyle: () => {
                 return { width: "14%" };
@@ -76,23 +66,10 @@ export const salesReportTableColumns = (isAdmin = false) =>
             footer: "",
             filter: textFilter({ placeholder: "Search" }),
             editable: true,
-            editor: {
-                type: Type.SELECT,
-                options: [
-                    { value: "Leffler and Sons", label: "Leffler and Sons" },
-                    {
-                        value: "Harber, Gaylord and Langworth",
-                        label: "Harber, Gaylord and Langworth",
-                    },
-                    { value: "Luis Gusikowski", label: "Luis Gusikowski" },
-                    { value: "Kunde LLC", label: "Kunde LLC" },
-                ],
-            },
         },
         {
-            dataField: "liabilityInsurer.name",
+            dataField: "insurerNames",
             text: "Insurance Company",
-            formatter: insurerNameFormatter,
             headerStyle: () => {
                 return { width: "28%" };
             },

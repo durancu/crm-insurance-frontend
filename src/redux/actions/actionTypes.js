@@ -198,13 +198,22 @@ export const SALES_UPDATE_FAIL = "SALES_UPDATE_FAIL";
 export const SALES_UPDATE_SUCCESS = "SALES_UPDATE_SUCCESS";
 
 //REPORT
-//List
+//Sales
 /**@constant {string} REPORT_LIST_REQUEST*/
 export const REPORT_LIST_REQUEST = "REPORT_LIST_REQUEST";
 /**@constant {string} REPORT_LIST_FAIL*/
 export const REPORT_LIST_FAIL = "REPORT_LIST_FAIL";
 /**@constant {string} REPORT_LIST_SUCCESS */
 export const REPORT_LIST_SUCCESS = "REPORT_LIST_SUCCESS";
+//Salary
+/**@constant {string} REPORT_SALARY_REQUEST*/
+export const REPORT_SALARY_REQUEST = "REPORT_SALARY_REQUEST";
+/**@constant {string} REPORT_SALARY_FAIL*/
+export const REPORT_SALARY_FAIL = "REPORT_SALARY_FAIL";
+/**@constant {string} REPORT_SALARY_SUCCESS */
+export const REPORT_SALARY_SUCCESS = "REPORT_SALARY_SUCCESS";
+
+
 
 //DASHBOARD
 //List
@@ -219,3 +228,4 @@ export const DASHBOARD_GET_SUCCESS = "DASHBOARD_GET_SUCCESS";
 export const FILTER_SET_REQUEST = "FILTER_SET_REQUEST"
 export const FILTER_SET_FAIL = "FILTER_SET_FAIL"
 export const FILTER_SET_SUCCESS = "FILTER_SET_SUCCESS"
+
