@@ -3,7 +3,6 @@ import Dashboard from "../components/dashboard";
 import Sales from "../components/sales";
 import SalesReport from "../components/reports/sales";
 import Profitability from "../components/reports/profitability";
-import Bonus from "../components/reports/bonus";
 import Salaries from "../components/reports/salaries";
 import Customers from "../components/manage/customers";
 import Users from "../components/manage/users";
@@ -27,56 +26,50 @@ export const COMPONENT_LIST = [
     protected: true,
   },
   {
-    title: "Sales",
-    url: "/sales",
+    title: "Sales Management",
+    url: "/manage/sales",
     component: Sales,
     protected: true,
   },
   {
-    title: "Reports Sales",
-    url: "/reports-sales",
+    title: "Sales Report",
+    url: "/reports/sales",
     component: SalesReport,
     protected: true,
   },
   {
-    title: "Profitability",
-    url: "/profitability",
+    title: "Profits Report",
+    url: "/reports/profits",
     component: Profitability,
     protected: true,
   },
   {
-    title: "Bonus",
-    url: "/bonus",
-    component: Bonus,
-    protected: true,
-  },
-  {
-    title: "Salaries",
-    url: "/salaries",
+    title: "Payroll Report",
+    url: "/reports/payroll",
     component: Salaries,
     protected: true,
   },
   {
-    title: "Customers",
-    url: "/customers",
+    title: "Customers Management",
+    url: "/manage/customers",
     component: Customers,
     protected: true,
   },
   {
-    title: "Insurer",
-    url: "/insurers",
+    title: "Insurers Management",
+    url: "/manage/insurers",
     component: Insurers,
     protected: true,
   },
   {
-    title: "Company",
-    url: "/company",
+    title: "Companies Management",
+    url: "/manage/companies",
     component: Company,
     protected: true,
   },
   {
-    title: "Users",
-    url: "/users",
+    title: "Users Management",
+    url: "/manage/users",
     component: Users,
     protected: true,
   },

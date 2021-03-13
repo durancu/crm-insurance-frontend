@@ -27,24 +27,25 @@ const Header = ({ user, userLogoutRequest }) => {
             <Link className="nav-link" to="/">
               Dashboard
             </Link>
-            <Link className="nav-link" to="/sales">
+            <Link className="nav-link" to="/manage/sales">
               Sales
             </Link>
             <NavDropdown title="Reports" id="collasible-nav-dropdown">
-              <Link className="dropdown-item" to="/reports-sales">
+              <Link className="dropdown-item" to="/reports/sales">
                 Sales
               </Link>
               {isAdmin && (
                 <>
-                  <Link className="dropdown-item" to="/profitability">
-                    Profitability
+                  <Link className="dropdown-item" to="/reports/profits">
+                    Profits
                   </Link>
+                  {/* 
                   <Link className="dropdown-item" to="/bonus">
                     Bonus
-                  </Link>
-                  <NavDropdown.Divider />
-                  <Link className="dropdown-item" to="/salaries">
-                    Salaries
+                  </Link> 
+                  */}
+                  <Link className="dropdown-item" to="/reports/payroll">
+                    Payroll
                   </Link>
                 </>
               )}
@@ -52,19 +53,19 @@ const Header = ({ user, userLogoutRequest }) => {
           </Nav>
           <Nav className="ml-auto">
             <NavDropdown title="Manage" id="basic-nav-dropdown">
-              <Link className="dropdown-item" to="/customers">
+              <Link className="dropdown-item" to="/manage/customers">
                 Customers
               </Link>
               {isAdmin && (
                 <>
-                  <Link className="dropdown-item" to="/users">
+                  <Link className="dropdown-item" to="/manage/users">
                     Users
                   </Link>
-                  <Link className="dropdown-item" to="/insurers">
+                  <Link className="dropdown-item" to="/manage/insurers">
                     Insurers
                   </Link>
                   <NavDropdown.Divider />
-                  <Link className="dropdown-item" to="/company">
+                  <Link className="dropdown-item" to="/manage/company">
                     Company
                   </Link>
                 </>

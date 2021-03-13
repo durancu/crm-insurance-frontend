@@ -1,4 +1,5 @@
 import moment from "moment";
+import { BUSINESS_SETTINGS } from "../../config/company";
 
 export const dataTransform = (element) => {
   let insurers = [];
@@ -51,6 +52,22 @@ export function fullNameFormatter(cell, row) {
   );
 }
 
+export function sellerLocationFormatter(cell, row) {
+  return (
+    <span>
+      {BUSINESS_SETTINGS.locations.find(location => location.id === row.seller.location).name}
+    </span>
+  );
+}
+
+export function locationFormatter(cell, row) {
+  return (
+    <span>
+      {BUSINESS_SETTINGS.locations.find(location => location.id === row.locationName).name}
+    </span>
+  );
+}
+
 export function customerFormatter(cell, row) {
   return row.customer.name;
 }
@@ -73,6 +90,13 @@ export function physicalDamageInsurerFormatter(cell, row) {
 
 export function wcGlUmbInsurerFormatter(cell, row) {
   return row.wcGlUmbInsurer ? row.wcGlUmbInsurer.name : '-';
+}
+
+export function joinedInsurerNamesFormatter(cell, row) {
+  if (row.hasOwnProperty("insurerNames") && row.insurerNames.length) {
+    return row.insurerNames.split('/').filter(Boolean).join(' / ')
+  }
+  return "";
 }
 
 export function insurerNameFormatter(cell, row) {
