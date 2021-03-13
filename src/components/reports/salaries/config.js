@@ -1,22 +1,18 @@
 //Functions
 import {
-  dateFormatter,
-  insurerNameFormatter,
   priceFormatter,
-  fullNameFormatter,
   footerPriceFormatter,
   salaryFormatter,
+  locationFormatter,
 } from "../../globals/functions";
 
 //Components
-
-import { textFilter } from "react-bootstrap-table2-filter";
-import { Type } from "react-bootstrap-table2-editor";
 
 export const salesReportTableColumns = (isAdmin = false) => [
   {
     dataField: "location",
     text: "Location",
+    formatter: locationFormatter,
     align: "left",
     headerAlign: "left",
     footer: "TOTALS",

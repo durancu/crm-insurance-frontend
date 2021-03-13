@@ -22,7 +22,7 @@ export const dataTransform = (element) => {
 
 export function priceFormatter(cell, row) {
   if (cell) {
-    return <span>{Math.round(cell * 100) / 100}</span>;
+    return <span>{cell}</span>;
   }
 
   return <span>-</span>;
@@ -30,7 +30,7 @@ export function priceFormatter(cell, row) {
 
 export function salaryFormatter(cell, row) {
   if (cell) {
-    return <span style={{color:"green",fontWeight:"bold"}}>{Math.round(cell * 100) / 100}</span>;
+    return <span style={{color:"green",fontWeight:"bold"}}>{cell}</span>;
   }
 
   return <span>-</span>;
@@ -38,14 +38,14 @@ export function salaryFormatter(cell, row) {
 
 export function totalPriceFormatter(cell, row) {
   if (cell) {
-    return <span><strong>{Math.round(cell * 100) / 100}</strong></span>;
+    return <span><strong>{cell}</strong></span>;
   }
 
   return <span>-</span>;
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
-  return <strong>{Math.round(text * 100) / 100}</strong>;
+  return <strong>{text}</strong>;
 }
 
 export function dateFormatter(cell, row) {
@@ -60,18 +60,11 @@ export function fullNameFormatter(cell, row) {
   );
 }
 
-export function sellerLocationFormatter(cell, row) {
+export function locationFormatter(cell, row, locationValue) {
+  console.log(row,cell,locationValue);
   return (
     <span>
-      {BUSINESS_SETTINGS.locations.find(location => location.id === row.seller.location).name}
-    </span>
-  );
-}
-
-export function locationFormatter(cell, row) {
-  return (
-    <span>
-      {BUSINESS_SETTINGS.locations.find(location => location.id === row.locationName).name}
+      {BUSINESS_SETTINGS.locations.find(location => location.id === cell).name}
     </span>
   );
 }
