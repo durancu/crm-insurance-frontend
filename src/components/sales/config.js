@@ -10,7 +10,7 @@ import {
     physicalDamageInsurerFormatter,
     wcGlUmbInsurerFormatter,
     totalPriceFormatter,
-    sellerLocationFormatter,
+    locationFormatter,
 } from "../globals/functions";
 
 //Components
@@ -60,7 +60,7 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
         },
         {
             dataField: "seller.location",
-            formatter: sellerLocationFormatter,
+            formatter: locationFormatter,
             text: "Location",
             headerStyle: () => {
                 return { width: "10%" };

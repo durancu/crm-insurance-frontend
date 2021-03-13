@@ -3,6 +3,7 @@ import {
   priceFormatter,
   footerPriceFormatter,
   salaryFormatter,
+  locationFormatter,
 } from "../../globals/functions";
 
 //Components
@@ -11,6 +12,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
   {
     dataField: "location",
     text: "Location",
+    formatter: locationFormatter,
     align: "left",
     headerAlign: "left",
     footer: "TOTALS",
