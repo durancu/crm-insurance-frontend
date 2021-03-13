@@ -8,7 +8,7 @@ import { Form } from "react-bootstrap";
 //Assets
 import "react-datepicker/dist/react-datepicker.css";
 
-const SalaryFilterDate = ({ setParams }) => {
+const FilterDate = ({ setParams }) => {
   const [state, setState] = useState(new Date());
 
   const handleChange = (date) => {
@@ -35,4 +35,4 @@ const SalaryFilterDate = ({ setParams }) => {
   );
 };
 
-export default SalaryFilterDate;
+export default FilterDate;

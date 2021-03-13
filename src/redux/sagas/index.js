@@ -33,6 +33,7 @@ import saleUpdateSaga from "./sale-sagas/saleUpdateSaga";
 //REPORTS
 import reportListSaga from "./report-sagas/reportListSaga";
 import reportSalarySaga from "./report-sagas/reportSalarySaga";
+import reportProfitSaga from "./report-sagas/reportProfitSaga";
 //REPORTS
 import dashboardGetSaga from "./dashboard-sagas/dashboardGetSaga";
 //FILTER
@@ -73,6 +74,7 @@ const sagas = function* sagas() {
   //REPORT
   yield spawn(reportListSaga);
   yield spawn(reportSalarySaga);
+  yield spawn(reportProfitSaga);
   //DASHBOARD
   yield spawn(dashboardGetSaga);
   //FILTER

@@ -138,6 +138,11 @@ export {
   reportSalaryFail,
   reportSalarySuccess,
 } from "./reports-actions/reportSalaryActions";
+export {
+  reportProfitRequest,
+  reportProfitFail,
+  reportProfitSuccess,
+} from "./reports-actions/reportProfitActions";
 //DASHBOARDS
 export {
   dashboardGetFail,

@@ -13,7 +13,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import { ADMIN_ROLES } from "../../../config/user";
-import SalaryFilterDate from "./SalaryFilterDate";
+import FilterDate from "../../globals/filters/FilterDate";
 import moment from "moment";
 
 export const Reports = ({
@@ -52,7 +52,7 @@ export const Reports = ({
         </Col>
       </Row>
       <Row className="mb-2">
-        <SalaryFilterDate setParams={setParams} />
+        <FilterDate setParams={setParams} />
       </Row>
 
       {loadingReport ? (

@@ -7,6 +7,7 @@ import {
 
 //Components
 
+
 export const salesReportTableColumns = (isAdmin = false) => [
   {
     dataField: "location",

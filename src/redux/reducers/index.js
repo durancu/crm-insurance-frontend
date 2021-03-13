@@ -43,9 +43,11 @@ import saleUpdateStatusReducer from "./sales-reducers/saleUpdateStatusReducer";
 
 //REPORT
 import reportReducer from "./reports-reducers/reportReducer";
-import reportSalaryReducer from "./reports-reducers/reportSalaryReducer";
 import reportListStatusReducer from "./reports-reducers/reportListStatusReducer";
+import reportSalaryReducer from "./reports-reducers/reportSalaryReducer";
 import reportSalaryStatusReducer from "./reports-reducers/reportSalaryStatusReducer";
+import reportProfitReducer from "./reports-reducers/reportProfitReducer";
+import reportProfitStatusReducer from "./reports-reducers/reportProfitStatusReducer";
 
 //DASHBOARD
 import dashboardReducer from "./dashboard-reducers/dashboardReducer";
@@ -97,6 +99,8 @@ export default combineReducers({
   reportListStatusReducer,
   reportSalaryReducer,
   reportSalaryStatusReducer,
+  reportProfitReducer,
+  reportProfitStatusReducer,
   //DASHBOARD
   dashboardReducer,
   dashboardStatusReducer,
