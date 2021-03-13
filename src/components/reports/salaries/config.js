@@ -22,19 +22,11 @@ export const salesReportTableColumns = (isAdmin = false) => [
     footer: "TOTALS",
   },
   {
-    dataField: "firstName",
-    text: "First Name",
+    dataField: "sellerName",
+    text: "Seller",
     sort: true,
     footer: (columnData) =>
       `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
-  },
-  {
-    dataField: "lastName",
-    text: "Last Name",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-    footer: "",
   },
   {
     dataField: "position",
