@@ -32,7 +32,6 @@ export const Reports = ({
     reportListRequest({}, params);
   }, [params, reportListRequest]);
 
-  console.log(sales)
   return (
     <>
       <Row className="mt-3 mb-3">

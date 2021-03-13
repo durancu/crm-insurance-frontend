@@ -1,24 +1,106 @@
-import React from 'react'
-//import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-export const Salaries = () => {
-    return (
-        <div>
-            <h3>Salaries</h3>
-        </div>
-    )
-}
+//Actions
+import { reportSalaryRequest } from "../../../redux/actions";
 
-Salaries.propTypes = {
-}
+//Assets
+import "../../assets/App.css";
+//Components
+import { Spinner, Row, Col } from "react-bootstrap";
+import BootstrapTable from "react-bootstrap-table-next";
+import filterFactory from "react-bootstrap-table2-filter";
+import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
+import { ADMIN_ROLES } from "../../../config/user";
+import SalaryFilterDate from "./SalaryFilterDate";
+import moment from "moment";
+
+export const Reports = ({
+  reportSalaryRequest,
+  loadingReport,
+  errorReport,
+  salaries,
+  user,
+}) => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [params, setParams] = useState({
+    month: moment().subtract(0, "month").month(),
+    year: moment().subtract(1, "month").year(),
+  });
+
+  useEffect(() => {
+    user.hasOwnProperty("roles") &&
+      ADMIN_ROLES.includes(user.roles[0]) &&
+      setIsAdmin(true);
+  }, [user, user.roles]);
+
+  useEffect(() => {
+    reportSalaryRequest({}, params);
+  }, [params, reportSalaryRequest]);
+
+  return (
+    <>
+      <Row className="mt-3 mb-3">
+        <Col sm="8">
+          <h2>Salary Report</h2>
+        </Col>
+        <Col>
+          <h3 style={{ textAlign: "right" }}>
+            {`${moment().month(params.month-1).format("MMM")}, ${params.year}`}
+          </h3>
+        </Col>
+      </Row>
+      <Row className="mb-2">
+        <SalaryFilterDate setParams={setParams} />
+      </Row>
+
+      {loadingReport ? (
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <Spinner animation="border" variant="primary" />
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <BootstrapTable
+            bootstrap4
+            keyField="_id"
+            data={salaries}
+            columns={salesReportTableColumns(isAdmin)}
+            striped
+            hover
+            condensed={true}
+            bordered={false}
+            responsive
+            filter={filterFactory()}
+            defaultSorted={salesReportDefaultSorted()}
+            noDataIndication="No registered salaries"
+            // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
+          />
+        </Row>
+      )}
+    </>
+  );
+};
+
+Reports.propTypes = {
+  salaries: PropTypes.array.isRequired,
+  loadingReport: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  errorReport: PropTypes.bool.isRequired,
+  reportSalaryRequest: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
-    
-})
+  salaries: state.reportSalaryReducer.list,
+  loadingReport: state.reportSalaryStatusReducer.loading,
+  errorReport: state.reportSalaryStatusReducer.error,
+  user: state.userProfileReducer.user,
+});
 
 const mapDispatchToProps = {
-    
-}
+  reportSalaryRequest,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Salaries)
+export default connect(mapStateToProps, mapDispatchToProps)(Reports);
