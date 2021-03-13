@@ -1,15 +1,12 @@
 import * as types from "../../actions/actionTypes";
 
 const initialState = {
-  list: {
-    metrics: [],
-    sales: [],
-  },
+  list: []
 };
 
-const reportReducer = (state = initialState, { type, payload }) => {
+const reportSalaryReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case types.REPORT_LIST_SUCCESS:
+    case types.REPORT_SALARY_SUCCESS:
       return { ...state, list: payload };
     
     default:
@@ -17,4 +14,4 @@ const reportReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default reportReducer;
+export default reportSalaryReducer;

@@ -27,6 +27,14 @@ export function priceFormatter(cell, row) {
   return <span>-</span>;
 }
 
+export function salaryFormatter(cell, row) {
+  if (cell) {
+    return <span style={{color:"green",fontWeight:"bold"}}>{Math.round(cell * 100) / 100}</span>;
+  }
+
+  return <span>-</span>;
+}
+
 export function totalPriceFormatter(cell, row) {
   if (cell) {
     return <span><strong>{Math.round(cell * 100) / 100}</strong></span>;

@@ -6,12 +6,9 @@ import { apiGet } from "../../../global/apiMethods";
 import { queryStringFromObject } from "../../../global/utils";
 
 const apiCall = (queryParams) => {
-  queryParams["with_sales"] = 'true';
+  queryParams["with_sales"] = "true";
   queryParams["fields"] = "totalCharge";
 
-  console.log('queryParams', queryParams)
-  console.log(queryStringFromObject(queryParams));
-  
   return apiGet(
     `reports/sales?${queryStringFromObject(queryParams)}`,
     true
@@ -20,7 +17,6 @@ const apiCall = (queryParams) => {
 const sagaRequest = function* sagaRequest({ queryParams }) {
   try {
     const response = yield call(apiCall, queryParams);
-    console.log("response", response);
     yield put(reportListSuccess(response.data));
   } catch (e) {
     yield put(reportListFail());
