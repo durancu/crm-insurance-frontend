@@ -42,13 +42,20 @@ export const companyTypeFormatter = (cell, row) =>
     <Person size="25" color="light" />
   );
 
-export const customerDeleteFormatter = (cell, row) => {
+export const componentDeleteFormatter = (cell, row) => {
   return (
     <Button size="lg" variant="danger" block>
       <Trash />
     </Button>
   );
 };
+
+//---------------------------------------
+
+//INSURERS FUNCTIONS
+export const commissionFormatter = (cell, row) => (
+  <span>{cell ? Math.round(cell * 100) + "%" : "-"}</span>
+);
 
 //---------------------------------------
 
@@ -88,7 +95,6 @@ export function fullNameFormatter(cell, row) {
   );
 }
 
-<<<<<<< HEAD
 export function locationFormatter(cell, row, locationValue) {
   console.log(row, cell, locationValue);
   return (
@@ -97,19 +103,14 @@ export function locationFormatter(cell, row, locationValue) {
         BUSINESS_SETTINGS.locations.find((location) => location.id === cell)
           .name
       }
-=======
-export function locationFormatter(cell, row) {
-  console.log(row, cell);
-  return (
-    <span>
-       {locationName(row.location)} 
->>>>>>> develop
     </span>
   );
 }
 
-export function locationName(locationCode){
-  return BUSINESS_SETTINGS.locations.find(location => location.id === locationCode).name
+export function locationName(locationCode) {
+  return BUSINESS_SETTINGS.locations.find(
+    (location) => location.id === locationCode
+  ).name;
 }
 
 export function customerFormatter(cell, row) {

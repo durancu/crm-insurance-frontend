@@ -7,18 +7,22 @@ import { connect } from "react-redux";
 import {
   customerLoadRequest,
   customerDeleteRequest,
+  customerUpdateRequest,
 } from "../../../redux/actions";
 
 //components
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import overlayFactory from "react-bootstrap-table2-overlay";
+import cellEditFactory from "react-bootstrap-table2-editor";
+
 import { customersDefaultSorted, customersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
 
 function CustomerList({
   customerLoadRequest,
   customerDeleteRequest,
+  customerUpdateRequest,
   customers,
   loading,
   loadingDelete,
@@ -66,7 +70,19 @@ function CustomerList({
             }),
           },
         })}
-        // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
+        cellEdit={cellEditFactory({
+          mode: "click",
+          afterSaveCell: (oldValue, newValue, row, column) => {
+            const fieldName = column.dataField;
+            let payload = {
+              _id: row._id,
+              [fieldName]: newValue,
+            };
+
+            oldValue !== newValue &&
+              customerUpdateRequest(payload, payload._id);
+          },
+        })}
       />
     </>
   );
@@ -75,6 +91,7 @@ function CustomerList({
 CustomerList.propTypes = {
   customerLoadRequest: PropTypes.func.isRequired,
   customerDeleteRequest: PropTypes.func.isRequired,
+  customerUpdateRequest: PropTypes.func.isRequired,
   customers: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   loadingDelete: PropTypes.bool.isRequired,
@@ -89,6 +106,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   customerLoadRequest,
   customerDeleteRequest,
+  customerUpdateRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerList);

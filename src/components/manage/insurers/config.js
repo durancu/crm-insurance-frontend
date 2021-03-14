@@ -1,13 +1,13 @@
 //Functions
 import {
-  companyTypeFormatter,
+  commissionFormatter,
   componentDeleteFormatter,
 } from "../../globals/functions";
-import { textFilter, selectFilter } from "react-bootstrap-table2-filter";
+import { textFilter } from "react-bootstrap-table2-filter";
 
 //Components
 
-export const customersTableColumns = (isAdmin = false, showModal, setId) => [
+export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
   {
     dataField: "name",
     text: "Full Name",
@@ -15,12 +15,6 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     headerAlign: "left",
     sort: true,
     filter: textFilter({ placeholder: "Search" }),
-  },
-  {
-    dataField: "isCompany",
-    text: "Type",
-    sort: true,
-    formatter: companyTypeFormatter,
   },
   {
     dataField: "email",
@@ -35,6 +29,38 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+  },
+  {
+    dataField: "liabilityCommission",
+    text: "Liability",
+    sort: true,
+    align: "center",
+    headerAlign: "center",
+    formatter: commissionFormatter,
+  },
+  {
+    dataField: "cargoCommission",
+    text: "Motor Cargo",
+    sort: true,
+    align: "center",
+    headerAlign: "center",
+    formatter: commissionFormatter,
+  },
+  {
+    dataField: "physicalDamageCommission",
+    text: "Physical Damage",
+    sort: true,
+    align: "center",
+    headerAlign: "center",
+    formatter: commissionFormatter,
+  },
+  {
+    dataField: "wcGlUmbCommission",
+    text: "WC/GL/UMB",
+    sort: true,
+    align: "center",
+    headerAlign: "center",
+    formatter: commissionFormatter,
   },
   {
     dataField: "",
@@ -54,11 +80,11 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   },
 ];
 
-export const customersDefaultSorted = () => [
+export const insurersDefaultSorted = () => [
   { dataField: "name", order: "desc" },
 ];
 
-export const customersOptions = (sellers) =>
+export const insurerOptions = (sellers) =>
   sellers.map((seller) => ({
     value: seller._id,
     label: `${seller.firstName} ${seller.lastName}`,
