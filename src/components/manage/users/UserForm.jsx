@@ -158,7 +158,7 @@ const UserForm = ({
                       required
                     >
                       <option value="" disabled>
-                        Choose a role
+                        Choose Role
                       </option>
                       {BUSINESS_SETTINGS.locations.map((location) => (
                         <option key={location.id} value={location.id}>
@@ -192,7 +192,7 @@ const UserForm = ({
                       required
                     >
                       <option value="" disabled>
-                        Choose a role
+                        Choose Role
                       </option>
                       {USER_SETTINGS.roles.map((role) => (
                         <option key={role.id} value={role.id}>

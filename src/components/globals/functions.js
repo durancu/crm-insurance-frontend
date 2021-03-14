@@ -73,7 +73,7 @@ export function totalPriceFormatter(cell, row) {
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
-  return <strong>{text}</strong>;
+  return <strong>{Math.round(Number(text) * 100) / 100}</strong>;
 }
 
 export function dateFormatter(cell, row) {
@@ -88,6 +88,7 @@ export function fullNameFormatter(cell, row) {
   );
 }
 
+<<<<<<< HEAD
 export function locationFormatter(cell, row, locationValue) {
   console.log(row, cell, locationValue);
   return (
@@ -96,8 +97,19 @@ export function locationFormatter(cell, row, locationValue) {
         BUSINESS_SETTINGS.locations.find((location) => location.id === cell)
           .name
       }
+=======
+export function locationFormatter(cell, row) {
+  console.log(row, cell);
+  return (
+    <span>
+       {locationName(row.location)} 
+>>>>>>> develop
     </span>
   );
+}
+
+export function locationName(locationCode){
+  return BUSINESS_SETTINGS.locations.find(location => location.id === locationCode).name
 }
 
 export function customerFormatter(cell, row) {

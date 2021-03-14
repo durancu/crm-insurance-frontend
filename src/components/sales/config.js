@@ -1,23 +1,15 @@
 //Functions
-import {
-    dateFormatter,
-    priceFormatter,
-    sellerFormatter,
-    footerPriceFormatter,
-    customerFormatter,
-    liabilityInsurerFormatter,
-    cargoInsurerFormatter,
-    physicalDamageInsurerFormatter,
-    wcGlUmbInsurerFormatter,
-    totalPriceFormatter,
-    locationFormatter,
-} from "../globals/functions";
-
-//Components
-
-import { textFilter, selectFilter } from "react-bootstrap-table2-filter";
 import { Type } from "react-bootstrap-table2-editor";
-
+//Components
+import { selectFilter, textFilter } from "react-bootstrap-table2-filter";
+import {
+    cargoInsurerFormatter, customerFormatter, dateFormatter,
+    footerPriceFormatter,
+    liabilityInsurerFormatter,
+    locationFormatter, physicalDamageInsurerFormatter, priceFormatter,
+    sellerFormatter,
+    totalPriceFormatter, wcGlUmbInsurerFormatter
+} from "../globals/functions";
 
 export const salesTableColumns = (isAdmin = false, customers = [], sellers = [], insurers = []) =>
     [
@@ -59,7 +51,7 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
             },
         },
         {
-            dataField: "seller.location",
+            dataField: "location",
             formatter: locationFormatter,
             text: "Location",
             headerStyle: () => {

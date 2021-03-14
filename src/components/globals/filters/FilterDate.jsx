@@ -19,7 +19,7 @@ const FilterDate = ({ setParams }) => {
   return (
     <Form inline>
       <Form.Group>
-        <Form.Label className="my-1 mr-2">Choose a month:</Form.Label>
+        <Form.Label className="my-1 mr-2">Month:</Form.Label>
         <DatePicker
           name="date"
           selected={state}

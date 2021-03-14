@@ -5,11 +5,23 @@ export const DASHBOARD_TEMPLATES = {
         id: 1,
         model: "sales",
         type: "line",
-        title: "Sales By Day",
+        title: "Sales Count By Day",
         width: 6,
         queryParams: {
             dataCriteria: "totalCharge",
-            groupingCriteria: "month",
+            groupingCriteria: "day",
+            aggregation: "count"
+        }
+    },
+    SALES_COUNT_BY_MONTH_LINE: {
+        id: 1,
+        model: "sales",
+        type: "line",
+        title: "Sales Count By Day",
+        width: 6,
+        queryParams: {
+            dataCriteria: "totalCharge",
+            groupingCriteria: "day",
             aggregation: "count"
         }
     },

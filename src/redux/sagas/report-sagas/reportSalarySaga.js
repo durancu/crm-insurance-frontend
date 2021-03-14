@@ -15,7 +15,7 @@ const apiCall = (queryParams) => {
 const sagaRequest = function* sagaRequest({ queryParams }) {
   try {
     const response = yield call(apiCall, queryParams);
-    yield put(reportSalarySuccess(response.data.salaries));
+    yield put(reportSalarySuccess(response.data.data));
   } catch (e) {
     yield put(reportSalaryFail());
   }
