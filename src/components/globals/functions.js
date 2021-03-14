@@ -1,5 +1,11 @@
 import moment from "moment";
+import { connect } from "react-redux";
+//Actions
+import { customerDeleteRequest } from "../../redux/actions";
+
 import { BUSINESS_SETTINGS } from "../../config/company";
+import { Person, Building, Trash } from "react-bootstrap-icons";
+import { Button } from "react-bootstrap";
 
 export const dataTransform = (element) => {
   let insurers = [];
@@ -28,9 +34,27 @@ export function priceFormatter(cell, row) {
   return <span>-</span>;
 }
 
+//CUSTOMERS FUNCTIONS
+export const companyTypeFormatter = (cell, row) =>
+  cell ? (
+    <Building size="25" color="light" />
+  ) : (
+    <Person size="25" color="light" />
+  );
+
+export const customerDeleteFormatter = (cell, row) => {
+  return (
+    <Button size="lg" variant="danger" block>
+      <Trash />
+    </Button>
+  );
+};
+
+//---------------------------------------
+
 export function salaryFormatter(cell, row) {
   if (cell) {
-    return <span style={{color:"green",fontWeight:"bold"}}>{cell}</span>;
+    return <span style={{ color: "green", fontWeight: "bold" }}>{cell}</span>;
   }
 
   return <span>-</span>;
@@ -38,7 +62,11 @@ export function salaryFormatter(cell, row) {
 
 export function totalPriceFormatter(cell, row) {
   if (cell) {
-    return <span><strong>{cell}</strong></span>;
+    return (
+      <span>
+        <strong>{cell}</strong>
+      </span>
+    );
   }
 
   return <span>-</span>;
@@ -61,10 +89,13 @@ export function fullNameFormatter(cell, row) {
 }
 
 export function locationFormatter(cell, row, locationValue) {
-  console.log(row,cell,locationValue);
+  console.log(row, cell, locationValue);
   return (
     <span>
-      {BUSINESS_SETTINGS.locations.find(location => location.id === cell).name}
+      {
+        BUSINESS_SETTINGS.locations.find((location) => location.id === cell)
+          .name
+      }
     </span>
   );
 }
@@ -78,24 +109,24 @@ export function sellerFormatter(cell, row) {
 }
 
 export function liabilityInsurerFormatter(cell, row) {
-  return row.liabilityInsurer ? row.liabilityInsurer.name : '-';
+  return row.liabilityInsurer ? row.liabilityInsurer.name : "-";
 }
 
 export function cargoInsurerFormatter(cell, row) {
-  return row.cargoInsurer ? row.cargoInsurer.name : '-';
+  return row.cargoInsurer ? row.cargoInsurer.name : "-";
 }
 
 export function physicalDamageInsurerFormatter(cell, row) {
-  return row.physicalDamageInsurer ? row.physicalDamageInsurer.name : '-';
+  return row.physicalDamageInsurer ? row.physicalDamageInsurer.name : "-";
 }
 
 export function wcGlUmbInsurerFormatter(cell, row) {
-  return row.wcGlUmbInsurer ? row.wcGlUmbInsurer.name : '-';
+  return row.wcGlUmbInsurer ? row.wcGlUmbInsurer.name : "-";
 }
 
 export function joinedInsurerNamesFormatter(cell, row) {
   if (row.hasOwnProperty("insurerNames") && row.insurerNames.length) {
-    return row.insurerNames.split('/').filter(Boolean).join(' / ')
+    return row.insurerNames.split("/").filter(Boolean).join(" / ");
   }
   return "";
 }
@@ -135,7 +166,7 @@ export const totalChargeCalculate = ({
   physicalDamageCharge,
   wcGlUmbCharge,
   fees,
-  permits
+  permits,
 }) =>
   transformNumber(parseFloat(liabilityCharge)) +
   transformNumber(parseFloat(cargoCharge)) +

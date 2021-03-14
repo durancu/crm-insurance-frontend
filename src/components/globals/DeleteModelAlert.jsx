@@ -4,17 +4,17 @@ import PropTypes from "prop-types";
 import { Modal, Button, Col, Row, Spinner } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 
-const DeleteComponent = ({ id, deleteElement, loading, error, children }) => {
-  const [modal, setModal] = useState(false);
-
-  const handleModal = () => {
-    setModal(!modal);
-  };
+const DeleteModelAlert = ({
+  modal,
+  handleModal,
+  id,
+  deleteElement,
+  loading,
+  error,
+  children,
+}) => {
   return (
     <>
-      <Button size="lg" variant="danger" onClick={handleModal}>
-        <Trash />
-      </Button>
       <Modal centered show={modal} onHide={handleModal}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -40,7 +40,10 @@ const DeleteComponent = ({ id, deleteElement, loading, error, children }) => {
                 size="lg"
                 block
                 variant="danger"
-                onClick={() => deleteElement(id)}
+                onClick={() => {
+                  deleteElement(id);
+                  handleModal();
+                }}
                 disabled={loading}
               >
                 Yes
@@ -53,11 +56,11 @@ const DeleteComponent = ({ id, deleteElement, loading, error, children }) => {
   );
 };
 
-DeleteComponent.propTypes = {
+DeleteModelAlert.propTypes = {
   id: PropTypes.string.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.bool,
   deleteElement: PropTypes.func.isRequired,
 };
 
-export default DeleteComponent;
+export default DeleteModelAlert;
