@@ -20,7 +20,7 @@ export const Reports = ({
   reportProfitRequest,
   loadingReport,
   errorReport,
-  salaries,
+  data,
   user,
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -41,18 +41,22 @@ export const Reports = ({
 
   return (
     <>
-      <Row className="mt-3 mb-3">
+      <Row className="mt-4 mb-4">
         <Col sm="8">
           <h2>Profits Report</h2>
         </Col>
         <Col>
-          <h3 style={{ textAlign: "right" }}>
-            {`${moment().month(params.month-1).format("MMM")}, ${params.year}`}
-          </h3>
         </Col>
       </Row>
-      <Row className="mb-2">
+      <Row className="mt-3 mb-3">
+        <Col sm="8">  
         <FilterDate setParams={setParams} />
+        </Col>
+        <Col sm="4">
+          <h4 style={{ textAlign: "right" }}>
+            {`${moment().month(params.month-1).format("MMM")}, ${params.year}`}
+          </h4>
+        </Col>
       </Row>
 
       {loadingReport ? (
@@ -66,7 +70,7 @@ export const Reports = ({
           <BootstrapTable
             bootstrap4
             keyField="_id"
-            data={salaries}
+            data={data}
             columns={salesReportTableColumns(isAdmin)}
             striped
             hover
@@ -75,7 +79,7 @@ export const Reports = ({
             responsive
             filter={filterFactory()}
             defaultSorted={salesReportDefaultSorted()}
-            noDataIndication="No registered salaries"
+            noDataIndication="No payroll data"
             // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
           />
         </Row>
@@ -85,7 +89,7 @@ export const Reports = ({
 };
 
 Reports.propTypes = {
-  salaries: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   loadingReport: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
   errorReport: PropTypes.bool.isRequired,
@@ -93,7 +97,7 @@ Reports.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  salaries: state.reportProfitReducer.list,
+  data: state.reportProfitReducer.list,
   loadingReport: state.reportProfitStatusReducer.loading,
   errorReport: state.reportProfitStatusReducer.error,
   user: state.userProfileReducer.user,

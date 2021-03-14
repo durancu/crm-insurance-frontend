@@ -8,7 +8,7 @@ import {
 
 //Components
 
-export const salesReportTableColumns = (isAdmin = false) => [
+export const payrollReportTableColumns = (isAdmin = false) => [
   {
     dataField: "location",
     text: "Location",
@@ -88,6 +88,6 @@ export const salesReportTableColumns = (isAdmin = false) => [
   },
 ];
 
-export const salesReportDefaultSorted = () => [
+export const payrollReportDefaultSorted = () => [
   { dataField: "soldAt", order: "desc" },
 ];

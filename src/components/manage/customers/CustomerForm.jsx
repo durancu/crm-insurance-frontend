@@ -116,7 +116,7 @@ const CustomerForm = ({
                       required
                     >
                       <option value="" disabled>
-                        Choose a type
+                        Choose Type
                       </option>
                       <option value="true">Business</option>
                       <option value="false">Individual</option>

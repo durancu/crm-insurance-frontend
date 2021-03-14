@@ -52,7 +52,7 @@ export const salesReportTableColumns = (isAdmin = false) =>
             },
         },
         {
-            dataField: "seller.location",
+            dataField: "location",
             text: "Location",
             headerStyle: () => {
                 return { width: "10%" };

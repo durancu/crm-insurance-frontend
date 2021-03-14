@@ -7,7 +7,7 @@ import { queryStringFromObject } from "../../../global/utils";
 
 const apiCall = (queryParams) => {
   return apiGet(
-    `reports/salaries?${queryStringFromObject(queryParams)}`,//AGREGAR LA RUTA DEL REPORTE DEL PROFIT
+    `reports/profits?${queryStringFromObject(queryParams)}`,
     true
   ).catch((error) => console.log(error));
 };
@@ -15,7 +15,7 @@ const apiCall = (queryParams) => {
 const sagaRequest = function* sagaRequest({ queryParams }) {
   try {
     const response = yield call(apiCall, queryParams);
-    yield put(reportProfitSuccess(response.data.salaries));//VERIFICA EN LA API EL NOMBRE DEL ARREGLO QUE DEVUELVE LA DATA DEL RESPONSE
+    yield put(reportProfitSuccess(response.data.data));
   } catch (e) {
     yield put(reportProfitFail());
   }
