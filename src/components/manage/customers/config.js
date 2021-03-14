@@ -40,7 +40,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     dataField: "",
     text: "",
     headerStyle: () => {
-      return { width: "5%" };
+      return { width: "64px" };
     },
     align: "center",
     headerAlign: "center",
