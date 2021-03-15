@@ -95,14 +95,10 @@ export function fullNameFormatter(cell, row) {
   );
 }
 
-export function locationFormatter(cell, row, locationValue) {
-  console.log(row, cell, locationValue);
+export function locationFormatter(cell, row) {
   return (
     <span>
-      {
-        BUSINESS_SETTINGS.locations.find((location) => location.id === cell)
-          .name
-      }
+       {locationName(row.location)} 
     </span>
   );
 }

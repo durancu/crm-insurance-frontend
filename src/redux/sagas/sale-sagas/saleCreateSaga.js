@@ -3,7 +3,6 @@ import { call, put, spawn, takeLatest } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
 import {
   saleCreateFail,
-  saleCreateSuccess,
   saleListRequest,
 } from "../../actions";
 
@@ -15,7 +14,6 @@ const apiCall = (data) =>
 const sagaRequest = function* sagaRequest({ payload }) {
   try {
     const response = yield call(apiCall, payload);
-   // yield put(saleCreateSuccess());
     yield put(saleListRequest());
   } catch (e) {
     yield put(saleCreateFail());
