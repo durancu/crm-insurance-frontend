@@ -41,7 +41,7 @@ export const companyTypeFormatter = (cell, row) =>
 
 export const componentDeleteFormatter = (cell, row) => {
   return (
-    <Button size="lg" variant="danger" block>
+    <Button size="sm" variant="danger" block>
       <Trash />
     </Button>
   );
@@ -63,7 +63,7 @@ export const isConfirmFormatter = (cell) =>(
 
 export const componentPasswordFormatter = (cell, row) => {
   return (
-    <Button size="lg" variant="success" block>
+    <Button size="sm" margin="5px" variant="success" block>
       <Key />
     </Button>
   );
@@ -152,6 +152,14 @@ export function joinedInsurerNamesFormatter(cell, row) {
     return row.insurerNames.split("/").filter(Boolean).join(" / ");
   }
   return "";
+}
+
+export function buttonHeaderFormatter(cell,row){
+  return { width: "32px"};
+}
+
+export function buttonCellFormatter(cell,row){
+  return { padding:"2px 0px 2px 0px" };
 }
 
 export function insurerNameFormatter(cell, row) {

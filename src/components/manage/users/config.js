@@ -4,6 +4,8 @@ import {
   isConfirmFormatter,
   componentPasswordFormatter,
   baseSalaryFormatter,
+  buttonCellFormatter,
+  buttonHeaderFormatter,
 } from "../../globals/functions";
 import { textFilter } from "react-bootstrap-table2-filter";
 
@@ -109,9 +111,8 @@ export const usersTableColumns = (
     align: "center",
     headerAlign: "center",
     formatter: isConfirmFormatter,
-    headerStyle: () => {
-      return { width: "64px" };
-    },
+    headerStyle: buttonHeaderFormatter,
+    style: buttonCellFormatter,
   },
   {
     dataField: "isAdmin",
@@ -120,16 +121,14 @@ export const usersTableColumns = (
     align: "center",
     headerAlign: "center",
     formatter: isConfirmFormatter,
-    headerStyle: () => {
-      return { width: "64px" };
-    },
+    headerStyle: buttonHeaderFormatter,
+    style: buttonCellFormatter,
   },
   {
     dataField: "",
     text: "",
-    headerStyle: () => {
-      return { width: "64px" };
-    },
+    headerStyle: buttonHeaderFormatter,
+    style: buttonCellFormatter,
     align: "center",
     headerAlign: "center",
     formatter: componentPasswordFormatter,
@@ -143,9 +142,8 @@ export const usersTableColumns = (
   {
     dataField: "",
     text: "",
-    headerStyle: () => {
-      return { width: "64px" };
-    },
+    headerStyle: buttonHeaderFormatter,
+    style: buttonCellFormatter,
     align: "center",
     headerAlign: "center",
     formatter: componentDeleteFormatter,

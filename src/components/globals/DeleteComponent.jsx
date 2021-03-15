@@ -19,7 +19,7 @@ const DeleteComponent = ({ id, deleteElement, loading, error, children }) => {
         <Modal.Header closeButton>
           <Modal.Title>
             {loading && <Spinner animation="border" variant="danger" />}
-            Do you want to delete the {children}?
+            Do you want to delete this {children}?
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
