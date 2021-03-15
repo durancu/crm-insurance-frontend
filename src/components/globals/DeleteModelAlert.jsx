@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import PropTypes from "prop-types";
 import { Modal, Button, Col, Row, Spinner } from "react-bootstrap";
-import { Trash } from "react-bootstrap-icons";
 
 const DeleteModelAlert = ({
   modal,

@@ -3,7 +3,6 @@ import {
   priceFormatter,
   footerPriceFormatter,
   salaryFormatter,
-  totalGrossProfitFormatter,
   locationFormatter,
 } from "../../globals/functions";
 

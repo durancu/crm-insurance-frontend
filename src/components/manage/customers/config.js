@@ -3,7 +3,7 @@ import {
   companyTypeFormatter,
   componentDeleteFormatter,
 } from "../../globals/functions";
-import { textFilter, selectFilter } from "react-bootstrap-table2-filter";
+import { textFilter } from "react-bootstrap-table2-filter";
 
 //Components
 

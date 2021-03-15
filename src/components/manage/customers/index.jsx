@@ -8,17 +8,17 @@ import CustomerList from "./CustomerList";
 export default function Customers() {
   const [modal, setModal] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [dataForm, setDataForm] = useState({});
+  /* const [dataForm, setDataForm] = useState({}); */
 
   const showModal = () => {
     edit && setEdit(false);
     setModal(!modal);
   };
 
-  const editItem = (data) => {
+  /* const editItem = (data) => {
     edit || setEdit(true);
     setDataForm(data);
-  };
+  }; */
 
   return (
     <>
@@ -33,8 +33,8 @@ export default function Customers() {
           <CustomerForm
             showModal={showModal}
             modal={modal}
-            edit={edit}
-            dataForm={dataForm}
+            edit={false}
+            dataForm={{}}
           />
         </Col>
       </Row>

@@ -26,8 +26,8 @@ const UserForm = ({
   userUpdateRequest,
   showModal,
   modal,
-  edit,
   user,
+  edit=false,
 }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let defaultForm = {

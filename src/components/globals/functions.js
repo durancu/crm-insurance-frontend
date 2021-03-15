@@ -1,10 +1,7 @@
 import moment from "moment";
-import { connect } from "react-redux";
-//Actions
-import { customerDeleteRequest } from "../../redux/actions";
 
 import { BUSINESS_SETTINGS } from "../../config/company";
-import { Person, Building, Trash } from "react-bootstrap-icons";
+import { Person, Building, Trash, Check ,Key} from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 
 export const dataTransform = (element) => {
@@ -59,6 +56,27 @@ export const commissionFormatter = (cell, row) => (
 
 //---------------------------------------
 
+//USERS FUNCTIONS
+export const isConfirmFormatter = (cell) =>(
+  cell ? <Check color="royalblue" size={40}/> : <strong>-</strong>
+)
+
+export const componentPasswordFormatter = (cell, row) => {
+  return (
+    <Button size="lg" variant="success" block>
+      <Key />
+    </Button>
+  );
+};
+
+export function baseSalaryFormatter(cell, row) {
+  if (cell) {
+    return <span style={{ color: "black", fontWeight: "bold" }}>{Math.round(cell * 100) / 100}</span>;
+  }
+
+  return <span>-</span>;
+}
+//---------------------------------------
 export function salaryFormatter(cell, row) {
   if (cell) {
     return <span style={{ color: "green", fontWeight: "bold" }}>{cell}</span>;
@@ -96,11 +114,7 @@ export function fullNameFormatter(cell, row) {
 }
 
 export function locationFormatter(cell, row) {
-  return (
-    <span>
-       {locationName(row.location)} 
-    </span>
-  );
+  return <span>{locationName(row.location)}</span>;
 }
 
 export function locationName(locationCode) {

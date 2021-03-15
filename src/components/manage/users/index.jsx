@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 //components
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
+import UserForm from "./UserForm";
 import UserList from "./UserList";
 
 export default function Users() {
+  const [modal, setModal] = useState(false);
+  //Functions
+  const showModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <>
       <Row className="mt-3">
-        <h1>Users</h1>
+        <Col sm="10">
+          <h1>Users</h1>
+        </Col>
+        <Col>
+          <Button variant="primary" onClick={showModal}>
+            Add New User
+          </Button>
+          <UserForm
+            showModal={showModal}
+            modal={modal}
+            edit={false}
+          />
+        </Col>
       </Row>
       <Row>
         <Col sm="12" lg="12">

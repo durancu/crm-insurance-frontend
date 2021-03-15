@@ -26,7 +26,6 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
   });
   const [dateRangeName, setDateRangeName] = useState(defaultForm.dateRangeName);
   const [currentDateRange, setCurrentDateRange] = useState("");
-  const [previousDate, setPreviousDate] = useState("");
 
   useEffect(() => {
     setDateRange(currentDateRange);
@@ -52,10 +51,6 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
       [target.name]: moment(target.value).format("YYYY-MM-DD"),
     }));
     console.log(dateRange);
-  };
-
-  const handleFocusDate = ({ target }) => {
-    setPreviousDate(target.value);
   };
 
   return (
@@ -94,7 +89,6 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
             name="startDate"
             value={dateRange.startDate}
             onChange={handleChangeDate}
-            onFocus={handleFocusDate}
             className="my-1 mr-2"
             required
           />
@@ -108,7 +102,6 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
             name="endDate"
             value={dateRange.endDate}
             onChange={handleChangeDate}
-            onFocus={handleFocusDate}
             className="my-1 mr-2"
             required
           />
