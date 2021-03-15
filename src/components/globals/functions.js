@@ -174,8 +174,8 @@ export function buttonHeaderFormatter(cell, row) {
   return { width: "32px" };
 }
 
-export function buttonCellFormatter(cell, row) {
-  return { padding: "0px" };
+export function buttonCellFormatter(cell,row){
+  return { padding:"0px", width: "32px" };
 }
 
 export function insurerNameFormatter(cell, row) {
