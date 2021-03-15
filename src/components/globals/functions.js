@@ -159,7 +159,7 @@ export function buttonHeaderFormatter(cell,row){
 }
 
 export function buttonCellFormatter(cell,row){
-  return { padding:"2px 0px 2px 0px" };
+  return { padding:"0px" };
 }
 
 export function insurerNameFormatter(cell, row) {

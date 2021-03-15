@@ -38,16 +38,16 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
         </Col>
       </Row>
       <Row className="mb-2">
-        <Col lg="10" sm="6">
+        <Col lg="10" md="12" sm="12">
           <DateRangeFilter />
         </Col>
       </Row>
       <Row>
-        <Col lg="9" sm="8">
+        <Col lg="9" md="12" sm="12">
           <Row>
           {charts &&
             charts.map((chartData, key) => (
-              <Col sm="6" key={key}>
+              <Col sm="6" md="6" sm="12" key={key}>
                 <DashboardChart chartData={chartData} />
               </Col>
             ))}

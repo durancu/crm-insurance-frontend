@@ -6,6 +6,7 @@ import {
   baseSalaryFormatter,
   buttonCellFormatter,
   buttonHeaderFormatter,
+  locationFormatter,
 } from "../../globals/functions";
 import { textFilter } from "react-bootstrap-table2-filter";
 
@@ -17,144 +18,173 @@ export const usersTableColumns = (
   setId,
   showPasswordModal
 ) => [
-  {
-    dataField: "firstName",
-    text: "First Name",
-    align: "left",
-    headerAlign: "left",
-    sort: true,
-    filter: textFilter({ placeholder: "Search" }),
-  },
-  {
-    dataField: "lastName",
-    text: "Last Name",
-    align: "left",
-    headerAlign: "left",
-    sort: true,
-    filter: textFilter({ placeholder: "Search" }),
-  },
-  {
-    dataField: "username",
-    text: "User Name",
-    align: "left",
-    headerAlign: "left",
-    sort: true,
-    filter: textFilter({ placeholder: "Search" }),
-    headerStyle: () => {
-      return { width: "150px" };
+    {
+      dataField: "username",
+      text: "User Name",
+      align: "left",
+      headerAlign: "left",
+      headerStyle: () => {
+        return { width: "8%" };
+      },
+      sort: true,
+      filter: textFilter({ placeholder: "Search" }),
+      headerStyle: () => {
+        return { width: "150px" };
+      },
     },
-  },
-  {
-    dataField: "email",
-    text: "Email",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    dataField: "phone",
-    text: "Phone",
-    sort: true,
-    align: "center",
-    headerAlign: "center",
-    headerStyle: () => {
-      return { width: "130px" };
+    {
+      dataField: "firstName",
+      text: "First Name",
+      align: "left",
+      headerAlign: "left",
+      headerStyle: () => {
+        return { width: "9%" };
+      },
+      sort: true,
+      filter: textFilter({ placeholder: "Search" }),
     },
-  },
-  {
-    dataField: "location",
-    text: "Location",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-    filter: textFilter({ placeholder: "Search" }),
-    headerStyle: () => {
-      return { width: "100px" };
+    {
+      dataField: "lastName",
+      text: "Last Name",
+      align: "left",
+      headerAlign: "left",
+      headerStyle: () => {
+        return { width: "9%" };
+      },
+      sort: true,
+      filter: textFilter({ placeholder: "Search" }),
     },
-  },
-  {
-    dataField: "position",
-    text: "Position",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-    headerStyle: () => {
-      return { width: "220px" };
+    {
+      dataField: "email",
+      text: "Email",
+      sort: true,
+      align: "left",
+      headerAlign: "left",
+      headerStyle: () => {
+        return { width: "12%" };
+      },
     },
-  },
-  {
-    dataField: "roles",
-    text: "Roles",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-    headerStyle: () => {
-      return { width: "100px" };
+    {
+      dataField: "phone",
+      text: "Phone",
+      sort: true,
+      align: "center",
+      headerAlign: "center",
+      headerStyle: () => {
+        return { width: "6%" };
+      },
     },
-  },
-  {
-    dataField: "baseSalary",
-    text: "Base Salary",
-    sort: true,
-    align: "right",
-    headerAlign: "right",
-    formatter: baseSalaryFormatter,
-    headerStyle: () => {
-      return { width: "130px" };
+    {
+      dataField: "location",
+      text: "Location",
+      sort: true,
+      align: "left",
+      headerAlign: "left",
+      formatter: locationFormatter,
+      filter: textFilter({ placeholder: "Search" }),
+      headerStyle: () => {
+        return { width: "10%" };
+      },
     },
-  },
+    {
+      dataField: "position",
+      text: "Position",
+      sort: true,
+      align: "left",
+      headerAlign: "left",
+      headerStyle: () => {
+        return { width: "10%" };
+      },
+    },
+    {
+      dataField: "roles",
+      text: "Roles",
+      sort: true,
+      align: "left",
+      headerAlign: "left",
+      headerStyle: () => {
+        return { width: "10%" };
+      },
+    },
+    {
+      dataField: "baseSalary",
+      text: "Base Salary",
+      sort: true,
+      align: "right",
+      headerAlign: "left",
+      formatter: baseSalaryFormatter,
+      headerStyle: () => {
+        return { width: "4%" };
+      },
+    },
+    {
+      dataField: "",
+      text: "",
+      headerStyle: () => {
+        return { width: "20px" };
+      },
+      editable: false,
+    },
 
-  {
-    dataField: "isSeller",
-    text: "Seller",
-    sort: true,
-    align: "center",
-    headerAlign: "center",
-    formatter: isConfirmFormatter,
-    headerStyle: buttonHeaderFormatter,
-    style: buttonCellFormatter,
-  },
-  {
-    dataField: "isAdmin",
-    text: "Admin",
-    sort: true,
-    align: "center",
-    headerAlign: "center",
-    formatter: isConfirmFormatter,
-    headerStyle: buttonHeaderFormatter,
-    style: buttonCellFormatter,
-  },
-  {
-    dataField: "",
-    text: "",
-    headerStyle: buttonHeaderFormatter,
-    style: buttonCellFormatter,
-    align: "center",
-    headerAlign: "center",
-    formatter: componentPasswordFormatter,
-    events: {
-      onClick: (e, column, columnIndex, row, rowIndex) => {
-        setId(row._id);
-        showPasswordModal();
+    /* {
+      dataField: "isSeller",
+      text: "Seller",
+      sort: true,
+      align: "center",
+      headerAlign: "center",
+      formatter: isConfirmFormatter,
+      headerStyle: buttonHeaderFormatter,
+      style: buttonCellFormatter,
+    },
+    {
+      dataField: "isAdmin",
+      text: "Admin",
+      sort: true,
+      align: "center",
+      headerAlign: "center",
+      formatter: isConfirmFormatter,
+      headerStyle: buttonHeaderFormatter,
+      style: buttonCellFormatter,
+    }, */
+    {
+      dataField: "",
+      text: "",
+      headerStyle: buttonHeaderFormatter,
+      style: buttonCellFormatter,
+      align: "center",
+      headerAlign: "center",
+      formatter: componentPasswordFormatter,
+      events: {
+        onClick: (e, column, columnIndex, row, rowIndex) => {
+          setId(row._id);
+          showPasswordModal();
+        },
       },
     },
-  },
-  {
-    dataField: "",
-    text: "",
-    headerStyle: buttonHeaderFormatter,
-    style: buttonCellFormatter,
-    align: "center",
-    headerAlign: "center",
-    formatter: componentDeleteFormatter,
-    events: {
-      onClick: (e, column, columnIndex, row, rowIndex) => {
-        setId(row._id);
-        showModal();
+    {
+      dataField: "",
+      text: "",
+      headerStyle: () => {
+        return { margin:"0px", padding:"0px", width: "2px" };
+      },
+      editable: false,
+    },
+    {
+      dataField: "",
+      text: "",
+      headerStyle: buttonHeaderFormatter,
+      style: buttonCellFormatter,
+      align: "center",
+      headerAlign: "center",
+      formatter: componentDeleteFormatter,
+      events: {
+        onClick: (e, column, columnIndex, row, rowIndex) => {
+          setId(row._id);
+          showModal();
+        },
       },
     },
-  },
-];
+  ];
 
 export const usersDefaultSorted = () => [{ dataField: "name", order: "desc" }];
 
