@@ -75,7 +75,7 @@ export const COMPONENT_LIST = [
   },
   {
     title: "Profile",
-    url: "/v",
+    url: "/profile",
     component: Profile,
     protected: true,
   },

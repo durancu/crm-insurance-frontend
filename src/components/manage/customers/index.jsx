@@ -23,7 +23,7 @@ export default function Customers() {
         </Col>
       </Row>
       <Row className="mt-0 mb-2">
-      <Col style={{textAlign:"right"}}> 
+        <Col style={{ textAlign: "right" }}>
           <Button variant="primary" onClick={showModal}>
             Add New Customer
           </Button>
@@ -40,8 +40,6 @@ export default function Customers() {
           <CustomerList />
         </Col>
       </Row>
-      
-      
     </>
   );
 }

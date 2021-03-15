@@ -18,15 +18,13 @@ export default function Users() {
         <Col sm="10">
           <h1>Users</h1>
         </Col>
-        <Col>
+      </Row>
+      <Row className="mt-0 mb-2">
+        <Col style={{ textAlign: "right" }}>
           <Button variant="primary" onClick={showModal}>
             Add New User
           </Button>
-          <UserForm
-            showModal={showModal}
-            modal={modal}
-            edit={false}
-          />
+          <UserForm showModal={showModal} modal={modal} edit={false} />
         </Col>
       </Row>
       <Row>

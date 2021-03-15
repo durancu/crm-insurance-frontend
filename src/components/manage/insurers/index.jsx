@@ -1,7 +1,7 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 //components
-import { Row, Col,Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import InsurerForm from "./InsurerForm";
 import InsurerList from "./InsurerList";
 
@@ -9,8 +9,7 @@ export default function Insurers() {
   const [modal, setModal] = useState(false);
   const showModal = () => {
     setModal(!modal);
-  }
-
+  };
 
   return (
     <>
@@ -18,9 +17,11 @@ export default function Insurers() {
         <Col sm="10">
           <h1>Insurers</h1>
         </Col>
-        <Col>
+      </Row>
+      <Row className="mt-0 mb-2">
+        <Col style={{ textAlign: "right" }}>
           <Button variant="primary" onClick={showModal}>
-            Create
+            Add New Insurer
           </Button>
           <InsurerForm
             showModal={showModal}
