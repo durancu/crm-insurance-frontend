@@ -1,8 +1,10 @@
 import moment from "moment";
 
 import { BUSINESS_SETTINGS } from "../../config/company";
-import { Person, Building, Trash, Check ,Key} from "react-bootstrap-icons";
-import { Button } from "react-bootstrap";
+import { Person, Building, Trash, Check, Key, Gear } from "react-bootstrap-icons";
+import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { USER_SETTINGS } from "../../config/user";
+import { RoleIcons } from "./RoleIcons";
 
 export const dataTransform = (element) => {
   let insurers = [];
@@ -57,9 +59,8 @@ export const commissionFormatter = (cell, row) => (
 //---------------------------------------
 
 //USERS FUNCTIONS
-export const isConfirmFormatter = (cell) =>(
-  cell ? <Check color="royalblue" size={40}/> : <strong>-</strong>
-)
+export const isConfirmFormatter = (cell) =>
+  cell ? <Check color="royalblue" size={40} /> : <strong>-</strong>;
 
 export const componentPasswordFormatter = (cell, row) => {
   return (
@@ -71,11 +72,26 @@ export const componentPasswordFormatter = (cell, row) => {
 
 export function baseSalaryFormatter(cell, row) {
   if (cell) {
-    return <span style={{ color: "black", fontWeight: "bold" }}>{Math.round(cell * 100) / 100}</span>;
+    return (
+      <span style={{ color: "black", fontWeight: "bold" }}>
+        {Math.round(cell * 100) / 100}
+      </span>
+    );
   }
 
   return <span>-</span>;
 }
+
+export const userRolesFormatter = (cell, row) => {
+  const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
+  const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon
+
+  return (
+    <RoleIcons title={name}>
+      <Icon size="24px"/>
+    </RoleIcons>
+  );
+};
 //---------------------------------------
 export function salaryFormatter(cell, row) {
   if (cell) {
@@ -154,12 +170,12 @@ export function joinedInsurerNamesFormatter(cell, row) {
   return "";
 }
 
-export function buttonHeaderFormatter(cell,row){
-  return { width: "32px"};
+export function buttonHeaderFormatter(cell, row) {
+  return { width: "32px" };
 }
 
-export function buttonCellFormatter(cell,row){
-  return { padding:"0px" };
+export function buttonCellFormatter(cell, row) {
+  return { padding: "0px" };
 }
 
 export function insurerNameFormatter(cell, row) {
