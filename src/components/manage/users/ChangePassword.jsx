@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -20,13 +20,9 @@ const ChangePassword = ({
     password: "",
     passwordConfirm: "",
   });
-  const [errors, setErrors] = useState({ });
-
+  const [errors, setErrors] = useState({});
 
   //Functions
-  useEffect(() => {
-   console.log(`id`, id)
-  })
   const handleChange = ({ target }) => {
     setForm((form) => ({ ...form, [target.name]: target.value }));
   };
@@ -38,6 +34,8 @@ const ChangePassword = ({
     setErrors(result);
 
     if (!Object.keys(result).length) {
+      delete form["passwordConfirm"];
+
       userUpdateRequest(form, id);
 
       setTimeout(() => {
@@ -118,7 +116,8 @@ const ChangePassword = ({
                   {errors.passwordConfirm}
                 </Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  {form.password !== form.passwordConfirm && `Not coincide passwords`}
+                  {form.password !== form.passwordConfirm &&
+                    `Not coincide passwords`}
                 </Form.Control.Feedback>
               </Form.Group>
             </Modal.Body>

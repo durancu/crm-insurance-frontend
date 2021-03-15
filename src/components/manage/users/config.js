@@ -16,8 +16,16 @@ export const usersTableColumns = (
   showPasswordModal
 ) => [
   {
-    dataField: "name",
-    text: "Full Name",
+    dataField: "firstName",
+    text: "First Name",
+    align: "left",
+    headerAlign: "left",
+    sort: true,
+    filter: textFilter({ placeholder: "Search" }),
+  },
+  {
+    dataField: "lastName",
+    text: "Last Name",
     align: "left",
     headerAlign: "left",
     sort: true,
