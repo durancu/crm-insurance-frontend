@@ -15,18 +15,15 @@ export default function Customers() {
     setModal(!modal);
   };
 
-  /* const editItem = (data) => {
-    edit || setEdit(true);
-    setDataForm(data);
-  }; */
-
   return (
     <>
       <Row className="mt-3">
         <Col sm="10">
-          <h1>Customers</h1>
+          <h2>Customers</h2>
         </Col>
-        <Col>
+      </Row>
+      <Row className="mt-0 mb-2">
+      <Col style={{textAlign:"right"}}> 
           <Button variant="primary" onClick={showModal}>
             Add New Customer
           </Button>
@@ -43,6 +40,8 @@ export default function Customers() {
           <CustomerList />
         </Col>
       </Row>
+      
+      
     </>
   );
 }

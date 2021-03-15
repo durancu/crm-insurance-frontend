@@ -12,9 +12,12 @@ import { textFilter } from "react-bootstrap-table2-filter";
 export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   {
     dataField: "name",
-    text: "Full Name",
+    text: "Name",
     align: "left",
     headerAlign: "left",
+    headerStyle: () => {
+      return { width: "25%" };
+    },
     sort: true,
     filter: textFilter({ placeholder: "Search" }),
   },
@@ -22,6 +25,9 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     dataField: "isCompany",
     text: "Type",
     sort: true,
+    headerStyle: () => {
+      return { width: "80px" };
+    },
     formatter: companyTypeFormatter,
   },
   {
@@ -30,6 +36,9 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    headerStyle: () => {
+      return { width: "25%" };
+    },
   },
   {
     dataField: "phone",
@@ -37,6 +46,17 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    headerStyle: () => {
+      return { width: "30%" };
+    },
+  },
+  {
+    dataField: "",
+    text: "",
+    headerStyle: () => {
+      return { margin:"0px", padding:"0px", width: "3px" };
+    },
+    editable: false,
   },
   {
     dataField: "",
