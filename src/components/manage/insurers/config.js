@@ -1,5 +1,7 @@
 //Functions
 import {
+  buttonCellFormatter,
+  buttonHeaderFormatter,
   commissionFormatter,
   componentDeleteFormatter,
 } from "../../globals/functions";
@@ -65,9 +67,8 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
   {
     dataField: "",
     text: "",
-    headerStyle: () => {
-      return { width: "64px" };
-    },
+    headerStyle: buttonHeaderFormatter,
+    style: buttonCellFormatter,
     align: "center",
     headerAlign: "center",
     formatter: componentDeleteFormatter,

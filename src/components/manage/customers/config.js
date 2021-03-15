@@ -1,5 +1,7 @@
 //Functions
 import {
+  buttonCellFormatter,
+  buttonHeaderFormatter,
   companyTypeFormatter,
   componentDeleteFormatter,
 } from "../../globals/functions";
@@ -39,9 +41,8 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   {
     dataField: "",
     text: "",
-    headerStyle: () => {
-      return { width: "64px" };
-    },
+    headerStyle: buttonHeaderFormatter,
+    style: buttonCellFormatter,
     align: "center",
     headerAlign: "center",
     formatter: componentDeleteFormatter,
