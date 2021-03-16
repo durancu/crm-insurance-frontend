@@ -30,7 +30,23 @@ export const usersTableColumns = (
     sort: true,
     filter: textFilter({ placeholder: "Search" }),
     headerStyle: () => {
-      return { width: "150px" };
+      return { width: "10%" };
+    },
+  },
+  {
+    dataField: "roles",
+    text: "Role",
+    align: "left",
+    headerAlign: "left",
+    sort: true,
+    filter: textFilter({ placeholder: "Search" }),
+    formatter: userRolesFormatter,
+    headerStyle: () => {
+      return { width: "12%" };
+    },
+    editor: {
+      type: Type.SELECT,
+      options: rolesOptions(),
     },
   },
   {
@@ -39,7 +55,7 @@ export const usersTableColumns = (
     align: "left",
     headerAlign: "left",
     headerStyle: () => {
-      return { width: "9%" };
+      return { width: "10%" };
     },
     sort: true,
     filter: textFilter({ placeholder: "Search" }),
@@ -50,7 +66,7 @@ export const usersTableColumns = (
     align: "left",
     headerAlign: "left",
     headerStyle: () => {
-      return { width: "9%" };
+      return { width: "10%" };
     },
     sort: true,
     filter: textFilter({ placeholder: "Search" }),
@@ -62,7 +78,7 @@ export const usersTableColumns = (
     align: "left",
     headerAlign: "left",
     headerStyle: () => {
-      return { width: "12%" };
+      return { width: "15%" };
     },
   },
   {
@@ -72,7 +88,7 @@ export const usersTableColumns = (
     align: "center",
     headerAlign: "center",
     headerStyle: () => {
-      return { width: "6%" };
+      return { width: "10%" };
     },
   },
   {
@@ -84,7 +100,7 @@ export const usersTableColumns = (
     formatter: locationFormatter,
     filter: textFilter({ placeholder: "Search" }),
     headerStyle: () => {
-      return { width: "10%" };
+      return { width: "12%" };
     },
   },
   {
@@ -94,23 +110,10 @@ export const usersTableColumns = (
     align: "left",
     headerAlign: "left",
     headerStyle: () => {
-      return { width: "10%" };
+      return { width: "12%" };
     },
   },
-  {
-    dataField: "roles",
-    text: "Role",
-    align: "center",
-    headerAlign: "center",
-    formatter: userRolesFormatter,
-    headerStyle: () => {
-      return { width: "10%" };
-    },
-    editor: {
-      type: Type.SELECT,
-      options: rolesOptions(),
-    },
-  },
+
   {
     dataField: "baseSalary",
     text: "Base Salary",
@@ -131,12 +134,12 @@ export const usersTableColumns = (
     editable: false,
   },
   {
-    dataField: "",
+    dataField: "button-password",
     text: "",
     headerStyle: buttonHeaderFormatter,
     style: buttonCellFormatter,
-    align: "center",
-    headerAlign: "center",
+    align: "right",
+    headerAlign: "right",
     formatter: componentPasswordFormatter,
     events: {
       onClick: (e, column, columnIndex, row, rowIndex) => {
@@ -145,16 +148,16 @@ export const usersTableColumns = (
       },
     },
   },
-  {
-    dataField: "",
+  /* {
+    dataField: "separator",
     text: "",
     headerStyle: () => {
       return { margin: "0px", padding: "0px", width: "2px" };
     },
     editable: false,
-  },
-  {
-    dataField: "",
+  }, */
+  /* {
+    dataField: "button-delete",
     text: "",
     headerStyle: buttonHeaderFormatter,
     style: buttonCellFormatter,
@@ -167,7 +170,7 @@ export const usersTableColumns = (
         showModal();
       },
     },
-  },
+  }, */
 ];
 
 export const usersDefaultSorted = () => [{ dataField: "name", order: "desc" }];

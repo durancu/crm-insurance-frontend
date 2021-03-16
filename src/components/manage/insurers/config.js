@@ -64,8 +64,8 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
     headerAlign: "center",
     formatter: commissionFormatter,
   },
-  {
-    dataField: "",
+  /* {
+    dataField: "button-delete",
     text: "",
     headerStyle: buttonHeaderFormatter,
     style: buttonCellFormatter,
@@ -78,7 +78,7 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
         showModal();
       },
     },
-  },
+  }, */
 ];
 
 export const insurersDefaultSorted = () => [

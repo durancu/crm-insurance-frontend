@@ -56,7 +56,12 @@ export const companyTypeFormatter = (cell, row) =>
 
 export const componentDeleteFormatter = (cell, row) => {
   return (
-    <Button size="sm" variant="danger" block>
+    <Button
+      className="mt-1"
+      style={{ border: "none" }}
+      size="sm"
+      variant="outline-danger"
+    >
       <Trash />
     </Button>
   );
@@ -77,7 +82,12 @@ export const isConfirmFormatter = (cell) =>
 
 export const componentPasswordFormatter = (cell, row) => {
   return (
-    <Button size="sm" margin="5px" variant="success" block>
+    <Button
+      className="mt-1"
+      style={{ border: "none" }}
+      size="sm"
+      variant="outline-success"
+    >
       <Key />
     </Button>
   );
@@ -97,13 +107,13 @@ export function baseSalaryFormatter(cell, row) {
 
 export const userRolesFormatter = (cell, row) => {
   const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
-  const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
-
-  return (
-    <TooltipIcon title={name}>
+  //const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
+  
+    /* <TooltipIcon title={name}>
       <Icon size="24px" />
-    </TooltipIcon>
-  );
+    </TooltipIcon> */
+  
+  return <span>{name}</span>;
 };
 //---------------------------------------
 export function salaryFormatter(cell, row) {

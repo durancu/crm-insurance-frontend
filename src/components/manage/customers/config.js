@@ -1,11 +1,11 @@
 //Functions
 import {
-  buttonCellFormatter,
+  /* buttonCellFormatter,
   buttonHeaderFormatter,
-  componentDeleteFormatter,
+  componentDeleteFormatter, */
   companyTypeFormatter,
 } from "../../globals/functions";
-import { textFilter } from "react-bootstrap-table2-filter";
+/* import { textFilter } from "react-bootstrap-table2-filter"; */
 
 //Components
 
@@ -108,13 +108,14 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   },
   {
     dataField: "separator-1",
+    hidden:true,
     text: "",
     headerStyle: () => {
       return { margin: "0px", padding: "0px", width: "3px" };
     },
     editable: false,
   },
-  {
+  /* {
     dataField: "button-delete",
     text: "",
     headerStyle: buttonHeaderFormatter,
@@ -128,7 +129,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
         showModal();
       },
     },
-  },
+  }, */
 ];
 
 export const customersDefaultSorted = () => [
