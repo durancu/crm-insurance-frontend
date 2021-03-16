@@ -24,24 +24,25 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   return (
     <>
       <Row className="mt-3 mb-3">
-        <Col sm="6">
-          <h2>Dashboard</h2>
-        </Col>
-      </Row>
-      <Row>
-        <Col lg="9" md="12" sm="12">
+        <Col sm="9" lg="9">
+          <Row className="mb-4">
+            <h2>Home</h2>
+          </Row>
           <Row>
             <Col>
               <h4>General Stats</h4>
               <hr></hr>
+              <p>This dashboards shows a summary of the company's sales stats for the selected date range. Change values in the filter below to get stats for different date range.
+                </p>
+
+              <p>
+                
+              </p>
             </Col>
           </Row>
-          <Row>
+          <Row className="ml-1 mt-3 mb-1">
             <Col lg="10" md="12" sm="12">
               <DateRangeFilter />
-              <br></br>
-              <p>This dashboards shows a summary of the company's sales stats. Change
-            the date range filter above to get stats for a specific time period.</p>
             </Col>
           </Row>
           <Row>
@@ -53,71 +54,76 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
               ))}
           </Row>
         </Col>
-        <Col lg="3" md="3" sm="3">
-          <Row>
-            <Col>
-              <h4>My Stats</h4>
-              <hr></hr>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm="12" lg="12">
-              <Card border="">
-                <Card.Header>
-                  <b>Last Month</b>
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title>Sales Total</Card.Title>
-                  <Card.Text style={{ textAlign: "center" }}>
-                    <span style={{ fontSize: "40px" }}>$42,500</span>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <br />
-            </Col>
-            <Col sm="12" lg="12">
-              <Card border="">
-                <Card.Header>
-                  <b>This Month</b>
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title>Sales Total</Card.Title>
-                  <Card.Text style={{ textAlign: "center" }}>
-                    <span style={{ fontSize: "40px" }}>$56,800</span>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <br />
-            </Col>
-            <Col sm="12" lg="12">
-              <Card border="">
-                <Card.Header>
-                  <b>Last Month</b>
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title>Total Salary</Card.Title>
-                  <Card.Text style={{ textAlign: "center" }}>
-                    <span style={{ fontSize: "40px" }}>$600</span>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <br />
-            </Col>
-            <Col sm="12" lg="12">
-              <Card border="">
-                <Card.Header>
-                  <b>This Month</b>
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title>Total Salary</Card.Title>
-                  <Card.Text style={{ textAlign: "center" }}>
-                    <span style={{ fontSize: "40px" }}>$1,440</span>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <br />
-            </Col>
-          </Row>
+        <Col sm="3" lg="3">
+            <Row>
+              <Col>
+                <h5>My Performance</h5>
+                <hr></hr>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm="12" lg="12">
+                <p>
+                  Hey {user.firstName}, it looks like you are performing great this month. Good job!
+                </p>
+              </Col>
+              <Col sm="12" lg="12">
+                <Card border="">
+                  <Card.Header>
+                    <b>This Month</b>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Title>Sales Total</Card.Title>
+                    <Card.Text style={{ textAlign: "center" }}>
+                      <span style={{ fontSize: "40px" }}>$56800</span>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Col>
+              <Col sm="12" lg="12">
+                <Card border="">
+                  <Card.Header>
+                    <b>This Month</b>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Title>Sales Count</Card.Title>
+                    <Card.Text style={{ textAlign: "center" }}>
+                      <span style={{ fontSize: "40px" }}>74</span>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Col>
+              <Col sm="12" lg="12">
+                <Card border="">
+                  <Card.Header>
+                    <b>This Month</b>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Title>Projected Bonus</Card.Title>
+                    <Card.Text style={{ textAlign: "center" }}>
+                      <span style={{ fontSize: "40px" }}>$600</span>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Col>
+              <Col sm="12" lg="12">
+                <Card border="">
+                  <Card.Header>
+                    <b>This Month</b>
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Title>Projected Salary</Card.Title>
+                    <Card.Text style={{ textAlign: "center" }}>
+                      <span style={{ fontSize: "40px" }}>$1,440</span>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Col>
+            </Row>
         </Col>
       </Row>
     </>

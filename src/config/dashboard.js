@@ -85,8 +85,18 @@ export const DASHBOARD_TEMPLATES = {
             aggregation: "sum"
         }
     },
-
-
+    TOTAL_SALE_BY_SELLER_DOUGHNUT: {
+        id: 6,
+        model: "sales",
+        type: "bar",
+        title: "Total Sales By Seller",
+        width: 6,
+        queryParams: {
+            dataCriteria: "totalCharge",
+            groupingCriteria: "seller",
+            aggregation: "sum"
+        }
+    },
 }
 
 export const DASHBOARD_SETS =
@@ -104,19 +114,19 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_BAR,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
         ],
     },
     "ENDORSEMENTS": {
         queries: [
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
         ],
     },
     "CERTIFICATES": {
         queries: [
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT
         ],
     },
     "TRAINEE": {
@@ -130,7 +140,7 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_DAY_BAR,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
         ],
     },
     "MANAGER": {

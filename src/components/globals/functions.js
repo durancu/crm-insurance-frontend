@@ -66,7 +66,7 @@ export const componentDeleteFormatter = (cell, row) => {
 
 //INSURERS FUNCTIONS
 export const commissionFormatter = (cell, row) => (
-  <span>{cell ? Math.round(cell * 100) + "%" : "-"}</span>
+  <span>{cell ? Math.round(cell) + "%" : "-"}</span>
 );
 
 //---------------------------------------
