@@ -25,10 +25,13 @@ const Header = ({ user, userLogoutRequest }) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link className="nav-link" to="/">
-              Dashboard
+              Home
             </Link>
             <Link className="nav-link" to="/manage/sales">
               Sales
+            </Link>
+            <Link className="nav-link" to="/manage/customers">
+              Customers
             </Link>
             <NavDropdown title="Reports" id="collasible-nav-dropdown">
               <Link className="dropdown-item" to="/reports/sales">
@@ -52,11 +55,8 @@ const Header = ({ user, userLogoutRequest }) => {
             </NavDropdown>
           </Nav>
           <Nav className="ml-auto">
-            <NavDropdown title="Manage" id="basic-nav-dropdown">
-              <Link className="dropdown-item" to="/manage/customers">
-                Customers
-              </Link>
-              {isAdmin && (
+            {isAdmin && (
+              <NavDropdown title="Manage" id="basic-nav-dropdown">
                 <>
                   <Link className="dropdown-item" to="/manage/users">
                     Users
@@ -69,8 +69,8 @@ const Header = ({ user, userLogoutRequest }) => {
                     Company
                   </Link> */}
                 </>
-              )}
-            </NavDropdown>
+              </NavDropdown>
+            )}
             <NavDropdown title="Account" id="basic-nav-dropdown">
               <Link className="dropdown-item" to="/profile">
                 My Profile

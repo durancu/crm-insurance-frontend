@@ -61,11 +61,11 @@ const InsurerForm = ({
           name: form.name,
           email: form.email,
           phone: form.phone,
-          liabilityCommission: parseFloat(form.liabilityCommission) / 100,
-          cargoCommission: parseFloat(form.cargoCommission) / 100,
+          liabilityCommission: parseFloat(form.liabilityCommission),
+          cargoCommission: parseFloat(form.cargoCommission),
           physicalDamageCommission:
-            parseFloat(form.physicalDamageCommission) / 100,
-          wcGlUmbCommission: parseFloat(form.wcGlUmbCommission) / 100,
+            parseFloat(form.physicalDamageCommission),
+          wcGlUmbCommission: parseFloat(form.wcGlUmbCommission),
         });
 
     setTimeout(() => {
