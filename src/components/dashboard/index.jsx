@@ -30,7 +30,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
           </Row>
           <Row>
             <Col>
-              <h4>General Stats</h4>
+              <h4>Company Overview</h4>
               <hr></hr>
               <p>This dashboards shows a summary of the company's sales stats for the selected date range. Change values in the filter below to get stats for different date range.
                 </p>
@@ -57,7 +57,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
         <Col sm="3" lg="3">
             <Row>
               <Col>
-                <h5>My Performance</h5>
+                <h5>Personal Performance</h5>
                 <hr></hr>
               </Col>
             </Row>

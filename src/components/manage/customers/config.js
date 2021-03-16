@@ -11,89 +11,23 @@ import {
 
 export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   {
-    dataField: "company",
-    text: "Type",
-    align: "center",
-    headerAlign: "center",
-    sort: true,
-    formatter: companyTypeFormatter,
-  },
-  {
     dataField: "name",
     text: "Name",
     align: "left",
     headerAlign: "left",
     sort: true,
-  },
-  {
-    dataField: "email",
-    text: "Email",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    dataField: "phone",
-    text: "Phone",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
     headerStyle: () => {
-      return { width: "100px" };
+      return { width: "10%" };
     },
   },
   {
-    dataField: "fax",
-    text: "Fax",
-    sort: true,
+    dataField: "company",
+    text: "Company",
     align: "left",
     headerAlign: "left",
+    sort: true,
     headerStyle: () => {
-      return { width: "100px" };
-    },
-  },
-  {
-    dataField: "address",
-    text: "Address",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    dataField: "city",
-    text: "City",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
-    dataField: "state",
-    text: "State",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-    headerStyle: () => {
-      return { width: "70px" };
-    },
-  },
-  {
-    dataField: "zip",
-    text: "Zip",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-    headerStyle: () => {
-      return { width: "100px" };
-    },
-  },
-  {
-    dataField: "country",
-    text: "Country",
-    sort: true,
-    align: "left",
-    headerAlign: "left",
-    headerStyle: () => {
-      return { width: "100px" };
+      return { width: "10%" };
     },
   },
   {
@@ -103,7 +37,87 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     align: "right",
     headerAlign: "right",
     headerStyle: () => {
-      return { width: "100px" };
+      return { width: "6%" };
+    },
+  },
+  {
+    dataField: "email",
+    text: "Email",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "15%" };
+    },
+  },
+  {
+    dataField: "phone",
+    text: "Phone",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "8%" };
+    },
+  },
+  {
+    dataField: "fax",
+    text: "Fax",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "8%" };
+    },
+  },
+  {
+    dataField: "address",
+    text: "Address",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "12%" };
+    },
+  },
+  {
+    dataField: "city",
+    text: "City",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "5%" };
+    },
+  },
+  {
+    dataField: "state",
+    text: "State",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "5%" };
+    },
+  },
+  {
+    dataField: "zip",
+    text: "Zip",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "5%" };
+    },
+  },
+  {
+    dataField: "country",
+    text: "Country",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "5%" };
     },
   },
   {
