@@ -62,7 +62,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
           </Row>
           <Row>
             <Col sm="12" lg="12">
-              <Card border="secondary">
+              <Card border="">
                 <Card.Header>
                   <b>Last Month</b>
                 </Card.Header>
@@ -76,7 +76,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
               <br />
             </Col>
             <Col sm="12" lg="12">
-              <Card border="secondary">
+              <Card border="">
                 <Card.Header>
                   <b>This Month</b>
                 </Card.Header>
@@ -90,7 +90,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
               <br />
             </Col>
             <Col sm="12" lg="12">
-              <Card border="secondary">
+              <Card border="">
                 <Card.Header>
                   <b>Last Month</b>
                 </Card.Header>
@@ -104,7 +104,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
               <br />
             </Col>
             <Col sm="12" lg="12">
-              <Card border="secondary">
+              <Card border="">
                 <Card.Header>
                   <b>This Month</b>
                 </Card.Header>

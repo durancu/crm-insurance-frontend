@@ -35,6 +35,9 @@ export function priceFormatter(cell, row) {
 
 
 export function preciseNumber(number, precision) {
+  if (!Number(number)){
+    return '0.00'
+  }
   return Number.parseFloat(number).toPrecision(Math.floor(Math.log10(number) + 1) + precision);
 }
 
