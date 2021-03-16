@@ -107,7 +107,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     },
   },
   {
-    dataField: "a",
+    dataField: "separator-1",
     text: "",
     headerStyle: () => {
       return { margin: "0px", padding: "0px", width: "3px" };
@@ -115,7 +115,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     editable: false,
   },
   {
-    dataField: "b",
+    dataField: "button-delete",
     text: "",
     headerStyle: buttonHeaderFormatter,
     style: buttonCellFormatter,

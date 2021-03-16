@@ -98,23 +98,6 @@ const CustomerCreate = ({
                 </Form.Group>
                 <Form.Group as={Col}>
                   <Form.Label style={{ fontSize: "small" }}>
-                    Company
-                    <span style={{ fontSize: "10px", color: "#999" }}>
-                      {" "}
-                      (Optional)
-                    </span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="company"
-                    value={form.company}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </Form.Row>
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>
                     <span style={{ color: "red" }}>* </span>Email
                   </Form.Label>
                   <Form.Control
@@ -133,8 +116,32 @@ const CustomerCreate = ({
               <Form.Row>
                 <Form.Group as={Col}>
                   <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Phone
+                    Company
+                    {/* <span style={{ fontSize: "10px", color: "#999" }}>
+                      {" "}
+                      (Optional)
+                    </span> */}
                   </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="company"
+                    value={form.company}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>DOT</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="dot"
+                    value={form.dot}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>Phone</Form.Label>
                   <Form.Control
                     type="tel"
                     name="phone"
@@ -150,9 +157,7 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Fax
-                  </Form.Label>
+                  <Form.Label style={{ fontSize: "small" }}>Fax</Form.Label>
                   <Form.Control
                     type="tel"
                     name="fax"
@@ -189,9 +194,7 @@ const CustomerCreate = ({
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Address
-                  </Form.Label>
+                  <Form.Label style={{ fontSize: "small" }}>Address</Form.Label>
                   <Form.Control
                     type="text"
                     name="address"
@@ -207,9 +210,7 @@ const CustomerCreate = ({
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>City
-                  </Form.Label>
+                  <Form.Label style={{ fontSize: "small" }}>City</Form.Label>
                   <Form.Control
                     type="text"
                     name="city"
@@ -222,10 +223,23 @@ const CustomerCreate = ({
                     {errors.city}
                   </Form.Control.Feedback>
                 </Form.Group>
+
+                <Form.Group as={Col}>
+                  <Form.Label style={{ fontSize: "small" }}>State</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="state"
+                    value={form.state}
+                    onChange={handleChange}
+                    isInvalid={errors.state}
+                    isValid={form.state}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.state}
+                  </Form.Control.Feedback>
+                </Form.Group>
                 <Form.Group as={Col} sm="2">
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Zip
-                  </Form.Label>
+                  <Form.Label style={{ fontSize: "small" }}>Zip</Form.Label>
                   <Form.Control
                     type="text"
                     name="zip"
@@ -239,25 +253,7 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>State
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="state"
-                    value={form.state}
-                    onChange={handleChange}
-                    isInvalid={errors.state}
-                    isValid={form.state}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.state}
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Country
-                  </Form.Label>
+                  <Form.Label style={{ fontSize: "small" }}>Country</Form.Label>
                   <Form.Control
                     type="text"
                     name="country"
@@ -271,24 +267,7 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
               </Form.Row>
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>DOT
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="dot"
-                    value={form.dot}
-                    onChange={handleChange}
-                    isInvalid={errors.dot}
-                    isValid={form.dot}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.dot}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Form.Row>
+              <Form.Row></Form.Row>
             </Modal.Body>
             <Modal.Footer>
               <Container>
