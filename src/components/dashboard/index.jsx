@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Row, Col, Card } from "react-bootstrap";
 import DashboardChart from "./sales/DashboardChart";
 import { DASHBOARD_SETS } from "../../config/dashboard";
+import { ADMIN_ROLES } from "../../config/user";
 import DateRangeFilter from "../globals/filters/DateRangeFilter";
 
 import { dashboardGetRequest } from "../../redux/actions";
@@ -11,6 +12,14 @@ import PersonalPerformance from "./personal-performance";
 
 export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   const [dashboardConfig, setDashboardConfig] = useState();
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(
+      user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0])
+    );
+  }, []);
 
   useEffect(() => {
     setDashboardConfig(
@@ -25,7 +34,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   return (
     <>
       <Row className="mt-3 mb-3">
-        <Col sm="9" lg="9">
+        <Col >
           <Row className="mb-4">
             <h2>Home</h2>
           </Row>
@@ -54,11 +63,10 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
               ))}
           </Row>
         </Col>
-        {!user.hasOwnProperty("roles") && DASHBOARD_SETS[user.roles[0]] && (
-          <Col sm="3" lg="3">
-            <PersonalPerformance />
-          </Col>
-        )}
+
+        <Col sm="3" lg="3" hidden={isAdmin}>
+          <PersonalPerformance isAdmin={isAdmin} />
+        </Col>
       </Row>
     </>
   );

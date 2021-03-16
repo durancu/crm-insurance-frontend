@@ -8,18 +8,20 @@ const PersonalPerformanceItem = ({ metric }) => {
     <Card className="mb-3">
       <Card.Header>
         <Row>
-          <Col>
-            <span style={{ fontSize: "24px" }}>{metric.title}</span>
+
+        {/* <Card.Title>{metric.label}</Card.Title> */}
+          <Col style={{textAlign:"left"}}>
+            <span style={{ fontSize: "24px" }}>{metric.label}</span>
           </Col>
-          <Col style={{ textAlign: "right" }}>
+          {/* <Col style={{ textAlign: "right" }}>
             <span style={{ fontSize: "14px" }}>
               <i>{metric.subtitle}</i>
             </span>
-          </Col>
+          </Col> */}
         </Row>
       </Card.Header>
       <Card.Body>
-        <Card.Title>{metric.label}</Card.Title>
+        {/* <Card.Title>{metric.label}</Card.Title> */}
         <Card.Text style={{ textAlign: "center" }}>
           <span style={{ fontSize: "35px" }}>{metric.valuePrefix}</span>
           <span style={{ fontSize: "50px" }}>{metric.value}</span>

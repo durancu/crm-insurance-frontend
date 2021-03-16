@@ -13,6 +13,7 @@ const PersonalPerformance = ({
   data,
   loading,
   error,
+  isAdmin,
   dashboardPersonalPerformanceRequest,
 }) => {
   const [params, setParams] = useState({
@@ -21,8 +22,8 @@ const PersonalPerformance = ({
   });
 
   useEffect(() => {
-    dashboardPersonalPerformanceRequest({}, params);
-  }, [dashboardPersonalPerformanceRequest, params]);
+    !isAdmin && dashboardPersonalPerformanceRequest({}, params);
+  }, [isAdmin, dashboardPersonalPerformanceRequest, params]);
   return (
     <>
       <Row>
@@ -42,8 +43,7 @@ const PersonalPerformance = ({
               <p>{data.message}</p>
             </Col>
             <Col sm="12" lg="12" style={{ textAlign: "center" }}>
-              {data.metrics.length > 0 &&
-                data.metrics.map((metric) => (
+              {data.metrics && data.metrics.map((metric) => (
                   <PersonalPerformanceItem key={metric.title} metric={metric} />
                 ))}
             </Col>
@@ -58,8 +58,8 @@ PersonalPerformance.propTypes = {
   user: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
   dashboardPersonalPerformanceRequest: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
