@@ -34,6 +34,9 @@ export const salesReportTableColumns = (isAdmin = false) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    headerStyle: () => {
+      return { width: "10%" };
+    },
     footer: "",
   },
   {
@@ -100,7 +103,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
     dataField: "totalSalary",
     text: "Salary",
     headerAlign: "right",
-    formatter: salaryFormatter,
+    formatter: priceFormatter,
     sort: true,
     align: "right",
     footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),

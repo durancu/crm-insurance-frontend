@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 //Actions
 import { reportListRequest } from "../../../redux/actions";
 
-//Assets
-import "../../assets/App.css";
+
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
@@ -60,7 +59,7 @@ export const Reports = ({
             columns={salesReportTableColumns(isAdmin)}
             striped
             hover
-            condensed={true}
+            
             bordered={false}
             responsive
             filter={filterFactory()}

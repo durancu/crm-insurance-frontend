@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
-//Assets
-import "../assets/App.css";
+
 //Components
 import { Button } from "react-bootstrap";
 import { Pencil } from "react-bootstrap-icons";

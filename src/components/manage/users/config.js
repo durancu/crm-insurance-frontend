@@ -8,6 +8,7 @@ import {
   buttonHeaderFormatter,
   locationFormatter,
   userRolesFormatter,
+  priceFormatter,
 } from "../../globals/functions";
 import { textFilter } from "react-bootstrap-table2-filter";
 import { Type } from "react-bootstrap-table2-editor";
@@ -119,7 +120,7 @@ export const usersTableColumns = (
     sort: true,
     align: "right",
     headerAlign: "left",
-    formatter: baseSalaryFormatter,
+    formatter: priceFormatter,
     headerStyle: () => {
       return { width: "4%" };
     },

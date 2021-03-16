@@ -31,6 +31,27 @@ const Profile = ({ userProfileGetRequest, user }) => {
       <Row>
         <Col className="pl-4 pr-4" sm="8" lg="8">
           <Card className="sm-8" style={{ border: "none" }}>
+          <h4>My Activity</h4>
+          <br/>
+          <BootstrapTable
+            bootstrap4
+            keyField="_id"
+            data={activitiesSample}
+            columns={activitiesTableColumns()}
+            hover
+            
+            bordered={false}
+            responsive
+            filter={filterFactory()}
+            defaultSorted={activitiesDefaultSorted()}
+            noDataIndication="No registered activity"
+            //loading={}
+          />
+          </Card>
+        </Col>
+        <Col sm="4" lg="4">
+          <Card className="sm-4" style={{ width: "20rem", border: "none" }}>
+            <Card.Img variant="top" src="assets/images/user-thumbnail.jpg" />
             <Card.Body>
               <Card.Title>
                 {user.firstName} {user.lastName}
@@ -53,39 +74,17 @@ const Profile = ({ userProfileGetRequest, user }) => {
                 }
               </Card.Text>
               <Card.Text>
-                <b>Position:</b> {user.position}
-              </Card.Text>
-              <Card.Text>
                 <b>Office:</b> {locationName(user.location)}
               </Card.Text>
             </Card.Body>
           </Card>
         </Col>
-        <Col sm="4" lg="4">
-          <Card className="sm-4" style={{ width: "20rem", border: "none" }}>
-            <Card.Img variant="top" src="assets/images/user-thumbnail.jpg" />
-          </Card>
-        </Col>
       </Row>
       <Row>
-        <Col>
-          <h4>My Activity</h4>
-          <hr></hr>
-          <BootstrapTable
-            bootstrap4
-            keyField="_id"
-            data={activitiesSample}
-            columns={activitiesTableColumns()}
-            striped
-            hover
-            condensed={true}
-            bordered={false}
-            responsive
-            filter={filterFactory()}
-            defaultSorted={activitiesDefaultSorted()}
-            noDataIndication="No registered activity"
-            //loading={}
-          />
+        <Col sm="8">
+        
+          
+          
         </Col>
       </Row>
     </>

@@ -54,7 +54,7 @@ function CustomerList({
         columns={customersTableColumns(false, showModal, setId)}
         striped
         hover
-        condensed={true}
+        
         bordered={false}
         responsive
         filter={filterFactory()}

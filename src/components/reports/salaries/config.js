@@ -45,7 +45,7 @@ export const payrollReportTableColumns = (isAdmin = false) => [
   },
   {
     dataField: "baseSalary",
-    text: "Base Salary",
+    text: "Base",
     sort: true,
     align: "right",
     headerAlign: "right",
@@ -77,9 +77,9 @@ export const payrollReportTableColumns = (isAdmin = false) => [
   },
   {
     dataField: "total",
-    text: "Total Salary",
+    text: "Salary",
     headerAlign: "right",
-    formatter: salaryFormatter,
+    formatter: priceFormatter,
     sort: true,
     align: "right",
     footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),

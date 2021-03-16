@@ -56,7 +56,7 @@ function InsurerList({
         columns={insurersTableColumns(false, showModal, setId)}
         striped
         hover
-        condensed={true}
+        
         bordered={false}
         responsive
         filter={filterFactory()}

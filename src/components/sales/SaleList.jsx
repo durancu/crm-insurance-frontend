@@ -11,8 +11,6 @@ import {
   saleListRequest,
 } from "../../redux/actions";
 
-//Assets
-import "../assets/App.css";
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
 //import SalesFilters from "./SalesFilters";
@@ -78,7 +76,7 @@ export const SaleList = ({
             columns={salesTableColumns(isAdmin, customers, sellers, insurers)}
             striped
             hover
-            condensed={true}
+            
             bordered={false}
             responsive
             filter={filterFactory()}

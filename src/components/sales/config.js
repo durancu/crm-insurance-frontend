@@ -18,7 +18,7 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
             text: "Date",
             formatter: dateFormatter,
             headerStyle: () => {
-                return { width: "7%" };
+                return { width: "5%" };
             },
             sort: true,
             footer: (columnData) =>
@@ -72,7 +72,6 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
             headerStyle: () => {
                 return { width: "10%" };
             },
-            sort: true,
             align: "left",
             headerAlign: "left",
             footer: "",
@@ -193,7 +192,7 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
             text: "WCGLUMB Insurer",
             formatter: wcGlUmbInsurerFormatter,
             headerStyle: () => {
-                return { width: "8%" };
+                return { width: "9%" };
             },
             align: "left",
             headerAlign: "left",
@@ -224,8 +223,8 @@ export const salesTableColumns = (isAdmin = false, customers = [], sellers = [],
         },
         {
             dataField: "totalCharge",
-            text: "TOTAL",
-            headerAlign: "right",
+            text: "Total",
+            headerAlign: "left",
             formatter: totalPriceFormatter,
             sort: true,
             align: "right",

@@ -66,7 +66,7 @@ function UserList({
         columns={usersTableColumns(false, showModal, setId, showPasswordModal)}
         striped
         hover
-        condensed={true}
+        
         bordered={false}
         responsive
         filter={filterFactory()}

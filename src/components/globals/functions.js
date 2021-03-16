@@ -27,10 +27,15 @@ export const dataTransform = (element) => {
 
 export function priceFormatter(cell, row) {
   if (cell) {
-    return <span>{cell}</span>;
+    return <span>{preciseNumber(cell,2)}</span>;
   }
 
   return <span>-</span>;
+}
+
+
+export function preciseNumber(number, precision) {
+  return Number.parseFloat(number).toPrecision(Math.floor(Math.log10(number) + 1) + precision);
 }
 
 //CUSTOMERS FUNCTIONS
@@ -88,7 +93,7 @@ export const userRolesFormatter = (cell, row) => {
 
   return (
     <RoleIcons title={name}>
-      <Icon size="24px"/>
+      <Icon size="24px" />
     </RoleIcons>
   );
 };
@@ -105,7 +110,7 @@ export function totalPriceFormatter(cell, row) {
   if (cell) {
     return (
       <span>
-        <strong>{cell}</strong>
+        <strong>{preciseNumber(cell,2)}</strong>
       </span>
     );
   }
@@ -114,7 +119,7 @@ export function totalPriceFormatter(cell, row) {
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
-  return <strong>{Math.round(Number(text) * 100) / 100}</strong>;
+  return <strong>{preciseNumber(text,2)}</strong>;
 }
 
 export function dateFormatter(cell, row) {
@@ -174,8 +179,8 @@ export function buttonHeaderFormatter(cell, row) {
   return { width: "32px" };
 }
 
-export function buttonCellFormatter(cell,row){
-  return { padding:"0px", width: "32px" };
+export function buttonCellFormatter(cell, row) {
+  return { padding: "0px", width: "32px" };
 }
 
 export function insurerNameFormatter(cell, row) {
