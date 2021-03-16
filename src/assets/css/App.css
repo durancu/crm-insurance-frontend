@@ -13,7 +13,12 @@
     font-size: 13px!important;
   }
 
-  div.react-bootstrap-table select.select-filter {
+  div.react-bootstrap-table select.select-filter  {
+    height: 32px!important;
+    font-size: 13px!important;
+  }
+
+  td.react-bootstrap-table-editing-cell {
     height: 32px!important;
     font-size: 13px!important;
   }

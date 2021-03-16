@@ -26,7 +26,7 @@ import {
   Container,
   InputGroup,
 } from "react-bootstrap";
-import CustomerForm from "../manage/customers/CustomerForm";
+import CustomerCreate from "../manage/customers/CustomerCreate";
 
 const defaultForm = {
   soldAt: moment().format("YYYY-MM-DD"),
@@ -175,7 +175,7 @@ export const SaleCreate = ({
   return (
     <>
       <Button onClick={handleModalSale}>Add New Sale</Button>
-      <CustomerForm
+      <CustomerCreate
         edit={false}
         modal={modalCustomer}
         showModal={handleModalCustomer}

@@ -1,10 +1,10 @@
 import moment from "moment";
 
 import { BUSINESS_SETTINGS } from "../../config/company";
-import { Person, Building, Trash, Check, Key, Gear } from "react-bootstrap-icons";
-import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Person, Building, Trash, Check, Key } from "react-bootstrap-icons";
+import { Button } from "react-bootstrap";
 import { USER_SETTINGS } from "../../config/user";
-import { RoleIcons } from "./RoleIcons";
+import { TooltipIcon } from "./TooltipIcon";
 
 export const dataTransform = (element) => {
   let insurers = [];
@@ -27,26 +27,31 @@ export const dataTransform = (element) => {
 
 export function priceFormatter(cell, row) {
   if (cell) {
-    return <span>{preciseNumber(cell,2)}</span>;
+    return <span>{preciseNumber(cell, 2)}</span>;
   }
 
   return <span>-</span>;
 }
 
-
 export function preciseNumber(number, precision) {
-  if (!Number(number)){
-    return '0.00'
+  if (!Number(number)) {
+    return "0.00";
   }
-  return Number.parseFloat(number).toPrecision(Math.floor(Math.log10(number) + 1) + precision);
+  return Number.parseFloat(number).toPrecision(
+    Math.floor(Math.log10(number) + 1) + precision
+  );
 }
 
 //CUSTOMERS FUNCTIONS
 export const companyTypeFormatter = (cell, row) =>
   cell ? (
-    <Building size="25" color="light" />
+    <TooltipIcon title={`${cell} Company`}>
+      <Building size="25" color="light" />
+    </TooltipIcon>
   ) : (
-    <Person size="25" color="light" />
+    <TooltipIcon title="Person">
+      <Person size="25" color="light" />
+    </TooltipIcon>
   );
 
 export const componentDeleteFormatter = (cell, row) => {
@@ -92,12 +97,12 @@ export function baseSalaryFormatter(cell, row) {
 
 export const userRolesFormatter = (cell, row) => {
   const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
-  const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon
+  const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
 
   return (
-    <RoleIcons title={name}>
+    <TooltipIcon title={name}>
       <Icon size="24px" />
-    </RoleIcons>
+    </TooltipIcon>
   );
 };
 //---------------------------------------
@@ -113,7 +118,7 @@ export function totalPriceFormatter(cell, row) {
   if (cell) {
     return (
       <span>
-        <strong>{preciseNumber(cell,2)}</strong>
+        <strong>{preciseNumber(cell, 2)}</strong>
       </span>
     );
   }
@@ -122,7 +127,7 @@ export function totalPriceFormatter(cell, row) {
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
-  return <strong>{preciseNumber(text,2)}</strong>;
+  return <strong>{preciseNumber(text, 2)}</strong>;
 }
 
 export function dateFormatter(cell, row) {

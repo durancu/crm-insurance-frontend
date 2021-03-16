@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 //components
 import { Row, Col, Button } from "react-bootstrap";
-import CustomerForm from "./CustomerForm";
+import CustomerCreate from "./CustomerCreate";
 import CustomerList from "./CustomerList";
 
 export default function Customers() {
@@ -27,7 +27,7 @@ export default function Customers() {
           <Button variant="primary" onClick={showModal}>
             Add New Customer
           </Button>
-          <CustomerForm
+          <CustomerCreate
             showModal={showModal}
             modal={modal}
             edit={false}

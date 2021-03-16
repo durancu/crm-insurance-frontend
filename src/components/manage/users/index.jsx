@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 //components
 import { Row, Col, Button } from "react-bootstrap";
-import UserForm from "./UserForm";
+import UserCreate from "./UserCreate";
 import UserList from "./UserList";
 
 export default function Users() {
@@ -24,7 +24,7 @@ export default function Users() {
           <Button variant="primary" onClick={showModal}>
             Add New User
           </Button>
-          <UserForm showModal={showModal} modal={modal} edit={false} />
+          <UserCreate showModal={showModal} modal={modal} edit={false} />
         </Col>
       </Row>
       <Row>

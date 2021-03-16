@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 //components
 import { Row, Col, Button } from "react-bootstrap";
-import InsurerForm from "./InsurerForm";
+import InsurerCreate from "./InsurerCreate";
 import InsurerList from "./InsurerList";
 
 export default function Insurers() {
@@ -23,7 +23,7 @@ export default function Insurers() {
           <Button variant="primary" onClick={showModal}>
             Add New Insurer
           </Button>
-          <InsurerForm
+          <InsurerCreate
             showModal={showModal}
             modal={modal}
             edit={false}

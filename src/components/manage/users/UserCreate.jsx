@@ -18,7 +18,7 @@ import { userCreateRequest, userUpdateRequest } from "../../../redux/actions";
 import { USER_SETTINGS } from "../../../config/user";
 import { BUSINESS_SETTINGS } from "../../../config/company";
 
-const UserForm = ({
+const UserCreate = ({
   loading,
   loadingGetUser,
   error,
@@ -281,7 +281,7 @@ const UserForm = ({
   );
 };
 
-UserForm.propTypes = {
+UserCreate.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   modalShow: PropTypes.bool,
@@ -302,4 +302,4 @@ const mapDispatchToProps = {
   userUpdateRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UserCreate);

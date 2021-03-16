@@ -19,7 +19,7 @@ import {
   insurerUpdateRequest,
 } from "../../../redux/actions";
 
-const InsurerForm = ({
+const InsurerCreate = ({
   loading,
   loadingGetInsurer,
   error,
@@ -225,7 +225,7 @@ const InsurerForm = ({
   );
 };
 
-InsurerForm.propTypes = {
+InsurerCreate.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   modalShow: PropTypes.bool,
@@ -246,4 +246,4 @@ const mapDispatchToProps = {
   insurerUpdateRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InsurerForm);
+export default connect(mapStateToProps, mapDispatchToProps)(InsurerCreate);

@@ -2,8 +2,8 @@
 import {
   buttonCellFormatter,
   buttonHeaderFormatter,
-  companyTypeFormatter,
   componentDeleteFormatter,
+  companyTypeFormatter,
 } from "../../globals/functions";
 import { textFilter } from "react-bootstrap-table2-filter";
 
@@ -11,24 +11,19 @@ import { textFilter } from "react-bootstrap-table2-filter";
 
 export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   {
+    dataField: "company",
+    text: "Type",
+    align: "center",
+    headerAlign: "center",
+    sort: true,
+    formatter: companyTypeFormatter,
+  },
+  {
     dataField: "name",
     text: "Name",
     align: "left",
     headerAlign: "left",
-    headerStyle: () => {
-      return { width: "25%" };
-    },
     sort: true,
-    filter: textFilter({ placeholder: "Search" }),
-  },
-  {
-    dataField: "isCompany",
-    text: "Type",
-    sort: true,
-    headerStyle: () => {
-      return { width: "80px" };
-    },
-    formatter: companyTypeFormatter,
   },
   {
     dataField: "email",
@@ -36,9 +31,6 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
-    headerStyle: () => {
-      return { width: "25%" };
-    },
   },
   {
     dataField: "phone",
@@ -47,19 +39,83 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     align: "left",
     headerAlign: "left",
     headerStyle: () => {
-      return { width: "30%" };
+      return { width: "100px" };
     },
   },
   {
-    dataField: "",
+    dataField: "fax",
+    text: "Fax",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "100px" };
+    },
+  },
+  {
+    dataField: "address",
+    text: "Address",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+  },
+  {
+    dataField: "city",
+    text: "City",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+  },
+  {
+    dataField: "state",
+    text: "State",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "70px" };
+    },
+  },
+  {
+    dataField: "zip",
+    text: "Zip",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "100px" };
+    },
+  },
+  {
+    dataField: "country",
+    text: "Country",
+    sort: true,
+    align: "left",
+    headerAlign: "left",
+    headerStyle: () => {
+      return { width: "100px" };
+    },
+  },
+  {
+    dataField: "dot",
+    text: "DOT",
+    sort: true,
+    align: "right",
+    headerAlign: "right",
+    headerStyle: () => {
+      return { width: "100px" };
+    },
+  },
+  {
+    dataField: "a",
     text: "",
     headerStyle: () => {
-      return { margin:"0px", padding:"0px", width: "3px" };
+      return { margin: "0px", padding: "0px", width: "3px" };
     },
     editable: false,
   },
   {
-    dataField: "",
+    dataField: "b",
     text: "",
     headerStyle: buttonHeaderFormatter,
     style: buttonCellFormatter,

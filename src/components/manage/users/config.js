@@ -27,9 +27,6 @@ export const usersTableColumns = (
     text: "User Name",
     align: "left",
     headerAlign: "left",
-    headerStyle: () => {
-      return { width: "8%" };
-    },
     sort: true,
     filter: textFilter({ placeholder: "Search" }),
     headerStyle: () => {
