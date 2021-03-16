@@ -32,12 +32,13 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
             <Col>
               <h4>Company Overview</h4>
               <hr></hr>
-              <p>This dashboards shows a summary of the company's sales stats for the selected date range. Change values in the filter below to get stats for different date range.
-                </p>
-
               <p>
-                
+                This dashboards shows a summary of the company's sales stats for
+                the selected date range. Change values in the filter below to
+                get stats for different date range.
               </p>
+
+              <p></p>
             </Col>
           </Row>
           <Row className="ml-1 mt-3 mb-1">
@@ -55,75 +56,89 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
           </Row>
         </Col>
         <Col sm="3" lg="3">
-            <Row>
-              <Col>
-                <h5>Personal Performance</h5>
-                <hr></hr>
-              </Col>
-            </Row>
-            <Row>
-              <Col sm="12" lg="12">
-                <p>
-                  Hey {user.firstName}, it looks like you are performing great this month. Good job!
-                </p>
-              </Col>
-              <Col sm="12" lg="12">
-                <Card border="">
-                  <Card.Header>
-                    <b>This Month</b>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title>Sales Total</Card.Title>
-                    <Card.Text style={{ textAlign: "center" }}>
-                      <span style={{ fontSize: "40px" }}>$56800</span>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Col>
-              <Col sm="12" lg="12">
-                <Card border="">
-                  <Card.Header>
-                    <b>This Month</b>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title>Sales Count</Card.Title>
-                    <Card.Text style={{ textAlign: "center" }}>
-                      <span style={{ fontSize: "40px" }}>74</span>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Col>
-              <Col sm="12" lg="12">
-                <Card border="">
-                  <Card.Header>
-                    <b>This Month</b>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title>Projected Bonus</Card.Title>
-                    <Card.Text style={{ textAlign: "center" }}>
-                      <span style={{ fontSize: "40px" }}>$600</span>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Col>
-              <Col sm="12" lg="12">
-                <Card border="">
-                  <Card.Header>
-                    <b>This Month</b>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title>Projected Salary</Card.Title>
-                    <Card.Text style={{ textAlign: "center" }}>
-                      <span style={{ fontSize: "40px" }}>$1,440</span>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <br />
-              </Col>
-            </Row>
+          <Row>
+            <Col>
+              <h5>Personal Performance</h5>
+              <hr></hr>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm="12" lg="12">
+              <p>
+                Hey {user.firstName}, it looks like you are performing great
+                this month. Good job!
+              </p>
+            </Col>
+            <Col sm="12" lg="12">
+              <Card border="">
+                <Card.Header>
+                  <b>This Month</b>
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>Sales Total</Card.Title>
+                  <Card.Text style={{ textAlign: "center" }}>
+                    <span style={{ fontSize: "40px" }}>$56800</span>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+            <Col sm="12" lg="12">
+              <Card border="">
+                <Card.Header>
+                  <b>This Month</b>
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>Sales Count</Card.Title>
+                  <Card.Text style={{ textAlign: "center" }}>
+                    <span style={{ fontSize: "40px" }}>74</span>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+            <Col sm="12" lg="12">
+              <Card border="">
+                <Card.Header>
+                  <Row>
+                    <Col>
+                      <span style={{ fontSize: "24px" }}>Bonus</span>
+                    </Col>
+                    <Col style={{ textAlign: "right" }}>
+                      <span style={{ fontSize: "14px" }}>
+                        <i>(projected)</i>
+                      </span>
+                    </Col>
+                  </Row>
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>This month</Card.Title>
+                  <Card.Text style={{ textAlign: "center" }}>
+                  <span style={{ fontSize: "35px" }}>$</span>
+                  <span style={{ fontSize: "50px" }}>600</span>
+                  <span style={{ fontSize: "30px" }}>.00</span>
+                  <hr></hr>
+                  <p>Month's projected bonus is a value calculated based on your monthly sales, your base salary, tips and discounts.</p>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+            <Col sm="12" lg="12">
+              <Card border="">
+                <Card.Header>
+                  <b>This Month</b>
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>Projected Salary</Card.Title>
+                  <Card.Text style={{ textAlign: "center" }}>
+                    <span style={{ fontSize: "40px" }}>$1,440</span>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+          </Row>
         </Col>
       </Row>
     </>
