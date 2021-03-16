@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -6,12 +6,16 @@ import { connect } from "react-redux";
 import { userProfileGetRequest } from "../../../redux/actions";
 
 //Components
-import { Row, Col, Card, ListGroup, CardColumns } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import { USER_SETTINGS } from "../../../config/user";
 import { locationName } from "../../globals/functions";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import { activitiesDefaultSorted, activitiesSample, activitiesTableColumns } from "./config";
+import {
+  activitiesDefaultSorted,
+  activitiesSample,
+  activitiesTableColumns,
+} from "./config";
 
 const Profile = ({ userProfileGetRequest, user }) => {
   useEffect(() => {
@@ -65,28 +69,25 @@ const Profile = ({ userProfileGetRequest, user }) => {
       </Row>
       <Row>
         <Col>
-        <h4>My Activity</h4>         
-        <hr></hr>
-
-        <BootstrapTable
-        bootstrap4
-        keyField="_id"
-        data={activitiesSample}
-        columns={activitiesTableColumns}
-        striped
-        hover
-        condensed={true}
-        bordered={false}
-        responsive
-        filter={filterFactory}
-        defaultSorted={activitiesDefaultSorted}
-        noDataIndication="No registered activity"
-        //loading={}
-      />
-
+          <h4>My Activity</h4>
+          <hr></hr>
+          <BootstrapTable
+            bootstrap4
+            keyField="_id"
+            data={activitiesSample}
+            columns={activitiesTableColumns()}
+            striped
+            hover
+            condensed={true}
+            bordered={false}
+            responsive
+            filter={filterFactory()}
+            defaultSorted={activitiesDefaultSorted()}
+            noDataIndication="No registered activity"
+            //loading={}
+          />
         </Col>
       </Row>
-      
     </>
   );
 };
