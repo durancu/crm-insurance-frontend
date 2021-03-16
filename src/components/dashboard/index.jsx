@@ -7,7 +7,7 @@ import { DASHBOARD_SETS } from "../../config/dashboard";
 import DateRangeFilter from "../globals/filters/DateRangeFilter";
 
 import { dashboardGetRequest } from "../../redux/actions";
-import  PersonalPerformance  from "./personal-performance";
+import PersonalPerformance from "./personal-performance";
 
 export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   const [dashboardConfig, setDashboardConfig] = useState();
@@ -19,7 +19,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   }, [user]);
 
   useEffect(() => {
-    dashboardGetRequest(dashboardConfig, params);
+    dashboardConfig && dashboardGetRequest(dashboardConfig, params);
   }, [dashboardConfig, dashboardGetRequest, params]);
 
   return (
@@ -32,7 +32,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
           <Row>
             <Col>
               <h4>Company Overview</h4>
-              <hr/>
+              <hr />
               <p>
                 This dashboards shows a summary of the company's sales stats for
                 the selected date range. Change values in the filter below to
@@ -55,7 +55,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
           </Row>
         </Col>
         <Col sm="3" lg="3">
-          <PersonalPerformance/>
+          <PersonalPerformance />
         </Col>
       </Row>
     </>
