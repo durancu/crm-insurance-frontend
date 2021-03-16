@@ -6,7 +6,12 @@ import { connect } from "react-redux";
 import { userProfileGetRequest } from "../../../redux/actions";
 
 //Components
-import { Row, Col, Card, ListGroup } from "react-bootstrap";
+import { Row, Col, Card, ListGroup, CardColumns } from "react-bootstrap";
+import { USER_SETTINGS } from "../../../config/user";
+import { locationName } from "../../globals/functions";
+import BootstrapTable from "react-bootstrap-table-next";
+import filterFactory from "react-bootstrap-table2-filter";
+import { activitiesDefaultSorted, activitiesSample, activitiesTableColumns } from "./config";
 
 const Profile = ({ userProfileGetRequest, user }) => {
   useEffect(() => {
@@ -20,24 +25,68 @@ const Profile = ({ userProfileGetRequest, user }) => {
         </Col>
       </Row>
       <Row>
-        <Col sm="12" lg="12">
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+        <Col className="pl-4 pr-4" sm="8" lg="8">
+          <Card className="sm-8" style={{ border: "none" }}>
             <Card.Body>
-              <Card.Title>Card Title</Card.Title>
+              <Card.Title>
+                {user.firstName} {user.lastName}
+              </Card.Title>
+              <Card.Subtitle>
+                <i>{user.position}</i>
+              </Card.Subtitle>
+              <hr></hr>
               <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                <b>Username:</b> {user.username}
+              </Card.Text>
+              <Card.Text>
+                <b>Email:</b> {user.email}
+              </Card.Text>
+              <Card.Text>
+                <b>Role:</b>{" "}
+                {
+                  USER_SETTINGS.roles.find(({ id }) => id === user.roles[0])
+                    .name
+                }
+              </Card.Text>
+              <Card.Text>
+                <b>Position:</b> {user.position}
+              </Card.Text>
+              <Card.Text>
+                <b>Office:</b> {locationName(user.location)}
               </Card.Text>
             </Card.Body>
-            <ListGroup variant="flush">
-              <ListGroup.Item>Cras justo odio</ListGroup.Item>
-              <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-              <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-            </ListGroup>
+          </Card>
+        </Col>
+        <Col sm="4" lg="4">
+          <Card className="sm-4" style={{ width: "20rem", border: "none" }}>
+            <Card.Img variant="top" src="assets/images/user-thumbnail.jpg" />
           </Card>
         </Col>
       </Row>
+      <Row>
+        <Col>
+        <h4>My Activity</h4>         
+        <hr></hr>
+
+        <BootstrapTable
+        bootstrap4
+        keyField="_id"
+        data={activitiesSample}
+        columns={activitiesTableColumns}
+        striped
+        hover
+        condensed={true}
+        bordered={false}
+        responsive
+        filter={filterFactory}
+        defaultSorted={activitiesDefaultSorted}
+        noDataIndication="No registered activity"
+        //loading={}
+      />
+
+        </Col>
+      </Row>
+      
     </>
   );
 };

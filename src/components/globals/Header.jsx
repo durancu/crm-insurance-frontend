@@ -64,10 +64,10 @@ const Header = ({ user, userLogoutRequest }) => {
                   <Link className="dropdown-item" to="/manage/insurers">
                     Insurers
                   </Link>
-                  <NavDropdown.Divider />
+                  {/* <NavDropdown.Divider />
                   <Link className="dropdown-item" to="/manage/company">
                     Company
-                  </Link>
+                  </Link> */}
                 </>
               )}
             </NavDropdown>

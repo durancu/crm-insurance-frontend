@@ -16,7 +16,7 @@ export default function Users() {
     <>
       <Row className="mt-3">
         <Col sm="10">
-          <h1>Users</h1>
+          <h2>Users</h2>
         </Col>
       </Row>
       <Row className="mt-0 mb-2">
