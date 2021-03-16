@@ -270,7 +270,7 @@ export const SaleCreate = ({
                 </Form.Row>
                 <Form.Row>
                   <Col>
-                    <hr></hr>
+                    <hr/>
                     <p className="mb-3">
                       <strong>Insurance Charges:</strong>
                     </p>
@@ -454,7 +454,7 @@ export const SaleCreate = ({
                 </Form.Row>
                 <Form.Row>
                   <Col>
-                    <hr></hr>
+                    <hr/>
                     <p className="mb-3">
                       <strong>Summary:</strong>
                     </p>

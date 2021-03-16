@@ -52,6 +52,8 @@ import reportProfitStatusReducer from "./reports-reducers/reportProfitStatusRedu
 //DASHBOARD
 import dashboardReducer from "./dashboard-reducers/dashboardReducer";
 import dashboardStatusReducer from "./dashboard-reducers/dashboardStatusReducer";
+import dashboardPersonalPerformanceReducer from "./dashboard-reducers/dashboardPersonalPerformanceReducer";
+import dashboardPersonalPerformanceStatusReducer from "./dashboard-reducers/dashboardPersonalPerformanceStatusReducer";
 
 import filterReducer from "./filter-reducers/filterReducer";
 
@@ -104,6 +106,8 @@ export default combineReducers({
   //DASHBOARD
   dashboardReducer,
   dashboardStatusReducer,
+  dashboardPersonalPerformanceReducer,
+  dashboardPersonalPerformanceStatusReducer,
   //FIlter
   filterReducer,
 });

@@ -59,7 +59,7 @@ const Profile = ({ userProfileGetRequest, user }) => {
               <Card.Subtitle>
                 <i>{user.position}</i>
               </Card.Subtitle>
-              <hr></hr>
+              <hr/>
               <Card.Text>
                 <b>Username:</b> {user.username}
               </Card.Text>

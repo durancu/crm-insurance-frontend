@@ -149,6 +149,11 @@ export {
   dashboardGetSuccess,
   dashboardGetRequest,
 } from "./dashboards-actions/dashboardGetActions";
+export {
+  dashboardPersonalPerformanceRequest,
+  dashboardPersonalPerformanceFail,
+  dashboardPersonalPerformanceSuccess,
+} from "./dashboards-actions/dashboardPersonalPerformanceActions";
 
 //FILTER
 export {
