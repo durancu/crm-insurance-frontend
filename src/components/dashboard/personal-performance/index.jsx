@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import moment from "moment";
 //COmponents
 import { Row, Col, Spinner } from "react-bootstrap";
 import PersonalPerformanceItem from "./PersonalPerformanceItem";
@@ -14,9 +15,14 @@ const PersonalPerformance = ({
   error,
   dashboardPersonalPerformanceRequest,
 }) => {
+  const [params, setParams] = useState({
+    month: moment().month() + 1,
+    year: moment().year(),
+  });
+
   useEffect(() => {
-    dashboardPersonalPerformanceRequest();
-  }, [dashboardPersonalPerformanceRequest]);
+    dashboardPersonalPerformanceRequest({}, params);
+  }, [dashboardPersonalPerformanceRequest, params]);
   return (
     <>
       <Row>
