@@ -54,9 +54,11 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
               ))}
           </Row>
         </Col>
-        <Col sm="3" lg="3">
-          <PersonalPerformance />
-        </Col>
+        {!user.hasOwnProperty("roles") && DASHBOARD_SETS[user.roles[0]] && (
+          <Col sm="3" lg="3">
+            <PersonalPerformance />
+          </Col>
+        )}
       </Row>
     </>
   );
