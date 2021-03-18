@@ -5,7 +5,19 @@ export const DASHBOARD_TEMPLATES = {
         id: 1,
         model: "sales",
         type: "line",
-        title: "Sales By Day",
+        title: "Sales Count By Day",
+        width: 6,
+        queryParams: {
+            dataCriteria: "totalCharge",
+            groupingCriteria: "day",
+            aggregation: "count"
+        }
+    },
+    SALES_COUNT_BY_MONTH_LINE: {
+        id: 1,
+        model: "sales",
+        type: "line",
+        title: "Sales Count By Day",
         width: 6,
         queryParams: {
             dataCriteria: "totalCharge",
@@ -73,59 +85,63 @@ export const DASHBOARD_TEMPLATES = {
             aggregation: "sum"
         }
     },
-
-
+    TOTAL_SALE_BY_SELLER_DOUGHNUT: {
+        id: 6,
+        model: "sales",
+        type: "bar",
+        title: "Total Sales By Seller",
+        width: 6,
+        queryParams: {
+            dataCriteria: "totalCharge",
+            groupingCriteria: "seller",
+            aggregation: "sum"
+        }
+    },
 }
 
 export const DASHBOARD_SETS =
 {
     "ADMIN": {
         queries: [
-            DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
-            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
+            DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
         ],
-        dateRange: "MTD"
     },
     "OWNER": {
         queries: [
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_BAR,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
         ],
-        dateRange: "MTD"
     },
     "ENDORSEMENTS": {
         queries: [
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
         ],
-        dateRange: "MTD"
     },
     "CERTIFICATES": {
         queries: [
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT
         ],
-        dateRange: "MTD"
     },
     "TRAINEE": {
         queries: [
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_DAY_BAR,
         ],
-        dateRange: "MTD"
     },
     "SELLER": {
         queries: [
             DASHBOARD_TEMPLATES.SALES_COUNT_BY_DAY_LINE,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_DAY_BAR,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
-            DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
+            DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_DOUGHNUT,
         ],
-        dateRange: "MTD"
     },
     "MANAGER": {
         queries: [
@@ -134,7 +150,6 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_SELLER_BAR,
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_BAR,
         ],
-        dateRange: "MTD"
     },
     "LEGAL": {
         queries: [
@@ -143,7 +158,6 @@ export const DASHBOARD_SETS =
             DASHBOARD_TEMPLATES.TOTAL_SALE_BY_LOCATION_BAR,
             DASHBOARD_TEMPLATES.TOTAL_PENDING_BY_SELLER_BAR,
         ],
-        dateRange: "MTD"
     },
 }
 

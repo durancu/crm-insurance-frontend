@@ -8,9 +8,9 @@ import userAuthReducer from "./users-reducers/userAuthReducer";
 import userAuthStatusReducer from "./users-reducers/userAuthStatusReducer";
 import userCheckAuthStatusReducer from "./users-reducers/userCheckAuthStatusReducer";
 //Profile
-import userProfileReducer from './users-reducers/userProfileReducer'
-import userProfileStatusReducer from './users-reducers/userProfileStatusReducer'
-import userProfileGetStatusReducer from './users-reducers/userProfileGetStatusReducer'
+import userProfileReducer from "./users-reducers/userProfileReducer";
+import userProfileStatusReducer from "./users-reducers/userProfileStatusReducer";
+import userProfileGetStatusReducer from "./users-reducers/userProfileGetStatusReducer";
 //USER
 import userReducer from "./users-reducers/userReducer";
 import userLoadStatusReducer from "./users-reducers/userLoadStatusReducer";
@@ -44,10 +44,18 @@ import saleUpdateStatusReducer from "./sales-reducers/saleUpdateStatusReducer";
 //REPORT
 import reportReducer from "./reports-reducers/reportReducer";
 import reportListStatusReducer from "./reports-reducers/reportListStatusReducer";
+import reportSalaryReducer from "./reports-reducers/reportSalaryReducer";
+import reportSalaryStatusReducer from "./reports-reducers/reportSalaryStatusReducer";
+import reportProfitReducer from "./reports-reducers/reportProfitReducer";
+import reportProfitStatusReducer from "./reports-reducers/reportProfitStatusReducer";
 
 //DASHBOARD
 import dashboardReducer from "./dashboard-reducers/dashboardReducer";
 import dashboardStatusReducer from "./dashboard-reducers/dashboardStatusReducer";
+import dashboardPersonalPerformanceReducer from "./dashboard-reducers/dashboardPersonalPerformanceReducer";
+import dashboardPersonalPerformanceStatusReducer from "./dashboard-reducers/dashboardPersonalPerformanceStatusReducer";
+
+import filterReducer from "./filter-reducers/filterReducer";
 
 export default combineReducers({
   testReducer,
@@ -91,7 +99,15 @@ export default combineReducers({
   //REPORT
   reportReducer,
   reportListStatusReducer,
+  reportSalaryReducer,
+  reportSalaryStatusReducer,
+  reportProfitReducer,
+  reportProfitStatusReducer,
   //DASHBOARD
   dashboardReducer,
   dashboardStatusReducer,
+  dashboardPersonalPerformanceReducer,
+  dashboardPersonalPerformanceStatusReducer,
+  //FIlter
+  filterReducer,
 });

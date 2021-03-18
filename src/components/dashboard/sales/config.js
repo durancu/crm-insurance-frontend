@@ -52,7 +52,7 @@ export const salesReportTableColumns = (isAdmin = false) =>
             },
         },
         {
-            dataField: "seller.location",
+            dataField: "location",
             text: "Location",
             headerStyle: () => {
                 return { width: "10%" };
@@ -135,8 +135,8 @@ export const salesReportTableColumns = (isAdmin = false) =>
             footerAlign: "right",
         },
         {
-            dataField: "downPayment",
-            text: "Charges",
+            dataField: "premium",
+            text: "Premium",
             headerAlign: "right",
             formatter: priceFormatter,
             sort: true,

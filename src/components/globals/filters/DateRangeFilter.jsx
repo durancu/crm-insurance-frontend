@@ -4,127 +4,67 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 //Components
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 //Actions
-import {
-  userLoadRequest,
-  customerLoadRequest,
-  saleListRequest,
-  reportListRequest,
-} from "../../../redux/actions";
+import { filterGetSuccess } from "../../../redux/actions";
+
 import { DateRange, dateRangeByName } from "../date-factory";
 
-const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
-  const defaultDateRange = dateRangeByName(DateRange.MONTH_TO_DATE);
+const defaultDateRange = dateRangeByName(DateRange.MONTH_TO_DATE);
+const DateRangeFilter = ({ filterGetSuccess, params }) => {
 
   const defaultForm = {
-    dateRange: DateRange.MONTH_TO_DATE,
-    startDate: defaultDateRange.start,
-    endDate: defaultDateRange.end,
+    dateRangeName: DateRange.ALL,
+    startDate: defaultDateRange.startDate,
+    endDate: defaultDateRange.endDate,
   };
 
-  const [startDate, setStartDate] = useState(defaultForm.startDate);
-  const [endDate, setEndDate] = useState(defaultForm.endDate);
-  const [dateRange, setDateRange] = useState(defaultForm.dateRange);
+  const [dateRange, setDateRange] = useState({
+    startDate: defaultForm.startDate,
+    endDate: defaultForm.endDate,
+  });
+  const [dateRangeName, setDateRangeName] = useState(defaultForm.dateRangeName);
   const [currentDateRange, setCurrentDateRange] = useState("");
-  const [previousDate, setPreviousDate] = useState("");
 
   useEffect(() => {
-    switch (model) {
-      case "sale":
-        saleListRequest(
-          `start_date=${defaultForm.startDate}&end_date=${defaultForm.endDate}`
-        );
-        break;
-      case "report":
-        reportListRequest(
-          `start_date=${defaultForm.startDate}&end_date=${defaultForm.endDate}`
-        );
-        break;
-
-      default:
-        break;
-    }
-  }, [
-    defaultForm.endDate,
-    defaultForm.startDate,
-    model,
-    reportListRequest,
-    saleListRequest,
-  ]);
-
-  useEffect(() => {
-    setStartDate(currentDateRange.start);
-    setEndDate(currentDateRange.end);
+    setDateRange(currentDateRange);
   }, [currentDateRange]);
 
-  const calculateDatesByRange = ({ target }) => {
-    setDateRange(target.value);
+  useEffect(() => {
+    filterGetSuccess({
+      "start_date": dateRange.startDate,
+      "end_date": dateRange.endDate,
+    });
+  }, [dateRange, filterGetSuccess]);
+
+  const handleDateRangeDropdownChange = ({ target }) => {
+    setDateRangeName(target.value);
     setCurrentDateRange(dateRangeByName(target.value));
   };
 
   //Load data of form
   const handleChangeDate = ({ target }) => {
-    switch (target.name) {
-      case "startDate":
-        setStartDate(moment(target.value).format("YYYY-MM-DD"));
-        break;
-      case "endDate":
-        setEndDate(moment(target.value).format("YYYY-MM-DD"));
-        break;
-      default:
-        break;
-    }
-  };
-
-  //Load data of form
-  const handleFocusDate = ({ target }) => {
-    setPreviousDate(target.value);
-  };
-
-  //Load data of form
-  const handleBlurDate = ({ target }) => {
-    switch (target.name) {
-      case "startDate":
-        if (previousDate !== target.value) {
-          setDateRange("CUSTOM");
-        }
-        break;
-      case "endDate":
-        if (previousDate !== target.value) {
-          setDateRange("CUSTOM");
-        }
-        break;
-      default:
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    switch (model) {
-      case "sale":
-        saleListRequest(`start_date=${startDate}&end_date=${endDate}`);
-        break;
-      case "report":
-        reportListRequest(`start_date=${startDate}&end_date=${endDate}`);
-        break;
-      default:
-    }
+    setDateRangeName("CUSTOM");
+    setDateRange((dateRange) => ({
+      ...dateRange,
+      [target.name]: moment(target.value).format("YYYY-MM-DD"),
+    }));
+    console.log(dateRange);
   };
 
   return (
-    <Form inline onSubmit={handleSubmit}>
+    <Form inline>
       <Form.Row>
-        <Form.Label htmlFor="dateRange" className="my-1 mr-2">
+        <Form.Label htmlFor="dateRangeName" className="my-1 mr-2">
           Date:
         </Form.Label>
 
         <Form.Control
-          name="dateRange"
+          name="dateRangeName"
           as="select"
-          onChange={calculateDatesByRange}
-          value={dateRange}
+          onChange={handleDateRangeDropdownChange}
+          value={dateRangeName}
           className="my-2 mr-sm-2"
           custom
         >
@@ -140,41 +80,31 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
           <option value="CUSTOM">Custom</option>
         </Form.Control>
 
-        <Form.Group>
+        <Form.Group hidden={dateRangeName === ""}>
           <Form.Label htmlFor="startDate" className="my-1 mr-2">
             From:
           </Form.Label>
           <Form.Control
             type="date"
             name="startDate"
-            value={startDate}
+            value={dateRange.startDate}
             onChange={handleChangeDate}
-            onBlur={handleBlurDate}
-            onFocus={handleFocusDate}
             className="my-1 mr-2"
             required
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group hidden={dateRangeName === ""}>
           <Form.Label htmlFor="endDate" className="my-1 mr-2">
             To:
           </Form.Label>
           <Form.Control
             type="date"
             name="endDate"
-            value={endDate}
+            value={dateRange.endDate}
             onChange={handleChangeDate}
-            onBlur={handleBlurDate}
-            onFocus={handleFocusDate}
             className="my-1 mr-2"
             required
           />
-        </Form.Group>
-
-        <Form.Group>
-          <Button type="submit" variant="dark">
-            Apply
-          </Button>
         </Form.Group>
       </Form.Row>
     </Form>
@@ -182,26 +112,15 @@ const DateRangeFilter = ({ saleListRequest, reportListRequest, model }) => {
 };
 
 DateRangeFilter.propTypes = {
-  userLoadRequest: PropTypes.func.isRequired,
-  sellers: PropTypes.array.isRequired,
-  customers: PropTypes.array.isRequired,
-  customerLoadRequest: PropTypes.func.isRequired,
-  model: PropTypes.string.isRequired,
   //Functions
-  saleListRequest: PropTypes.func.isRequired,
-  reportListRequest: PropTypes.func.isRequired,
+  filterGetSuccess: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  sellers: state.userReducer.list,
-  customers: state.customerReducer.list,
 });
 
 const mapDispatchToProps = {
-  userLoadRequest,
-  customerLoadRequest,
-  saleListRequest,
-  reportListRequest,
+  filterGetSuccess,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DateRangeFilter);

@@ -133,10 +133,31 @@ export {
   reportListFail,
   reportListSuccess,
 } from "./reports-actions/reportListActions";
+export {
+  reportSalaryRequest,
+  reportSalaryFail,
+  reportSalarySuccess,
+} from "./reports-actions/reportSalaryActions";
+export {
+  reportProfitRequest,
+  reportProfitFail,
+  reportProfitSuccess,
+} from "./reports-actions/reportProfitActions";
 //DASHBOARDS
 export {
   dashboardGetFail,
   dashboardGetSuccess,
-  dashboardGetRequest
+  dashboardGetRequest,
 } from "./dashboards-actions/dashboardGetActions";
+export {
+  dashboardPersonalPerformanceRequest,
+  dashboardPersonalPerformanceFail,
+  dashboardPersonalPerformanceSuccess,
+} from "./dashboards-actions/dashboardPersonalPerformanceActions";
 
+//FILTER
+export {
+  filterGetRequest,
+  filterGetFail,
+  filterGetSuccess,
+} from "./filters-actions/filterActions";

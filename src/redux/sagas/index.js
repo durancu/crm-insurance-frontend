@@ -32,8 +32,14 @@ import saleDeleteSaga from "./sale-sagas/saleDeleteSaga";
 import saleUpdateSaga from "./sale-sagas/saleUpdateSaga";
 //REPORTS
 import reportListSaga from "./report-sagas/reportListSaga";
+import reportSalarySaga from "./report-sagas/reportSalarySaga";
+import reportProfitSaga from "./report-sagas/reportProfitSaga";
 //REPORTS
 import dashboardGetSaga from "./dashboard-sagas/dashboardGetSaga";
+import dashboardPersonalPerformanceSaga from "./dashboard-sagas/dashboardPersonalPerformanceSaga";
+
+//FILTER
+import filterSaga from "./filter-sagas/filterSaga";
 
 const sagas = function* sagas() {
   //AUTH
@@ -69,8 +75,13 @@ const sagas = function* sagas() {
   yield spawn(saleUpdateSaga);
   //REPORT
   yield spawn(reportListSaga);
+  yield spawn(reportSalarySaga);
+  yield spawn(reportProfitSaga);
   //DASHBOARD
   yield spawn(dashboardGetSaga);
+  yield spawn(dashboardPersonalPerformanceSaga);
+  //FILTER
+  yield spawn(filterSaga);
 };
 
 export default sagas;

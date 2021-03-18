@@ -1,8 +1,9 @@
 import * as types from "../actionTypes";
 
-export const saleListRequest = (queryParams) => ({
+export const saleListRequest = (payload, queryParams = {}) => ({
   type: types.SALES_LIST_REQUEST,
-  queryParams
+  payload,
+  queryParams,
 });
 
 export const saleListFail = () => ({

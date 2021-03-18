@@ -1,0 +1,34 @@
+  
+  div.react-bootstrap-table table tbody tr {
+    border-top-style: hidden !important;
+    border-bottom-style: hidden !important;
+  }
+
+
+  div.react-bootstrap-table td {
+    font-size: 13px!important;
+  }
+
+  div.react-bootstrap-table {
+    font-size: 13px!important;
+  }
+
+  div.react-bootstrap-table select.select-filter  {
+    height: 32px!important;
+    font-size: 13px!important;
+  }
+
+  td.react-bootstrap-table-editing-cell {
+    height: 32px!important;
+    font-size: 13px!important;
+  }
+
+  div.react-bootstrap-table input.text-filter {
+    height: 32px!important;
+    font-size: 13px!important;
+  }
+
+  div.react-bootstrap-table input.form-control, select.form-control {
+    padding: 2px!important;
+    font-size: 13px!important; 
+  }

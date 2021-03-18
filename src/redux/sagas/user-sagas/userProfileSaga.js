@@ -9,7 +9,7 @@ const apiCall = () => apiGet("profile", true).catch((err) => console.log(err));
 const sagaRequest = function* sagaRequest() {
   try {
     const response = yield call(apiCall);
-    setSessionData("profile", JSON.stringify(response.data));
+    yield setSessionData("profile", JSON.stringify(response.data));
     yield put(userProfileSetSuccess(response.data));
   } catch (e) {
     yield put(userProfileSetFail());

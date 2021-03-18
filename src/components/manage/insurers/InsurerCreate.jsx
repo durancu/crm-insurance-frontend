@@ -1,14 +1,25 @@
-import React, { useState, Fragment, useEffect } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import React, { useState, Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 //components
-import { Form, Button, Modal, Spinner, Row, Col } from 'react-bootstrap'
+import {
+  Form,
+  Button,
+  Modal,
+  Spinner,
+  Row,
+  Col,
+  Container,
+} from "react-bootstrap";
 
 //action
-import { insurerCreateRequest, insurerUpdateRequest } from '../../../redux/actions'
+import {
+  insurerCreateRequest,
+  insurerUpdateRequest,
+} from "../../../redux/actions";
 
-const InsurerForm = ({
+const InsurerCreate = ({
   loading,
   loadingGetInsurer,
   error,
@@ -17,7 +28,8 @@ const InsurerForm = ({
   showModal,
   modal,
   edit,
-  insurer }) => {
+  insurer,
+}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let defaultForm = {
     name: "",
@@ -27,31 +39,34 @@ const InsurerForm = ({
     cargoCommission: 0,
     physicalDamageCommission: 0,
     wcGlUmbCommission: 0,
-  }
+  };
 
-  const [form, setForm] = useState(defaultForm)
+  const [form, setForm] = useState(defaultForm);
 
   useEffect(() => {
-    edit ? setForm(insurer) : setForm(defaultForm)
+    edit ? setForm(insurer) : setForm(defaultForm);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [edit, insurer])
+  }, [edit, insurer]);
 
   const handleChange = ({ target }) => {
-    setForm(form => ({ ...form, [target.name]: target.value }))
-  }
+    setForm((form) => ({ ...form, [target.name]: target.value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    edit ? insurerUpdateRequest(form, form._id) : insurerCreateRequest({
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      liabilityCommission: parseFloat(form.liabilityCommission)/100,
-      cargoCommission: parseFloat(form.cargoCommission)/100,
-      physicalDamageCommission: parseFloat(form.physicalDamageCommission)/100,
-      wcGlUmbCommission: parseFloat(form.wcGlUmbCommission)/100,
-    });
+    edit
+      ? insurerUpdateRequest(form, form._id)
+      : insurerCreateRequest({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          liabilityCommission: parseFloat(form.liabilityCommission),
+          cargoCommission: parseFloat(form.cargoCommission),
+          physicalDamageCommission:
+            parseFloat(form.physicalDamageCommission),
+          wcGlUmbCommission: parseFloat(form.wcGlUmbCommission),
+        });
 
     setTimeout(() => {
       if (!loading && !error) {
@@ -59,25 +74,25 @@ const InsurerForm = ({
         showModal();
       }
     }, 1000);
-  }
+  };
 
   const clearForm = () => {
-    setForm(defaultForm)
-  }
+    setForm(defaultForm);
+  };
 
   return (
     <Fragment>
-      <Modal show={modal} onHide={showModal}>
+      <Modal show={modal} onHide={showModal} backdrop="static">
         <Form onSubmit={handleSubmit}>
           <fieldset disabled={loading || loadingGetInsurer}>
-            <Modal.Header closeButton>
-              <Modal.Title>
-                Insurer {edit ? `Update` : `Create`}
-              </Modal.Title>
+            <Modal.Header>
+              <Modal.Title>Insurer {edit ? `Update` : `Create`}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form.Group>
-                <Form.Label>Name</Form.Label>
+                <Form.Label style={{ fontSize: "small" }}>
+                  <span style={{ color: "red" }}>* </span> Name
+                </Form.Label>
                 <Form.Control
                   type="text"
                   name="name"
@@ -88,7 +103,9 @@ const InsurerForm = ({
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Phone</Form.Label>
+                <Form.Label style={{ fontSize: "small" }}>
+                  <span style={{ color: "red" }}>* </span> Phone
+                </Form.Label>
                 <Form.Control
                   type="tel"
                   name="phone"
@@ -99,19 +116,30 @@ const InsurerForm = ({
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Email</Form.Label>
+                <Form.Label style={{ fontSize: "small" }}>
+                  <span style={{ color: "red" }}>* </span> Email
+                </Form.Label>
                 <Form.Control
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  required />
+                  required
+                />
               </Form.Group>
-              <Row><Col><br/><h4>Commissions (%)</h4><br/></Col></Row>
+              <Row>
+                <Col>
+                  <br />
+                  <h4>Commissions (%)</h4>
+                  <br />
+                </Col>
+              </Row>
               <Row>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Liability</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span> Liability
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="liabilityCommission"
@@ -122,7 +150,9 @@ const InsurerForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>Motor Cargo</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span> Motor Cargo
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="cargoCommission"
@@ -134,9 +164,10 @@ const InsurerForm = ({
               </Row>
               <Row>
                 <Col>
-
                   <Form.Group>
-                    <Form.Label>Physical Damage</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span> Physical Damage
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="physicalDamageCommission"
@@ -147,7 +178,9 @@ const InsurerForm = ({
                 </Col>
                 <Col>
                   <Form.Group>
-                    <Form.Label>WC/GL/UMB</Form.Label>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span> WC/GL/UMB
+                    </Form.Label>
                     <Form.Control
                       type="text"
                       name="wcGlUmbCommission"
@@ -159,40 +192,58 @@ const InsurerForm = ({
               </Row>
             </Modal.Body>
             <Modal.Footer>
-              <Button
-                type="submit"
-                variant={edit ? `success` : `primary`}
-                block
-              >
-                {loading ? <Spinner animation="border" /> : (edit ? `Update` : `Create`)}
-              </Button>
+              <Container>
+                <Row className="justify-content-center">
+                  <Col sm="3">
+                    <Button variant="light" block onClick={showModal}>
+                      Cancel
+                    </Button>
+                  </Col>
+                  <Col />
+                  <Col lg="3">
+                    <Button
+                      type="submit"
+                      variant={edit ? `success` : `primary`}
+                      block
+                    >
+                      {loading ? (
+                        <Spinner animation="border" />
+                      ) : edit ? (
+                        `Update`
+                      ) : (
+                        `Create`
+                      )}
+                    </Button>
+                  </Col>
+                </Row>
+              </Container>
             </Modal.Footer>
           </fieldset>
         </Form>
       </Modal>
     </Fragment>
-  )
-}
+  );
+};
 
-InsurerForm.propTypes = {
+InsurerCreate.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   modalShow: PropTypes.bool,
   loadingGetInsurer: PropTypes.bool.isRequired,
   insurerCreateRequest: PropTypes.func.isRequired,
   formModal: PropTypes.func,
-}
+};
 
 const mapStateToProps = (state) => ({
   loading: state.insurerCreateStatusReducer.loading,
   error: state.insurerCreateStatusReducer.error,
   insurer: state.insurerReducer.item,
-  loadingGetInsurer: state.insurerGetStatusReducer.loading
-})
+  loadingGetInsurer: state.insurerGetStatusReducer.loading,
+});
 
 const mapDispatchToProps = {
   insurerCreateRequest,
-  insurerUpdateRequest
-}
+  insurerUpdateRequest,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(InsurerForm)
+export default connect(mapStateToProps, mapDispatchToProps)(InsurerCreate);

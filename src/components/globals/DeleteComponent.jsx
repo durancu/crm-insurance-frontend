@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import PropTypes from "prop-types";
 import { Modal, Button, Col, Row, Spinner } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
@@ -11,14 +12,14 @@ const DeleteComponent = ({ id, deleteElement, loading, error, children }) => {
   };
   return (
     <>
-      <Button size="sm" variant="danger" onClick={handleModal}>
+      <Button size="lg" variant="danger" onClick={handleModal}>
         <Trash />
       </Button>
       <Modal centered show={modal} onHide={handleModal}>
         <Modal.Header closeButton>
           <Modal.Title>
             {loading && <Spinner animation="border" variant="danger" />}
-            Do you want to delete the {children}?
+            Do you want to delete this {children}?
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -54,8 +55,8 @@ const DeleteComponent = ({ id, deleteElement, loading, error, children }) => {
 
 DeleteComponent.propTypes = {
   id: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
   deleteElement: PropTypes.func.isRequired,
 };
 

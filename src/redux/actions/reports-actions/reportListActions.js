@@ -1,8 +1,9 @@
 import * as types from "../actionTypes";
 
-export const reportListRequest = (payload="") => ({
+export const reportListRequest = (payload={},queryParams = {}) => ({
   type: types.REPORT_LIST_REQUEST,
-  payload
+  payload,
+  queryParams
 });
 
 export const reportListFail = () => ({

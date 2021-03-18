@@ -4,7 +4,7 @@
  * @returns {object} Message and Status
  */
 export const setSessionData = (name, payload) => {
-  sessionStorage.setItem(name, payload);
+  localStorage.setItem(name, payload);
   return {
     message: "Saved success",
     error: false,
@@ -18,14 +18,14 @@ export const setSessionData = (name, payload) => {
 export const getSessionData = (name) => ({
   message: "Loaded success",
   error: false,
-  data: sessionStorage.getItem(name),
+  data: localStorage.getItem(name),
 });
 
 /**Delete token cookies
  * @returns {object} Message and Status
  */
 export const deleteSessionData = (name) => {
-  sessionStorage.removeItem(name);
+  localStorage.removeItem(name);
   return {
     message: "Delete success",
     error: false,

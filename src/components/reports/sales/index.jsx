@@ -2,20 +2,17 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Link } from "react-router-dom";
-
 //Actions
 import { reportListRequest } from "../../../redux/actions";
 
-//Assets
-import "../../assets/App.css";
+
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import cellEditFactory from "react-bootstrap-table2-editor";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import DateRangeFilter from "../../globals/filters/DateRangeFilter";
+import { ADMIN_ROLES } from "../../../config/user";
 
 export const Reports = ({
   reportListRequest,
@@ -23,12 +20,16 @@ export const Reports = ({
   errorReport,
   sales,
   user,
+  params,
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    reportListRequest();
-    user.roles.map((rol) => rol === "ADMIN" && setIsAdmin(true));
-  }, [reportListRequest, user.roles]);
+    user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
+  }, [user, user.roles]);
+
+  useEffect(() => {
+    reportListRequest({}, params);
+  }, [params, reportListRequest]);
 
   return (
     <>
@@ -37,14 +38,9 @@ export const Reports = ({
           <h2>Sales Report</h2>
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-2">
         <Col lg="10" sm="6">
-          <DateRangeFilter model={'report'}/>
-        </Col>
-        <Col lg="2" sm="6" align="right">
-          <Link to="/sales/create" className="btn btn-primary">
-            Add New Sale
-          </Link>
+          <DateRangeFilter/>
         </Col>
       </Row>
 
@@ -63,13 +59,13 @@ export const Reports = ({
             columns={salesReportTableColumns(isAdmin)}
             striped
             hover
-            condensed={true}
+            
             bordered={false}
             responsive
             filter={filterFactory()}
             defaultSorted={salesReportDefaultSorted()}
             noDataIndication="No registered sales"
-            cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
+           // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
           />
         </Row>
       )}
@@ -90,6 +86,7 @@ const mapStateToProps = (state) => ({
   loadingReport: state.reportListStatusReducer.loading,
   errorReport: state.reportListStatusReducer.error,
   user: state.userProfileReducer.user,
+  params: state.filterReducer.params,
 });
 
 const mapDispatchToProps = {
