@@ -241,9 +241,10 @@ export const totalChargeCalculate = ({
   transformNumber(parseFloat(liabilityCharge)) +
   transformNumber(parseFloat(cargoCharge)) +
   transformNumber(parseFloat(physicalDamageCharge)) +
-  transformNumber(parseFloat(wcGlUmbCharge)) +
-  transformNumber(parseFloat(fees)) +
-  transformNumber(parseFloat(permits));
+  transformNumber(parseFloat(wcGlUmbCharge));
+  //+
+  //transformNumber(parseFloat(fees)) +
+ // transformNumber(parseFloat(permits));
 
 /**Calc pendingPayment
  * @param {object} formData

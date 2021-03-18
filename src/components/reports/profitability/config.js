@@ -1,4 +1,5 @@
 //Functions
+import { textFilter } from "react-bootstrap-table2-filter";
 import {
   priceFormatter,
   footerPriceFormatter,
@@ -17,6 +18,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
     headerAlign: "left",
     footer: "TOTALS",
     formatter: locationFormatter,
+    filter: textFilter({ placeholder: "Search" }),
   },
   {
     dataField: "sellerName",
