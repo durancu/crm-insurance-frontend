@@ -16,7 +16,7 @@ const PersonalPerformance = ({
   isAdmin,
   dashboardPersonalPerformanceRequest,
 }) => {
-  const [params, setParams] = useState({
+  const [params] = useState({
     month: moment().month() + 1,
     year: moment().year(),
   });

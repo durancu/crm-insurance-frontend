@@ -11,7 +11,7 @@ const apiCall = (data, _id) =>
 const sagaRequest = function* sagaRequest(action) {
   const { payload, _id } = action;
   try {
-    const response = yield call(apiCall, payload, _id);
+    yield call(apiCall, payload, _id);
     yield put(insurerUpdateSuccess());
     yield put(insurerListRequest());
   } catch (e) {

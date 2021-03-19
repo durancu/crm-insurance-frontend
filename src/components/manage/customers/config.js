@@ -3,7 +3,6 @@ import {
   /* buttonCellFormatter,
   buttonHeaderFormatter,
   componentDeleteFormatter, */
-  companyTypeFormatter,
 } from "../../globals/functions";
 /* import { textFilter } from "react-bootstrap-table2-filter"; */
 

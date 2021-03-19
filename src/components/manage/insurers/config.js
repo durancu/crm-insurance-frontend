@@ -1,9 +1,6 @@
 //Functions
 import {
-  buttonCellFormatter,
-  buttonHeaderFormatter,
   commissionFormatter,
-  componentDeleteFormatter,
 } from "../../globals/functions";
 import { textFilter } from "react-bootstrap-table2-filter";
 

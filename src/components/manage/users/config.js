@@ -1,9 +1,6 @@
 //Functions
 import {
-  componentDeleteFormatter,
-  isConfirmFormatter,
   componentPasswordFormatter,
-  baseSalaryFormatter,
   buttonCellFormatter,
   buttonHeaderFormatter,
   locationFormatter,

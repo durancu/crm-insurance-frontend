@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import DashboardChart from "./sales/DashboardChart";
 import { DASHBOARD_SETS } from "../../config/dashboard";
 import { ADMIN_ROLES } from "../../config/user";
@@ -19,7 +19,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
     setIsAdmin(
       user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0])
     );
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     setDashboardConfig(
