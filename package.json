@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^13.0.6",
-    "@types/react-dom": "^17.0.2",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/react-dom": "^16.0.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "chartjs-plugin-colorschemes": "^0.4.0",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.5.2",
-    "react-bootstrap-icons": "^1.4.0",
+    "react": "^16.0.1",
+    "react-bootstrap": "^1.4.3",
+    "react-bootstrap-icons": "^1.3.0",
     "react-bootstrap-table-next": "^4.0.3",
     "react-bootstrap-table2-editor": "^1.4.0",
     "react-bootstrap-table2-filter": "^1.3.3",
@@ -23,23 +23,19 @@
     "react-bootstrap-table2-toolkit": "^2.1.3",
     "react-chartjs-2": "^2.11.1",
     "react-datepicker": "^3.6.0",
-    "react-dom": "^17.0.1",
+    "react-dom": "^16.0.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "4.0.1",
     "redux": "^4.0.5",
-    "redux-devtools": "^3.7.0",
-    "redux-devtools-extension": "^2.13.9",
     "redux-saga": "^1.1.3",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
-    "start:prod": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
-    "build": "node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start:dist": "node dist/main.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +56,8 @@
     ]
   },
   "devDependencies": {
-    "moxios": "^0.4.0"
+    "moxios": "^0.4.0",
+    "redux-devtools": "^3.7.0",
+    "redux-devtools-extension": "^2.13.8"
   }
 }
