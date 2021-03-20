@@ -40,7 +40,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:dist": "node dist/main.js"
-
   },
   "eslintConfig": {
     "extends": [
