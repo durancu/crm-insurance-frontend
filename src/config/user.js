@@ -43,5 +43,28 @@ export const USER_SETTINGS = {
 };
 
 export const SELLER_ROLES = ["SELLER", "TRAINEE"];
-export const ADMIN_ROLES = ["OWNER", "ADMIN", "MANAGER"];
-export const EXECUTIVE_ROLES = ["LEGAL", "MANAGER","ADMIN"];
+export const ADMIN_ROLES = ["OWNER", "ADMIN"];
+export const EXECUTIVE_ROLES = ["LEGAL", "MANAGER","ADMIN", "OWNER"];
+
+
+/* export function isAdmin(
+  user: Partial<User>
+): any {
+  return ADMIN_ROLES.includes(user.roles[0]);
+}
+
+export function isExecutive(
+  user: Partial<User>
+): any {
+  return EXECUTIVE_ROLES.includes(user.roles[0]);
+}
+
+export function isSeller(
+  user: Partial<User>
+): any {
+  return SELLER_ROLES.includes(user.roles[0]);
+}
+
+export function getPrimaryRole(user: Partial<User>):string{
+  return (user.roles && user.roles.length) && user.roles[0].toUpperCase();
+} */
