@@ -6,6 +6,7 @@
     "node": "14.x"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.13.10",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^13.0.6",
@@ -15,7 +16,7 @@
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "chartjs-plugin-colorschemes": "^0.4.0",
-    "fsevents": "^2.3.2",
+    "chokidar": "3",
     "jquery": "^3.6.0",
     "moment": "^2.29.1",
     "prop-types": "^15.7.2",
