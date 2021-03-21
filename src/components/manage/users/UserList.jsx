@@ -19,7 +19,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import { usersDefaultSorted, usersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
 import ChangePassword from "./ChangePassword";
-import { ADMIN_ROLES } from "../../../config/user";
+import { isAdminCheck } from "../../../config/user";
 
 function UserList({
   userLoadRequest,
@@ -37,9 +37,7 @@ function UserList({
   const [id, setId] = useState("");
   //Functions
   useEffect(() => {
-    if (user.hasOwnProperty("roles")) {
-      ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
-    }
+    setIsAdmin(isAdminCheck(user));
     userLoadRequest();
   }, [user, userLoadRequest]);
 
@@ -57,7 +55,7 @@ function UserList({
         handleModal={showModal}
         deleteElement={userDeleteRequest}
       >
-        Customer
+        Employee
       </DeleteModelAlert>
       <ChangePassword
         modal={passwordModal}
@@ -69,7 +67,12 @@ function UserList({
         bootstrap4
         keyField="_id"
         data={users}
-        columns={usersTableColumns(isAdmin, showModal, setId, showPasswordModal)}
+        columns={usersTableColumns(
+          isAdmin,
+          showModal,
+          setId,
+          showPasswordModal
+        )}
         striped
         hover
         bordered={false}

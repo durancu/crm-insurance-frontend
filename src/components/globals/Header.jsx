@@ -6,21 +6,17 @@ import { Link } from "react-router-dom";
 import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { ADMIN_ROLES, EXECUTIVE_ROLES } from "../../config/user";
+import { isAdminCheck, isExecutiveCheck } from "../../config/user";
 
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isExecutive, setIsExecutive] = useState(false);
 
   useEffect(() => {
-    if (user.hasOwnProperty("roles")) {
-      ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
-      const executive = EXECUTIVE_ROLES.filter(
-        (role) => role === user.roles[0]
-      );
-      executive.length > 0 && setIsExecutive(true);
-    }
+    setIsAdmin(isAdminCheck(user));
+    setIsExecutive(isExecutiveCheck(user));
   }, [user]);
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
       <Container fluid style={{ maxWidth: "98%" }}>
@@ -39,6 +35,12 @@ const Header = ({ user, userLogoutRequest }) => {
             <Link className="nav-link" to="/manage/customers">
               Customers
             </Link>
+
+            <Link className="nav-link" to="/manage/users">
+              Employees
+            </Link>
+          </Nav>
+          <Nav className="ml-auto">
             <NavDropdown title="Reports" id="collasible-nav-dropdown">
               <Link className="dropdown-item" to="/reports/sales">
                 Sales
@@ -63,11 +65,6 @@ const Header = ({ user, userLogoutRequest }) => {
                 Payroll
               </Link>
             </NavDropdown>
-            <Link className="nav-link" to="/manage/users">
-              Employees
-            </Link>
-          </Nav>
-          <Nav className="ml-auto">
             {isAdmin && (
               <NavDropdown title="Manage" id="basic-nav-dropdown">
                 <>

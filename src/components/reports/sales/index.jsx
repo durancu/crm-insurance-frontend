@@ -5,14 +5,13 @@ import { connect } from "react-redux";
 //Actions
 import { reportListRequest } from "../../../redux/actions";
 
-
 //Components
 import { Spinner, Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import DateRangeFilter from "../../globals/filters/DateRangeFilter";
-import { ADMIN_ROLES } from "../../../config/user";
+import { isAdminCheck } from "../../../config/user";
 
 export const Reports = ({
   reportListRequest,
@@ -24,7 +23,7 @@ export const Reports = ({
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
+    setIsAdmin(isAdminCheck(user));
   }, [user, user.roles]);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export const Reports = ({
       </Row>
       <Row className="mb-2">
         <Col lg="10" sm="6">
-          <DateRangeFilter/>
+          <DateRangeFilter />
         </Col>
       </Row>
 
@@ -59,13 +58,12 @@ export const Reports = ({
             columns={salesReportTableColumns(isAdmin)}
             striped
             hover
-            
             bordered={false}
             responsive
             filter={filterFactory()}
             defaultSorted={salesReportDefaultSorted()}
             noDataIndication="No registered sales"
-           // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
+            // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}
           />
         </Row>
       )}
