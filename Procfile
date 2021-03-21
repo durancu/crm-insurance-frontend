@@ -1,5 +1,1 @@
-//web: npm run start:prod
-// this enable to start without using ts-node
-// this will run prestart:prod automatically
-
-web: npm run start:dist
+web: node --optimize_for_size --max_old_space_size=920 --gc_interval=100 node_modules/.bin/react-scripts start
