@@ -10,7 +10,7 @@ const apiCall = async() =>
 const sagaRequest = function* sagaRequest() {
   try {
     const response = yield call(apiCall);
-    setSessionData("profile", JSON.stringify(response.data));
+    yield setSessionData("profile", JSON.stringify(response.data));
     yield put(userAuthCheckSuccess(response.data));
   } catch (error) {
     yield put(userLogoutRequest());
