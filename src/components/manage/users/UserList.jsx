@@ -19,23 +19,29 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import { usersDefaultSorted, usersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
 import ChangePassword from "./ChangePassword";
+import { ADMIN_ROLES } from "../../../config/user";
 
 function UserList({
   userLoadRequest,
   userDeleteRequest,
   userUpdateRequest,
   users,
+  user,
   loading,
   loadingDelete,
 }) {
   //States
+  const [isAdmin, setIsAdmin] = useState(false);
   const [modal, setModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
   const [id, setId] = useState("");
   //Functions
   useEffect(() => {
+    if (user.hasOwnProperty("roles")) {
+      ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
+    }
     userLoadRequest();
-  }, [userLoadRequest]);
+  }, [user, userLoadRequest]);
 
   const showModal = () => {
     setModal(!modal);
@@ -63,7 +69,7 @@ function UserList({
         bootstrap4
         keyField="_id"
         data={users}
-        columns={usersTableColumns(false, showModal, setId, showPasswordModal)}
+        columns={usersTableColumns(isAdmin, showModal, setId, showPasswordModal)}
         striped
         hover
         bordered={false}
@@ -108,6 +114,7 @@ UserList.propTypes = {
 
 const mapStateToProps = (state) => ({
   users: state.userReducer.list,
+  user: state.userProfileReducer.user,
   loading: state.userLoadStatusReducer.loading,
   loadingDelete: state.userDeleteStatusReducer.loading,
 });

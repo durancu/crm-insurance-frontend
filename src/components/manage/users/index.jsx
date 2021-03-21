@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 //components
 import { Row, Col, Button } from "react-bootstrap";
 import UserCreate from "./UserCreate";
 import UserList from "./UserList";
+import { ADMIN_ROLES } from "../../../config/user";
 
-export default function Users() {
+const Users = ({ user }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
   const [modal, setModal] = useState(false);
   //Functions
+  useEffect(() => {
+    if (user.hasOwnProperty("roles")) {
+      ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
+    }
+  }, [user]);
+
   const showModal = () => {
     setModal(!modal);
   };
@@ -20,7 +29,7 @@ export default function Users() {
         </Col>
       </Row>
       <Row className="mt-0 mb-2">
-        <Col style={{ textAlign: "right" }}>
+        <Col style={{ textAlign: "right" }} hidden={!isAdmin}>
           <Button variant="primary" onClick={showModal}>
             Add New User
           </Button>
@@ -34,4 +43,10 @@ export default function Users() {
       </Row>
     </>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  user: state.userProfileReducer.user,
+});
+
+export default connect(mapStateToProps)(Users);

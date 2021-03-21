@@ -20,6 +20,8 @@ export const usersTableColumns = (
   showPasswordModal
 ) => [
   {
+    hidden: !isAdmin,
+    editable: isAdmin,
     dataField: "username",
     text: "User Name",
     align: "left",
@@ -31,6 +33,8 @@ export const usersTableColumns = (
     },
   },
   {
+    hidden: !isAdmin,
+    editable: isAdmin,
     dataField: "roles",
     text: "Role",
     align: "left",
@@ -47,6 +51,7 @@ export const usersTableColumns = (
     },
   },
   {
+    editable: isAdmin,
     dataField: "firstName",
     text: "First Name",
     align: "left",
@@ -58,6 +63,7 @@ export const usersTableColumns = (
     filter: textFilter({ placeholder: "Search" }),
   },
   {
+    editable: isAdmin,
     dataField: "lastName",
     text: "Last Name",
     align: "left",
@@ -69,6 +75,7 @@ export const usersTableColumns = (
     filter: textFilter({ placeholder: "Search" }),
   },
   {
+    editable: isAdmin,
     dataField: "email",
     text: "Email",
     sort: true,
@@ -79,6 +86,7 @@ export const usersTableColumns = (
     },
   },
   {
+    editable: isAdmin,
     dataField: "phone",
     text: "Phone",
     sort: true,
@@ -89,6 +97,7 @@ export const usersTableColumns = (
     },
   },
   {
+    editable: isAdmin,
     dataField: "location",
     text: "Location",
     sort: true,
@@ -101,6 +110,7 @@ export const usersTableColumns = (
     },
   },
   {
+    editable: isAdmin,
     dataField: "position",
     text: "Position",
     sort: true,
@@ -112,6 +122,8 @@ export const usersTableColumns = (
   },
 
   {
+    hidden: !isAdmin,
+    editable: isAdmin,
     dataField: "baseSalary",
     text: "Base Salary",
     sort: true,
@@ -123,6 +135,7 @@ export const usersTableColumns = (
     },
   },
   {
+    hidden: !isAdmin,
     dataField: "",
     text: "",
     headerStyle: () => {
@@ -131,6 +144,7 @@ export const usersTableColumns = (
     editable: false,
   },
   {
+    hidden: !isAdmin,
     dataField: "button-password",
     text: "",
     headerStyle: buttonHeaderFormatter,

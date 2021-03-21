@@ -44,3 +44,4 @@ export const USER_SETTINGS = {
 
 export const SELLER_ROLES = ["SELLER", "TRAINEE"];
 export const ADMIN_ROLES = ["OWNER", "ADMIN", "MANAGER"];
+export const EXECUTIVE_ROLES = ["LEGAL", "MANAGER","ADMIN"];
