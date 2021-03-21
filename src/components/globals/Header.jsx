@@ -6,14 +6,20 @@ import { Link } from "react-router-dom";
 import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { ADMIN_ROLES } from "../../config/user";
+import { ADMIN_ROLES, EXECUTIVE_ROLES } from "../../config/user";
 
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isExecutive, setIsExecutive] = useState(false);
+
   useEffect(() => {
-    user.hasOwnProperty("roles") &&
-      ADMIN_ROLES.includes(user.roles[0]) &&
-      setIsAdmin(true);
+    if (user.hasOwnProperty("roles")) {
+      ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
+      const executive = EXECUTIVE_ROLES.filter(
+        (role) => role === user.roles[0]
+      );
+      executive.length > 0 && setIsExecutive(true);
+    }
   }, [user]);
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
@@ -37,30 +43,37 @@ const Header = ({ user, userLogoutRequest }) => {
               <Link className="dropdown-item" to="/reports/sales">
                 Sales
               </Link>
-              {isAdmin && (
-                <>
-                  <Link className="dropdown-item" to="/reports/profits">
-                    Profits
-                  </Link>
-                  {/* 
+              <Link
+                className="dropdown-item"
+                to="/reports/profits"
+                hidden={!isAdmin}
+              >
+                Profits
+              </Link>
+              {/* 
                   <Link className="dropdown-item" to="/bonus">
                     Bonus
                   </Link> 
                   */}
-                  <Link className="dropdown-item" to="/reports/payroll">
-                    Payroll
-                  </Link>
-                </>
-              )}
+              <Link
+                className="dropdown-item"
+                to="/reports/payroll"
+                hidden={!isExecutive}
+              >
+                Payroll
+              </Link>
             </NavDropdown>
+            <Link className="nav-link" to="/manage/users">
+              Employees
+            </Link>
           </Nav>
           <Nav className="ml-auto">
             {isAdmin && (
               <NavDropdown title="Manage" id="basic-nav-dropdown">
                 <>
-                  <Link className="dropdown-item" to="/manage/users">
+                  {/* <Link className="dropdown-item" to="/manage/users">
                     Users
-                  </Link>
+                  </Link> */}
                   <Link className="dropdown-item" to="/manage/insurers">
                     Insurers
                   </Link>
