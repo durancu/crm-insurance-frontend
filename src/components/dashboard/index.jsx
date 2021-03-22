@@ -59,10 +59,11 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
               ))}
           </Row>
         </Col>
-
-        <Col sm="3" lg="3" hidden={isAdmin}>
-          <PersonalPerformance isAdmin={isAdmin} />
-        </Col>
+        {!isAdmin && (
+          <Col sm="3" lg="3">
+            <PersonalPerformance isAdmin={isAdmin} />
+          </Col>
+        )}
       </Row>
     </>
   );
