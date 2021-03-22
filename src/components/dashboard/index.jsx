@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import DashboardChart from "./sales/DashboardChart";
-import { DASHBOARD_SETS } from "../../config/dashboard";
-import { ADMIN_ROLES } from "../../config/user";
+import { loadDashboardConfig } from "../../config/dashboard";
+import { isAdminCheck } from "../../config/user";
 import DateRangeFilter from "../globals/filters/DateRangeFilter";
 
 import { dashboardGetRequest } from "../../redux/actions";
@@ -13,18 +13,14 @@ import PersonalPerformance from "./personal-performance";
 export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   const [dashboardConfig, setDashboardConfig] = useState();
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   useEffect(() => {
-    setIsAdmin(
-      user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0])
-    );
+    setIsAdmin(isAdminCheck(user));
   }, [user]);
 
   useEffect(() => {
-    setDashboardConfig(
-      user.hasOwnProperty("roles") && DASHBOARD_SETS[user.roles[0]]
-    );
+    setDashboardConfig(loadDashboardConfig(user));
   }, [user]);
 
   useEffect(() => {
@@ -34,7 +30,7 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   return (
     <>
       <Row className="mt-3 mb-3">
-        <Col >
+        <Col>
           <Row className="mb-4">
             <h2>Home</h2>
           </Row>

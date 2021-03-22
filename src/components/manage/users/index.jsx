@@ -5,16 +5,14 @@ import { connect } from "react-redux";
 import { Row, Col, Button } from "react-bootstrap";
 import UserCreate from "./UserCreate";
 import UserList from "./UserList";
-import { ADMIN_ROLES } from "../../../config/user";
+import { isAdminCheck } from "../../../config/user";
 
 const Users = ({ user }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [modal, setModal] = useState(false);
   //Functions
   useEffect(() => {
-    if (user.hasOwnProperty("roles")) {
-      ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
-    }
+    setIsAdmin(isAdminCheck(user));
   }, [user]);
 
   const showModal = () => {
