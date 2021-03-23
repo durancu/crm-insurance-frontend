@@ -1,20 +1,34 @@
 import { call, put, spawn, takeLatest } from "redux-saga/effects";
 
 import * as types from "../../actions/actionTypes";
-import { customerCreateFail, customerCreateSuccess } from "../../actions";
+import { customerCreateFail, customerCreateSuccess, messageLaunchRequest } from "../../actions";
 
 import { apiPost } from "../../../global/apiMethods";
+import { LANGUAGE } from "../../../config/language";
 
-const apiCall = (data) =>
-  apiPost("customers", data, true).catch((err) => console.log(err));
 
 const sagaRequest = function* sagaRequest({ payload }) {
+  const config = {};
+  const apiCall = (data) =>
+    apiPost("customers", data, true).catch(({ response }) => {
+      config.title = LANGUAGE.en.message.fail.customer.create;
+      config.visible = true;
+      config.type = "error";
+      config.statusCode = response.data.statusCode;
+      config.messages = [response.data.message];
+      return console.log(response);
+    });
   try {
     const response = yield call(apiCall, payload);
+    config.title = "Success";
+    config.visible = true;
+    config.type = "success";
+    config.messages = [LANGUAGE.en.message.success.customer.create];
     yield put(customerCreateSuccess(response.data));
   } catch (e) {
     yield put(customerCreateFail());
   }
+  yield put(messageLaunchRequest(config));
 };
 
 const customerCreateRequest = function* customerCreateRequest() {

@@ -1,4 +1,6 @@
 import { spawn } from "redux-saga/effects";
+//GLOBAL
+import messageSaga from "./message-saga/messageSaga";
 //AUTH
 import userAuthSaga from "./user-sagas/userAuthSaga";
 import userLogoutSaga from "./user-sagas/userLogoutSaga";
@@ -42,6 +44,8 @@ import dashboardPersonalPerformanceSaga from "./dashboard-sagas/dashboardPersona
 import filterSaga from "./filter-sagas/filterSaga";
 
 const sagas = function* sagas() {
+  //GLOBAL
+  yield spawn(messageSaga);
   //AUTH
   yield spawn(userAuthSaga);
   yield spawn(userLogoutSaga);

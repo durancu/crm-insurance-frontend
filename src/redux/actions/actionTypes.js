@@ -2,6 +2,14 @@
 export const COUNTER_UP = "COUNTER_UP";
 export const COUNTER_DOWN = "COUNTER_DOWN";
 
+//MESSAGES
+/**@constant {string} MESSAGE_LAUNCH_REQUEST*/
+export const MESSAGE_LAUNCH_REQUEST = "MESSAGE_LAUNCH_REQUEST";
+/**@constant {string} MESSAGE_LAUNCH_FAIL*/
+export const MESSAGE_LAUNCH_FAIL = "MESSAGE_LAUNCH_FAIL";
+/**@constant {string} MESSAGE_LAUNCH_SUCCESS*/
+export const MESSAGE_LAUNCH_SUCCESS = "MESSAGE_LAUNCH_SUCCESS";
+
 //USER
 //Auth
 /**@constant {string} USER_AUTH_REQUEST*/

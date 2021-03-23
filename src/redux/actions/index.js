@@ -1,6 +1,13 @@
 export { counterDownAction, counterUpAction } from "./testAction";
 
 //Global
+//Message
+
+export {
+  messageLaunchRequest,
+  messageLaunchFail,
+  messageLaunchSuccess,
+} from "./message-actions/messageActions";
 
 //User
 export {
