@@ -13,6 +13,7 @@ const sagaRequest = function* sagaRequest({ payload }) {
       config.title = LANGUAGE.en.message.fail.sale.delete;
       config.visible = true;
       config.type = "error";
+      config.time=Date.now()
       config.statusCode = response.data.statusCode;
       config.messages = [response.data.message];
       return console.log(response);
@@ -21,6 +22,7 @@ const sagaRequest = function* sagaRequest({ payload }) {
     const response = yield call(apiCall, payload);
     config.title = "Success";
     config.visible = true;
+    config.time=Date.now()
     config.type = "success";
     config.messages = [LANGUAGE.en.message.success.sale.delete];
     yield put(saleDeleteSuccess(response.data._id));

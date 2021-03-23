@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 const MessageList = ({ messages }) => {
   return (
-    <ul>
-      {messages.length > 0 && messages.map((message) => (
-        <li key={message}>{message}</li>
+    <>
+      {messages.length > 0 && messages.map((message,i) => (
+        <div key={i}>{message}</div>
       ))}
-    </ul>
+    </>
   );
 };
 

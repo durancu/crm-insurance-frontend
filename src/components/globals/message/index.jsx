@@ -25,7 +25,7 @@ const Messages = ({ config }) => {
       className="d-flex justify-content-center align-items-center"
     >
       <Toast
-        className={`bg-${color[config.type]}`}
+       /*  className={`bg-${color[config.type]}`} */
         aria-live="assertive"
         aria-atomic="true"
         role="alert"
@@ -36,7 +36,7 @@ const Messages = ({ config }) => {
       >
         <Toast.Header>
           <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-          <strong className="mr-auto">{config.title}</strong>
+          <strong className={`mr-auto text-${color[config.type]}`}>{config.title}</strong>
           <small className="text-muted">
             {config.hasOwnProperty("time") &&
               moment(config.time).startOf("hour").fromNow()}
