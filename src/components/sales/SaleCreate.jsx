@@ -18,7 +18,6 @@ import {
 import { salesCreateValidate } from "./saleCreateValidate";
 //components
 import {
-  Badge,
   Col,
   Form,
   Button,
