@@ -1,5 +1,8 @@
 export const salesCreateValidate = (values) => {
   const errors = {};
+
+  console.log(values);
+  
   !values.soldAt && (errors.soldAt = "Sale Date is required");
   !values.customer && (errors.customer = "Customer is required");
 
