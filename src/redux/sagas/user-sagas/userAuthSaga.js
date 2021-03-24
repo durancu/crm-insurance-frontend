@@ -20,19 +20,20 @@ const sagaRequest = function* sagaRequest(action) {
       config.type = "error";
       config.messages = [LANGUAGE.en.message.fail.user.login];
 
-      return console.log(response.data);
+      return console.log(response);
     });
 
   const { payload } = action;
   try {
     const response = yield call(apiCall, payload);
     yield setSessionData("token", response.data.access_token);
+    config.visible = false;
     yield put(userAuthSuccess());
     yield put(userProfileSetRequest());
   } catch (e) {
     yield put(userAuthFail());
-    yield put(messageLaunchRequest(config));
   }
+  yield put(messageLaunchRequest(config));
 };
 
 const userAuthRequest = function* userAuthRequest() {

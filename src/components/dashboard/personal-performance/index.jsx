@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 //COmponents
-import { Row, Col, Spinner } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import PersonalPerformanceItem from "./PersonalPerformanceItem";
 //Actions
 import { dashboardPersonalPerformanceRequest } from "../../../redux/actions";
+import Spinner from "../../globals/spinner";
 
 const PersonalPerformance = ({
   user,
@@ -35,7 +36,7 @@ const PersonalPerformance = ({
       <Row>
         {loading ? (
           <Col style={{ textAlign: "center" }}>
-            <Spinner size="lg" animation="border" variant="primary" />
+            <Spinner />
           </Col>
         ) : (
           <>
@@ -43,8 +44,9 @@ const PersonalPerformance = ({
               <p>{data.message}</p>
             </Col>
             <Col sm="12" lg="12" style={{ textAlign: "center" }}>
-              {data.metrics && data.metrics.map((metric) => (
-                  <PersonalPerformanceItem key={metric.title} metric={metric} />
+              {data.metrics &&
+                data.metrics.map((metric,i) => (
+                  <PersonalPerformanceItem key={i} metric={metric} />
                 ))}
             </Col>
           </>

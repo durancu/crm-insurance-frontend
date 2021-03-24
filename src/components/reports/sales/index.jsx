@@ -6,11 +6,12 @@ import { connect } from "react-redux";
 import { reportListRequest } from "../../../redux/actions";
 
 //Components
-import { Spinner, Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import DateRangeFilter from "../../globals/filters/DateRangeFilter";
+import Spinner from "../../globals/spinner";
+import { Row, Col } from "react-bootstrap";
+import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import { isAdminCheck } from "../../../config/user";
 
 export const Reports = ({
@@ -46,7 +47,7 @@ export const Reports = ({
       {loadingReport ? (
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Spinner animation="border" variant="primary" />
+            <Spinner />
           </Col>
         </Row>
       ) : (

@@ -13,9 +13,9 @@ import {
 //components
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import overlayFactory from "react-bootstrap-table2-overlay";
 import cellEditFactory from "react-bootstrap-table2-editor";
-
+import { Row, Col } from "react-bootstrap";
+import Spinner from "../../globals/spinner";
 import { insurersDefaultSorted, insurersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
 
@@ -24,8 +24,9 @@ function InsurerList({
   insurerDeleteRequest,
   insurerUpdateRequest,
   insurers,
-  loading,
+  loadingCreate,
   loadingDelete,
+  loadingUpdate,
 }) {
   //States
   const [modal, setModal] = useState(false);
@@ -41,50 +42,50 @@ function InsurerList({
   };
   return (
     <>
-      <DeleteModelAlert
-        id={id}
-        modal={modal}
-        handleModal={showModal}
-        deleteElement={insurerDeleteRequest}
-      >
-        Customer
-      </DeleteModelAlert>
-      <BootstrapTable
-        bootstrap4
-        keyField="_id"
-        data={insurers}
-        columns={insurersTableColumns(false, showModal, setId)}
-        striped
-        hover
-        
-        bordered={false}
-        responsive
-        filter={filterFactory()}
-        defaultSorted={insurersDefaultSorted()}
-        noDataIndication="No registered insurers"
-        loading={loading || loadingDelete}
-        overlay={overlayFactory({
-          spinner: true,
-          styles: {
-            overlay: (base) => ({
-              ...base,
-              background: "rgba(100,100, 100, 0.7)",
-            }),
-          },
-        })}
-        cellEdit={cellEditFactory({
-          mode: "click",
-          afterSaveCell: (oldValue, newValue, row, column) => {
-            const fieldName = column.dataField;
-            let payload = {
-              _id: row._id,
-              [fieldName]: newValue,
-            };
+      {loadingCreate || loadingDelete || loadingUpdate ? (
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <Spinner />
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <DeleteModelAlert
+            id={id}
+            modal={modal}
+            handleModal={showModal}
+            deleteElement={insurerDeleteRequest}
+          >
+            Customer
+          </DeleteModelAlert>
+          <BootstrapTable
+            bootstrap4
+            keyField="_id"
+            data={insurers}
+            columns={insurersTableColumns(false, showModal, setId)}
+            striped
+            hover
+            bordered={false}
+            responsive
+            filter={filterFactory()}
+            defaultSorted={insurersDefaultSorted()}
+            noDataIndication="No registered insurers"
+            cellEdit={cellEditFactory({
+              mode: "click",
+              afterSaveCell: (oldValue, newValue, row, column) => {
+                const fieldName = column.dataField;
+                let payload = {
+                  _id: row._id,
+                  [fieldName]: newValue,
+                };
 
-            oldValue !== newValue && insurerUpdateRequest(payload, payload._id);
-          },
-        })}
-      />
+                oldValue !== newValue &&
+                  insurerUpdateRequest(payload, payload._id);
+              },
+            })}
+          />
+        </Row>
+      )}
     </>
   );
 }
@@ -92,14 +93,16 @@ function InsurerList({
 InsurerList.propTypes = {
   insurerListRequest: PropTypes.func.isRequired,
   insurers: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loadingCreate: PropTypes.bool.isRequired,
   loadingDelete: PropTypes.bool.isRequired,
+  loadingUpdate: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   insurers: state.insurerReducer.list,
-  loading: state.insurerListStatusReducer.loading,
+  loadingCreate: state.insurerListStatusReducer.loading,
   loadingDelete: state.insurerDeleteStatusReducer.loading,
+  loadingUpdate: state.insurerUpdateStatusReducer.loading,
 });
 
 const mapDispatchToProps = {

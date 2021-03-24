@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 import { reportProfitRequest } from "../../../redux/actions";
 
 //Components
-import { Spinner, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import { isAdminCheck } from "../../../config/user";
 import FilterDate from "../../globals/filters/FilterDate";
 import moment from "moment";
+import Spinner from "../../globals/spinner";
 
 export const Reports = ({
   reportProfitRequest,
@@ -59,7 +60,7 @@ export const Reports = ({
       {loadingReport ? (
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Spinner animation="border" variant="primary" />
+            <Spinner />
           </Col>
         </Row>
       ) : (
