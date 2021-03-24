@@ -7,19 +7,34 @@ import { userAuthRequest } from "../../redux/actions";
 import { Form, Row, Col, Card, Button, Spinner } from "react-bootstrap";
 
 function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
-  const [form, setForm] = useState({ username: "", password: "password" });
+  const [form, setForm] = useState({ username: "", password: "" });
+  const [errors, setErrors] = useState({});
 
   const handleChange = ({ target }) => {
     setForm((form) => ({ ...form, [target.name]: target.value }));
   };
 
   const handleSubmit = (e) => {
-    userAuthRequest(form);
     e.preventDefault();
+    const result = validateForm(form);
+    setErrors(result);
+
+    if (!Object.keys(result).length) {
+      userAuthRequest(form);
+    }
+  };
+
+  const validateForm = (values) => {
+    const errors = {};
+
+    !values.username && (errors.username = "User Name is empty");
+    !values.password && (errors.password = "Password is empty");
+
+    return errors;
   };
 
   return loadingAuthCheck ? (
-    <Spinner animation="border" variant="primary"/>
+    <Spinner animation="border" variant="primary" />
   ) : (
     <Row style={{ marginTop: "10%" }}>
       <Col md={{ span: 4, offset: 4 }}>
@@ -41,8 +56,12 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
                   value={form.username}
                   onChange={handleChange}
                   autoFocus
-                  required
+                  isInvalid={errors.username}
+                  isValid={form.username}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.username}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Password</Form.Label>
@@ -52,8 +71,12 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
                   type="password"
                   value={form.password}
                   onChange={handleChange}
-                  required
+                  isInvalid={errors.password}
+                  isValid={form.password}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
               </Form.Group>
             </Card.Body>
             <Card.Footer>

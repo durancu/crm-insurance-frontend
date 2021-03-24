@@ -60,7 +60,7 @@ const UserCreate = ({
     edit ? userUpdateRequest(form, form._id) : userCreateRequest(form);
 
     setTimeout(() => {
-      if (!loading && !error) {
+      if (!error) {
         clearForm();
         showModal();
       }
@@ -210,7 +210,7 @@ const UserCreate = ({
                 <Form.Control
                   type="text"
                   name="baseSalary"
-                  value={form.email}
+                  value={form.baseSalary}
                   onChange={handleChange}
                   required
                 />

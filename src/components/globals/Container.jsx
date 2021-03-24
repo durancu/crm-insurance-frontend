@@ -3,10 +3,11 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 //Actions
-import { userAuthCheckRequest} from "../../redux/actions";
+import { userAuthCheckRequest } from "../../redux/actions";
 //components
 import Header from "./Header";
 import Body from "./Body";
+
 
 function Containers({
   children,
@@ -22,7 +23,7 @@ function Containers({
   return (
     <>
       {authCheck && <Redirect to="/" />}
-      {authCheck && <Header/>}
+      {authCheck && <Header />}
       <Body>{children}</Body>
     </>
   );
@@ -42,7 +43,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  userAuthCheckRequest
+  userAuthCheckRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Containers);
