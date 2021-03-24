@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { userAuthRequest } from "../../redux/actions";
 //Components
-import { Form, Row, Col, Card, Button, Spinner } from "react-bootstrap";
+import { Form, Row, Col, Card, Button ,Spinner} from "react-bootstrap";
+import Spinner2 from "../globals/spinner";
 
 function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -34,7 +35,11 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
   };
 
   return loadingAuthCheck ? (
-    <Spinner animation="border" variant="primary" />
+    <Row style={{ marginTop: "25%" }} className="justify-content-md-center">
+      <Col md="auto">
+        <Spinner2 size={60}/>
+      </Col>
+    </Row>
   ) : (
     <Row style={{ marginTop: "10%" }}>
       <Col md={{ span: 4, offset: 4 }}>

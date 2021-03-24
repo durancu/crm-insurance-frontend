@@ -1,31 +1,30 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+//COMPONENTS
 import { Toast } from "react-bootstrap";
 import MessageList from "./MessageList";
-import moment from "moment";
+/* import moment from "moment"; */
+import { MESSAGE_CONFIG } from "../../../config/messageConfig";
 
-const Messages = ({ config }) => {
+const Messages = ({ config, time }) => {
   const [show, setShow] = useState(false);
-  const [color] = useState({
-    warning: "warning",
-    success: "success",
-    error: "danger",
-    info: "info",
-  });
+  const [configData, setConfigData] = useState(MESSAGE_CONFIG[0]);
 
   useEffect(() => {
     config && config.visible && setShow(true);
+    config &&
+      setConfigData(MESSAGE_CONFIG.filter(({ id }) => id === config.type)[0]);
   }, [config]);
 
-  return (
+  return configData ? (
     <div
       aria-live="polite"
       aria-atomic="true"
       className="d-flex justify-content-center align-items-center"
     >
       <Toast
-       /*  className={`bg-${color[config.type]}`} */
+        /*  className={`bg-${color[config.type]}`} */
         aria-live="assertive"
         aria-atomic="true"
         role="alert"
@@ -35,12 +34,14 @@ const Messages = ({ config }) => {
         autohide */
       >
         <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-          <strong className={`mr-auto text-${color[config.type]}`}>{config.title}</strong>
-          <small className="text-muted">
+          <configData.icon className={`mr-1 text-${configData.color}`} />
+          <strong className={`mr-auto text-${configData.color}`}>
+            {config.title}
+          </strong>
+          {/* <small className="text-muted">
             {config.hasOwnProperty("time") &&
-              moment(config.time).startOf("hour").fromNow()}
-          </small>
+              moment(time).startOf("hour").fromNow()}
+          </small> */}
         </Toast.Header>
         {config.hasOwnProperty("messages") && (
           <Toast.Body>
@@ -56,6 +57,8 @@ const Messages = ({ config }) => {
         )}
       </Toast>
     </div>
+  ) : (
+    <></>
   );
 };
 
@@ -65,6 +68,7 @@ Messages.propTypes = {
 
 const mapStateToProps = (state) => ({
   config: state.messageReducer.config,
+  time: state.messageReducer.time,
 });
 
 const mapDispatchToProps = {};
