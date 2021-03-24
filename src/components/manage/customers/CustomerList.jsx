@@ -13,19 +13,21 @@ import {
 //components
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import overlayFactory from "react-bootstrap-table2-overlay";
 import cellEditFactory from "react-bootstrap-table2-editor";
 
 import { customersDefaultSorted, customersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
+import { Row, Col } from "react-bootstrap";
+import Spinner from "../../globals/spinner";
 
 function CustomerList({
   customerLoadRequest,
   customerDeleteRequest,
   customerUpdateRequest,
   customers,
-  loading,
+  loadingCreate,
   loadingDelete,
+  loadingUpdate,
 }) {
   const [modal, setModal] = useState(false);
   const [id, setId] = useState("");
@@ -39,51 +41,50 @@ function CustomerList({
 
   return (
     <>
-      <DeleteModelAlert
-        id={id}
-        modal={modal}
-        handleModal={showModal}
-        deleteElement={customerDeleteRequest}
-      >
-        Customer
-      </DeleteModelAlert>
-      <BootstrapTable
-        bootstrap4
-        keyField="_id"
-        data={customers}
-        columns={customersTableColumns(false, showModal, setId)}
-        striped
-        hover
-        
-        bordered={false}
-        responsive
-        filter={filterFactory()}
-        defaultSorted={customersDefaultSorted()}
-        noDataIndication="No registered customers"
-        loading={loading}
-        overlay={overlayFactory({
-          spinner: true,
-          styles: {
-            overlay: (base) => ({
-              ...base,
-              background: "rgba(100,100, 100, 0.7)",
-            }),
-          },
-        })}
-        cellEdit={cellEditFactory({
-          mode: "click",
-          afterSaveCell: (oldValue, newValue, row, column) => {
-            const fieldName = column.dataField;
-            let payload = {
-              _id: row._id,
-              [fieldName]: newValue,
-            };
+      {loadingCreate || loadingDelete || loadingUpdate ? (
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <Spinner />
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <DeleteModelAlert
+            id={id}
+            modal={modal}
+            handleModal={showModal}
+            deleteElement={customerDeleteRequest}
+          >
+            Customer
+          </DeleteModelAlert>
+          <BootstrapTable
+            bootstrap4
+            keyField="_id"
+            data={customers}
+            columns={customersTableColumns(false, showModal, setId)}
+            striped
+            hover
+            bordered={false}
+            responsive
+            filter={filterFactory()}
+            defaultSorted={customersDefaultSorted()}
+            noDataIndication="No registered customers"
+            cellEdit={cellEditFactory({
+              mode: "click",
+              afterSaveCell: (oldValue, newValue, row, column) => {
+                const fieldName = column.dataField;
+                let payload = {
+                  _id: row._id,
+                  [fieldName]: newValue,
+                };
 
-            oldValue !== newValue &&
-              customerUpdateRequest(payload, payload._id);
-          },
-        })}
-      />
+                oldValue !== newValue &&
+                  customerUpdateRequest(payload, payload._id);
+              },
+            })}
+          />
+        </Row>
+      )}
     </>
   );
 }
@@ -93,14 +94,16 @@ CustomerList.propTypes = {
   customerDeleteRequest: PropTypes.func.isRequired,
   customerUpdateRequest: PropTypes.func.isRequired,
   customers: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loadingCreate: PropTypes.bool.isRequired,
   loadingDelete: PropTypes.bool.isRequired,
+  loadingUpdate: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   customers: state.customerReducer.list,
-  loading: state.customerLoadStatusReducer.loading,
+  loadingCreate: state.customerLoadStatusReducer.loading,
   loadingDelete: state.customerDeleteStatusReducer.loading,
+  loadingUpdate: state.customerUpdateStatusReducer.loading,
 });
 
 const mapDispatchToProps = {

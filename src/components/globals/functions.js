@@ -226,23 +226,21 @@ export function insurerNameFormatter(cell, row) {
  */
 const transformNumber = (number) => (isNaN(number) ? 0 : number);
 
-/**Calc totalCharge
+/**Calc premium
  * @param {object} formData
- * @returns {number} totalCharge
+ * @returns {number} premium
  */
-export const totalChargeCalculate = ({
+export const premiumCalculate = ({
   liabilityCharge,
   cargoCharge,
   physicalDamageCharge,
-  wcGlUmbCharge,
-  fees,
-  permits,
+  wcGlUmbCharge
 }) =>
   transformNumber(parseFloat(liabilityCharge)) +
   transformNumber(parseFloat(cargoCharge)) +
   transformNumber(parseFloat(physicalDamageCharge)) +
   transformNumber(parseFloat(wcGlUmbCharge));
-  //+
+  //
   //transformNumber(parseFloat(fees)) +
  // transformNumber(parseFloat(permits));
 
@@ -251,4 +249,4 @@ export const totalChargeCalculate = ({
  * @returns {number} pendingPayment
  */
 export const pendingPaymentCalculate = (form) =>
-  totalChargeCalculate(form) - transformNumber(parseFloat(form.chargesPaid));
+transformNumber(parseFloat(form.totalCharge)) - transformNumber(parseFloat(form.chargesPaid));

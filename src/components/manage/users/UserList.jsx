@@ -13,13 +13,13 @@ import {
 //components
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import overlayFactory from "react-bootstrap-table2-overlay";
 import cellEditFactory from "react-bootstrap-table2-editor";
-
+import { Row, Col } from "react-bootstrap";
 import { usersDefaultSorted, usersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
 import ChangePassword from "./ChangePassword";
-import { ADMIN_ROLES } from "../../../config/user";
+import { isAdminCheck } from "../../../config/user";
+import Spinner from "../../globals/spinner";
 
 function UserList({
   userLoadRequest,
@@ -27,8 +27,9 @@ function UserList({
   userUpdateRequest,
   users,
   user,
-  loading,
+  loadingCreate,
   loadingDelete,
+  loadingUpdate,
 }) {
   //States
   const [isAdmin, setIsAdmin] = useState(false);
@@ -37,9 +38,7 @@ function UserList({
   const [id, setId] = useState("");
   //Functions
   useEffect(() => {
-    if (user.hasOwnProperty("roles")) {
-      ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
-    }
+    setIsAdmin(isAdminCheck(user));
     userLoadRequest();
   }, [user, userLoadRequest]);
 
@@ -51,54 +50,58 @@ function UserList({
   };
   return (
     <>
-      <DeleteModelAlert
-        id={id}
-        modal={modal}
-        handleModal={showModal}
-        deleteElement={userDeleteRequest}
-      >
-        Customer
-      </DeleteModelAlert>
-      <ChangePassword
-        modal={passwordModal}
-        showModal={showPasswordModal}
-        id={id}
-      />
+      {loadingCreate || loadingDelete || loadingUpdate ? (
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <Spinner />
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <DeleteModelAlert
+            id={id}
+            modal={modal}
+            handleModal={showModal}
+            deleteElement={userDeleteRequest}
+          >
+            Employee
+          </DeleteModelAlert>
+          <ChangePassword
+            modal={passwordModal}
+            showModal={showPasswordModal}
+            id={id}
+          />
+          <BootstrapTable
+            bootstrap4
+            keyField="_id"
+            data={users}
+            columns={usersTableColumns(
+              isAdmin,
+              showModal,
+              setId,
+              showPasswordModal
+            )}
+            striped
+            hover
+            bordered={false}
+            responsive
+            filter={filterFactory()}
+            defaultSorted={usersDefaultSorted()}
+            noDataIndication="No registered users"
+            cellEdit={cellEditFactory({
+              mode: "click",
+              afterSaveCell: (oldValue, newValue, row, column) => {
+                const fieldName = column.dataField;
+                let payload = {
+                  [fieldName]: newValue,
+                };
 
-      <BootstrapTable
-        bootstrap4
-        keyField="_id"
-        data={users}
-        columns={usersTableColumns(isAdmin, showModal, setId, showPasswordModal)}
-        striped
-        hover
-        bordered={false}
-        responsive
-        filter={filterFactory()}
-        defaultSorted={usersDefaultSorted()}
-        noDataIndication="No registered users"
-        loading={loading || loadingDelete}
-        overlay={overlayFactory({
-          spinner: true,
-          styles: {
-            overlay: (base) => ({
-              ...base,
-              background: "rgba(100,100, 100, 0.7)",
-            }),
-          },
-        })}
-        cellEdit={cellEditFactory({
-          mode: "click",
-          afterSaveCell: (oldValue, newValue, row, column) => {
-            const fieldName = column.dataField;
-            let payload = {
-              [fieldName]: newValue,
-            };
-
-            oldValue !== newValue && userUpdateRequest(payload, row._id);
-          },
-        })}
-      />
+                oldValue !== newValue && userUpdateRequest(payload, row._id);
+              },
+            })}
+          />
+        </Row>
+      )}
     </>
   );
 }
@@ -108,15 +111,17 @@ UserList.propTypes = {
   userDeleteRequest: PropTypes.func.isRequired,
   userUpdateRequest: PropTypes.func.isRequired,
   users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired,
+  loadingCreate: PropTypes.bool.isRequired,
   loadingDelete: PropTypes.bool.isRequired,
+  loadingUpdate: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   users: state.userReducer.list,
   user: state.userProfileReducer.user,
-  loading: state.userLoadStatusReducer.loading,
+  loadingCreate: state.userLoadStatusReducer.loading,
   loadingDelete: state.userDeleteStatusReducer.loading,
+  loadingUpdate: state.userUpdateStatusReducer.loading,
 });
 
 const mapDispatchToProps = {

@@ -1,5 +1,8 @@
 export const salesCreateValidate = (values) => {
   const errors = {};
+
+  console.log(values);
+
   !values.soldAt && (errors.soldAt = "Sale Date is required");
   !values.customer && (errors.customer = "Customer is required");
 
@@ -10,45 +13,53 @@ export const salesCreateValidate = (values) => {
     (errors.insurers = "Please choose at least one insurance company");
 
   if (values.liabilityInsurer)
-    if (values.liabilityCharge === undefined)
+    if (isInvalidNumber(values.liabilityCharge))
       errors.liabilityCharge = "Liability Charge Insurer is required";
-    else if (isNaN(values.liabilityCharge))
-      errors.liabilityCharge = "The value is not correct";
+    else if (values.liabilityCharge <= 0)
+      errors.liabilityCharge = "Value must be greater than 0";
 
   if (values.cargoInsurer)
-    if (values.cargoCharge === undefined)
+    if (isInvalidNumber(values.cargoCharge))
       errors.cargoCharge = "Motor Cargo Insurer is required";
-    else if (isNaN(values.cargoCharge))
-      errors.cargoCharge = "The value is not correct";
+    else if (values.cargoCharge <= 0)
+      errors.cargoCharge = "Value must be greater than 0";
 
   if (values.physicalDamageInsurer)
-    if (values.physicalDamageCharge === undefined)
+    if (isInvalidNumber(values.physicalDamageCharge))
       errors.physicalDamageCharge = "Physical Damage Charge is required";
-    else if (isNaN(values.physicalDamageCharge))
-      errors.physicalDamageCharge = "The value is not correct";
+    else if (values.physicalDamageCharge <= 0)
+      errors.physicalDamageCharge = "Value must be greater than 0";
 
   if (values.wcGlUmbInsurer)
-    if (values.wcGlUmbCharge === undefined)
+    if (isInvalidNumber(values.wcGlUmbCharge))
       errors.wcGlUmbCharge = "WC/GL/UMB Charge is required";
-    else if (isNaN(values.wcGlUmbCharge))
-      errors.wcGlUmbCharge = "The value is not correct";
+    else if (values.wcGlUmbCharge <= 0)
+      errors.wcGlUmbCharge = "Value must be greater than 0";
 
-  if (values.premium === undefined) errors.premium = "Premium is required";
-  else if (isNaN(values.premium)) errors.premium = "The value is not correct";
+  if (isInvalidNumber(values.fees)) errors.fees = "Fees is required";
+  else if (values.fees < 0) errors.fees = "Value must be greater or equal than 0";
 
-  if (values.fees === undefined) errors.fees = "Fees is required";
-  else if (isNaN(values.fees)) errors.fees = "The value is not correct";
+  if (isInvalidNumber(values.permits)) errors.permits = "Permits is required";
+  else if (values.permits < 0) errors.permits = "Value must be greater or equal than 0";
 
-  if (values.permits === undefined) errors.permits = "Permits is required";
-  else if (isNaN(values.permits)) errors.permits = "The value is not correct";
+  if (isInvalidNumber(values.tips)) errors.tips = "Tips is required";
+  else if (values.tips < 0) errors.tips = "Value must be greater or equal than 0";
 
-  if (values.tips === undefined) errors.tips = "Tips is required";
-  else if (isNaN(values.tips)) errors.tips = "The value is not correct";
+  if (isInvalidNumber(values.totalCharge))
+    errors.totalCharge = "Down payment is required";
+  else if (values.totalCharge <= 0)
+    errors.totalCharge = "Down payment must be greater than 0";
 
-  if (values.chargesPaid === undefined)
+  if (isInvalidNumber(values.chargesPaid))
     errors.chargesPaid = "Charges is required";
-  else if (isNaN(values.chargesPaid))
-    errors.chargesPaid = "The value is not correct";
+  else if (values.chargesPaid < 0)
+    errors.chargesPaid = "Value must be greater or equal than 0";
+  else if (values.chargesPaid > values.totalCharge)
+    errors.chargesPaid = "Paid amount cannot be greater than Down Payment";
 
   return errors;
 };
+
+export const isInvalidNumber = (number) => (
+  number === undefined || isNaN(number)
+);

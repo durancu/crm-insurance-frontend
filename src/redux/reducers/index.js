@@ -2,6 +2,8 @@ import { combineReducers } from "redux";
 
 import testReducer from "./testReducer";
 //Global
+import messageReducer from "./message-reducers/messageReducer";
+import messageStatusReducer from "./message-reducers/messageStatusReducer";
 
 //AUTH
 import userAuthReducer from "./users-reducers/userAuthReducer";
@@ -60,6 +62,8 @@ import filterReducer from "./filter-reducers/filterReducer";
 export default combineReducers({
   testReducer,
   //Global
+  messageReducer,
+  messageStatusReducer,
   //AUTH
   userAuthReducer,
   userAuthStatusReducer,

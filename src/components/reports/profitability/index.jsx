@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 import { reportProfitRequest } from "../../../redux/actions";
 
 //Components
-import { Spinner, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
-import { ADMIN_ROLES } from "../../../config/user";
+import { isAdminCheck } from "../../../config/user";
 import FilterDate from "../../globals/filters/FilterDate";
 import moment from "moment";
+import Spinner from "../../globals/spinner";
 
 export const Reports = ({
   reportProfitRequest,
@@ -28,9 +29,7 @@ export const Reports = ({
   });
 
   useEffect(() => {
-    user.hasOwnProperty("roles") &&
-      ADMIN_ROLES.includes(user.roles[0]) &&
-      setIsAdmin(true);
+    setIsAdmin(isAdminCheck(user));
   }, [user, user.roles]);
 
   useEffect(() => {
@@ -43,16 +42,17 @@ export const Reports = ({
         <Col sm="8">
           <h2>Profits Report</h2>
         </Col>
-        <Col>
-        </Col>
+        <Col></Col>
       </Row>
       <Row className="mt-3 mb-3">
-        <Col sm="8">  
-        <FilterDate setParams={setParams} />
+        <Col sm="8">
+          <FilterDate setParams={setParams} />
         </Col>
         <Col sm="4">
           <h4 style={{ textAlign: "right" }}>
-            {`${moment().month(params.month-1).format("MMM")}, ${params.year}`}
+            {`${moment()
+              .month(params.month - 1)
+              .format("MMM")}, ${params.year}`}
           </h4>
         </Col>
       </Row>
@@ -60,7 +60,7 @@ export const Reports = ({
       {loadingReport ? (
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Spinner animation="border" variant="primary" />
+            <Spinner />
           </Col>
         </Row>
       ) : (

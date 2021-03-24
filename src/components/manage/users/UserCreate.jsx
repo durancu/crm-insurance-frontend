@@ -27,7 +27,7 @@ const UserCreate = ({
   showModal,
   modal,
   user,
-  edit=false,
+  edit = false,
 }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let defaultForm = {
@@ -60,7 +60,7 @@ const UserCreate = ({
     edit ? userUpdateRequest(form, form._id) : userCreateRequest(form);
 
     setTimeout(() => {
-      if (!loading && !error) {
+      if (!error) {
         clearForm();
         showModal();
       }
@@ -173,7 +173,13 @@ const UserCreate = ({
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Position
                     </Form.Label>
-                    <Form.Control type="text" name="position" required />
+                    <Form.Control
+                      type="text"
+                      name="position"
+                      value={form.position}
+                      required
+                      onChange={handleChange}
+                    />
                   </Form.Group>
                 </Col>
               </Row>
@@ -210,7 +216,7 @@ const UserCreate = ({
                 <Form.Control
                   type="text"
                   name="baseSalary"
-                  value={form.email}
+                  value={form.baseSalary}
                   onChange={handleChange}
                   required
                 />

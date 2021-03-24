@@ -11,14 +11,13 @@ import {
 } from "../../redux/actions";
 //Functions
 import {
-  totalChargeCalculate,
+  premiumCalculate,
   pendingPaymentCalculate,
 } from "../globals/functions";
 
 import { salesCreateValidate } from "./saleCreateValidate";
 //components
 import {
-  Badge,
   Col,
   Form,
   Button,
@@ -36,6 +35,7 @@ const defaultForm = {
   premium: 0,
   chargesPaid: 0,
   tips: 0,
+  totalCharge:0,
 };
 
 export const SaleCreate = ({
@@ -54,7 +54,7 @@ export const SaleCreate = ({
   const [formValues, setFormValues] = useState(defaultForm);
   const [formStates, setFormStates] = useState(defaultForm);
   //Auto Calculate
-  const [totalCharge, setTotalCharge] = useState(0);
+  const [premium, setPremium] = useState(0);
   const [pendingPayment, setPendingPayment] = useState(0);
   //ValidateForms
   const [errors, setErrors] = useState({ errors: [] });
@@ -72,9 +72,9 @@ export const SaleCreate = ({
         customer: lastCustomer._id,
       }));
   }, [lastCustomer]);
-  //Calculate totalCharge pendingPayment
+  //Calculate premium
   useEffect(() => {
-    setTotalCharge(totalChargeCalculate(formValues));
+    setPremium(premiumCalculate(formValues));
     setPendingPayment(pendingPaymentCalculate(formValues));
   }, [formValues]);
 
@@ -101,6 +101,7 @@ export const SaleCreate = ({
       case "tips":
       case "chargesPaid":
       case "premium":
+      case "totalCharge":
         setFormValues({
           ...formValues,
           [target.name]: parseFloat(target.value),
@@ -123,21 +124,21 @@ export const SaleCreate = ({
     e && e.preventDefault();
     const result = salesCreateValidate(formValues);
     setErrors(result);
-
+   console.log(errors);
     if (!Object.keys(result).length) {
       //console.log("formValues", formValues);
       setFormValues({
         ...formValues,
-        soldAt:new Date(formStates.soldAt).toISOString(),
+        soldAt: new Date(formStates.soldAt).toISOString(),
       });
 
-      console.log('soldAt', new Date(formValues.soldAt).toISOString())
-      console.log('formValues', formValues)
+      console.log("soldAt", new Date(formValues.soldAt).toISOString());
+      console.log("formValues", formValues);
       saleCreateRequest(formValues);
       !addMore && handleModalSale();
       clearForm();
     }
-    // console.log(errors);
+
   };
 
   const clearForm = () => {
@@ -146,19 +147,23 @@ export const SaleCreate = ({
       customer: "",
       fees: 0,
       permits: 0,
-      premium: 0,
       chargesPaid: 0,
+      totalCharge: 0,
       tips: 0,
+      premium:0,
     });
+
+    setErrors([]);
 
     setFormValues({
       soldAt: moment().format("YYYY-MM-DD"),
       customer: "",
       fees: 0,
       permits: 0,
-      premium: 0,
       chargesPaid: 0,
+      totalCharge: 0,
       tips: 0,
+      premium:0,
     });
   };
 
@@ -252,13 +257,15 @@ export const SaleCreate = ({
                 </Form.Row>
                 <Form.Row>
                   <Col>
-                    <hr/>
+                    <hr />
                     <p className="mb-3">
                       <strong>Insurance Charges:</strong>
                     </p>
-                    <Badge pill variant="danger">
+                    <p>
+                    <small style={{color:"#dc3545"}}>
                       {errors.insurers}
-                    </Badge>
+                    </small>
+                    </p>
                   </Col>
                 </Form.Row>
                 <Form.Row>
@@ -292,7 +299,7 @@ export const SaleCreate = ({
                       <span style={{ color: "red" }}>* </span>Liability Charge:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="liabilityCharge"
                       min="0"
                       onChange={handleChange}
@@ -335,9 +342,8 @@ export const SaleCreate = ({
                       Charge:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="cargoCharge"
-                      defaultValue="0"
                       onChange={handleChange}
                       isInvalid={errors.cargoCharge}
                       value={formStates.cargoCharge || 0}
@@ -380,9 +386,8 @@ export const SaleCreate = ({
                       Charge:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="physicalDamageCharge"
-                      defaultValue="0"
                       onChange={handleChange}
                       isInvalid={errors.physicalDamageCharge}
                       value={formStates.physicalDamageCharge || 0}
@@ -422,9 +427,9 @@ export const SaleCreate = ({
                       <span style={{ color: "red" }}>* </span>WC/GL/UMB Charge:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="wcGlUmbCharge"
-                      defaultValue="0"
+                      
                       onChange={handleChange}
                       isInvalid={errors.wcGlUmbCharge}
                       value={formStates.wcGlUmbCharge || 0}
@@ -435,21 +440,21 @@ export const SaleCreate = ({
                   </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                <Form.Group as={Col} className="sm-6">
+                  <Form.Group as={Col}>
                     <Form.Label style={{ fontSize: "small" }}>
                       Premium:
                     </Form.Label>
                     <Form.Control
                       type="text"
-                      name="totalCharge"
-                      value={totalCharge}
+                      name="premium"
+                      value={premium}
                       disabled
                     />
                   </Form.Group>
                 </Form.Row>
                 <Form.Row>
                   <Col>
-                    <hr/>
+                    <hr />
                     <p className="mb-3">
                       <strong>Summary:</strong>
                     </p>
@@ -461,9 +466,9 @@ export const SaleCreate = ({
                       <span style={{ color: "red" }}>* </span>Fees:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="fees"
-                      defaultValue="0"
+                      
                       onChange={handleChange}
                       onBlur={handleBlur}
                       isInvalid={errors.fees}
@@ -479,9 +484,9 @@ export const SaleCreate = ({
                       <span style={{ color: "red" }}>* </span>Permits:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="permits"
-                      defaultValue="0"
+                      
                       onChange={handleChange}
                       onBlur={handleBlur}
                       isInvalid={errors.permits}
@@ -497,9 +502,9 @@ export const SaleCreate = ({
                       <span style={{ color: "red" }}>* </span>Tips:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="tips"
-                      defaultValue="0"
+                      
                       onChange={handleChange}
                       onBlur={handleBlur}
                       isInvalid={errors.tips}
@@ -512,21 +517,21 @@ export const SaleCreate = ({
                 </Form.Row>
                 <hr />
                 <Form.Row>
-                <Form.Group as={Col}>
+                  <Form.Group as={Col}>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Down Payment:
                     </Form.Label>
                     <Form.Control
-                      type="number"
-                      name="premium"
-                      defaultValue="0"
+                      type="text"
+                      name="totalCharge"
+                      
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      isInvalid={errors.premium}
-                      value={formStates.premium}
+                      isInvalid={errors.totalCharge}
+                      value={formStates.totalCharge}
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.premium}
+                      {errors.totalCharge}
                     </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group as={Col}>
@@ -534,9 +539,9 @@ export const SaleCreate = ({
                       <span style={{ color: "red" }}>* </span>Down Payment Paid:
                     </Form.Label>
                     <Form.Control
-                      type="number"
+                      type="text"
                       name="chargesPaid"
-                      defaultValue="0"
+                      
                       onChange={handleChange}
                       onBlur={handleBlur}
                       isInvalid={errors.chargesPaid}
