@@ -154,6 +154,8 @@ export const SaleCreate = ({
       premium:0,
     });
 
+    setErrors([]);
+
     setFormValues({
       soldAt: moment().format("YYYY-MM-DD"),
       customer: "",
@@ -260,9 +262,11 @@ export const SaleCreate = ({
                     <p className="mb-3">
                       <strong>Insurance Charges:</strong>
                     </p>
-                    <Badge pill variant="danger">
+                    <p>
+                    <small style={{color:"#dc3545"}}>
                       {errors.insurers}
-                    </Badge>
+                    </small>
+                    </p>
                   </Col>
                 </Form.Row>
                 <Form.Row>
@@ -437,7 +441,7 @@ export const SaleCreate = ({
                   </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                  <Form.Group as={Col} className="sm-6 md-6">
+                  <Form.Group as={Col}>
                     <Form.Label style={{ fontSize: "small" }}>
                       Premium:
                     </Form.Label>
