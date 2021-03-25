@@ -18,6 +18,7 @@ import { Row, Col } from "react-bootstrap";
 import Spinner from "../../globals/spinner";
 import { insurersDefaultSorted, insurersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
+import { isAdminCheck } from "../../../config/user";
 
 function InsurerList({
   insurerListRequest,
@@ -27,11 +28,17 @@ function InsurerList({
   loadingCreate,
   loadingDelete,
   loadingUpdate,
+  user,
 }) {
   //States
   const [modal, setModal] = useState(false);
   const [id, setId] = useState("");
-  //Functions
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(isAdminCheck(user));
+  }, [user]);
 
   useEffect(() => {
     insurerListRequest();
@@ -62,7 +69,7 @@ function InsurerList({
             bootstrap4
             keyField="_id"
             data={insurers}
-            columns={insurersTableColumns(false, showModal, setId)}
+            columns={insurersTableColumns(isAdmin, showModal, setId)}
             striped
             hover
             bordered={false}
@@ -96,6 +103,7 @@ InsurerList.propTypes = {
   loadingCreate: PropTypes.bool.isRequired,
   loadingDelete: PropTypes.bool.isRequired,
   loadingUpdate: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -103,6 +111,7 @@ const mapStateToProps = (state) => ({
   loadingCreate: state.insurerListStatusReducer.loading,
   loadingDelete: state.insurerDeleteStatusReducer.loading,
   loadingUpdate: state.insurerUpdateStatusReducer.loading,
+  user: state.userProfileReducer.user,
 });
 
 const mapDispatchToProps = {

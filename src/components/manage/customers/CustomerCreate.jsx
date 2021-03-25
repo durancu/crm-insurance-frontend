@@ -146,7 +146,7 @@ const CustomerCreate = ({
                     type="tel"
                     name="phone"
                     value={form.phone}
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    
                     placeholder="123-456-7890"
                     onChange={handleChange}
                     isInvalid={errors.phone}
@@ -162,7 +162,7 @@ const CustomerCreate = ({
                     type="tel"
                     name="fax"
                     value={form.fax}
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    
                     placeholder="123-456-7890"
                     onChange={handleChange}
                     isInvalid={errors.fax}

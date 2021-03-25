@@ -6,14 +6,16 @@ import { Link } from "react-router-dom";
 import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { isAdminCheck, isExecutiveCheck } from "../../config/user";
+import { isAdminCheck, isExecutiveCheck, isSellerCheck } from "../../config/user";
 
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
   const [isExecutive, setIsExecutive] = useState(false);
 
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
+    setIsSeller(isSellerCheck(user));
     setIsExecutive(isExecutiveCheck(user));
   }, [user]);
 
@@ -29,7 +31,9 @@ const Header = ({ user, userLogoutRequest }) => {
             <Link className="nav-link" to="/">
               Home
             </Link>
-            <Link className="nav-link" to="/manage/sales">
+            <Link className="nav-link" to="/manage/sales"
+            hidden={!isSeller && !isAdmin}
+            >
               Sales
             </Link>
             <Link className="nav-link" to="/manage/customers">
@@ -65,19 +69,12 @@ const Header = ({ user, userLogoutRequest }) => {
                 Payroll
               </Link>
             </NavDropdown>
-            {isAdmin && (
+            {isExecutive && (
               <NavDropdown title="Manage" id="basic-nav-dropdown">
                 <>
-                  {/* <Link className="dropdown-item" to="/manage/users">
-                    Users
-                  </Link> */}
                   <Link className="dropdown-item" to="/manage/insurers">
                     Insurers
                   </Link>
-                  {/* <NavDropdown.Divider />
-                  <Link className="dropdown-item" to="/manage/company">
-                    Company
-                  </Link> */}
                 </>
               </NavDropdown>
             )}

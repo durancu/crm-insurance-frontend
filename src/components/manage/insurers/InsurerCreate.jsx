@@ -18,6 +18,11 @@ import {
   insurerCreateRequest,
   insurerUpdateRequest,
 } from "../../../redux/actions";
+import {
+  isAdminCheck,
+  isExecutiveCheck,
+  isSellerCheck,
+} from "../../../config/user";
 
 const InsurerCreate = ({
   loading,
@@ -29,6 +34,7 @@ const InsurerCreate = ({
   modal,
   edit,
   insurer,
+  user,
 }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let defaultForm = {
@@ -42,6 +48,16 @@ const InsurerCreate = ({
   };
 
   const [form, setForm] = useState(defaultForm);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
+  const [isExecutive, setIsExecutive] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(isAdminCheck(user));
+    setIsSeller(isSellerCheck(user));
+    setIsExecutive(isExecutiveCheck(user));
+  }, [user]);
 
   useEffect(() => {
     edit ? setForm(insurer) : setForm(defaultForm);
@@ -63,8 +79,7 @@ const InsurerCreate = ({
           phone: form.phone,
           liabilityCommission: parseFloat(form.liabilityCommission),
           cargoCommission: parseFloat(form.cargoCommission),
-          physicalDamageCommission:
-            parseFloat(form.physicalDamageCommission),
+          physicalDamageCommission: parseFloat(form.physicalDamageCommission),
           wcGlUmbCommission: parseFloat(form.wcGlUmbCommission),
         });
 
@@ -110,7 +125,6 @@ const InsurerCreate = ({
                   type="tel"
                   name="phone"
                   value={form.phone}
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   onChange={handleChange}
                   required
                 />
@@ -127,15 +141,15 @@ const InsurerCreate = ({
                   required
                 />
               </Form.Group>
-              <Row>
+              <Row hidden={!isAdmin}>
                 <Col>
                   <br />
                   <h4>Commissions (%)</h4>
                   <br />
                 </Col>
               </Row>
-              <Row>
-                <Col>
+              <Row hidden={!isAdmin}>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span> Liability
@@ -148,7 +162,7 @@ const InsurerCreate = ({
                     />
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span> Motor Cargo
@@ -161,9 +175,7 @@ const InsurerCreate = ({
                     />
                   </Form.Group>
                 </Col>
-              </Row>
-              <Row>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span> Physical Damage
@@ -176,7 +188,7 @@ const InsurerCreate = ({
                     />
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span> WC/GL/UMB
@@ -232,6 +244,7 @@ InsurerCreate.propTypes = {
   loadingGetInsurer: PropTypes.bool.isRequired,
   insurerCreateRequest: PropTypes.func.isRequired,
   formModal: PropTypes.func,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -239,6 +252,7 @@ const mapStateToProps = (state) => ({
   error: state.insurerCreateStatusReducer.error,
   insurer: state.insurerReducer.item,
   loadingGetInsurer: state.insurerGetStatusReducer.loading,
+  user: state.userProfileReducer.user,
 });
 
 const mapDispatchToProps = {

@@ -31,35 +31,39 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
   },
   {
     dataField: "liabilityCommission",
-    text: "Liability",
+    text: "Liability Commision",
     sort: true,
     align: "center",
     headerAlign: "center",
     formatter: commissionFormatter,
+    hidden: !isAdmin
   },
   {
     dataField: "cargoCommission",
-    text: "Motor Cargo",
+    text: "Motor Cargo Commision",
     sort: true,
     align: "center",
     headerAlign: "center",
     formatter: commissionFormatter,
+    hidden: !isAdmin
   },
   {
     dataField: "physicalDamageCommission",
-    text: "Physical Damage",
+    text: "Physical Damage Commision",
     sort: true,
     align: "center",
     headerAlign: "center",
     formatter: commissionFormatter,
+    hidden: !isAdmin
   },
   {
     dataField: "wcGlUmbCommission",
-    text: "WC/GL/UMB",
+    text: "WC/GL/UMB Commision",
     sort: true,
     align: "center",
     headerAlign: "center",
     formatter: commissionFormatter,
+    hidden: !isAdmin
   },
   /* {
     dataField: "button-delete",
