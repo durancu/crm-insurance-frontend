@@ -65,7 +65,7 @@ export const salesReportTableColumns = (isAdmin = false) =>
             editable: false, // No es editable, porque es una property del seller
         },
         {
-            dataField: "customer.name",
+            dataField: "customer.company",
             text: "Customer",
             headerStyle: () => {
                 return { width: "14%" };

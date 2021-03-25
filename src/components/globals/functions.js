@@ -162,8 +162,12 @@ export function locationName(locationCode) {
   ).name;
 }
 
-export function customerFormatter(cell, row) {
-  return row.customer.name;
+export function saleCustomerFormatter(cell, row) {
+  return row.customerName;
+}
+
+export function customerCompanyFormatter(cell, row) {
+  return row.company || "-";
 }
 
 export function sellerFormatter(cell, row) {

@@ -1,9 +1,5 @@
 //Functions
-import {
-  /* buttonCellFormatter,
-  buttonHeaderFormatter,
-  componentDeleteFormatter, */
-} from "../../globals/functions";
+import { customerCompanyFormatter } from "../../globals/functions";
 /* import { textFilter } from "react-bootstrap-table2-filter"; */
 
 //Components
@@ -11,7 +7,7 @@ import {
 export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   {
     dataField: "name",
-    text: "Name",
+    text: "Contact Person",
     align: "left",
     headerAlign: "left",
     sort: true,
@@ -28,6 +24,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     headerStyle: () => {
       return { width: "10%" };
     },
+    formatter: customerCompanyFormatter
   },
   {
     dataField: "dot",

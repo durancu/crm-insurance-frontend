@@ -7,7 +7,7 @@ import {
   buttonHeaderFormatter,
   cargoInsurerFormatter,
   componentDeleteFormatter,
-  customerFormatter,
+  saleCustomerFormatter,
   dateFormatter,
   footerPriceFormatter,
   liabilityInsurerFormatter,
@@ -82,7 +82,7 @@ export const salesTableColumns = (
   {
     dataField: "customer._id",
     text: "Customer",
-    formatter: customerFormatter,
+    formatter: saleCustomerFormatter,
     headerStyle: () => {
       return { width: "10%" };
     },
@@ -329,7 +329,7 @@ export const salesTableColumns = (
 ];
 
 export const customersOptions = (customers) =>
-  customers.map((customer) => ({ value: customer._id, label: customer.name }));
+  customers.map((customer) => ({ value: customer._id, label: `${customer.company||customer.name}` }));
 
 export const sellersOptions = (sellers) =>
   sellers.map((seller) => ({
