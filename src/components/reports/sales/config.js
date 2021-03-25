@@ -117,7 +117,7 @@ export const salesReportTableColumns = () =>
             footerAlign: "right",
         },
         {
-            dataField: "totalCharge",
+            dataField: "premium",
             text: "Total",
             headerAlign: "right",
             formatter: priceFormatter,

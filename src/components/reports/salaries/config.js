@@ -32,7 +32,7 @@ export const payrollReportTableColumns = (isAdmin = false) => [
     footer: "",
   },
   {
-    dataField: "totalCharge",
+    dataField: "premium",
     text: "Total Sales",
     headerAlign: "right",
     formatter: priceFormatter,

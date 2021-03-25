@@ -11,8 +11,7 @@ import {
 } from "../../redux/actions";
 //Functions
 import {
-  premiumCalculate,
-  pendingPaymentCalculate,
+  pendingPaymentCalculate, totalPremiumCalculate,
 } from "../globals/functions";
 
 import { salesCreateValidate } from "./saleCreateValidate";
@@ -74,7 +73,7 @@ export const SaleCreate = ({
   }, [lastCustomer]);
   //Calculate premium
   useEffect(() => {
-    setPremium(premiumCalculate(formValues));
+    setPremium(totalPremiumCalculate(formValues));
     setPendingPayment(pendingPaymentCalculate(formValues));
   }, [formValues]);
 

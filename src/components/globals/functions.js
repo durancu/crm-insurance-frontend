@@ -108,11 +108,11 @@ export function baseSalaryFormatter(cell, row) {
 export const userRolesFormatter = (cell, row) => {
   const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
   //const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
-  
-    /* <TooltipIcon title={name}>
-      <Icon size="24px" />
-    </TooltipIcon> */
-  
+
+  /* <TooltipIcon title={name}>
+    <Icon size="24px" />
+  </TooltipIcon> */
+
   return <span>{name}</span>;
 };
 //---------------------------------------
@@ -230,23 +230,23 @@ const transformNumber = (number) => (isNaN(number) ? 0 : number);
  * @param {object} formData
  * @returns {number} premium
  */
-export const premiumCalculate = ({
+export const totalPremiumCalculate = ({
   liabilityCharge,
   cargoCharge,
   physicalDamageCharge,
-  wcGlUmbCharge
+  wcGlUmbCharge,
 }) =>
   transformNumber(parseFloat(liabilityCharge)) +
   transformNumber(parseFloat(cargoCharge)) +
   transformNumber(parseFloat(physicalDamageCharge)) +
   transformNumber(parseFloat(wcGlUmbCharge));
-  //
-  //transformNumber(parseFloat(fees)) +
- // transformNumber(parseFloat(permits));
+//+
+//transformNumber(parseFloat(fees)) +
+// transformNumber(parseFloat(permits));
 
 /**Calc pendingPayment
  * @param {object} formData
  * @returns {number} pendingPayment
  */
 export const pendingPaymentCalculate = (form) =>
-transformNumber(parseFloat(form.totalCharge)) - transformNumber(parseFloat(form.chargesPaid));
+  transformNumber(parseFloat(form.totalCharge)) - transformNumber(parseFloat(form.chargesPaid));

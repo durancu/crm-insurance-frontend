@@ -7,7 +7,7 @@ import { queryStringFromObject } from "../../../global/utils";
 
 const apiCall = (queryParams) => {
   queryParams["with_sales"] = "true";
-  queryParams["fields"] = "totalCharge";
+  queryParams["fields"] = "premium";
 
   return apiGet(
     `reports/sales?${queryStringFromObject(queryParams)}`,

@@ -89,7 +89,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
     headerStyle: () => { return { width: "8%" } },
   },
   {
-    dataField: "totalCharge",
+    dataField: "premium",
     text: "Sales",
     headerAlign: "right",
     formatter: priceFormatter,
