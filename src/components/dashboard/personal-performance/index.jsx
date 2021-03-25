@@ -35,7 +35,7 @@ const PersonalPerformance = ({
     <>
       <Row>
         <Col>
-          <h4>My Performance ({lastMonth} - Today)</h4>
+          <h4>My Performance <small>({lastMonth} - Today)</small></h4>
           <hr />
         </Col>
       </Row>

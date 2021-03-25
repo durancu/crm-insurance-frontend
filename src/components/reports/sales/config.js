@@ -37,7 +37,6 @@ export const salesReportTableColumns = () =>
         },
         {
             dataField: "locationName",
-            formatter: locationFormatter,
             text: "Location",
             headerStyle: () => {
                 return { width: "10%" };
@@ -73,8 +72,8 @@ export const salesReportTableColumns = () =>
             filter: textFilter({ placeholder: "Search" }),
         },
         {
-            dataField: "premium",
-            text: "Premium",
+            dataField: "totalCharge",
+            text: "Down Payment",
             headerAlign: "right",
             formatter: priceFormatter,
             sort: true,
@@ -118,7 +117,7 @@ export const salesReportTableColumns = () =>
         },
         {
             dataField: "premium",
-            text: "Total",
+            text: "Premium",
             headerAlign: "right",
             formatter: priceFormatter,
             sort: true,
@@ -127,6 +126,7 @@ export const salesReportTableColumns = () =>
             footerFormatter: footerPriceFormatter,
             footerAlign: "right",
         },
+
     ];
 
 
