@@ -31,5 +31,5 @@ export const activitiesSample = [
 ]
 
 export const activitiesDefaultSorted = () => [
-  { dataField: "name", order: "desc" },
+  { dataField: "name", order: "asc" },
 ];

@@ -143,7 +143,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
 ];
 
 export const customersDefaultSorted = () => [
-  { dataField: "name", order: "desc" },
+  { dataField: "name", order: "asc" },
 ];
 
 export const customersOptions = (sellers) =>

@@ -79,7 +79,7 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
 ];
 
 export const insurersDefaultSorted = () => [
-  { dataField: "name", order: "desc" },
+  { dataField: "name", order: "asc" },
 ];
 
 export const insurerOptions = (sellers) =>

@@ -184,7 +184,7 @@ export const usersTableColumns = (
   }, */
 ];
 
-export const usersDefaultSorted = () => [{ dataField: "name", order: "desc" }];
+export const usersDefaultSorted = () => [{ dataField: "name", order: "asc" }];
 
 export const userOptions = (sellers) =>
   sellers.map((seller) => ({
