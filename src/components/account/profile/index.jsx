@@ -9,13 +9,6 @@ import { userProfileGetRequest } from "../../../redux/actions";
 import { Row, Col, Card } from "react-bootstrap";
 import { USER_SETTINGS } from "../../../config/user";
 import { locationName } from "../../globals/functions";
-import BootstrapTable from "react-bootstrap-table-next";
-import filterFactory from "react-bootstrap-table2-filter";
-import {
-  activitiesDefaultSorted,
-  activitiesSample,
-  activitiesTableColumns,
-} from "./config";
 
 const Profile = ({ userProfileGetRequest, user }) => {
   useEffect(() => {
@@ -25,7 +18,11 @@ const Profile = ({ userProfileGetRequest, user }) => {
     <>
       <Row className="mt-3 mb-3">
         <Col sm="8">
-          <h2>Profile</h2>
+          <h3>Profile</h3>
+              <p>
+              This page shows your personal info and activity as employee. You can contact your manager to fix any error your personal data.
+              </p>
+              <hr />
         </Col>
       </Row>
       <Row>
@@ -33,7 +30,8 @@ const Profile = ({ userProfileGetRequest, user }) => {
           <Card className="sm-8" style={{ border: "none" }}>
           <h4>My Activity</h4>
           <br/>
-          <BootstrapTable
+          <h3 style={{color:"#999999"}}>Something pretty cool is coming here soon...</h3>
+          {/* <BootstrapTable
             bootstrap4
             keyField="_id"
             data={activitiesSample}
@@ -45,8 +43,7 @@ const Profile = ({ userProfileGetRequest, user }) => {
             filter={filterFactory()}
             defaultSorted={activitiesDefaultSorted()}
             noDataIndication="No registered activity"
-            //loading={}
-          />
+          /> */}
           </Card>
         </Col>
         <Col sm="4" lg="4">

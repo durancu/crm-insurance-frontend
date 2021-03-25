@@ -30,35 +30,31 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   return (
     <>
       <Row className="mt-3 mb-3">
+        <Col sm="12">
+          <h3>Home</h3>
+        </Col>
+      </Row>
+      <Row>
         <Col>
-          <Row className="mb-4">
-            <h2>Home</h2>
-          </Row>
-          <Row>
-            <Col>
-              <h4>Company Overview</h4>
-              <hr />
-              <p>
-                This dashboards shows a summary of the company's sales stats for
-                the selected date range. Change values in the filter below to
-                get stats for different date range.
-              </p>
-            </Col>
-          </Row>
-          <Row className="ml-1 mt-3 mb-1">
-            <Col lg="10" md="12" sm="12">
-              <DateRangeFilter />
-            </Col>
-          </Row>
+          <h4>Company Overview</h4>
+          <hr />
+          <p>
+            This dashboards shows a summary of the company's sales stats for the
+            selected date range. Change values in the filter below to get stats
+            for different date range.
+          </p>
+
+          <DateRangeFilter />
           <Row>
             {charts &&
               charts.map((chartData, key) => (
-                <Col sm="6" md="6" key={key}>
+                <Col sm="6" lg="6" key={key}>
                   <DashboardChart chartData={chartData} />
                 </Col>
               ))}
           </Row>
         </Col>
+
         {!isAdmin && (
           <Col sm="3" lg="3">
             <PersonalPerformance isAdmin={isAdmin} />

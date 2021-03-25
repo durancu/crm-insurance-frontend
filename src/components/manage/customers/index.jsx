@@ -19,7 +19,7 @@ export default function Customers() {
     <>
       <Row className="mt-3">
         <Col sm="10">
-          <h2>Customers</h2>
+          <h3>Customer Management</h3>
         </Col>
       </Row>
       <Row className="mt-0 mb-2">
