@@ -20,8 +20,6 @@ import {
 } from "../../../redux/actions";
 import {
   isAdminCheck,
-  isExecutiveCheck,
-  isSellerCheck,
 } from "../../../config/user";
 
 const InsurerCreate = ({
@@ -50,13 +48,9 @@ const InsurerCreate = ({
   const [form, setForm] = useState(defaultForm);
 
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isSeller, setIsSeller] = useState(false);
-  const [isExecutive, setIsExecutive] = useState(false);
 
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
-    setIsSeller(isSellerCheck(user));
-    setIsExecutive(isExecutiveCheck(user));
   }, [user]);
 
   useEffect(() => {

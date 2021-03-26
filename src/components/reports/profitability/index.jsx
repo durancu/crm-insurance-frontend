@@ -36,6 +36,20 @@ export const Reports = ({
     reportProfitRequest({}, params);
   }, [params, reportProfitRequest]);
 
+
+  const [monthStart, setMonthStart] = useState(
+      moment({"day":21, "month": params.month, "year": params.year}).subtract(1, 'months').format("MMM Do")
+  );
+
+  const [monthEnd, setMonthEnd] = useState(
+    moment({"day":20, "month": params.month, "year": params.year}).format("MMM Do")
+);
+
+useEffect(() => {
+  setMonthStart(monthStart);
+  setMonthEnd(monthEnd);
+}, [monthEnd, monthStart]);
+
   return (
     <>
       <Row className="mt-4 mb-4">
@@ -50,9 +64,10 @@ export const Reports = ({
         </Col>
         <Col sm="4">
           <h4 style={{ textAlign: "right" }}>
-            {`${moment()
+            {/* {`${moment()
               .month(params.month - 1)
-              .format("MMM")}, ${params.year}`}
+              .format("MMM")}, ${params.year}`} */}
+              {`${monthStart} - ${monthEnd}`}
           </h4>
         </Col>
       </Row>
