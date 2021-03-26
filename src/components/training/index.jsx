@@ -242,8 +242,8 @@ const Training = () => {
                   <Row>
                     <Col style={{ textAlign: "left" }}>
                       <Image
-                        /* src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-sale.png" */
-                         src="/images/clientes.jpg" 
+                        src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/customers.jpeg"
+                         
                         thumbnail
                       />
                     </Col>
@@ -289,8 +289,8 @@ const Training = () => {
                   <Row>
                     <Col style={{ textAlign: "left" }}>
                       <Image
-                        src="/images/create-customers.jpg"
-                       /*  src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-sale.png" */
+                        
+                       src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-customer.jpeg"
                         thumbnail
                       />
                     </Col>
@@ -327,8 +327,7 @@ const Training = () => {
                   <Row>
                     <Col style={{ textAlign: "left" }}>
                       <Image
-                        /* src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-sale.png" */
-                         src="/images/employees.jpg" 
+                        src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/employees.jpeg"
                         thumbnail
                       />
                     </Col>
@@ -377,8 +376,7 @@ const Training = () => {
                   <Row>
                     <Col style={{ textAlign: "left" }}>
                       <Image
-                        src="/images/sales-reports.jpg"
-                        /* src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/sales-management.png" */
+                         src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/sales-report.jpeg"
                         thumbnail
                       />
                     </Col>

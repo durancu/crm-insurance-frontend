@@ -1,8 +1,5 @@
 //Functions
 import {
-  componentPasswordFormatter,
-  buttonCellFormatter,
-  buttonHeaderFormatter,
   locationFormatter,
   userRolesFormatter,
   priceFormatter,
