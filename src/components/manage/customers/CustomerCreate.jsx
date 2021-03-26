@@ -235,7 +235,7 @@ const CustomerCreate = ({
                     isValid={form.state}
                   >
                     <option value="" disabled>
-                      Choose Type
+                      Choose State
                     </option>
                     {USA_STATES.map((state) => (
                       <option key={state.id} value={state.id}>
