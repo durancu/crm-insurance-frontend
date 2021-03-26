@@ -6,7 +6,12 @@ import { Link } from "react-router-dom";
 import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { isAdminCheck, isExecutiveCheck, isSellerCheck } from "../../config/user";
+import {PersonCircle} from 'react-bootstrap-icons'
+import {
+  isAdminCheck,
+  isExecutiveCheck,
+  isSellerCheck,
+} from "../../config/user";
 
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -31,8 +36,10 @@ const Header = ({ user, userLogoutRequest }) => {
             <Link className="nav-link" to="/">
               Home
             </Link>
-            <Link className="nav-link" to="/manage/sales"
-            hidden={!isSeller && !isAdmin}
+            <Link
+              className="nav-link"
+              to="/manage/sales"
+              hidden={!isSeller && !isAdmin}
             >
               Sales
             </Link>
@@ -78,15 +85,18 @@ const Header = ({ user, userLogoutRequest }) => {
                 </>
               </NavDropdown>
             )}
-            <NavDropdown title="Account" id="basic-nav-dropdown">
+            <NavDropdown title={<PersonCircle size={25}/>} id="basic-nav-dropdown">
               <Link className="dropdown-item" to="/profile">
                 Profile
-                <NavDropdown.Divider />
               </Link>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/" onClick={userLogoutRequest}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
+            <Link className="nav-link" to="/training">
+              Training
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

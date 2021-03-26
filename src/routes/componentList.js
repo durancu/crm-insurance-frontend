@@ -9,7 +9,7 @@ import Users from "../components/manage/users";
 import Insurers from "../components/manage/insurers";
 import Company from "../components/manage/company";
 import Profile from "../components/account/profile";
-
+import Training from "../components/training";
 
 export const COMPONENT_LIST = [
   {
@@ -77,6 +77,12 @@ export const COMPONENT_LIST = [
     title: "Profile",
     url: "/profile",
     component: Profile,
+    protected: true,
+  },
+  {
+    title: "Training",
+    url: "/training",
+    component: Training,
     protected: true,
   },
 ];
