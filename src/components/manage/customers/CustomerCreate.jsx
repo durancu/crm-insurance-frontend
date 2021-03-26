@@ -12,6 +12,7 @@ import {
 } from "../../../redux/actions";
 //Functions
 import { customerCreateValidate } from "./customerCreateValidate";
+import { USA_STATES } from "../../../config/usaState";
 
 const defaultForm = {
   company: "",
@@ -146,7 +147,6 @@ const CustomerCreate = ({
                     type="tel"
                     name="phone"
                     value={form.phone}
-                    
                     placeholder="123-456-7890"
                     onChange={handleChange}
                     isInvalid={errors.phone}
@@ -162,7 +162,6 @@ const CustomerCreate = ({
                     type="tel"
                     name="fax"
                     value={form.fax}
-                    
                     placeholder="123-456-7890"
                     onChange={handleChange}
                     isInvalid={errors.fax}
@@ -227,13 +226,24 @@ const CustomerCreate = ({
                 <Form.Group as={Col}>
                   <Form.Label style={{ fontSize: "small" }}>State</Form.Label>
                   <Form.Control
-                    type="text"
+                    as="select"
                     name="state"
                     value={form.state}
                     onChange={handleChange}
+                    custom
                     isInvalid={errors.state}
                     isValid={form.state}
-                  />
+                  >
+                    <option value="" disabled>
+                      Choose Type
+                    </option>
+                    {USA_STATES.map((state) => (
+                      <option key={state.id} value={state.id}>
+                        {state.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+
                   <Form.Control.Feedback type="invalid">
                     {errors.state}
                   </Form.Control.Feedback>
