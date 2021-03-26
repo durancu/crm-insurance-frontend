@@ -63,7 +63,7 @@ const Training = () => {
                         estadísticas:
                         <ul>
                           <li>
-                            Company Overview proporciona gráficas (diferentes
+                            <b>Company Overview</b> proporciona gráficas (diferentes
                             según el tipo de empleado o rol de usuario), con
                             información actualizada en tiempo real sobre el
                             comportamiento de las ventas en ambas oficinas. De
@@ -72,7 +72,7 @@ const Training = () => {
                             de los otros vendedores.
                           </li>
                           <li>
-                            En la barra lateral derecha, el empleado tendrá la
+                            En la barra lateral derecha (<b>Employee's Performance</b>), el empleado tendrá la
                             oportunidad de darle seguimiento a su rendimiento
                             personal en lo que va de mes (los meses se calculan
                             empezando los días 21, y terminando el 20 del

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //Actions
 import { userLogoutRequest } from "../../redux/actions";
 //Components
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
 import {PersonCircle, Book} from 'react-bootstrap-icons'
 import {
   isAdminCheck,
@@ -28,11 +28,14 @@ const Header = ({ user, userLogoutRequest }) => {
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
       <Container fluid style={{ maxWidth: "98%" }}>
         <Link className="navbar-brand" to="/">
-          VL17 Insurance Agency
+        <Image
+        src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-64.png"
+        />
+          <span style={{marginLeft:"20px", marginRight:"50px"}}>MANAGEMENT SYSTEM</span>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav justify className="mr-auto">
+          <Nav defaultActiveKey justify className="mr-auto">
             <Link className="nav-link" to="/">
               Home
             </Link>
