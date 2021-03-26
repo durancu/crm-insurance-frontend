@@ -106,14 +106,18 @@ export function baseSalaryFormatter(cell, row) {
 }
 
 export const userRolesFormatter = (cell, row) => {
-  const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
+  const role = USER_SETTINGS.roles.find(({ id }) => id === cell[0]);
+
+  if (role){
+    return role.name;
+  } else {return '-';}
   //const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
 
   /* <TooltipIcon title={name}>
     <Icon size="24px" />
   </TooltipIcon> */
 
-  return <span>{name}</span>;
+  //return <span>{name}</span>;
 };
 //---------------------------------------
 export function salaryFormatter(cell, row) {

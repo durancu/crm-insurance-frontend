@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import {PersonCircle} from 'react-bootstrap-icons'
+import {PersonCircle, Book} from 'react-bootstrap-icons'
 import {
   isAdminCheck,
   isExecutiveCheck,
@@ -95,7 +95,7 @@ const Header = ({ user, userLogoutRequest }) => {
               </NavDropdown.Item>
             </NavDropdown>
             <Link className="nav-link" to="/training">
-              Training
+              <Book size={25}/>
             </Link>
           </Nav>
         </Navbar.Collapse>
