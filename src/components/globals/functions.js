@@ -128,7 +128,7 @@ export function totalPriceFormatter(cell, row) {
   if (cell) {
     return (
       <span>
-        <strong>{preciseNumber(cell, 2)}</strong>
+        preciseNumber(cell, 2)
       </span>
     );
   }
@@ -137,7 +137,7 @@ export function totalPriceFormatter(cell, row) {
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
-  return <strong>{preciseNumber(text, 2)}</strong>;
+  return preciseNumber(text, 2);
 }
 
 export function dateFormatter(cell, row) {
