@@ -92,10 +92,15 @@ function UserList({
               mode: "click",
               afterSaveCell: (oldValue, newValue, row, column) => {
                 const fieldName = column.dataField;
-                let payload = {
-                  [fieldName]: newValue,
-                };
-
+                let payload = {};
+                if (fieldName === "roles") {
+                  payload = {
+                    [fieldName]: [newValue],
+                  };
+                } else
+                  payload = {
+                    [fieldName]: newValue,
+                  };
                 oldValue !== newValue && userUpdateRequest(payload, row._id);
               },
             })}

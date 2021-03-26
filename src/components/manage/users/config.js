@@ -192,5 +192,5 @@ export const userOptions = (sellers) =>
     label: `${seller.firstName} ${seller.lastName}`,
   }));
 
-export const rolesOptions = () =>
+export const rolesOptions = (roles) =>
   USER_SETTINGS.roles.map(({ id, name }) => ({ value: id, label: name }));

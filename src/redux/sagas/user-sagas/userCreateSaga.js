@@ -19,7 +19,6 @@ const sagaRequest = function* sagaRequest({ payload }) {
       config.type = "error";
       config.statusCode = response.data.statusCode;
       config.messages = [response.data.message];
-      return console.log(response);
     });
   try {
     const response = yield call(apiCall, payload);
