@@ -27,7 +27,6 @@ const sagaRequest = function* sagaRequest(action) {
   try {
     const id = payload._id;
     delete payload._id;
-
     const response = yield call(apiCall, payload, id);
     config.title = "Success";
     config.visible = true;
