@@ -220,7 +220,7 @@ export const SaleCreate = ({
 
                   <Form.Group as={Col}>
                     <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> Customer:
+                      <span style={{ color: "red" }}>* </span> Company:
                     </Form.Label>
                     <InputGroup className="mb-3">
                       <Form.Control
@@ -234,7 +234,7 @@ export const SaleCreate = ({
                         <option value="">N/A</option>
                         {customers.map((customer) => (
                           <option key={customer._id} value={customer._id}>
-                            {customer.name}
+                            {customer.company}
                           </option>
                         ))}
                       </Form.Control>
