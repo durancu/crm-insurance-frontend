@@ -17,6 +17,7 @@ import {
 import { userCreateRequest, userUpdateRequest } from "../../../redux/actions";
 import { USER_SETTINGS } from "../../../config/user";
 import { BUSINESS_SETTINGS } from "../../../config/company";
+import { userCreateValidate } from "./userCreateValidate";
 
 const UserCreate = ({
   loading,
@@ -37,13 +38,14 @@ const UserCreate = ({
     email: "",
     phone: "",
     position: "",
-    role: "",
+    roles: [],
     location: "",
     password: "",
     baseSalary: "",
   };
 
   const [form, setForm] = useState(defaultForm);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     edit ? setForm(user) : setForm(defaultForm);
@@ -51,20 +53,25 @@ const UserCreate = ({
   }, [edit, user]);
 
   const handleChange = ({ target }) => {
-    setForm((form) => ({ ...form, [target.name]: target.value }));
+    target.name === "roles"
+      ? setForm((form) => ({ ...form, [target.name]: [target.value] }))
+      : setForm((form) => ({ ...form, [target.name]: target.value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const result = userCreateValidate(form);
+    setErrors(result);
+    if (!Object.keys(result).length) {
+      edit ? userUpdateRequest(form, form._id) : userCreateRequest(form);
 
-    edit ? userUpdateRequest(form, form._id) : userCreateRequest(form);
-
-    setTimeout(() => {
-      if (!error) {
-        clearForm();
-        showModal();
-      }
-    }, 1000);
+      setTimeout(() => {
+        if (!error) {
+          clearForm();
+          showModal();
+        }
+      }, 1000);
+    }
   };
 
   const clearForm = () => {
@@ -91,8 +98,11 @@ const UserCreate = ({
                       name="firstName"
                       value={form.firstName}
                       onChange={handleChange}
-                      required
+                      isInvalid={errors.firstName}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.firstName}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -105,8 +115,11 @@ const UserCreate = ({
                       name="lastName"
                       value={form.lastName}
                       onChange={handleChange}
-                      required
+                      isInvalid={errors.lastName}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.lastName}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -122,8 +135,11 @@ const UserCreate = ({
                       value={form.username}
                       onChange={handleChange}
                       disabled={edit}
-                      required
+                      isInvalid={errors.username}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.username}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -135,11 +151,13 @@ const UserCreate = ({
                       type="tel"
                       name="phone"
                       value={form.phone}
-                      
                       onChange={handleChange}
                       placeholder="123-456-7890"
-                      required
+                      isInvalid={errors.phone}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.phone}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -155,7 +173,7 @@ const UserCreate = ({
                       value={form.location}
                       onChange={handleChange}
                       custom
-                      required
+                      isInvalid={errors.location}
                     >
                       <option value="" disabled>
                         Choose Role
@@ -166,6 +184,9 @@ const UserCreate = ({
                         </option>
                       ))}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.location}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col>
@@ -177,9 +198,12 @@ const UserCreate = ({
                       type="text"
                       name="position"
                       value={form.position}
-                      required
                       onChange={handleChange}
+                      isInvalid={errors.position}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.position}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -191,11 +215,11 @@ const UserCreate = ({
                     </Form.Label>
                     <Form.Control
                       as="select"
-                      name="role"
-                      value={form.role}
+                      name="roles"
+                      value={form.roles}
                       onChange={handleChange}
                       custom
-                      required
+                      isInvalid={errors.roles}
                     >
                       <option value="" disabled>
                         Choose Role
@@ -206,6 +230,9 @@ const UserCreate = ({
                         </option>
                       ))}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.roles}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -218,8 +245,11 @@ const UserCreate = ({
                   name="baseSalary"
                   value={form.baseSalary}
                   onChange={handleChange}
-                  required
+                  isInvalid={errors.baseSalary}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.baseSalary}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group>
                 <Form.Label style={{ fontSize: "small" }}>
@@ -230,8 +260,11 @@ const UserCreate = ({
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  required
+                  isInvalid={errors.email}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.email}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group>
                 <Form.Label style={{ fontSize: "small" }}>
@@ -242,8 +275,11 @@ const UserCreate = ({
                   name="password"
                   value={edit ? undefined : form.password}
                   onChange={handleChange}
-                  required={!edit}
+                  isInvalid={errors.password}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {errors.password}
+                </Form.Control.Feedback>
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
