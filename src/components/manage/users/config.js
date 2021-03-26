@@ -143,6 +143,7 @@ export const usersTableColumns = (
     },
     editable: false,
   },
+  /* 
   {
     hidden: !isAdmin,
     dataField: "button-password",
@@ -158,7 +159,7 @@ export const usersTableColumns = (
         showPasswordModal();
       },
     },
-  },
+  }, */
   /* {
     dataField: "separator",
     text: "",
