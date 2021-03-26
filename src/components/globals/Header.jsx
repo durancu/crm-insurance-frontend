@@ -35,7 +35,7 @@ const Header = ({ user, userLogoutRequest }) => {
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav defaultActiveKey justify className="mr-auto">
+          <Nav justify className="mr-auto">
             <Link className="nav-link" to="/">
               Home
             </Link>
