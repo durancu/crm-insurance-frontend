@@ -242,6 +242,7 @@ export const salesTableColumns = (
     formatter: priceFormatter,
     sort: true,
     align: "right",
+    editable: false,
     footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
     footerFormatter: footerPriceFormatter,
     footerAlign: "right",
