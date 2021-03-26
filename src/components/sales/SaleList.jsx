@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import moment from "moment";
 
 //Actions
 import {
@@ -153,6 +154,13 @@ export const SaleList = ({
                 if (referenceFields.includes(fieldName)) {
                   const referenceField = fieldName.split(".")[0];
                   payload = { ...payload, [referenceField]: newValue };
+                }
+
+                if (fieldName === "soldAt") {
+                  payload = {
+                    ...payload,
+                    soldAt: moment(newValue).toISOString(),
+                  };
                 }
 
                 saleUpdateRequest(payload);
