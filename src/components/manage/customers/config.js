@@ -112,6 +112,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    hidden: true,
     headerStyle: () => {
       return { width: "5%" };
     },
