@@ -16,10 +16,10 @@ const Training = () => {
         </Col>
       </Row>
       <Row>
-        <Col sm="2">&nbsp;</Col>
-        <Col sm="8" lg="8">
+        <Col sm="1">&nbsp;</Col>
+        <Col sm="10" lg="10">
           <Accordion defaultActiveKey="0">
-            <Card>
+            {/* <Card>
               <Accordion.Toggle as={Card.Header} eventKey="0">
                 <h4>Login</h4>
               </Accordion.Toggle>
@@ -49,7 +49,7 @@ const Training = () => {
                   </Row>
                 </Card.Body>
               </Accordion.Collapse>
-            </Card>
+            </Card> */}
             <Card>
               <Accordion.Toggle as={Card.Header} eventKey="1">
                 <h4>Home Page</h4>
@@ -217,24 +217,23 @@ const Training = () => {
                   <Row>
                     <Col>
                       <p>
-                        La pagina de Clientes <b>(Customer Management)</b> gestiona la informacion de todos los clientes así como su actualización.
+                        La página de Clientes <b>(Customer Management)</b> gestiona la información de todos los clientes así como su actualización.
                       </p>
-                      <p>Cuenta con el boton <b>Add New Customer</b> de color azul situado en la zona derecha superior de la tabla,
-                       el cual permite la insercción de nuevos clientes al sistema.</p>
+                      <p>El botón <b>Add New Customer</b> de color azul situado en la zona derecha superior de la tabla, permite la inserción de nuevos clientes al sistema.</p>
                       <p>
                         Las columnas de la tabla indican los campos asociados a
                         cada cliente, según el orden en que aparecen a continuación:
                         <ul>
                           <li><b>Contact Person:</b> Nombre del contacto del Cliente</li>
-                          <li><b>Company:</b> Nombre de la compañia del Cliente</li>
-                          <li><b>DOT:</b> (**********VALOR DEL DTO PREGUNTAR).</li>
-                          <li><b>Email:</b> Email del contacto del Cliente</li>
-                          <li><b>Phone:</b> Telefono del contacto del Cliente.</li>
-                          <li><b>Fax:</b> Fax del contacto del Cliente</li>
-                          <li><b>Address:</b> Direccion del Cliente.</li>
-                          <li><b>City:</b> Ciudad a la que pertenece el Cliente.</li>
-                          <li><b>State:</b> Estado al que pertenece el Cliente.).</li>
-                          <li><b>Zip:</b> Codigo Postal  de la ciudad que pertenece el Cliente..</li>
+                          <li><b>Company:</b> Nombre de la compañia del cliente (este valor se usa como referencia en las listas desplegables)</li>
+                          <li><b>DOT:</b> Número DOT.</li>
+                          <li><b>Email:</b> Email del contacto del cliente</li>
+                          <li><b>Phone:</b> Teléfono de contacto del cliente.</li>
+                          <li><b>Fax:</b> Número de fax del cliente</li>
+                          <li><b>Address:</b> Dirección del cliente.</li>
+                          <li><b>City:</b> Ciudad.</li>
+                          <li><b>State:</b> Estado.</li>
+                          <li><b>Zip:</b> Código Postal.</li>
                         </ul>
                       </p>
                     </Col>
@@ -260,22 +259,21 @@ const Training = () => {
                   <Row>
                     <Col>
                       <p>
-                        Para agregar un cliente, debe dar clic en el botón "Add New Customer", que aparece en la esquina superar de la tabla.
-                        Al hacerlo, se abrirá la siguiente ventana, donde deberá introducir todos los datos asociados a ese cliente.
+                        Al dar clic sobre el botón "Add New Customer", se abrirá la siguiente ventana, donde debe introducir todos los datos asociados al cliente que se está creando.
                       </p>
                       <p>
                         Los campos deberán ser llenados según las siguientes indicaciones:
                         <ul>
-                          <li><b>Name:</b> Nombre del contacto del cliente .</li>
+                          <li><b>Name:</b> Nombre de contacto del cliente (usualmente la persona a la que se realizó la venta).</li>
                           <li><b>Email:</b> Email del contacto cliente.</li>
-                          <li><b>Company:</b> Compañia del cliente.</li>
-                          <li><b>DOT:</b>(*****PREGUNTAR LA DESCRIPCION).</li>
-                          <li><b>Phone:</b>Telefono del contacto del cliente.</li>
-                          <li><b>FAX:</b>Fax del contacto del cliente.</li>
-                          <li><b>Address:</b> Direccion del Cliente.</li>
-                          <li><b>City:</b> Ciudad a la que pertenece el Cliente.</li>
-                          <li><b>State:</b> Estado al que pertenece el Cliente.).</li>
-                          <li><b>Zip:</b> Codigo Postal de la ciudad que pertenece el Cliente..</li>
+                          <li><b>Company:</b> Compañía del cliente (valor usado como referencia del cliente a lo largo del sistema).</li>
+                          <li><b>DOT:</b> Número DOT.</li>
+                          <li><b>Phone:</b> Teléfono de contacto del cliente.</li>
+                          <li><b>FAX:</b> Número de dax del cliente.</li>
+                          <li><b>Address:</b> Direccion del cliente.</li>
+                          <li><b>City:</b> Ciudad.</li>
+                          <li><b>State:</b> Estado.</li>
+                          <li><b>Zip:</b> Código Postal.</li>
                         </ul>
                       </p>
                       <p>
@@ -307,19 +305,18 @@ const Training = () => {
                   <Row>
                     <Col>
                       <p>
-                        La pagina Directorio de Empleados <b>(Employee Directory)</b> gestiona la informacion de todos los empleados de la compañia.
+                        La página Directorio de Empleados <b>(Employee Directory)</b> gestiona la información de todos los empleados de la compañía.
                       </p>
                       <p>
                         Las columnas de la tabla indican los campos asociados a
                         cada cliente, según el orden en que aparecen a continuación:
                         <ul>
-                          <li><b>Firts Name:</b> Nombre del Empleado</li>
+                          <li><b>First Name:</b> Nombre del Empleado</li>
                           <li><b>Last Name:</b> Apellido del Empleado</li>
-                          <li><b>Email:</b> Email del Empleado</li>
-                          <li><b>Phone:</b> Telefono de contacto del Empleado</li>
-                          <li><b>Location:</b> Localizacion de la officina del Empleado</li>
-                          <li><b>Position:</b> Cargo que ocupa en la compañia</li>
-                          
+                          <li><b>Email:</b> Email de la compañía del Empleado</li>
+                          <li><b>Phone:</b> Teléfono de contacto del Empleado</li>
+                          <li><b>Location:</b> Oficina en que trabaja el Empleado</li>
+                          <li><b>Position:</b> Cargo que ocupa en la compañía</li>
                         </ul>
                       </p>
                     </Col>
@@ -344,14 +341,14 @@ const Training = () => {
                   <Row>
                     <Col>
                       <p>
-                        En esta página encontraremos el reporte del total de ventas realizadas por la compañia.
+                        En esta página se muestra el reporte del total de ventas realizadas por la compañía.
                       </p>
                       <p>
                         Justo debajo del título de la página, puede encontrarse
                         el selector de fechas. Desde allí, el empleado podrá
                         filtrar las ventas para un período especifico de tiempo,
                         que bien puede ser de los predeterminados en esa lista,
-                        como un período de tiempo cualquiera solo seleccionando
+                        o un período de tiempo cualquiera, solo seleccionando
                         las fechas de inicio y fin.
                       </p>
                       <p>
@@ -360,17 +357,17 @@ const Training = () => {
                         <ul>
                           <li><b>Date:</b> Fecha en que se realizó la venta.</li>
                           <li><b>Employee:</b> Empleado de la compañía que realizó la venta.</li>
-                          <li><b>Location:</b>Officina de donde se realizo la venta.</li>
-                          <li><b>Customer:</b> Cliente al que se le realizo la venta.</li>
-                          <li><b>Insurance Providers:</b>Aseguranzas que se aplicaron en la venta.</li>
-                          <li><b>Down Payment:</b>Monto cobrado al comprador por concepto de down payment.</li>
-                          <li><b>Fees:</b>Monto cobrado por concepto de fees asociados a la venta.</li>
-                          <li><b>Permits:</b>Monto cobrado por concepto de permisos asociados a la venta.</li>
-                          <li><b>Tips:</b>Monto recibido por el vendedor en concepto de propina.</li>
-                          <li><b>Premium:</b>Representa la suma de los cargos de los cuatro tipos de aseguranza.</li>
+                          <li><b>Location:</b> Oficina de donde se realizó la venta.</li>
+                          <li><b>Customer:</b> Cliente al que se le realizó la venta.</li>
+                          <li><b>Insurance Providers:</b> Aseguranzas que se aplicaron en la venta.</li>
+                          <li><b>Down Payment:</b> Monto cobrado al comprador por concepto de down payment.</li>
+                          <li><b>Fees:</b> Monto cobrado por concepto de fees asociados a la venta.</li>
+                          <li><b>Permits:</b> Monto cobrado por concepto de permisos asociados a la venta.</li>
+                          <li><b>Tips:</b> Monto recibido por el vendedor en concepto de propina.</li>
+                          <li><b>Premium:</b> Representa la suma de los cargos de los cuatro tipos de aseguranza.</li>
                         </ul>
                       </p>
-                      <p>Al final de la tabla, podrá consultar los acumulados de datos para cada columna, así como el total de ventas asociado al período seleccionado.</p>
+                      <p> Al final de la tabla, podrá consultar los acumulados de datos para cada columna, así como el total de ventas asociado al período seleccionado.</p>
                     </Col>
                   </Row>
                   <Row>
