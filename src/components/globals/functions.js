@@ -106,18 +106,14 @@ export function baseSalaryFormatter(cell, row) {
 }
 
 export const userRolesFormatter = (cell, row) => {
-  const role = USER_SETTINGS.roles.find(({ id }) => id === cell[0]);
-
-  if (role){
-    return role.name;
-  } else {return '-';}
+  const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
   //const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
 
   /* <TooltipIcon title={name}>
     <Icon size="24px" />
   </TooltipIcon> */
 
-  //return <span>{name}</span>;
+  return <span>{name}</span>;
 };
 //---------------------------------------
 export function salaryFormatter(cell, row) {
@@ -132,7 +128,7 @@ export function totalPriceFormatter(cell, row) {
   if (cell) {
     return (
       <span>
-        preciseNumber(cell, 2)
+        {preciseNumber(cell, 2)}
       </span>
     );
   }
@@ -141,7 +137,7 @@ export function totalPriceFormatter(cell, row) {
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
-  return preciseNumber(text, 2);
+  return <span>{preciseNumber(text, 2)}</span>;
 }
 
 export function dateFormatter(cell, row) {
