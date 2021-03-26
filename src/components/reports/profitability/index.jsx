@@ -14,6 +14,7 @@ import { isAdminCheck } from "../../../config/user";
 import FilterDate from "../../globals/filters/FilterDate";
 import moment from "moment";
 import Spinner from "../../globals/spinner";
+import { calculateMonthRange } from "../../globals/functions";
 
 export const Reports = ({
   reportProfitRequest,
@@ -24,9 +25,14 @@ export const Reports = ({
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [params, setParams] = useState({
-    month: moment().subtract(0, "month").month(),
-    year: moment().subtract(1, "month").year(),
+    month: moment().month(),
+    year: moment().year(),
   });
+
+  const [monthRange, setMonthRange] = useState(calculateMonthRange({
+    month: moment().month(),
+    year: moment().year(),
+  }));
 
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
@@ -34,21 +40,8 @@ export const Reports = ({
 
   useEffect(() => {
     reportProfitRequest({}, params);
+    setMonthRange(calculateMonthRange(params));
   }, [params, reportProfitRequest]);
-
-
-  const [monthStart, setMonthStart] = useState(
-      moment({"day":21, "month": params.month, "year": params.year}).subtract(1, 'months').format("MMM Do")
-  );
-
-  const [monthEnd, setMonthEnd] = useState(
-    moment({"day":20, "month": params.month, "year": params.year}).format("MMM Do")
-);
-
-useEffect(() => {
-  setMonthStart(monthStart);
-  setMonthEnd(monthEnd);
-}, [monthEnd, monthStart]);
 
   return (
     <>
@@ -63,13 +56,9 @@ useEffect(() => {
           <FilterDate setParams={setParams} />
         </Col>
         <Col sm="4">
-          <h4 style={{ textAlign: "right" }}>
-            {/* {`${moment()
-              .month(params.month - 1)
-              .format("MMM")}, ${params.year}`} */}
-              {`${monthStart} - ${monthEnd}`}
-
-          </h4>
+          <h5 style={{ textAlign: "right" }}>
+            {`${monthRange.start} - ${monthRange.end}`}
+          </h5>
         </Col>
       </Row>
 

@@ -13,7 +13,7 @@ const FilterDate = ({ setParams }) => {
 
   const handleChange = (date) => {
     setState(date);
-    setParams({ month: moment(date).month() + 1, year: moment(date).year() });
+    setParams({ month: moment(date).month(), year: moment(date).year() });
   };
 
   return (
@@ -26,7 +26,6 @@ const FilterDate = ({ setParams }) => {
           onChange={handleChange}
           dateFormat="MM/yyyy"
           showMonthYearPicker
-          minDate={new Date("12/31/2020")}
           maxDate={new Date()}
           className="form-control xl"
         />
