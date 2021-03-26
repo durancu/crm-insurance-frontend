@@ -22,7 +22,7 @@ const defaultForm = {
   address: "",
   city: "",
   state: "",
-  country: "",
+  country: "USA",
   dot: "",
   zip: "",
 };
@@ -252,7 +252,7 @@ const CustomerCreate = ({
                     {errors.zip}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col}>
+                <Form.Group as={Col} hidden={true}>
                   <Form.Label style={{ fontSize: "small" }}>Country</Form.Label>
                   <Form.Control
                     type="text"

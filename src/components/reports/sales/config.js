@@ -4,7 +4,6 @@ import {
     priceFormatter,
     footerPriceFormatter,
     joinedInsurerNamesFormatter,
-    locationFormatter,
 } from "../../globals/functions";
 
 //Components
