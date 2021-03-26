@@ -51,10 +51,10 @@ const Training = () => {
               </Accordion.Collapse>
             </Card>
             <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
+              <Accordion.Toggle as={Card.Header} eventKey="1">
                 <h4>Home Page</h4>
               </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
+              <Accordion.Collapse eventKey="1">
                 <Card.Body>
                   <Row>
                     <Col>
@@ -98,10 +98,10 @@ const Training = () => {
             </Card>
 
             <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
+              <Accordion.Toggle as={Card.Header} eventKey="2">
                 <h4>Gestión de ventas</h4>
               </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
+              <Accordion.Collapse eventKey="2">
                 <Card.Body>
                   <Row>
                     <Col>
@@ -157,10 +157,10 @@ const Training = () => {
             </Card>
 
             <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
+              <Accordion.Toggle as={Card.Header} eventKey="3">
                 <h4>Crear Venta</h4>
               </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
+              <Accordion.Collapse eventKey="3">
                 <Card.Body>
                   <Row>
                     <Col>
@@ -208,9 +208,184 @@ const Training = () => {
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
-
-
-
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="4">
+                <h4>Gestión de Clientes</h4>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="4">
+                <Card.Body>
+                  <Row>
+                    <Col>
+                      <p>
+                        La pagina de Clientes <b>(Customer Management)</b> gestiona la informacion de todos los clientes así como su actualización.
+                      </p>
+                      <p>Cuenta con el boton <b>Add New Customer</b> de color azul situado en la zona derecha superior de la tabla,
+                       el cual permite la insercción de nuevos clientes al sistema.</p>
+                      <p>
+                        Las columnas de la tabla indican los campos asociados a
+                        cada cliente, según el orden en que aparecen a continuación:
+                        <ul>
+                          <li><b>Contact Person:</b> Nombre del contacto del Cliente</li>
+                          <li><b>Company:</b> Nombre de la compañia del Cliente</li>
+                          <li><b>DOT:</b> (**********VALOR DEL DTO PREGUNTAR).</li>
+                          <li><b>Email:</b> Email del contacto del Cliente</li>
+                          <li><b>Phone:</b> Telefono del contacto del Cliente.</li>
+                          <li><b>Fax:</b> Fax del contacto del Cliente</li>
+                          <li><b>Address:</b> Direccion del Cliente.</li>
+                          <li><b>City:</b> Ciudad a la que pertenece el Cliente.</li>
+                          <li><b>State:</b> Estado al que pertenece el Cliente.).</li>
+                          <li><b>Zip:</b> Codigo Postal  de la ciudad que pertenece el Cliente..</li>
+                        </ul>
+                      </p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col style={{ textAlign: "left" }}>
+                      <Image
+                        /* src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-sale.png" */
+                         src="/images/clientes.jpg" 
+                        thumbnail
+                      />
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="5">
+                <h4>Crear Clientes</h4>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="5">
+                <Card.Body>
+                  <Row>
+                    <Col>
+                      <p>
+                        Para agregar un cliente, debe dar clic en el botón "Add New Customer", que aparece en la esquina superar de la tabla.
+                        Al hacerlo, se abrirá la siguiente ventana, donde deberá introducir todos los datos asociados a ese cliente.
+                      </p>
+                      <p>
+                        Los campos deberán ser llenados según las siguientes indicaciones:
+                        <ul>
+                          <li><b>Name:</b> Nombre del contacto del cliente .</li>
+                          <li><b>Email:</b> Email del contacto cliente.</li>
+                          <li><b>Company:</b> Compañia del cliente.</li>
+                          <li><b>DOT:</b>(*****PREGUNTAR LA DESCRIPCION).</li>
+                          <li><b>Phone:</b>Telefono del contacto del cliente.</li>
+                          <li><b>FAX:</b>Fax del contacto del cliente.</li>
+                          <li><b>Address:</b> Direccion del Cliente.</li>
+                          <li><b>City:</b> Ciudad a la que pertenece el Cliente.</li>
+                          <li><b>State:</b> Estado al que pertenece el Cliente.).</li>
+                          <li><b>Zip:</b> Codigo Postal de la ciudad que pertenece el Cliente..</li>
+                        </ul>
+                      </p>
+                      <p>
+                      A continuación, de clic en el botón "Create", si desea guardar la venta y salir.
+                      </p>
+                      <p>
+                        Si desea salir sin almacenar la venta, de clic en el boton "Cancelar".
+                      </p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col style={{ textAlign: "left" }}>
+                      <Image
+                        src="/images/create-customers.jpg"
+                       /*  src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-sale.png" */
+                        thumbnail
+                      />
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="6">
+                <h4>Directorio de Empleados</h4>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="6">
+                <Card.Body>
+                  <Row>
+                    <Col>
+                      <p>
+                        La pagina Directorio de Empleados <b>(Employee Directory)</b> gestiona la informacion de todos los empleados de la compañia.
+                      </p>
+                      <p>
+                        Las columnas de la tabla indican los campos asociados a
+                        cada cliente, según el orden en que aparecen a continuación:
+                        <ul>
+                          <li><b>Firts Name:</b> Nombre del Empleado</li>
+                          <li><b>Last Name:</b> Apellido del Empleado</li>
+                          <li><b>Email:</b> Email del Empleado</li>
+                          <li><b>Phone:</b> Telefono de contacto del Empleado</li>
+                          <li><b>Location:</b> Localizacion de la officina del Empleado</li>
+                          <li><b>Position:</b> Cargo que ocupa en la compañia</li>
+                          
+                        </ul>
+                      </p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col style={{ textAlign: "left" }}>
+                      <Image
+                        /* src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-sale.png" */
+                         src="/images/employees.jpg" 
+                        thumbnail
+                      />
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+            <Card>
+              <Accordion.Toggle as={Card.Header} eventKey="7">
+                <h4>Reporte de ventas</h4>
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="7">
+                <Card.Body>
+                  <Row>
+                    <Col>
+                      <p>
+                        En esta página encontraremos el reporte del total de ventas realizadas por la compañia.
+                      </p>
+                      <p>
+                        Justo debajo del título de la página, puede encontrarse
+                        el selector de fechas. Desde allí, el empleado podrá
+                        filtrar las ventas para un período especifico de tiempo,
+                        que bien puede ser de los predeterminados en esa lista,
+                        como un período de tiempo cualquiera solo seleccionando
+                        las fechas de inicio y fin.
+                      </p>
+                      <p>
+                        Las columnas de la tabla indican los campos asociados a
+                        cada venta, según el orden en que aparecen a continuación:
+                        <ul>
+                          <li><b>Date:</b> Fecha en que se realizó la venta.</li>
+                          <li><b>Employee:</b> Empleado de la compañía que realizó la venta.</li>
+                          <li><b>Location:</b>Officina de donde se realizo la venta.</li>
+                          <li><b>Customer:</b> Cliente al que se le realizo la venta.</li>
+                          <li><b>Insurance Providers:</b>Aseguranzas que se aplicaron en la venta.</li>
+                          <li><b>Down Payment:</b>Monto cobrado al comprador por concepto de down payment.</li>
+                          <li><b>Fees:</b>Monto cobrado por concepto de fees asociados a la venta.</li>
+                          <li><b>Permits:</b>Monto cobrado por concepto de permisos asociados a la venta.</li>
+                          <li><b>Tips:</b>Monto recibido por el vendedor en concepto de propina.</li>
+                          <li><b>Premium:</b>Representa la suma de los cargos de los cuatro tipos de aseguranza.</li>
+                        </ul>
+                      </p>
+                      <p>Al final de la tabla, podrá consultar los acumulados de datos para cada columna, así como el total de ventas asociado al período seleccionado.</p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col style={{ textAlign: "left" }}>
+                      <Image
+                        src="/images/sales-reports.jpg"
+                        /* src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/sales-management.png" */
+                        thumbnail
+                      />
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
 
 
           </Accordion>

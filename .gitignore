@@ -31,3 +31,5 @@ yarn.lock
 ./package-lock.json
 
 # /dist
+
+/public/images/
