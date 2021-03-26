@@ -50,9 +50,14 @@ export const Reports = ({
         </Col>
         <Col sm="4">
           <h4 style={{ textAlign: "right" }}>
-            {`${moment()
+            {`
+            ${moment()
+              .month(params.month - 2)
+              .format("MMM")} 21${moment().month(params.month - 2).format("MMM") === "Dec" ?", "+params.year :""}
+              -
+            ${moment()
               .month(params.month - 1)
-              .format("MMM")}, ${params.year}`}
+              .format("MMM")} 20, ${params.year}`}
           </h4>
         </Col>
       </Row>
