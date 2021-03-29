@@ -23,9 +23,6 @@ export const salesReportTableColumns = (isAdmin = false) =>
             },
             sort: true,
             footer: "TOTALS",
-            editor: {
-                type: Type.DATE,
-            },
         },
         {
             dataField: "seller.firstName",
@@ -40,16 +37,6 @@ export const salesReportTableColumns = (isAdmin = false) =>
             footer: (columnData) =>
                 `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
             filter: textFilter({ placeholder: "Search" }),
-            editable: isAdmin, 
-            editor: {
-                type: Type.SELECT,
-                options: [
-                    { value: "Mark", label: "Mark Sailor" },
-                    { value: "Mary", label: "Mary Lumber" },
-                    { value: "Lis", label: "Lis Clinton" },
-                    { value: "Mark", label: "Mark Rock" },
-                ],
-            },
         },
         {
             dataField: "location",
@@ -62,7 +49,6 @@ export const salesReportTableColumns = (isAdmin = false) =>
             headerAlign: "left",
             footer: "",
             filter: textFilter({ placeholder: "Search" }),
-            editable: false, // No es editable, porque es una property del seller
         },
         {
             dataField: "customer.company",
@@ -75,19 +61,6 @@ export const salesReportTableColumns = (isAdmin = false) =>
             headerAlign: "left",
             footer: "",
             filter: textFilter({ placeholder: "Search" }),
-            editable: true,
-            editor: {
-                type: Type.SELECT,
-                options: [
-                    { value: "Leffler and Sons", label: "Leffler and Sons" },
-                    {
-                        value: "Harber, Gaylord and Langworth",
-                        label: "Harber, Gaylord and Langworth",
-                    },
-                    { value: "Luis Gusikowski", label: "Luis Gusikowski" },
-                    { value: "Kunde LLC", label: "Kunde LLC" },
-                ],
-            },
         },
         {
             dataField: "liabilityInsurer.name",
@@ -99,7 +72,6 @@ export const salesReportTableColumns = (isAdmin = false) =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            editable: false,
         },
         {
             dataField: "fees",

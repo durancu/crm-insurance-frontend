@@ -42,7 +42,7 @@ const Header = ({ user, userLogoutRequest }) => {
             <Link
               className="nav-link"
               to="/manage/sales"
-              /* hidden={!isSeller && !isAdmin} */
+              hidden={!isSeller}
             >
               Sales
             </Link>

@@ -18,7 +18,7 @@ import { Row, Col } from "react-bootstrap";
 import { usersDefaultSorted, usersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
 import ChangePassword from "./ChangePassword";
-import { isAdminCheck } from "../../../config/user";
+import { isAdminCheck, isExecutiveCheck } from "../../../config/user";
 import Spinner from "../../globals/spinner";
 
 function UserList({
@@ -33,12 +33,14 @@ function UserList({
 }) {
   //States
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isExecutive, setIsExecutive] = useState(false);
   const [modal, setModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
   const [id, setId] = useState("");
   //Functions
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
+    setIsExecutive(isExecutiveCheck(user));
     userLoadRequest();
   }, [user, userLoadRequest]);
 
@@ -77,6 +79,7 @@ function UserList({
             data={users}
             columns={usersTableColumns(
               isAdmin,
+              isExecutive,
               showModal,
               setId,
               showPasswordModal
@@ -91,12 +94,11 @@ function UserList({
             cellEdit={cellEditFactory({
               mode: "click",
               afterSaveCell: (oldValue, newValue, row, column) => {
+                console.log(column);
                 const fieldName = column.dataField;
                 let payload = {};
-                if (fieldName === "roles") {
-                  payload = {
-                    [fieldName]: [newValue],
-                  };
+                if (fieldName === "roles[0]") {
+                  payload = { roles: [newValue] };
                 } else
                   payload = {
                     [fieldName]: newValue,

@@ -3,7 +3,7 @@ import moment from "moment";
 import { BUSINESS_SETTINGS } from "../../config/company";
 import { Person, Building, Trash, Check, Key } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
-import { USER_SETTINGS } from "../../config/user";
+import { isAdminCheck, USER_SETTINGS } from "../../config/user";
 import { TooltipIcon } from "./TooltipIcon";
 
 export const dataTransform = (element) => {
@@ -88,16 +88,17 @@ export const isConfirmFormatter = (cell) =>
   cell ? <Check color="royalblue" size={40} /> : <strong>-</strong>;
 
 export const componentPasswordFormatter = (cell, row) => {
-  return (
-    <Button
-      className="mt-1"
-      style={{ border: "none" }}
-      size="sm"
-      variant="outline-success"
-    >
-      <Key />
-    </Button>
-  );
+  if (!isAdminCheck(row))
+    return (
+      <Button
+        className="mt-1"
+        style={{ border: "none" }}
+        size="sm"
+        variant="outline-success"
+      >
+        <Key />
+      </Button>
+    );
 };
 
 export function baseSalaryFormatter(cell, row) {
@@ -113,7 +114,7 @@ export function baseSalaryFormatter(cell, row) {
 }
 
 export const userRolesFormatter = (cell, row) => {
-  const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
+  const name = USER_SETTINGS.roles.find(({ id }) => id === cell).name;
   //const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
 
   /* <TooltipIcon title={name}>
@@ -229,6 +230,10 @@ export function insurerNameFormatter(cell, row) {
       return insurers.indexOf(valor) === index;
     })
     .join(" / ");
+}
+
+export function rowIsNotAdmin(cell, row) {
+  return row.roles[0] !== "ADMIN";
 }
 
 /** Return number
