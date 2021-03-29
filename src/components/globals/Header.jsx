@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { userLogoutRequest } from "../../redux/actions";
 //Components
 import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
-import {PersonCircle, Book} from 'react-bootstrap-icons'
+import { PersonCircle, Book } from "react-bootstrap-icons";
 import {
   isAdminCheck,
   isExecutiveCheck,
@@ -27,35 +27,31 @@ const Header = ({ user, userLogoutRequest }) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
       <Container fluid style={{ maxWidth: "98%" }}>
-        <Link className="navbar-brand" to="/">
-        <Image
-        src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-64.png"
-        />
-          <span style={{marginLeft:"20px", marginRight:"50px"}}>MANAGEMENT SYSTEM</span>
-        </Link>
+        <Navbar.Brand href="/" style={{marginRight:"50px"}}>
+          <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-vl17-crm.png" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav justify className="mr-auto">
-            <Link className="nav-link" to="/">
+          <Nav className="mr-auto fill justify">      
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/">
               Home
             </Link>
-            <Link
-              className="nav-link"
-              to="/manage/sales"
-              hidden={!isSeller}
-            >
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/sales" hidden={!isSeller}>
               Sales
             </Link>
-            <Link className="nav-link" to="/manage/customers">
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/customers">
               Customers
             </Link>
 
-            <Link className="nav-link" to="/manage/users">
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/users">
               Employees
             </Link>
-          </Nav>
-          <Nav className="ml-auto">
-            <NavDropdown title="Reports" id="collasible-nav-dropdown">
+            {(isAdmin || isExecutive) && (
+              <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/insurers">
+                Insurers
+              </Link>
+            )}
+            <NavDropdown title="Reports" style={{marginRight:"20px"}} id="collasible-nav-dropdown">
               <Link className="dropdown-item" to="/reports/sales">
                 Sales
               </Link>
@@ -79,16 +75,15 @@ const Header = ({ user, userLogoutRequest }) => {
                 Payroll
               </Link>
             </NavDropdown>
-            {isExecutive && (
-              <NavDropdown title="Manage" id="basic-nav-dropdown">
-                <>
-                  <Link className="dropdown-item" to="/manage/insurers">
-                    Insurers
-                  </Link>
-                </>
-              </NavDropdown>
-            )}
-            <NavDropdown title={<PersonCircle size={25}/>} id="basic-nav-dropdown">
+          </Nav>
+          <Nav className="ml-auto filled">
+            <Link className="nav-link" to="/training" style={{marginRight:"20px"}}>
+              <Book size={25} />
+            </Link>
+            <NavDropdown
+              title={<PersonCircle size={25} />}
+              id="basic-nav-dropdown"
+            >
               <Link className="dropdown-item" to="/profile">
                 Profile
               </Link>
@@ -97,9 +92,6 @@ const Header = ({ user, userLogoutRequest }) => {
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
-            <Link className="nav-link" to="/training">
-              <Book size={25}/>
-            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

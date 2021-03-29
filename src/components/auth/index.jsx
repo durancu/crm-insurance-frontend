@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { userAuthRequest } from "../../redux/actions";
 //Components
-import { Form, Row, Col, Card, Button ,Spinner} from "react-bootstrap";
+import { Form, Row, Col, Card, Button, Spinner, Image } from "react-bootstrap";
 import Spinner2 from "../globals/spinner";
 
 function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
@@ -35,67 +35,82 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
   };
 
   return loadingAuthCheck ? (
-    <Row style={{ marginTop: "25%" }} className="justify-content-md-center">
+    <Row style={{ marginTop: "20%" }} className="justify-content-md-center">
       <Col md="auto">
-        <Spinner2 size={60}/>
+        <Spinner2 size={60} />
       </Col>
     </Row>
   ) : (
-    <Row style={{ marginTop: "10%" }}>
-      <Col md={{ span: 4, offset: 4 }}>
+    <Row style={{padding:"0 150px 0 150px", marginTop: "10%"}}>
+      <Col md={{ span:4, offset: 4 }}>
         <Card>
           <Form onSubmit={handleSubmit}>
-            <Card.Header>
+            <Card.Header style={{ background: "#333", color: "#fff" }}>
               <Card.Title align="center">
-                <h2>VL17 Insurance Agency</h2>
-                <h4>Sales Management System</h4>
+                <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-vl17-crm.png" />
               </Card.Title>
             </Card.Header>
             <Card.Body>
-              <Form.Group>
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  disabled={loading}
-                  name="username"
-                  type="text"
-                  value={form.username}
-                  onChange={handleChange}
-                  autoFocus
-                  isInvalid={errors.username}
-                  isValid={form.username}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.username}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  disabled={loading}
-                  name="password"
-                  type="password"
-                  value={form.password}
-                  onChange={handleChange}
-                  isInvalid={errors.password}
-                  isValid={form.password}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.password}
-                </Form.Control.Feedback>
-              </Form.Group>
+              <Row>
+                <Col>
+                  <Form.Group>
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                      disabled={loading}
+                      name="username"
+                      type="text"
+                      value={form.username}
+                      onChange={handleChange}
+                      autoFocus
+                      isInvalid={errors.username}
+                      isValid={form.username}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.username}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      disabled={loading}
+                      name="password"
+                      type="password"
+                      value={form.password}
+                      onChange={handleChange}
+                      isInvalid={errors.password}
+                      isValid={form.password}
+                      autoComplete
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.password}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group className="mt-3">
+                    <Button
+                      type="submit"
+                      variant="dark"
+                      size="lg"
+                      block
+                      disabled={loading}
+                    >
+                      {loading ? <Spinner animation="border" /> : `Login`}
+                    </Button>
+                  </Form.Group>
+                </Col>
+              </Row>
             </Card.Body>
-            <Card.Footer>
-              <Form.Group>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  block
-                  disabled={loading}
-                >
-                  {loading ? <Spinner animation="border" /> : `Login`}
-                </Button>
-              </Form.Group>
+            <Card.Footer style={{textAlign:"center"}}>
+              <Row>
+                <Col>
+                  <span>
+                    Powered by ARANE Consulting LLC, 2021. All Rights Reserved.
+                  </span>
+                </Col>
+              </Row>
             </Card.Footer>
           </Form>
         </Card>
