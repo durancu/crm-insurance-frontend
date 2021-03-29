@@ -106,9 +106,9 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
             <Card.Footer style={{textAlign:"center"}}>
               <Row>
                 <Col>
-                  <span>
+                  <small>
                     Powered by ARANE Consulting LLC, 2021. All Rights Reserved.
-                  </span>
+                  </small>
                 </Col>
               </Row>
             </Card.Footer>

@@ -31,7 +31,7 @@ const Users = ({ user }) => {
       <Row className="mt-0 mb-2">
         <Col style={{ textAlign: "right" }} hidden={!isAdmin && !isExecutive}>
           <Button variant="primary" onClick={showModal}>
-            Add New User
+            Add New Employee
           </Button>
           <UserCreate showModal={showModal} modal={modal} edit={false} />
         </Col>

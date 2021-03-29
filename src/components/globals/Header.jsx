@@ -36,7 +36,7 @@ const Header = ({ user, userLogoutRequest }) => {
             <Link className="nav-link" style={{marginRight:"20px"}} to="/">
               Home
             </Link>
-            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/sales" hidden={!isSeller}>
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/sales" hidden={!isAdmin && !isExecutive && !isSeller}>
               Sales
             </Link>
             <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/customers">
@@ -70,7 +70,7 @@ const Header = ({ user, userLogoutRequest }) => {
               <Link
                 className="dropdown-item"
                 to="/reports/payroll"
-                hidden={!isExecutive}
+                hidden={!isAdmin && !isExecutive}
               >
                 Payroll
               </Link>

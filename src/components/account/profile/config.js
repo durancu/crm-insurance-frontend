@@ -12,7 +12,7 @@ export const activitiesTableColumns = () => [
       return { width: "20%" };
     },
     //sort: true,
-    //filter: textFilter({ placeholder: "Search" }),
+    //filter: textFilter({ placeholder: "search..." }),
   },
   {
     dataField: "description",

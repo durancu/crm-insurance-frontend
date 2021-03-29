@@ -41,6 +41,7 @@ const Profile = ({ userProfileGetRequest, user }) => {
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={activitiesDefaultSorted()}
             noDataIndication="No registered activity"
           /> */}

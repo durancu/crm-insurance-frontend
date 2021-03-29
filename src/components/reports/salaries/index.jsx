@@ -75,11 +75,12 @@ export const Reports = ({
             keyField="_id"
             data={data}
             columns={payrollReportTableColumns(isAdmin)}
-            striped
+            /* striped */
             hover
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={payrollReportDefaultSorted()}
             noDataIndication="No payroll data"
             // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}

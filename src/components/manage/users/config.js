@@ -22,32 +22,27 @@ export const usersTableColumns = (
   showPasswordModal
 ) => [
     {
-      dataField: "username",
-      text: "User Name",
+      dataField: "location",
+      text: "Location",
+      sort: true,
       align: "left",
       headerAlign: "left",
-      sort: true,
-      filter: textFilter({ placeholder: "Search" }),
-      headerStyle: () => {
-        return { width: "10%" };
-      },
-      hidden: !isAdmin && !isExecutive,
-      editable: (isAdmin || isExecutive) && rowIsNotAdmin,
-    },
-    {
-      dataField: "roles[0]",
-      text: "Role",
-      align: "left",
-      headerAlign: "left",
-      sort: true,
-      filter: textFilter({ placeholder: "Search" }),
-      formatter: userRolesFormatter,
+      formatter: locationFormatter,
+      filter: textFilter({ placeholder: "search..." }),
       headerStyle: () => {
         return { width: "12%" };
       },
-      editor: {
-        type: Type.SELECT,
-        options: rolesOptions(),
+      editable: false,
+    },
+    {
+      dataField: "username",
+      text: "Username",
+      align: "left",
+      headerAlign: "left",
+      sort: true,
+      filter: textFilter({ placeholder: "search..." }),
+      headerStyle: () => {
+        return { width: "10%" };
       },
       hidden: !isAdmin && !isExecutive,
       editable: (isAdmin || isExecutive) && rowIsNotAdmin,
@@ -61,7 +56,7 @@ export const usersTableColumns = (
         return { width: "10%" };
       },
       sort: true,
-      filter: textFilter({ placeholder: "Search" }),
+      filter: textFilter({ placeholder: "search..." }),
       editable: (isAdmin || isExecutive) && rowIsNotAdmin,
     },
     {
@@ -73,7 +68,24 @@ export const usersTableColumns = (
         return { width: "10%" };
       },
       sort: true,
-      filter: textFilter({ placeholder: "Search" }),
+      filter: textFilter({ placeholder: "search..." }),
+      editable: (isAdmin || isExecutive) && rowIsNotAdmin,
+    },
+    {
+      dataField: "roles[0]",
+      text: "Role",
+      align: "left",
+      headerAlign: "left",
+      sort: true,
+      formatter: userRolesFormatter,
+      headerStyle: () => {
+        return { width: "12%" };
+      },
+      editor: {
+        type: Type.SELECT,
+        options: rolesOptions(),
+      },
+      hidden: !isAdmin && !isExecutive,
       editable: (isAdmin || isExecutive) && rowIsNotAdmin,
     },
     {
@@ -99,26 +111,13 @@ export const usersTableColumns = (
       editable: (isAdmin || isExecutive) && rowIsNotAdmin,
     },
     {
-      dataField: "location",
-      text: "Location",
-      sort: true,
-      align: "left",
-      headerAlign: "left",
-      formatter: locationFormatter,
-      filter: textFilter({ placeholder: "Search" }),
-      headerStyle: () => {
-        return { width: "12%" };
-      },
-      editable: false,
-    },
-    {
       dataField: "position",
       text: "Position",
       sort: true,
       align: "left",
       headerAlign: "left",
       headerStyle: () => {
-        return { width: "12%" };
+        return { width: "10%" };
       },
       editable: (isAdmin || isExecutive) && rowIsNotAdmin,
     },
@@ -130,9 +129,7 @@ export const usersTableColumns = (
       align: "right",
       headerAlign: "left",
       formatter: priceFormatter,
-      headerStyle: () => {
-        return { width: "4%" };
-      },
+      
       hidden: !isAdmin && !isExecutive,
       editable: (isAdmin || isExecutive) && rowIsNotAdmin,
     },
@@ -154,14 +151,12 @@ export const usersTableColumns = (
       align: "right",
       headerAlign: "right",
       formatter: componentPasswordFormatter,
-      events: {
+      events: ((isAdmin || isExecutive) && rowIsNotAdmin) ? {
         onClick: (e, column, columnIndex, row, rowIndex) => {
-          if ((isAdmin || isExecutive) && rowIsNotAdmin) {
-            setId(row._id);
-            showPasswordModal();
-          }
+          setId(row._id);
+          showPasswordModal();
         },
-      },
+      } : {},
       hidden: !isAdmin && !isExecutive,
       editable: false,
     },
@@ -199,4 +194,4 @@ export const userOptions = (sellers) =>
   }));
 
 export const rolesOptions = (roles) =>
-  USER_SETTINGS.roles.filter(({id})=>(id!=="ADMIN")).map(({ id, name }) => ({ value: id, label: name }));
+  USER_SETTINGS.roles.filter(({ id }) => (id !== "ADMIN")).map(({ id, name }) => ({ value: id, label: name }));

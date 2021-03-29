@@ -107,11 +107,12 @@ export const SaleList = ({
               sellers,
               insurers
             )}
-            striped
+            /* striped */
             hover
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={salesDefaultSorted()}
             noDataIndication="No registered sales"
             cellEdit={cellEditFactory({

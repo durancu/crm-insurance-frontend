@@ -1,4 +1,4 @@
-.heading-title {
+/* .heading-title {
   width: 142px;
   height: 36px;
   color: #000000;
@@ -8,11 +8,11 @@
   text-align: left;
 }
 
-/* .danger {
+ .danger {
   background: #bb285c;
   color: #ffffff;
   font-family: "Helvetica";
-} */
+} 
 
 .button-default {
   width: 110px;
@@ -180,4 +180,8 @@
 
 .react-bs-container-header tr {
   border-bottom-style: hidden !important;
+} */
+
+body {
+  font-weight: 300;
 }

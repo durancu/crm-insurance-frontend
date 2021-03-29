@@ -32,7 +32,7 @@ export const salesReportTableColumns = () =>
             headerAlign: "left",
             footer: (columnData) =>
                 `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "locationName",
@@ -45,7 +45,7 @@ export const salesReportTableColumns = () =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "customerName",
@@ -56,7 +56,7 @@ export const salesReportTableColumns = () =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "insurerNames",
@@ -68,7 +68,7 @@ export const salesReportTableColumns = () =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "totalCharge",

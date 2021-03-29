@@ -70,11 +70,12 @@ function InsurerList({
             keyField="_id"
             data={insurers}
             columns={insurersTableColumns(isAdmin, showModal, setId)}
-            striped
+            /* striped */
             hover
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={insurersDefaultSorted()}
             noDataIndication="No registered insurers"
             cellEdit={cellEditFactory({

@@ -7,8 +7,7 @@ import { userAuthCheckRequest } from "../../redux/actions";
 //components
 import Header from "./Header";
 import Body from "./Body";
-
-
+import Footer from "./Footer";
 function Containers({
   children,
   userAuthCheckRequest,
@@ -25,6 +24,7 @@ function Containers({
       {authCheck && <Redirect to="/" />}
       {authCheck && <Header />}
       <Body>{children}</Body>
+      {authCheck && <Footer />}
     </>
   );
 }

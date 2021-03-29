@@ -84,13 +84,14 @@ function UserList({
               setId,
               showPasswordModal
             )}
-            striped
+            /* striped */
             hover
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={usersDefaultSorted()}
-            noDataIndication="No registered users"
+            noDataIndication="No registered employees"
             cellEdit={cellEditFactory({
               mode: "click",
               afterSaveCell: (oldValue, newValue, row, column) => {

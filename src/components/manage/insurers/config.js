@@ -13,7 +13,7 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
     align: "left",
     headerAlign: "left",
     sort: true,
-    filter: textFilter({ placeholder: "Search" }),
+    filter: textFilter({ placeholder: "search..." }),
   },
   {
     dataField: "email",

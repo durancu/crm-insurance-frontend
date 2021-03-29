@@ -55,7 +55,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: sellersOptions(sellers),
     }),
     editable: isAdmin,
@@ -76,7 +76,7 @@ export const salesTableColumns = (
     align: "left",
     headerAlign: "left",
     footer: "",
-    filter: textFilter({ placeholder: "Search" }),
+    filter: textFilter({ placeholder: "search..." }),
     editable: false, // Not editable, because is a sell
   },
   {
@@ -90,7 +90,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: customersOptions(customers),
     }),
     editable: true,
@@ -110,7 +110,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,
@@ -144,7 +144,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,
@@ -178,7 +178,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,
@@ -212,7 +212,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,

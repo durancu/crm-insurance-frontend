@@ -62,11 +62,12 @@ function CustomerList({
             keyField="_id"
             data={customers}
             columns={customersTableColumns(false, showModal, setId)}
-            striped
+            /* striped */
             hover
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={customersDefaultSorted()}
             noDataIndication="No registered customers"
             cellEdit={cellEditFactory({

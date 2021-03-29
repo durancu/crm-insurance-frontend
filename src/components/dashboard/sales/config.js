@@ -36,7 +36,7 @@ export const salesReportTableColumns = (isAdmin = false) =>
             headerAlign: "left",
             footer: (columnData) =>
                 `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "location",
@@ -48,7 +48,7 @@ export const salesReportTableColumns = (isAdmin = false) =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "customer.company",
@@ -60,7 +60,7 @@ export const salesReportTableColumns = (isAdmin = false) =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "liabilityInsurer.name",
