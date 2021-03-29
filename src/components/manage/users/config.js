@@ -156,7 +156,7 @@ export const usersTableColumns = (
       formatter: componentPasswordFormatter,
       events: {
         onClick: (e, column, columnIndex, row, rowIndex) => {
-          if (!isAdmin && !isExecutive && rowIsNotAdmin) {
+          if ((isAdmin || isExecutive) && rowIsNotAdmin) {
             setId(row._id);
             showPasswordModal();
           }
