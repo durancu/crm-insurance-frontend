@@ -10,7 +10,22 @@ import { LANGUAGE } from "../../../config/language";
 const sagaRequest = function* sagaRequest({ payload }) {
   const config = {};
   const apiCall = (data) =>
-    apiPost("customers", data, true).catch(({ response }) => {
+    apiPost("customers", data, true).then((response) => {
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        config.title = LANGUAGE.en.message.success.customer.create;
+        config.visible = true;
+        config.type = "success";
+        config.messages = [LANGUAGE.en.message.success.customer.create];
+        put(customerCreateSuccess(response.data));
+      } else {
+        config.title = LANGUAGE.en.message.fail.customer.create;
+        config.visible = true;
+        config.type = "success";
+        config.messages = [LANGUAGE.en.message.error.customer.create, response.message];
+        put(customerCreateFail());
+      }
+
+    }).catch(({ response }) => {
       config.title = LANGUAGE.en.message.fail.customer.create;
       config.visible = true;
       config.type = "error";
@@ -19,12 +34,7 @@ const sagaRequest = function* sagaRequest({ payload }) {
       return console.log(response);
     });
   try {
-    const response = yield call(apiCall, payload);
-    config.title = "Success";
-    config.visible = true;
-    config.type = "success";
-    config.messages = [LANGUAGE.en.message.success.customer.create];
-    yield put(customerCreateSuccess(response.data));
+    yield call(apiCall, payload);
   } catch (e) {
     yield put(customerCreateFail());
   }
@@ -35,7 +45,7 @@ const customerCreateRequest = function* customerCreateRequest() {
   yield takeLatest(types.CUSTOMERS_CREATE_REQUEST, sagaRequest);
 };
 
-const customerCreateSaga = function* customerCreateSaga(){
+const customerCreateSaga = function* customerCreateSaga() {
   yield spawn(customerCreateRequest)
 }
 

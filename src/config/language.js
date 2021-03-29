@@ -27,10 +27,10 @@ export const LANGUAGE = {
       fail: {
         user: {
           login: "Username or password incorrect",
-          create: "User create fail",
-          delete: "User delete fail",
-          update: "User update fail",
-          password: "User change password fail",
+          create: "User create failed",
+          delete: "User delete failed",
+          update: "User update failed",
+          password: "User change password failed",
         },
         insurer: {
           create: "Insurer create fail",
@@ -38,9 +38,9 @@ export const LANGUAGE = {
           update: "Insurer update fail",
         },
         customer: {
-          create: "Customer create fail",
-          delete: "Customer delete fail",
-          update: "Customer update fail",
+          create: "Error creating new customer.",
+          delete: "Error updating customer.",
+          update: "Error deleting customer.",
         },
         sale: {
           create: "Sale create fail",

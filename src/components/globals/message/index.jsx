@@ -30,8 +30,8 @@ const Messages = ({ config, time }) => {
         role="alert"
         onClose={() => setShow(false)}
         show={show}
-        /* delay={3000}
-        autohide */
+        delay={5000}
+        autohide
       >
         <Toast.Header>
           <configData.icon className={`mr-1 text-${configData.color}`} />
@@ -45,11 +45,6 @@ const Messages = ({ config, time }) => {
         </Toast.Header>
         {config.hasOwnProperty("messages") && (
           <Toast.Body>
-            {config.hasOwnProperty("statusCode") && (
-              <>
-                <strong>Error:</strong> config.statusCode
-              </>
-            )}
             {Object.keys(config.messages).length > 0 && (
               <MessageList messages={config.messages} />
             )}

@@ -176,7 +176,7 @@ const UserCreate = ({
                       isInvalid={errors.location}
                     >
                       <option value="" disabled>
-                        Choose Role
+                        Choose Location
                       </option>
                       {BUSINESS_SETTINGS.locations.map((location) => (
                         <option key={location.id} value={location.id}>
@@ -224,7 +224,7 @@ const UserCreate = ({
                       <option value="" disabled>
                         Choose Role
                       </option>
-                      {USER_SETTINGS.roles.map((role) => (
+                      {USER_SETTINGS.roles.filter(({id})=>(id!=="ADMIN")).map((role) => (
                         <option key={role.id} value={role.id}>
                           {role.name}
                         </option>

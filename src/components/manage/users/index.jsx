@@ -5,14 +5,16 @@ import { connect } from "react-redux";
 import { Row, Col, Button } from "react-bootstrap";
 import UserCreate from "./UserCreate";
 import UserList from "./UserList";
-import { isAdminCheck } from "../../../config/user";
+import { isAdminCheck, isExecutiveCheck } from "../../../config/user";
 
 const Users = ({ user }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isExecutive, setIsExecutive] = useState(false);
   const [modal, setModal] = useState(false);
   //Functions
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
+    setIsExecutive(isExecutiveCheck(user));
   }, [user]);
 
   const showModal = () => {
@@ -27,7 +29,7 @@ const Users = ({ user }) => {
         </Col>
       </Row>
       <Row className="mt-0 mb-2">
-        <Col style={{ textAlign: "right" }} hidden={!isAdmin}>
+        <Col style={{ textAlign: "right" }} hidden={!isAdmin && !isExecutive}>
           <Button variant="primary" onClick={showModal}>
             Add New User
           </Button>
