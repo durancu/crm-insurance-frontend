@@ -6,6 +6,9 @@ export const userAuthCheckRequest = () => ({
 export const userAuthCheckFail = () => ({
   type: types.USER_CHECK_AUTH_FAIL,
 });
+export const userAuthCheckError = () => ({
+  type: types.USER_CHECK_AUTH_ERROR,
+});
 export const userAuthCheckSuccess = (payload) => ({
   type: types.USER_CHECK_AUTH_SUCCESS,
   payload,

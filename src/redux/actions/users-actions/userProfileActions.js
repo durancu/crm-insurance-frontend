@@ -14,6 +14,12 @@ export const userProfileSetRequest = () => ({
 export const userProfileSetFail = () => ({
   type: types.USER_PROFILE_SET_FAIL,
 });
+/** Action Creator
+ * @returns {string} action
+ */
+export const userProfileSetError = () => ({
+  type: types.USER_PROFILE_SET_ERROR,
+});
 
 /** Action Creator
  * @returns {object} action and object
@@ -35,6 +41,12 @@ export const userProfileGetRequest = () => ({
  */
 export const userProfileGetFail = () => ({
   type: types.USER_PROFILE_GET_FAIL,
+});
+/** Action Creator
+ * @returns {string} action
+ */
+export const userProfileGetError = () => ({
+  type: types.USER_PROFILE_GET_ERROR,
 });
 
 /** Action Creator
