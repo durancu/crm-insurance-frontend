@@ -9,7 +9,7 @@ const reportProfitStatusReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.REPORT_PROFIT_REQUEST:
       return { loading: true, error: false };
-      
+
     case types.REPORT_PROFIT_FAIL:
       return { loading: false, error: true };
 
