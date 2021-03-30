@@ -9,8 +9,13 @@ const saleUpdateStatusReducer = (state = initialState, { type }) => {
   switch (type) {
     case types.SALES_UPDATE_REQUEST:
       return { loading: true, error: false };
+
     case types.SALES_UPDATE_FAIL:
       return { loading: false, error: true };
+
+    case types.SALES_UPDATE_ERROR:
+      return { loading: false, error: true };
+
     case types.SALES_UPDATE_SUCCESS:
       return { loading: false, error: false };
 

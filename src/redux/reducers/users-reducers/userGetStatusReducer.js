@@ -13,6 +13,9 @@ const userGetStatusReducer = (state = initialState, { type }) => {
     case types.USER_GET_FAIL:
       return { loading: false, error: true };
 
+    case types.USER_GET_ERROR:
+      return { loading: false, error: true };
+
     case types.USER_GET_SUCCESS:
       return { loading: false, error: false };
 

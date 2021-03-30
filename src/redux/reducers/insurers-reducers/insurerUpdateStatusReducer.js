@@ -13,6 +13,9 @@ const insurerUpdateStatusReducer = (state = initialState, { type }) => {
     case types.INSURERS_UPDATE_FAIL:
       return { loading: false, error: true };
 
+    case types.INSURERS_UPDATE_ERROR:
+      return { loading: false, error: true };
+
     case types.INSURERS_UPDATE_SUCCESS:
       return { loading: false, error: false };
 

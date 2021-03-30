@@ -1,25 +1,27 @@
-import * as types from '../../actions/actionTypes'
+import * as types from "../../actions/actionTypes";
 
 const initialState = {
   loading: false,
-  error: false
-}
+  error: false,
+};
 
 const insurerGetStatusReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-
     case types.INSURERS_GET_REQUEST:
-      return { loading: true, error: false }
+      return { loading: true, error: false };
 
     case types.INSURERS_GET_FAIL:
-      return { loading: false, error: true }
+      return { loading: false, error: true };
+
+    case types.INSURERS_GET_ERROR:
+      return { loading: false, error: true };
 
     case types.INSURERS_GET_SUCCESS:
-      return { loading: false, error: false }
+      return { loading: false, error: false };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default insurerGetStatusReducer
+export default insurerGetStatusReducer;
