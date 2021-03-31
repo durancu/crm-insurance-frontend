@@ -1,29 +1,28 @@
 body {
   font-weight: 300 !important;
-  font-size: 12px;
+  font-size: 1rem;
 }
 
 .react-bootstrap-table th {
   /* text-transform: uppercase; */
-  font-size: 12px;
   font-weight: 300;
 }
 
 .react-bootstrap-table td {
-  font-size: 12px;
+  font-size: 0.8rem;
 }
 
 
 .react-bootstrap-table th input,
 .react-bootstrap-table th select {
   padding: 2px !important;
-  font-size: 12px !important;
+  font-size: 0.8rem !important;
 }
 
 div.react-bootstrap-table tbody th input,
 div.react-bootstrap-table tbody th select {
   padding: 0px 2px 0px 2px !important;
-  font-size: 12px !important;
+  font-size: 0.8rem !important;
   height: 24px !important;
 }
 
@@ -31,7 +30,7 @@ div.react-bootstrap-table tbody th select {
 tbody th {
   padding: 2px 5px 0px 5px !important;
   background: #f3f3f3;
-  font-size: 12px !important;
+  font-size: 0.8rem !important;
   color: #000 !important;
   font-weight: 400;
 }
@@ -58,10 +57,10 @@ div.react-bootstrap-table table tbody tr {
 div.react-bootstrap-table select.select-filter,
 div.react-bootstrap-table input.text-filter {
   height: 24px !important;
-  font-size: 12px !important;
+  font-size: 0.8rem !important;
 }
 
 td.react-bootstrap-table-editing-cell {
-  height: 32px !important;
-  font-size: 12px !important;
+  height: 24px !important;
+  font-size: 0.8rem !important;
 }

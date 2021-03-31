@@ -84,7 +84,9 @@ const UserCreate = ({
         <Form onSubmit={handleSubmit}>
           <fieldset disabled={loading || loadingGetUser}>
             <Modal.Header>
-              <Modal.Title>{edit ? `Update` : `Create New`} Employee</Modal.Title>
+              <Modal.Title>
+                {edit ? `Update` : `Create New`} Employee
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -124,7 +126,7 @@ const UserCreate = ({
                 </Col>
               </Row>
               <Row>
-              <Col sm="6">
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Username
@@ -162,7 +164,7 @@ const UserCreate = ({
                 </Col>
               </Row>
               <Row>
-              <Col sm="6">
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Location
@@ -206,7 +208,7 @@ const UserCreate = ({
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-              <Col sm="6">
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Role
@@ -222,11 +224,13 @@ const UserCreate = ({
                       <option value="" disabled>
                         Choose Role
                       </option>
-                      {USER_SETTINGS.roles.filter(({id})=>(id!=="ADMIN")).map((role) => (
-                        <option key={role.id} value={role.id}>
-                          {role.name}
-                        </option>
-                      ))}
+                      {USER_SETTINGS.roles
+                        .filter(({ id }) => id !== "ADMIN" && id !== "OWNER")
+                        .map((role) => (
+                          <option key={role.id} value={role.id}>
+                            {role.name}
+                          </option>
+                        ))}
                     </Form.Control>
                     <Form.Control.Feedback type="invalid">
                       {errors.roles}
@@ -234,57 +238,57 @@ const UserCreate = ({
                   </Form.Group>
                 </Col>
 
-              <Col sm="6">
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Salary
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="baseSalary"
-                  value={form.baseSalary}
-                  onChange={handleChange}
-                  isInvalid={errors.baseSalary}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.baseSalary}
-                </Form.Control.Feedback>
-              </Form.Group>
-              </Col>
-              <Col sm="6">
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Email
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  isInvalid={errors.email}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.email}
-                </Form.Control.Feedback>
-              </Form.Group>
-              </Col>
-              <Col sm="6">
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Password
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  value={edit ? undefined : form.password}
-                  onChange={handleChange}
-                  isInvalid={errors.password}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.password}
-                </Form.Control.Feedback>
-              </Form.Group>
-              </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Salary
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="baseSalary"
+                      value={form.baseSalary}
+                      onChange={handleChange}
+                      isInvalid={errors.baseSalary}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.baseSalary}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Email
+                    </Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      isInvalid={errors.email}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.email}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Password
+                    </Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      value={edit ? undefined : form.password}
+                      onChange={handleChange}
+                      isInvalid={errors.password}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.password}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
               </Row>
             </Modal.Body>
             <Modal.Footer>

@@ -133,7 +133,7 @@ export const usersTableColumns = (
       align: "right",
       headerAlign: "right",
       formatter: priceFormatter,
-      
+
       hidden: !isAdmin && !isExecutive,
       editable: (isAdmin || isExecutive) && rowIsNotAdmin,
     },
@@ -198,4 +198,4 @@ export const userOptions = (sellers) =>
   }));
 
 export const rolesOptions = (roles) =>
-  USER_SETTINGS.roles.filter(({ id }) => (id !== "ADMIN")).map(({ id, name }) => ({ value: id, label: name }));
+  USER_SETTINGS.roles.filter(({ id }) => (id !== "ADMIN" && id !== "OWNER")).map(({ id, name }) => ({ value: id, label: name }));

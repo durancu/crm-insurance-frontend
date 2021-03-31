@@ -103,7 +103,7 @@ const InsurerCreate = ({
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Row hidden={!isAdmin}>
+              <Row>
                 <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>

@@ -25,7 +25,7 @@ const Header = ({ user, userLogoutRequest }) => {
   }, [user]);
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top" style={{fontSize:"1rem"}}>
       <Container fluid style={{ maxWidth: "98%" }}>
         <Navbar.Brand href="/" style={{marginRight:"50px"}}>
           <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-vl17-crm.png" />
