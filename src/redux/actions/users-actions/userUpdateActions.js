@@ -19,6 +19,12 @@ export const userUpdateRequest = (payload, _id) => {
 export const userUpdateFail = () => ({
   type: types.USER_UPDATE_FAIL,
 });
+/** Action creator
+ * @returns {string} Action
+ */
+export const userUpdateError = () => ({
+  type: types.USER_UPDATE_ERROR,
+});
 
 /** Action creator
  * @param {object} payload

@@ -12,6 +12,9 @@ export const dashboardPersonalPerformanceRequest = (
 export const dashboardPersonalPerformanceFail = () => ({
   type: types.DASHBOARD_PERSONAL_PERFORMANCE_FAIL,
 });
+export const dashboardPersonalPerformanceError = () => ({
+  type: types.DASHBOARD_PERSONAL_PERFORMANCE_ERROR,
+});
 
 export const dashboardPersonalPerformanceSuccess = (payload) => ({
   type: types.DASHBOARD_PERSONAL_PERFORMANCE_SUCCESS,

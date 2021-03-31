@@ -3,33 +3,36 @@ import { call, put, spawn, takeLatest } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
 import {
   saleCreateFail,
+  saleCreateError,
   saleListRequest,
   saleCreateSuccess,
   messageLaunchRequest,
 } from "../../actions";
 
 import { apiPost } from "../../../global/apiMethods";
-import { LANGUAGE } from "../../../config/language";
+import { formatterMessage } from "../../../config/messageConfig";
 
 const sagaRequest = function* sagaRequest({ payload }) {
-  const config = {};
+  let config = {};
   const apiCall = (data) =>
     apiPost("sales", data, true).catch(({ response }) => {
-      config.title = LANGUAGE.en.message.fail.sale.create;
-      config.visible = true;
-      config.type = "error";
-      config.statusCode = response.data.statusCode;
-      config.messages = [response.data.message];
+      config = formatterMessage(response, "sale", "create");
       return console.log(response);
     });
   try {
     const response = yield call(apiCall, payload);
-    config.title = "Success";
-    config.visible = true;
-    config.type = "success";
-    config.messages = [LANGUAGE.en.message.success.sale.create];
-    yield put(saleCreateSuccess(response.data));
-    yield put(saleListRequest());
+    config = formatterMessage(response, "sale", "create");
+    switch (config.type) {
+      case "success":
+        yield put(saleCreateSuccess(response.data));
+        yield put(saleListRequest());
+        break;
+      case "error":
+        yield put(saleCreateError());
+        break;
+      default:
+        break;
+    }
   } catch (e) {
     yield put(saleCreateFail());
   }

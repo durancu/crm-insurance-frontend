@@ -13,6 +13,9 @@ const userUpdateStatusReducer = (state = initialState, { type }) => {
     case types.USER_UPDATE_FAIL:
       return { loading: false, error: true };
 
+    case types.USER_UPDATE_ERROR:
+      return { loading: false, error: true };
+
     case types.USER_UPDATE_SUCCESS:
       return { loading: false, error: false };
 

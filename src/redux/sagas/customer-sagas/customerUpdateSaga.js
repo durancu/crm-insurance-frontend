@@ -6,30 +6,34 @@ import {
   customerUpdateSuccess,
   customerLoadRequest,
   messageLaunchRequest,
+  customerUpdateError,
 } from "../../actions";
 
 import { apiUpdate } from "../../../global/apiMethods";
-import { LANGUAGE } from "../../../config/language";
+import { formatterMessage } from "../../../config/messageConfig";
 
 const sagaRequest = function* sagaRequest({ payload, _id }) {
-  const config = {};
+  let config = {};
   const apiCall = (data, _id) =>
     apiUpdate(`customers/${_id}`, data, true).catch(({ response }) => {
-      config.title = LANGUAGE.en.message.fail.customer.update;
-      config.visible = true;
-      config.type = "error";
-      config.statusCode = response.data.statusCode;
-      config.messages = [response.data.message];
+      config = formatterMessage(response, "customer", "update");
       return console.log(response);
     });
   try {
     const response = yield call(apiCall, payload, _id);
-    config.title = "Success";
-    config.visible = true;
-    config.type = "success";
-    config.messages = [LANGUAGE.en.message.success.customer.update];
-    yield put(customerUpdateSuccess(response.data));
-    yield put(customerLoadRequest());
+    config = formatterMessage(response, "customer", "create");
+
+    switch (config.type) {
+      case "success":
+        yield put(customerUpdateSuccess(response.data));
+        yield put(customerLoadRequest());
+        break;
+      case "error":
+        yield put(customerUpdateError());
+        break;
+      default:
+        break;
+    }
   } catch (e) {
     yield put(customerUpdateFail());
   }

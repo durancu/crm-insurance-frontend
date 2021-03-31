@@ -19,6 +19,12 @@ export const insurerUpdateRequest = (payload, _id) => {
 export const insurerUpdateFail = () => ({
   type: types.INSURERS_UPDATE_FAIL,
 });
+/** Action creator
+ * @returns {string} Action
+ */
+export const insurerUpdateError = () => ({
+  type: types.INSURERS_UPDATE_ERROR,
+});
 
 /** Action creator
  * @param {object} payload

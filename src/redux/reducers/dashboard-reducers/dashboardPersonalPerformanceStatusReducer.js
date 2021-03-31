@@ -5,12 +5,20 @@ const initialState = {
   error: false,
 };
 
-const dashboardPersonalPerformanceStatusReducer = (state = initialState, { type }) => {
+const dashboardPersonalPerformanceStatusReducer = (
+  state = initialState,
+  { type }
+) => {
   switch (type) {
     case types.DASHBOARD_PERSONAL_PERFORMANCE_REQUEST:
       return { loading: true, error: false };
+
     case types.DASHBOARD_PERSONAL_PERFORMANCE_FAIL:
       return { loading: false, error: true };
+
+    case types.DASHBOARD_PERSONAL_PERFORMANCE_ERROR:
+      return { loading: false, error: true };
+
     case types.DASHBOARD_PERSONAL_PERFORMANCE_SUCCESS:
       return { loading: false, error: false };
 

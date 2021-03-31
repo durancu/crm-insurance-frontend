@@ -2,32 +2,37 @@ import { call, put, spawn, takeLatest } from "redux-saga/effects";
 
 import * as types from "../../actions/actionTypes";
 import {
+  insurerCreateError,
   insurerCreateFail,
   insurerCreateSuccess,
+  insurerListRequest,
   messageLaunchRequest,
 } from "../../actions";
 
 import { apiPost } from "../../../global/apiMethods";
-import { LANGUAGE } from "../../../config/language";
+import { formatterMessage } from "../../../config/messageConfig";
 
 const sagaRequest = function* sagaRequest({ payload }) {
-  const config = {};
+  let config = {};
   const apiCall = (data) =>
     apiPost("insurers", data, true).catch(({ response }) => {
-      config.title = LANGUAGE.en.message.fail.insurer.create;
-      config.visible = true;
-      config.type = "error";
-      config.statusCode = response.data.statusCode;
-      config.messages = [response.data.message];
+      config = formatterMessage(response, "insurer", "create");
       return console.log(response);
     });
   try {
     const response = yield call(apiCall, payload);
-    config.title = "Success";
-    config.visible = true;
-    config.type = "success";
-    config.messages = [LANGUAGE.en.message.success.insurer.create];
-    yield put(insurerCreateSuccess(response.data));
+    config = formatterMessage(response, "insurer", "create");
+    switch (config.type) {
+      case "success":
+        yield put(insurerCreateSuccess(response.data));
+        yield put(insurerListRequest());
+        break;
+      case "error":
+        yield put(insurerCreateError());
+        break;
+      default:
+        break;
+    }
   } catch (e) {
     yield put(insurerCreateFail());
   }

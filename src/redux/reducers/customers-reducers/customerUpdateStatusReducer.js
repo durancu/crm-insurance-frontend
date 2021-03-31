@@ -13,6 +13,9 @@ const customerUpdateStatusReducer = (state = initialState, { type }) => {
     case types.CUSTOMERS_UPDATE_FAIL:
       return { loading: false, error: true };
 
+    case types.CUSTOMERS_UPDATE_ERROR:
+      return { loading: false, error: true };
+
     case types.CUSTOMERS_UPDATE_SUCCESS:
       return { loading: false, error: false };
 

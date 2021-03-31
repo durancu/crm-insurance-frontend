@@ -2,11 +2,14 @@ import * as types from "../actionTypes";
 
 export const saleUpdateRequest = (payload) => ({
   type: types.SALES_UPDATE_REQUEST,
-  payload
+  payload,
 });
 
 export const saleUpdateFail = () => ({
   type: types.SALES_UPDATE_FAIL,
+});
+export const saleUpdateError = () => ({
+  type: types.SALES_UPDATE_ERROR,
 });
 
 export const saleUpdateSuccess = (payload) => ({
