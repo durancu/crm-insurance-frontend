@@ -17,8 +17,9 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 
 import { customersDefaultSorted, customersTableColumns } from "./config";
 import DeleteModelAlert from "../../globals/DeleteModelAlert";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
 import Spinner from "../../globals/spinner";
+import CustomerCreate from "./CustomerCreate";
 
 function CustomerList({
   customerLoadRequest,
@@ -29,63 +30,98 @@ function CustomerList({
   loadingDelete,
   loadingUpdate,
 }) {
-  const [modal, setModal] = useState(false);
+
+  const [createCustomerModal, setCreateCustomerModal] = useState(false);
+  const [edit, setEdit] = useState(false);
+  /* const [dataForm, setDataForm] = useState({}); */
+
+  const showCreateCustomerModal = () => {
+    edit && setEdit(false);
+    setCreateCustomerModal(!createCustomerModal);
+  };
+
+  const [deleteCustomeModal, setDeleteCustomerModal] = useState(false);
   const [id, setId] = useState("");
   useEffect(() => {
     customerLoadRequest();
   }, [customerLoadRequest]);
 
-  const showModal = () => {
-    setModal(!modal);
+  const showDeleteCustomerModal = () => {
+    setDeleteCustomerModal(!deleteCustomeModal);
   };
 
   return (
     <>
-      {loadingCreate || loadingDelete || loadingUpdate ? (
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            <Spinner />
-          </Col>
-        </Row>
-      ) : (
-        <Row>
-          <DeleteModelAlert
-            id={id}
-            modal={modal}
-            handleModal={showModal}
-            deleteElement={customerDeleteRequest}
-          >
-            Customer
-          </DeleteModelAlert>
-          <BootstrapTable
-            bootstrap4
-            keyField="_id"
-            data={customers}
-            columns={customersTableColumns(false, showModal, setId)}
-            /* striped */
-            hover
-            bordered={false}
-            responsive
-            filter={filterFactory()}
-            filterPosition="top"
-            defaultSorted={customersDefaultSorted()}
-            noDataIndication="No registered customers"
-            cellEdit={cellEditFactory({
-              mode: "click",
-              afterSaveCell: (oldValue, newValue, row, column) => {
-                const fieldName = column.dataField;
-                let payload = {
-                  _id: row._id,
-                  [fieldName]: newValue,
-                };
+      <Card>
+        <Card.Body>
+          <Row className="mb-2">
+            <Col lg="8" sm="6">
+              &nbsp;
+            </Col>
+            <Col lg="4" sm="6" align="right">
+              <Button variant="primary" onClick={showCreateCustomerModal}>
+                Add New Customer
+              </Button>
+              <CustomerCreate
+                showModal={showCreateCustomerModal}
+                modal={createCustomerModal}
+                edit={false}
+                dataForm={{}}
+              />
+            </Col>
+          </Row>
 
-                oldValue !== newValue &&
-                  customerUpdateRequest(payload, payload._id);
-              },
-            })}
-          />
-        </Row>
-      )}
+          {loadingCreate || loadingDelete || loadingUpdate ? (
+            <Row className="justify-content-md-center">
+              <Col md="auto">
+                <Spinner />
+              </Col>
+            </Row>
+          ) : (
+            <Row>
+              <DeleteModelAlert
+                id={id}
+                modal={deleteCustomeModal}
+                handleModal={showDeleteCustomerModal}
+                deleteElement={customerDeleteRequest}
+              >
+                Customer
+              </DeleteModelAlert>
+              <BootstrapTable
+                bootstrap4
+                keyField="_id"
+                data={customers}
+                columns={customersTableColumns(
+                  false,
+                  showDeleteCustomerModal,
+                  setId
+                )}
+                /* striped */
+                hover
+                bordered={false}
+                responsive
+                filter={filterFactory()}
+                filterPosition="top"
+                defaultSorted={customersDefaultSorted()}
+                noDataIndication="No registered customers"
+                cellEdit={cellEditFactory({
+                  mode: "click",
+                  afterSaveCell: (oldValue, newValue, row, column) => {
+                    const fieldName = column.dataField;
+                    let payload = {
+                      _id: row._id,
+                      [fieldName]: newValue,
+                    };
+
+                    oldValue !== newValue &&
+                      customerUpdateRequest(payload, payload._id);
+                  },
+                })}
+              />
+            </Row>
+          )}
+        </Card.Body>
+      </Card>
     </>
   );
 }

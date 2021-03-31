@@ -1,45 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
 //components
-import { Row, Col, Button } from "react-bootstrap";
-import CustomerCreate from "./CustomerCreate";
+import { Row, Col } from "react-bootstrap";
+
 import CustomerList from "./CustomerList";
 
 export default function Customers() {
-  const [modal, setModal] = useState(false);
-  const [edit, setEdit] = useState(false);
-  /* const [dataForm, setDataForm] = useState({}); */
-
-  const showModal = () => {
-    edit && setEdit(false);
-    setModal(!modal);
-  };
-
   return (
     <>
-      <Row className="mt-3">
-        <Col sm="10">
+      <Row className="mt-3 mb-3">
+        <Col>
           <h3>Customer Management</h3>
         </Col>
       </Row>
-      <Row className="mt-0 mb-2">
-        <Col style={{ textAlign: "right" }}>
-          <Button variant="primary" onClick={showModal}>
-            Add New Customer
-          </Button>
-          <CustomerCreate
-            showModal={showModal}
-            modal={modal}
-            edit={false}
-            dataForm={{}}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm="12" lg="12">
-          <CustomerList />
-        </Col>
-      </Row>
+      <CustomerList />
     </>
   );
 }

@@ -11,6 +11,10 @@ import {
   Row,
   Col,
   Container,
+  InputGroup,
+  FormControl,
+  FormLabel,
+  FormGroup,
 } from "react-bootstrap";
 
 //action
@@ -18,9 +22,7 @@ import {
   insurerCreateRequest,
   insurerUpdateRequest,
 } from "../../../redux/actions";
-import {
-  isAdminCheck,
-} from "../../../config/user";
+import { isAdminCheck } from "../../../config/user";
 
 const InsurerCreate = ({
   loading,
@@ -34,7 +36,7 @@ const InsurerCreate = ({
   insurer,
   user,
 }) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   let defaultForm = {
     name: "",
     email: "",
@@ -46,16 +48,11 @@ const InsurerCreate = ({
   };
 
   const [form, setForm] = useState(defaultForm);
-
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    setIsAdmin(isAdminCheck(user));
-  }, [user]);
-
-  useEffect(() => {
     edit ? setForm(insurer) : setForm(defaultForm);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [edit, insurer]);
 
   const handleChange = ({ target }) => {
@@ -89,124 +86,176 @@ const InsurerCreate = ({
     setForm(defaultForm);
   };
 
+  useEffect(() => {
+    setIsAdmin(isAdminCheck(user));
+  }, [user]);
+
+
+
   return (
     <Fragment>
-      <Modal show={modal} onHide={showModal} backdrop="static">
+      <Modal show={modal} onHide={showModal} backdrop="static" size="lg">
         <Form onSubmit={handleSubmit}>
           <fieldset disabled={loading || loadingGetInsurer}>
             <Modal.Header>
-              <Modal.Title>Insurer {edit ? `Update` : `Create`}</Modal.Title>
+              <Modal.Title>
+                {edit ? `Update` : `Create New`} Insurance Provider
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span> Name
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  autoFocus
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span> Phone
-                </Form.Label>
-                <Form.Control
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span> Email
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
               <Row hidden={!isAdmin}>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span> Name
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      required
+                      autoFocus
+                    />
+                  </Form.Group>
+                </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span> Email
+                    </Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span> Phone
+                    </Form.Label>
+                    <Form.Control
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}> </span> Fax
+                    </Form.Label>
+                    <Form.Control
+                      type="tel"
+                      name="fax"
+                      value={form.fax}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row hidden={!isAdmin} className="mb-3">
                 <Col>
-                  <br />
-                  <h4>Commissions (%)</h4>
-                  <br />
+                  <hr />
+                  <strong>Commissions (%)</strong>
                 </Col>
               </Row>
               <Row hidden={!isAdmin}>
                 <Col sm="6">
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> Liability
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="liabilityCommission"
-                      value={form.liabilityCommission}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                  <FormGroup>
+                    <FormLabel style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}> </span> Liability
+                    </FormLabel>
+                    <InputGroup className="mb-3">
+                      <FormControl
+                        aria-label="Percentage of profit per sale."
+                        name="liabilityCommission"
+                        value={form.liabilityCommission}
+                        onChange={handleChange}
+                        style={{ textAlign: "right" }}
+                      />
+                      <InputGroup.Append>
+                        <InputGroup.Text>%</InputGroup.Text>
+                      </InputGroup.Append>
+                    </InputGroup>
+                  </FormGroup>
                 </Col>
                 <Col sm="6">
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> Motor Cargo
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="cargoCommission"
-                      value={form.cargoCommission}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                  <FormGroup>
+                    <FormLabel style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}></span> Motor Cargo
+                    </FormLabel>
+                    <InputGroup className="mb-3">
+                      <FormControl
+                        aria-label="Percentage of profit per sale."
+                        name="cargoCommission"
+                        value={form.cargoCommission}
+                        onChange={handleChange}
+                        style={{ textAlign: "right" }}
+                      />
+                      <InputGroup.Append>
+                        <InputGroup.Text>%</InputGroup.Text>
+                      </InputGroup.Append>
+                    </InputGroup>
+                  </FormGroup>
                 </Col>
                 <Col sm="6">
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> Physical Damage
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="physicalDamageCommission"
-                      value={form.physicalDamageCommission}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                  <FormGroup>
+                    <FormLabel style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}> </span> Physical Damage
+                    </FormLabel>
+                    <InputGroup className="mb-3">
+                      <FormControl
+                        aria-label="Percentage of profit per sale."
+                        name="physicalDamageCommission"
+                        value={form.physicalDamageCommission}
+                        onChange={handleChange}
+                        style={{ textAlign: "right" }}
+                      />
+                      <InputGroup.Append>
+                        <InputGroup.Text>%</InputGroup.Text>
+                      </InputGroup.Append>
+                    </InputGroup>
+                  </FormGroup>
                 </Col>
                 <Col sm="6">
-                  <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> WC/GL/UMB
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="wcGlUmbCommission"
-                      value={form.wcGlUmbCommission}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                  <FormGroup>
+                    <FormLabel style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}> </span> WC/GL/UMB
+                    </FormLabel>
+                    <InputGroup className="mb-3">
+                      <FormControl
+                        aria-label="Percentage of profit per sale."
+                        name="wcGlUmbCommission"
+                        value={form.wcGlUmbCommission}
+                        onChange={handleChange}
+                        style={{ textAlign: "right" }}
+                      />
+                      <InputGroup.Append>
+                        <InputGroup.Text>%</InputGroup.Text>
+                      </InputGroup.Append>
+                    </InputGroup>
+                  </FormGroup>
                 </Col>
               </Row>
             </Modal.Body>
             <Modal.Footer>
               <Container>
                 <Row className="justify-content-center">
-                  <Col sm="3">
+                  <Col sm="4">
                     <Button variant="light" block onClick={showModal}>
                       Cancel
                     </Button>
                   </Col>
                   <Col />
-                  <Col lg="3">
+                  <Col lg="4">
                     <Button
                       type="submit"
                       variant={edit ? `success` : `primary`}
@@ -217,7 +266,7 @@ const InsurerCreate = ({
                       ) : edit ? (
                         `Update`
                       ) : (
-                        `Create`
+                        `Save`
                       )}
                     </Button>
                   </Col>

@@ -18,14 +18,14 @@ const PersonalPerformance = ({
   dashboardPersonalPerformanceRequest,
 }) => {
   const [params] = useState({
-    month: moment().month() + 1,
+    month: moment().date() > 21 ? moment().month() + 2 : moment().month()+1,
     year: moment().year(),
   });
 
   const [lastMonth] = useState(
-    moment().date() < 21
-      ? moment({"day":21}).subtract(1, 'months').format("MMM Do")
-      : moment({"day":21}).format("MMM Do")
+    moment().date() > 21
+      ? moment({ day: 21 }).add(1, "months").format("MMM Do")
+      : moment({ day: 21 }).format("MMM Do")
   );
 
   useEffect(() => {
@@ -35,7 +35,10 @@ const PersonalPerformance = ({
     <>
       <Row>
         <Col>
-          <h4>{user.firstName}'s Performance <small>({lastMonth} - Today)</small></h4>
+          <h4>
+            {user.firstName}'s Performance{" "}
+            <small>({lastMonth - 1} - Today)</small>
+          </h4>
           <hr />
         </Col>
       </Row>

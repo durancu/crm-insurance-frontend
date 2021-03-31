@@ -41,11 +41,11 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
       </Col>
     </Row>
   ) : (
-    <Row style={{padding:"0 150px 0 150px", marginTop: "10%"}}>
-      <Col md={{ span:4, offset: 4 }}>
+    <Row style={{ padding: "0 150px 0 150px", marginTop: "10%" }}>
+      <Col md={{ span: 4, offset: 4 }}>
         <Card>
           <Form onSubmit={handleSubmit}>
-            <Card.Header style={{ background: "#333", color: "#fff" }}>
+            <Card.Header>
               <Card.Title align="center">
                 <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-vl17-crm.png" />
               </Card.Title>
@@ -79,7 +79,7 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
                       onChange={handleChange}
                       isInvalid={errors.password}
                       isValid={form.password}
-                      autoComplete
+                      autoComplete="true"
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.password}
@@ -103,11 +103,16 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
                 </Col>
               </Row>
             </Card.Body>
-            <Card.Footer style={{textAlign:"center"}}>
+            <Card.Footer style={{ textAlign: "center" }}>
               <Row>
-                <Col>
+                <Col style={{ fontSize: "13px" }}>
                   <small>
-                    Powered by ARANE Consulting LLC, 2021. All Rights Reserved.
+                    Powered by{" "}
+                    <a href="https://araneconsulting.com">
+                      {" "}
+                      ARANE Consulting LLC
+                    </a>
+                    , 2021. All Rights Reserved.
                   </small>
                 </Col>
               </Row>

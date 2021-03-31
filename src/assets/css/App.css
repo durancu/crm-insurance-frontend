@@ -1,44 +1,52 @@
 body {
-  font-weight: 300!important;
+  font-weight: 300 !important;
+  font-size: 12px;
 }
 
 .react-bootstrap-table th {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-size: 12px;
   font-weight: 300;
 }
 
-.react-bootstrap-table th input, .react-bootstrap-table th select{
+.react-bootstrap-table td {
+  font-size: 12px;
+}
+
+
+.react-bootstrap-table th input,
+.react-bootstrap-table th select {
   padding: 2px !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
 }
 
-div.react-bootstrap-table tbody th input, div.react-bootstrap-table tbody th select {
-  padding: 0px 2px 0px 2px!important;
-  font-size: 11px !important;
-  height: 24px!important;
+div.react-bootstrap-table tbody th input,
+div.react-bootstrap-table tbody th select {
+  padding: 0px 2px 0px 2px !important;
+  font-size: 12px !important;
+  height: 24px !important;
 }
 
-.react-bootstrap-table th, tbody th {
-  padding: 0!important;
-  background: #444;
-  padding: 2px !important;
-  font-size: 11px !important;
-  color: #fff!important;
+.react-bootstrap-table th,
+tbody th {
+  padding: 2px 5px 0px 5px !important;
+  background: #f3f3f3;
+  font-size: 12px !important;
+  color: #000 !important;
+  font-weight: 400;
 }
 
-.react-bootstrap-table thead th{
-  text-align: left;
-  line-height: 20px;
-  padding-left: 5px!important;
+.react-bootstrap-table thead th {
+  padding-top: 10px!important;
 }
 
-
+.react-bootstrap-table th {
+  padding-bottom: 10px!important;
+}
 
 .order-4 {
   order: 4;
   position: relative;
-  /* float: right; */
   margin-left: 10px;
 }
 
@@ -47,31 +55,13 @@ div.react-bootstrap-table table tbody tr {
   border-bottom-style: hidden !important;
 }
 
-div.react-bootstrap-table td {
-  font-size: 11px !important;
-}
-
-div.react-bootstrap-table {
-  font-size: 11px !important;
-}
-
-div.react-bootstrap-table select.select-filter {
+div.react-bootstrap-table select.select-filter,
+div.react-bootstrap-table input.text-filter {
   height: 24px !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
 }
 
 td.react-bootstrap-table-editing-cell {
   height: 32px !important;
-  font-size: 11px !important;
-}
-
-div.react-bootstrap-table input.text-filter {
-  height: 24px !important;
-  font-size: 11px !important;
-}
-
-div.react-bootstrap-table input.form-control,
-select.form-control {
-  padding: 2px !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
 }

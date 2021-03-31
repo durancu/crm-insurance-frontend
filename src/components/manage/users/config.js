@@ -78,6 +78,7 @@ export const usersTableColumns = (
       headerAlign: "left",
       sort: true,
       formatter: userRolesFormatter,
+      //filter: textFilter({ placeholder: "search..." }),
       headerStyle: () => {
         return { width: "12%" };
       },
@@ -94,6 +95,7 @@ export const usersTableColumns = (
       sort: true,
       align: "left",
       headerAlign: "left",
+      filter: textFilter({ placeholder: "search..." }),
       headerStyle: () => {
         return { width: "15%" };
       },
@@ -105,6 +107,7 @@ export const usersTableColumns = (
       sort: true,
       align: "center",
       headerAlign: "center",
+      filter: textFilter({ placeholder: "search..." }),
       headerStyle: () => {
         return { width: "10%" };
       },
@@ -116,6 +119,7 @@ export const usersTableColumns = (
       sort: true,
       align: "left",
       headerAlign: "left",
+      filter: textFilter({ placeholder: "search..." }),
       headerStyle: () => {
         return { width: "10%" };
       },
@@ -127,7 +131,7 @@ export const usersTableColumns = (
       text: "Base Salary",
       sort: true,
       align: "right",
-      headerAlign: "left",
+      headerAlign: "right",
       formatter: priceFormatter,
       
       hidden: !isAdmin && !isExecutive,

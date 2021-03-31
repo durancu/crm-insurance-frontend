@@ -14,19 +14,6 @@ import {
 import { customerCreateValidate } from "./customerCreateValidate";
 import { USA_STATES } from "../../../config/usaState";
 
-const defaultForm = {
-  company: "",
-  name: "",
-  email: "",
-  phone: "",
-  fax: "",
-  address: "",
-  city: "",
-  state: "",
-  country: "USA",
-  dot: "",
-  zip: "",
-};
 const CustomerCreate = ({
   loading,
   loadingGetCustomer,
@@ -38,6 +25,20 @@ const CustomerCreate = ({
   edit,
   customer,
 }) => {
+  const defaultForm = {
+    company: "",
+    name: "",
+    email: "",
+    phone: "",
+    fax: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "USA",
+    dot: "",
+    zip: "",
+  };
+
   const [form, setForm] = useState(defaultForm);
   const [errors, setErrors] = useState({});
 
@@ -81,23 +82,43 @@ const CustomerCreate = ({
             </Modal.Header>
             <Modal.Body>
               <Form.Row>
-                <Form.Group as={Col}>
+              <Form.Group as={Col} sm="6">
                   <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Name
+                    <span style={{ color: "red" }}>* </span>Customer type
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="type"
+                    value={form.type}
+                    onChange={handleChange}
+                    custom
+                    required
+                    disabled
+                  >
+                    <option value="" disabled>
+                      Choose Type
+                    </option>
+                    <option value="true">Business</option>
+                    <option value="false">Individual</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+
+              <Form.Group as={Col} sm="6">
+                  <Form.Label style={{ fontSize: "small" }}>
+                  <span style={{ color: "red" }}>* </span>Company Name
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    name="name"
-                    value={form.name}
+                    name="company"
+                    value={form.company}
                     onChange={handleChange}
-                    isInvalid={errors.name}
-                    isValid={form.name}
+                    required
                   />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.name}
-                  </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col}>
+
+                <Form.Group as={Col} sm="6">
                   <Form.Label style={{ fontSize: "small" }}>
                     <span style={{ color: "red" }}>* </span>Email
                   </Form.Label>
@@ -113,35 +134,30 @@ const CustomerCreate = ({
                     {errors.email}
                   </Form.Control.Feedback>
                 </Form.Group>
-              </Form.Row>
-              <Form.Row>
-                <Form.Group as={Col}>
+
+              
+
+
+                <Form.Group as={Col} sm="6">
                   <Form.Label style={{ fontSize: "small" }}>
-                    Company
-                    {/* <span style={{ fontSize: "10px", color: "#999" }}>
-                      {" "}
-                      (Optional)
-                    </span> */}
+                    {/* <span style={{ color: "red" }}>* </span> */}Contact Person
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    name="company"
-                    value={form.company}
+                    name="name"
+                    value={form.name}
                     onChange={handleChange}
+                    isInvalid={errors.name}
+                    isValid={form.name}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.name}
+                  </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>DOT</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="dot"
-                    value={form.dot}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </Form.Row>
-              <Form.Row>
-                <Form.Group as={Col}>
+
+                
+
+                <Form.Group as={Col} sm="6">
                   <Form.Label style={{ fontSize: "small" }}>Phone</Form.Label>
                   <Form.Control
                     type="tel"
@@ -156,7 +172,21 @@ const CustomerCreate = ({
                     {errors.phone}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col}>
+                
+
+                <Form.Group as={Col} sm="6">
+                  <Form.Label style={{ fontSize: "small" }}>US DOT Number</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="dot"
+                    value={form.dot}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+
+                
+
+                <Form.Group as={Col} sm="6">
                   <Form.Label style={{ fontSize: "small" }}>Fax</Form.Label>
                   <Form.Control
                     type="tel"
@@ -171,25 +201,7 @@ const CustomerCreate = ({
                     {errors.fax}
                   </Form.Control.Feedback>
                 </Form.Group>
-                {/* <Form.Group as={Col}>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Customer type
-                    </Form.Label>
-                    <Form.Control
-                      as="select"
-                      name="isCompany"
-                      value={form.isCompany}
-                      onChange={handleChange}
-                      custom
-                      required
-                    >
-                      <option value="" disabled>
-                        Choose Type
-                      </option>
-                      <option value="true">Business</option>
-                      <option value="false">Individual</option>
-                    </Form.Control>
-                  </Form.Group> */}
+                
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col}>
@@ -208,7 +220,7 @@ const CustomerCreate = ({
                 </Form.Group>
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col}>
+                <Form.Group as={Col} sm="4">
                   <Form.Label style={{ fontSize: "small" }}>City</Form.Label>
                   <Form.Control
                     type="text"
@@ -223,7 +235,7 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Form.Group as={Col}>
+                <Form.Group as={Col} sm="4">
                   <Form.Label style={{ fontSize: "small" }}>State</Form.Label>
                   <Form.Control
                     as="select"
@@ -248,7 +260,7 @@ const CustomerCreate = ({
                     {errors.state}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} sm="2">
+                <Form.Group as={Col} sm="4">
                   <Form.Label style={{ fontSize: "small" }}>Zip</Form.Label>
                   <Form.Control
                     type="text"
@@ -299,7 +311,7 @@ const CustomerCreate = ({
                       ) : edit ? (
                         `Update`
                       ) : (
-                        `Create`
+                        `Save`
                       )}
                     </Button>
                   </Col>

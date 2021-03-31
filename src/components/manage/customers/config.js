@@ -1,4 +1,5 @@
 //Functions
+import { textFilter } from "react-bootstrap-table2-filter";
 import { customerCompanyFormatter } from "../../globals/functions";
 /* import { textFilter } from "react-bootstrap-table2-filter"; */
 
@@ -6,32 +7,36 @@ import { customerCompanyFormatter } from "../../globals/functions";
 
 export const customersTableColumns = (isAdmin = false, showModal, setId) => [
   {
-    dataField: "name",
-    text: "Contact Person",
-    align: "left",
-    headerAlign: "left",
-    sort: true,
-    headerStyle: () => {
-      return { width: "10%" };
-    },
-  },
-  {
     dataField: "company",
-    text: "Company",
+    text: "Company Name",
     align: "left",
     headerAlign: "left",
     sort: true,
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "10%" };
     },
     formatter: customerCompanyFormatter
   },
   {
+    dataField: "name",
+    text: "Contact Person",
+    align: "left",
+    headerAlign: "left",
+    sort: true,
+    filter: textFilter({ placeholder: "search..." }),
+    headerStyle: () => {
+      return { width: "10%" };
+    },
+  },
+  
+  {
     dataField: "dot",
     text: "DOT",
     sort: true,
     align: "right",
     headerAlign: "right",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "6%" };
     },
@@ -42,6 +47,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "15%" };
     },
@@ -52,6 +58,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "8%" };
     },
@@ -62,6 +69,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "8%" };
     },
@@ -72,6 +80,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "12%" };
     },
@@ -82,6 +91,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "5%" };
     },
@@ -92,6 +102,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "5%" };
     },
@@ -102,6 +113,7 @@ export const customersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
     headerStyle: () => {
       return { width: "5%" };
     },

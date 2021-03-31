@@ -35,9 +35,7 @@ export const salesTableColumns = (
       return { width: "5%" };
     },
     sort: true,
-    footer: (columnData) =>
-      `
-            ${columnData.reduce((acc, item) => acc + 1, 0)} sales`,
+    footer: (columnData) =>`${columnData.reduce((acc, item) => acc + 1, 0)} sales`,
     editor: {
       type: Type.DATE,
     },

@@ -1,41 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
 //components
-import { Row, Col, Button } from "react-bootstrap";
-import InsurerCreate from "./InsurerCreate";
+import { Row, Col } from "react-bootstrap";
 import InsurerList from "./InsurerList";
 
-export default function Insurers() {
-  const [modal, setModal] = useState(false);
-  const showModal = () => {
-    setModal(!modal);
-  };
+export default function Insurers(){    
 
   return (
     <>
-      <Row className="mt-3">
-        <Col sm="10">
-          <h2>Insurers</h2>
+      <Row className="mt-3 mb-3">
+        <Col>
+          <h3>Insurers</h3>
         </Col>
       </Row>
-      <Row className="mt-0 mb-2">
-        <Col style={{ textAlign: "right" }}>
-          <Button variant="primary" onClick={showModal}>
-            Add New Insurer
-          </Button>
-          <InsurerCreate
-            showModal={showModal}
-            modal={modal}
-            edit={false}
-            dataForm={{}}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm="12" lg="12">
           <InsurerList />
-        </Col>
-      </Row>
     </>
   );
 }

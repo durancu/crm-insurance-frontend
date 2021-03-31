@@ -21,6 +21,7 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
   },
   {
     dataField: "phone",
@@ -28,6 +29,7 @@ export const insurersTableColumns = (isAdmin = false, showModal, setId) => [
     sort: true,
     align: "left",
     headerAlign: "left",
+    filter: textFilter({ placeholder: "search..." }),
   },
   {
     dataField: "liabilityCommission",

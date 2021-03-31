@@ -11,22 +11,23 @@ const sagaRequest = function* sagaRequest({ payload }) {
   const config = {};
   const apiCall = (data) =>
     apiPost("customers", data, true).then((response) => {
-      if (response.statusCode >= 200 && response.statusCode < 300) {
-        config.title = LANGUAGE.en.message.success.customer.create;
+      console.log(response.data);
+      if (response.status >= 200 && response.status < 300) {
+        config.title = 'Success';
         config.visible = true;
         config.type = "success";
         config.messages = [LANGUAGE.en.message.success.customer.create];
         put(customerCreateSuccess(response.data));
       } else {
-        config.title = LANGUAGE.en.message.fail.customer.create;
+        config.title = 'Error';
         config.visible = true;
-        config.type = "success";
+        config.type = "error";
         config.messages = [LANGUAGE.en.message.error.customer.create, response.message];
         put(customerCreateFail());
       }
 
     }).catch(({ response }) => {
-      config.title = LANGUAGE.en.message.fail.customer.create;
+      config.title = 'Error';
       config.visible = true;
       config.type = "error";
       config.statusCode = response.data.statusCode;

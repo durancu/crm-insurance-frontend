@@ -14,17 +14,17 @@ const Footer = () => {
       variant="dark"
       fixed="bottom"
       sticky="bottom"
-      style={{ padding: "0 20px 0 20px" }}
+      style={{ padding: "0 20px 0 20px", marginTop:"80px" }}
     >
       <Nav>
         <span style={{fontSize:"10px", color:"#f0f0f0"}}>Powered by ARANE Consulting LLC, 2021. All Rights Reserved.</span>
       </Nav>
       <Navbar.Brand
         href="https://araneconsulting.com"
-        style={{ marginLeft: "50px" }}
+        style={{ marginLeft: "50px",  padding:"0"}}
         className="ml-auto"
       >
-        <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-arane-small.png" />
+        <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-arane-small.png"  height="24"/>
       </Navbar.Brand>
     </Navbar>
   );
