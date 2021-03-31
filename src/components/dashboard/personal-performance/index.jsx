@@ -22,9 +22,9 @@ const PersonalPerformance = ({
     year: moment().year(),
   });
 
-  const [lastMonth] = useState(
-    moment().date() > 21
-      ? moment({ day: 21 }).add(1, "months").format("MMM Do")
+  const [reportMonth] = useState(
+    moment().date() < 21
+      ? moment({ day: 21 }).subtract(1, "months").format("MMM Do")
       : moment({ day: 21 }).format("MMM Do")
   );
 
@@ -36,8 +36,8 @@ const PersonalPerformance = ({
       <Row>
         <Col>
           <h4>
-            {user.firstName}'s Performance{" "}
-            <small>({lastMonth - 1} - Today)</small>
+            Monthly Performance{" "}
+            <small>({reportMonth} - Today)</small>
           </h4>
           <hr />
         </Col>
