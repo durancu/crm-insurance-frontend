@@ -10,12 +10,19 @@ import Insurers from "../components/manage/insurers";
 import Company from "../components/manage/company";
 import Profile from "../components/account/profile";
 import Training from "../components/training";
+import Page403 from "../components/globals/Page403";
 
 export const COMPONENT_LIST = [
   {
     title: "Login",
     url: "/auth",
     component: Auth,
+    protected: false,
+  },
+  {
+    title: "Page 403",
+    url: "/403",
+    component: Page403,
     protected: false,
   },
 
