@@ -8,6 +8,7 @@ import { userAuthCheckRequest, allowedIpGetRequest } from "../../redux/actions";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+import Page403 from "./Page403";
 function Containers({
   children,
   userAuthCheckRequest,
@@ -19,16 +20,24 @@ function Containers({
   loadingAllowedIp,
 }) {
   useEffect(() => {
-     userAuthCheckRequest();
+    userAuthCheckRequest();
   }, [userAuthCheckRequest]);
+
+  useEffect(() => {
+    allowedIpGetRequest();
+  }, [allowedIpGetRequest]);
+
+  useEffect(() => {
+    console.log(allowedIp);
+  }, [allowedIp]);
 
   return (
     <>
-      {/* {false && <Redirect to="/403" />} */}
-      {authCheck &&  <Redirect to="/" />}
-      {authCheck &&  <Header />}
-      <Body>{children}</Body>
-      {authCheck && <Footer />}
+      {authCheck && allowedIp && <Redirect to="/" />}
+      {authCheck && allowedIp && <Header />}
+      { allowedIp ? <Body>{children}</Body> : <Page403></Page403> }
+      
+      {authCheck && allowedIp && <Footer />}
     </>
   );
 }

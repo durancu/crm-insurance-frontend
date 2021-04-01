@@ -10,7 +10,7 @@ export {
   allowedIpGetFail,
   allowedIpGetRequest,
   allowedIpGetSuccess,
-} from "./allowed-ip-actions/allowedIpSetAction";
+} from "./allowed-ip-actions/allowedIpActions";
 
 //User
 export {

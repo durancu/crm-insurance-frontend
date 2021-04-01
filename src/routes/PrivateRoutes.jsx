@@ -6,6 +6,7 @@ import { Route, Redirect } from "react-router-dom";
 //actions
 
 import { userAuthCheckRequest, allowedIpGetRequest } from "../redux/actions";
+import Page403 from "../components/globals/Page403";
 
 export const PrivateRoutes = ({
   component: Component,
@@ -13,9 +14,14 @@ export const PrivateRoutes = ({
   allowedIp,
   ...rest
 }) => {
+
   useEffect(() => {
     allowedIpGetRequest();
-  });
+  }, []);
+  
+  useEffect(() => {
+    console.log(allowedIp);
+  }, [allowedIp]);
 
   useEffect(() => {
     userAuthCheckRequest();
@@ -25,14 +31,14 @@ export const PrivateRoutes = ({
     <Route
       {...rest}
       render={(props) =>
-        true ? (
+        allowedIp ? (
           authCheck ? (
             <Component {...props} />
           ) : (
             <Redirect to="/auth" />
           )
         ) : (
-          <Redirect to="/403" />
+          <Page403></Page403>
         )
       }
     />
