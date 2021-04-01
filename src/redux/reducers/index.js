@@ -4,6 +4,9 @@ import testReducer from "./testReducer";
 //Global
 import messageReducer from "./message-reducers/messageReducer";
 import messageStatusReducer from "./message-reducers/messageStatusReducer";
+import allowedIpReducer from './allowed-ip-reducers/allowedIpReducer'
+import allowedIpGetStatusReducer from './allowed-ip-reducers/allowedIpGetStatusReducer'
+
 
 //AUTH
 import userAuthReducer from "./users-reducers/userAuthReducer";
@@ -64,6 +67,9 @@ export default combineReducers({
   //Global
   messageReducer,
   messageStatusReducer,
+  //Allowed-IP
+  allowedIpReducer,
+  allowedIpGetStatusReducer,
   //AUTH
   userAuthReducer,
   userAuthStatusReducer,

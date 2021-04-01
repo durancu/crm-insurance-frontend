@@ -7,15 +7,29 @@ import { Route, Redirect } from "react-router-dom";
 
 import { userAuthCheckRequest } from "../redux/actions";
 
-export const PrivateRoutes = ({ component: Component, authCheck, ...rest }) => {
+export const PrivateRoutes = ({
+  component: Component,
+  authCheck,
+  allowedIp,
+  ...rest
+}) => {
   useEffect(() => {
-    userAuthCheckRequest();
-  },[authCheck]);
+    allowedIp && userAuthCheckRequest();
+  }, [allowedIp, authCheck]);
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        authCheck ? <Component {...props} /> : <Redirect to="/auth" />
+        allowedIp ? (
+          authCheck ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to="/auth" />
+          )
+        ) : (
+          <Redirect to="/403" />
+        )
       }
     />
   );
@@ -27,6 +41,7 @@ PrivateRoutes.propTypes = {
 
 const mapStateToProps = (state) => ({
   authCheck: state.userProfileReducer.authCheck,
+  allowedIp: state.allowedIpReducer.allowedIp,
 });
 
 const mapDispatchToProps = {

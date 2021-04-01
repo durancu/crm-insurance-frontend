@@ -1,46 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 //Actions
-import { userAuthCheckRequest } from "../../redux/actions";
+import { userAuthCheckRequest, allowedIpGetRequest } from "../../redux/actions";
 //components
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
-import { userIpIsAllowed } from "./functions";
 function Containers({
   children,
   userAuthCheckRequest,
+  allowedIpGetRequest,
   error,
   loading,
   authCheck,
+  allowedIp,
+  loadingAllowedIp,
 }) {
   useEffect(() => {
-    userAuthCheckRequest();
-  }, [userAuthCheckRequest]);
-
-  const [allowedIp, setAllowedIp] = useState(false);
-
-  useEffect(() => {
-    userIpIsAllowed().then(res => {
-      setAllowedIp(res);
-    }).catch(setAllowedIp("N/A"));
-
-  }, []);
+    allowedIpGetRequest();
+    allowedIp && userAuthCheckRequest();
+  }, [allowedIp, allowedIpGetRequest, userAuthCheckRequest]);
 
   return (
     <>
-      {allowedIp ? (
-        <>
-          {authCheck && <Redirect to="/" />}
-          {authCheck && <Header />}
-          <Body>{children}</Body>
-          {authCheck && <Footer />}
-        </>
-      ) : (
-        <> Your IP is not allowed to access this website</>
-      )}
+      {!allowedIp && <Redirect to="/403" />}
+      {authCheck && allowedIp && <Redirect to="/" />}
+      {authCheck && allowedIp && <Header />}
+      <Body>{children}</Body>
+      {authCheck && allowedIp && <Footer />}
     </>
   );
 }
@@ -56,10 +45,13 @@ const mapStateToProps = (state) => ({
   authCheck: state.userProfileReducer.authCheck,
   loading: state.userProfileGetStatusReducer.loading,
   error: state.userProfileGetStatusReducer.error,
+  allowedIp: state.allowedIpReducer.allowedIp,
+  loadingAllowedIp: state.allowedIpGetStatusReducer.loading,
 });
 
 const mapDispatchToProps = {
   userAuthCheckRequest,
+  allowedIpGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Containers);

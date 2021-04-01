@@ -1,7 +1,7 @@
 //Test
 export const COUNTER_UP = "COUNTER_UP";
 export const COUNTER_DOWN = "COUNTER_DOWN";
-
+//GLOBAL
 //MESSAGES
 /**@constant {string} MESSAGE_LAUNCH_REQUEST*/
 export const MESSAGE_LAUNCH_REQUEST = "MESSAGE_LAUNCH_REQUEST";
@@ -9,6 +9,13 @@ export const MESSAGE_LAUNCH_REQUEST = "MESSAGE_LAUNCH_REQUEST";
 export const MESSAGE_LAUNCH_FAIL = "MESSAGE_LAUNCH_FAIL";
 /**@constant {string} MESSAGE_LAUNCH_SUCCESS*/
 export const MESSAGE_LAUNCH_SUCCESS = "MESSAGE_LAUNCH_SUCCESS";
+//AllowedIP SET
+/**@constant {string} ALLOWED_IP_GET_REQUEST*/
+export const ALLOWED_IP_GET_REQUEST = "ALLOWED_IP_GET_REQUEST";
+/**@constant {string} ALLOWED_IP_GET_FAIL*/
+export const ALLOWED_IP_GET_FAIL = "ALLOWED_IP_GET_FAIL";
+/**@constant {string} ALLOWED_IP_GET_SUCCESS*/
+export const ALLOWED_IP_GET_SUCCESS = "ALLOWED_IP_GET_SUCCESS";
 
 //USER
 //Auth
