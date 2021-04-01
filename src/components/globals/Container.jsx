@@ -19,13 +19,12 @@ function Containers({
   loadingAllowedIp,
 }) {
   useEffect(() => {
-    allowedIpGetRequest();
-    allowedIp && userAuthCheckRequest();
-  }, [allowedIp, allowedIpGetRequest, userAuthCheckRequest]);
+     userAuthCheckRequest();
+  }, [userAuthCheckRequest]);
 
   return (
     <>
-      {!allowedIp && <Redirect to="/403" />}
+      {/* {false && <Redirect to="/403" />} */}
       {authCheck && allowedIp && <Redirect to="/" />}
       {authCheck && allowedIp && <Header />}
       <Body>{children}</Body>

@@ -53,6 +53,12 @@ export const SaleCreate = ({
   //Date and Values
   const [formValues, setFormValues] = useState(defaultForm);
   const [formStates, setFormStates] = useState(defaultForm);
+  const [chargeShow, setChargeShow] = useState({
+    liabilityCharge: true,
+    cargoCharge: false,
+    physicalDamageCharge: false,
+    wcGlUmbCharge: false,
+  });
   //Auto Calculate
   const [premium, setPremium] = useState(0);
   const [pendingPayment, setPendingPayment] = useState(0);
@@ -74,9 +80,10 @@ export const SaleCreate = ({
   }, [lastCustomer]);
   //Calculate premium
   useEffect(() => {
-    setPremium(totalPremiumCalculate(formValues));
+    setPremium(totalPremiumCalculate(formStates));
     setPendingPayment(pendingPaymentCalculate(formValues));
-  }, [formValues]);
+    console.log("chargeShow", chargeShow);
+  }, [chargeShow, formStates, formValues]);
 
   //Load data of formValues
   const handleChange = ({ target }) => {
@@ -100,13 +107,13 @@ export const SaleCreate = ({
       case "permits":
       case "tips":
       case "chargesPaid":
-      case "premium":
       case "totalCharge":
         setFormValues({
           ...formValues,
           [target.name]: parseFloat(target.value),
         });
         break;
+
       default:
         setFormValues((formValues) => ({
           ...formValues,
@@ -114,9 +121,52 @@ export const SaleCreate = ({
         }));
         break;
     }
+    switch (target.name) {
+      case "liabilityInsurer":
+        target.value === "" &&
+          setFormStates({ ...formStates, liabilityCharge: 0 });
+        setChargeShow({ ...chargeShow, liabilityCharge: true });
+
+        target.value !== "" &&
+          setChargeShow({ ...chargeShow, liabilityCharge: false });
+        break;
+      case "cargoInsurer":
+        target.value === "" &&
+          setFormStates({ ...formStates, cargoCharge: "" });
+
+        target.value !== "" &&
+          setChargeShow({ ...chargeShow, liabilityCharge: false });
+        break;
+      case "physicalDamageInsurer":
+        target.value === "" &&
+          setFormStates({ ...formStates, physicalDamageCharge: "" });
+        break;
+      case "wcGlUmbInsurer":
+        target.value === "" &&
+          setFormStates({ ...formStates, wcGlUmbCharge: "" });
+        break;
+      default:
+        break;
+    }
   };
 
   const handleBlur = ({ target }) => {
+    switch (target.name) {
+      case "liabilityInsurer":
+        target.value === "" && delete formValues["liabilityCharge"];
+        break;
+      case "cargoInsurer":
+        target.value === "" && delete formValues["cargoCharge"];
+        break;
+      case "physicalDamageInsurer":
+        target.value === "" && delete formValues["physicalDamageCharge"];
+        break;
+      case "wcGlUmbInsurer":
+        target.value === "" && delete formValues["wcGlUmbCharge"];
+        break;
+      default:
+        break;
+    }
     target.value === "" && delete formValues[target.name];
   };
 
@@ -296,7 +346,7 @@ export const SaleCreate = ({
                   <Form.Group
                     as={Col}
                     sm="2"
-                    hidden={!formStates.liabilityInsurer}
+                    hidden={chargeShow.liabilityCharge}
                   >
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Charge:
