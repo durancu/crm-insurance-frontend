@@ -5,6 +5,7 @@ import { Person, Building, Trash, Check, Key } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 import { isAdminCheck, USER_SETTINGS } from "../../config/user";
 import { TooltipIcon } from "./TooltipIcon";
+import publicIp from 'public-ip';
 
 export const dataTransform = (element) => {
   let insurers = [];
@@ -234,6 +235,24 @@ export function insurerNameFormatter(cell, row) {
 
 export function rowIsNotAdmin(cell, row) {
   return row.roles[0] !== "ADMIN";
+}
+
+export async function userPublicIPV4Address() {
+    return await publicIp.v4();
+}
+
+export async function userIpIsAllowed () {
+  const addresses = process.env.REACT_APP_IP_WHITELIST
+    ? process.env.REACT_APP_IP_WHITELIST.split(",")
+    : [];
+
+  console.log(addresses);
+
+  const ipAddress = await userPublicIPV4Address();
+
+  console.log(ipAddress);
+  return addresses.includes(ipAddress);
+
 }
 
 /** Return number

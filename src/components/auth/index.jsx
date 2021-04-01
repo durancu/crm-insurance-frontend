@@ -34,6 +34,8 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
     return errors;
   };
 
+  
+
   return loadingAuthCheck ? (
     <Row style={{ marginTop: "20%" }} className="justify-content-md-center">
       <Col md="auto">
