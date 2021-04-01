@@ -20,12 +20,8 @@ export async function userIpIsAllowed() {
 
   const ipAddress = await userPublicIPV4Address();
 
-  console.log(addresses);
-  console.log(ipAddress);
-  console.log(process.env.REACT_APP_ENV)
-
   return (
-    (process.env.REACT_APP_ENV === "dev") ||
+    (process.env.REACT_APP_ENV === "local" || process.env.REACT_APP_ENV === "dev") ||
       (process.env.REACT_APP_ENV === "pro" &&
     addresses.includes(ipAddress))
   );

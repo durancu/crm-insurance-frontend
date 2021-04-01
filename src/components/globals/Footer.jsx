@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 //Actions
 import { userLogoutRequest } from "../../redux/actions";
 //Components
-import { Navbar, Nav, Image } from "react-bootstrap";
+import { Navbar, Image } from "react-bootstrap";
 
-const Footer = ({ ipAddress }) => {
+const Footer = () => {
   return (
     <Navbar
       bg="dark"
@@ -20,9 +20,6 @@ const Footer = ({ ipAddress }) => {
         color: "#f0f0f0",
       }}
     >
-      <Nav>
-        <span>{ipAddress}</span>
-      </Nav>
       <div className="ml-auto">
         Powered by ARANE Consulting LLC, 2021. All Rights Reserved.
         <Navbar.Brand
@@ -46,7 +43,6 @@ Footer.propTypes = {
 
 const mapStateToProps = (state) => ({
   user: state.userProfileReducer.user,
-  ipAddress: state.allowedIpReducer.ipAddress,
 });
 
 const mapDispatchToProps = {
