@@ -126,14 +126,11 @@ export const SaleCreate = ({
     setErrors(result);
     console.log(errors);
     if (!Object.keys(result).length) {
-      //console.log("formValues", formValues);
       setFormValues({
         ...formValues,
         soldAt: new Date(formStates.soldAt).toISOString(),
       });
 
-      console.log("soldAt", new Date(formValues.soldAt).toISOString());
-      console.log("formValues", formValues);
       saleCreateRequest(formValues);
       !addMore && handleModalSale();
       clearForm();
@@ -248,10 +245,10 @@ export const SaleCreate = ({
                         >
                           <b>+</b>
                         </Button>
-                      
-                      <Form.Control.Feedback type="invalid">
-                        {errors.customer}
-                      </Form.Control.Feedback>
+
+                        <Form.Control.Feedback type="invalid">
+                          {errors.customer}
+                        </Form.Control.Feedback>
                       </InputGroup.Append>
                     </InputGroup>
                   </Form.Group>
@@ -270,7 +267,7 @@ export const SaleCreate = ({
                   </Col>
                 </Form.Row>
                 <Form.Row>
-                  <Form.Group as={Col} >
+                  <Form.Group as={Col}>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>
                       Liability Insurer:
@@ -304,13 +301,12 @@ export const SaleCreate = ({
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Charge:
                     </Form.Label>
-                    
+
                     <InputGroup>
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
                       <Form.Control
-                        
                         name="liabilityCharge"
                         min="0"
                         onChange={handleChange}
@@ -324,7 +320,7 @@ export const SaleCreate = ({
                     </InputGroup>
                   </Form.Group>
 
-                  <Form.Group as={Col} >
+                  <Form.Group as={Col}>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>
                       Motor Cargo Insurer:
@@ -359,17 +355,16 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="cargoCharge"
-                      onChange={handleChange}
-                      isInvalid={errors.cargoCharge}
-                      value={formStates.cargoCharge || 0}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.cargoCharge}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="cargoCharge"
+                        onChange={handleChange}
+                        isInvalid={errors.cargoCharge}
+                        value={formStates.cargoCharge || 0}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.cargoCharge}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
                 </Form.Row>
@@ -400,7 +395,11 @@ export const SaleCreate = ({
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group as={Col} sm="2" hidden={!formStates.physicalDamageInsurer}>
+                  <Form.Group
+                    as={Col}
+                    sm="2"
+                    hidden={!formStates.physicalDamageInsurer}
+                  >
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>
                       Charge:
@@ -409,17 +408,16 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="physicalDamageCharge"
-                      onChange={handleChange}
-                      isInvalid={errors.physicalDamageCharge}
-                      value={formStates.physicalDamageCharge || 0}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.physicalDamageCharge}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="physicalDamageCharge"
+                        onChange={handleChange}
+                        isInvalid={errors.physicalDamageCharge}
+                        value={formStates.physicalDamageCharge || 0}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.physicalDamageCharge}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
 
@@ -448,7 +446,11 @@ export const SaleCreate = ({
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group as={Col} sm="2" hidden={!formStates.wcGlUmbInsurer}>
+                  <Form.Group
+                    as={Col}
+                    sm="2"
+                    hidden={!formStates.wcGlUmbInsurer}
+                  >
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Charge:
                     </Form.Label>
@@ -456,17 +458,16 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="wcGlUmbCharge"
-                      onChange={handleChange}
-                      isInvalid={errors.wcGlUmbCharge}
-                      value={formStates.wcGlUmbCharge || 0}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.wcGlUmbCharge}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="wcGlUmbCharge"
+                        onChange={handleChange}
+                        isInvalid={errors.wcGlUmbCharge}
+                        value={formStates.wcGlUmbCharge || 0}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.wcGlUmbCharge}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
                 </Form.Row>
@@ -479,13 +480,12 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="premium"
-                      value={premium}
-                      disabled
-                      style={{ textAlign: "right" }}
-                    />
+                      <Form.Control
+                        name="premium"
+                        value={premium}
+                        disabled
+                        style={{ textAlign: "right" }}
+                      />
                     </InputGroup>
                   </Form.Group>
                 </Form.Row>
@@ -506,18 +506,17 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="fees"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={errors.fees}
-                      value={formStates.fees}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.fees}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="fees"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        isInvalid={errors.fees}
+                        value={formStates.fees}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.fees}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
 
@@ -529,18 +528,17 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="permits"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={errors.permits}
-                      value={formStates.permits}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.permits}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="permits"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        isInvalid={errors.permits}
+                        value={formStates.permits}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.permits}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
 
@@ -552,18 +550,17 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="tips"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={errors.tips}
-                      value={formStates.tips}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.tips}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="tips"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        isInvalid={errors.tips}
+                        value={formStates.tips}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.tips}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
                 </Form.Row>
@@ -577,18 +574,17 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="totalCharge"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={errors.totalCharge}
-                      value={formStates.totalCharge}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.totalCharge}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="totalCharge"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        isInvalid={errors.totalCharge}
+                        value={formStates.totalCharge}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.totalCharge}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
                   <Form.Group as={Col}>
@@ -599,18 +595,17 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="chargesPaid"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      isInvalid={errors.chargesPaid}
-                      value={formStates.chargesPaid}
-                      style={{ textAlign: "right" }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.chargesPaid}
-                    </Form.Control.Feedback>
+                      <Form.Control
+                        name="chargesPaid"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        isInvalid={errors.chargesPaid}
+                        value={formStates.chargesPaid}
+                        style={{ textAlign: "right" }}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.chargesPaid}
+                      </Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
 
@@ -622,13 +617,12 @@ export const SaleCreate = ({
                       <InputGroup.Prepend>
                         <InputGroup.Text>$</InputGroup.Text>
                       </InputGroup.Prepend>
-                    <Form.Control
-                      
-                      name="pendingAmount"
-                      value={pendingPayment}
-                      disabled
-                      style={{ textAlign: "right" }}
-                    />
+                      <Form.Control
+                        name="pendingAmount"
+                        value={pendingPayment}
+                        disabled
+                        style={{ textAlign: "right" }}
+                      />
                     </InputGroup>
                   </Form.Group>
                 </Form.Row>
