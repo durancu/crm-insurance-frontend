@@ -25,10 +25,10 @@ function Containers({
   return (
     <>
       {/* {false && <Redirect to="/403" />} */}
-      {authCheck && allowedIp && <Redirect to="/" />}
-      {authCheck && allowedIp && <Header />}
+      {authCheck &&  <Redirect to="/" />}
+      {authCheck &&  <Header />}
       <Body>{children}</Body>
-      {authCheck && allowedIp && <Footer />}
+      {authCheck && <Footer />}
     </>
   );
 }
