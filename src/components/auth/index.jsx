@@ -43,8 +43,8 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
       </Col>
     </Row>
   ) : (
-    <Row style={{ padding: "0 150px 0 150px", marginTop: "10%" }}>
-      <Col md={{ span: 4, offset: 4 }}>
+    <Row style={{ marginTop: "10%" }}>
+      <Col className="ml-auto mr-auto" md="6" sm="10" lg="3" style={{minWidth:"24rem"}}>
         <Card>
           <Form onSubmit={handleSubmit}>
             <Card.Header>
