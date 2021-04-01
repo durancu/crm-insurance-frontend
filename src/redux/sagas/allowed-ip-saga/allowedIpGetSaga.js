@@ -9,7 +9,7 @@ const sagaRequest = function* sagaRequest() {
     ipData.ipAddress = yield call(userPublicIPV4Address);
     ipData.allowedIp = yield call(userIpIsAllowed);
 
-    console.log(`ipData`, ipData)
+   /*  console.log(`ipData`, ipData) */
     yield put(allowedIpGetSuccess(ipData));
   } catch (e) {
     yield put(allowedIpGetFail());
