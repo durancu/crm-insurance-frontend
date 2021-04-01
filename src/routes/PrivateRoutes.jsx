@@ -14,6 +14,7 @@ export const PrivateRoutes = ({
   ...rest
 }) => {
   useEffect(() => {
+    //console.log("allowedIP",allowedIp);
     allowedIp && userAuthCheckRequest();
   }, [allowedIp, authCheck]);
 

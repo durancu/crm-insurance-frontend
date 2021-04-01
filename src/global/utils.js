@@ -11,22 +11,21 @@ export const queryStringFromObject = function (object) {
   return parameters.join("&");
 };
 
-export const userPublicIPV4Address = () => publicIp.v4();
+export async function userPublicIPV4Address() { return await publicIp.v4() };
 
 export async function userIpIsAllowed() {
   const addresses = process.env.REACT_APP_IP_WHITELIST
     ? process.env.REACT_APP_IP_WHITELIST.split(",")
     : [];
 
-  console.log(addresses);
-
   const ipAddress = await userPublicIPV4Address();
 
+  console.log(addresses);
   console.log(ipAddress);
+  console.log(process.env.REACT_APP_ENV);
 
   return (
-    (process.env.REACT_APP_ENV === "dev" ||
-      process.env.REACT_APP_ENV === "pro") &&
+    
     addresses.includes(ipAddress)
   );
 }
