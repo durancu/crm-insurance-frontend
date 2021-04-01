@@ -17,6 +17,7 @@ import { isAdminCheck } from "../../../config/user";
 import FilterDate from "../../globals/filters/FilterDate";
 import moment from "moment";
 import Spinner from "../../globals/spinner";
+import { calculateMonthRange } from "../../globals/functions";
 
 export const Reports = ({
   reportSalaryRequest,
@@ -31,12 +32,15 @@ export const Reports = ({
     year: moment().subtract(1, "month").year(),
   });
 
+  const [monthRange, setMonthRange] = useState({ start: "", end: "" });
+
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
   }, [user, user.roles]);
 
   useEffect(() => {
     reportSalaryRequest({}, params);
+    setMonthRange(calculateMonthRange(params));
   }, [params, reportSalaryRequest]);
 
   return (
@@ -52,11 +56,9 @@ export const Reports = ({
           <FilterDate setParams={setParams} />
         </Col>
         <Col sm="4">
-          <h4 style={{ textAlign: "right" }}>
-            {`${moment()
-              .month(params.month - 1)
-              .format("MMM")}, ${params.year}`}
-          </h4>
+          <h5 style={{ textAlign: "right" }}>
+          {`${monthRange.start} - ${monthRange.end}`}
+          </h5>
         </Col>
       </Row>
 
@@ -73,11 +75,12 @@ export const Reports = ({
             keyField="_id"
             data={data}
             columns={payrollReportTableColumns(isAdmin)}
-            striped
+            /* striped */
             hover
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={payrollReportDefaultSorted()}
             noDataIndication="No payroll data"
             // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}

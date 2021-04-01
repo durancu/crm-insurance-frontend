@@ -7,7 +7,7 @@ import {
   buttonHeaderFormatter,
   cargoInsurerFormatter,
   componentDeleteFormatter,
-  customerFormatter,
+  saleCustomerFormatter,
   dateFormatter,
   footerPriceFormatter,
   liabilityInsurerFormatter,
@@ -35,9 +35,7 @@ export const salesTableColumns = (
       return { width: "5%" };
     },
     sort: true,
-    footer: (columnData) =>
-      `
-            ${columnData.reduce((acc, item) => acc + 1, 0)} sales`,
+    footer: (columnData) =>`${columnData.reduce((acc, item) => acc + 1, 0)} sales`,
     editor: {
       type: Type.DATE,
     },
@@ -55,7 +53,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: sellersOptions(sellers),
     }),
     editable: isAdmin,
@@ -76,13 +74,13 @@ export const salesTableColumns = (
     align: "left",
     headerAlign: "left",
     footer: "",
-    filter: textFilter({ placeholder: "Search" }),
+    filter: textFilter({ placeholder: "search..." }),
     editable: false, // Not editable, because is a sell
   },
   {
     dataField: "customer._id",
     text: "Customer",
-    formatter: customerFormatter,
+    formatter: saleCustomerFormatter,
     headerStyle: () => {
       return { width: "10%" };
     },
@@ -90,7 +88,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: customersOptions(customers),
     }),
     editable: true,
@@ -110,7 +108,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,
@@ -144,7 +142,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,
@@ -178,7 +176,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,
@@ -212,7 +210,7 @@ export const salesTableColumns = (
     headerAlign: "left",
     footer: "",
     filter: selectFilter({
-      placeholder: "Search",
+      placeholder: "search...",
       options: insurersOptions(insurers),
     }),
     editable: true,
@@ -242,6 +240,7 @@ export const salesTableColumns = (
     formatter: priceFormatter,
     sort: true,
     align: "right",
+    editable: false,
     footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
     footerFormatter: footerPriceFormatter,
     footerAlign: "right",
@@ -329,7 +328,7 @@ export const salesTableColumns = (
 ];
 
 export const customersOptions = (customers) =>
-  customers.map((customer) => ({ value: customer._id, label: customer.name }));
+  customers.map((customer) => ({ value: customer._id, label: `${customer.company||customer.name}` }));
 
 export const sellersOptions = (sellers) =>
   sellers.map((seller) => ({

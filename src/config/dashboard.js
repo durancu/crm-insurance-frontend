@@ -6,7 +6,7 @@ export const DASHBOARD_TEMPLATES = {
     title: "Sales Count By Day",
     width: 6,
     queryParams: {
-      dataCriteria: "totalCharge",
+      dataCriteria: "premium",
       groupingCriteria: "day",
       aggregation: "count",
     },
@@ -18,7 +18,7 @@ export const DASHBOARD_TEMPLATES = {
     title: "Sales Count By Day",
     width: 6,
     queryParams: {
-      dataCriteria: "totalCharge",
+      dataCriteria: "premium",
       groupingCriteria: "day",
       aggregation: "count",
     },
@@ -30,7 +30,7 @@ export const DASHBOARD_TEMPLATES = {
     title: "Total Sales Amount By Location",
     width: 6,
     queryParams: {
-      dataCriteria: "totalCharge",
+      dataCriteria: "premium",
       groupingCriteria: "location",
       aggregation: "sum",
     },
@@ -42,7 +42,7 @@ export const DASHBOARD_TEMPLATES = {
     type: "bar",
     width: 6,
     queryParams: {
-      dataCriteria: "totalCharge",
+      dataCriteria: "premium",
       groupingCriteria: "seller",
       aggregation: "sum",
     },
@@ -66,7 +66,7 @@ export const DASHBOARD_TEMPLATES = {
     width: 6,
     title: "Total Sale By Day",
     queryParams: {
-      dataCriteria: "totalCharge",
+      dataCriteria: "premium",
       groupingCriteria: "day",
       aggregation: "sum",
     },
@@ -78,7 +78,7 @@ export const DASHBOARD_TEMPLATES = {
     title: "Total Sales Amount By Location",
     width: 6,
     queryParams: {
-      dataCriteria: "totalCharge",
+      dataCriteria: "premium",
       groupingCriteria: "location",
       aggregation: "sum",
     },
@@ -90,7 +90,7 @@ export const DASHBOARD_TEMPLATES = {
     title: "Total Sales By Seller",
     width: 6,
     queryParams: {
-      dataCriteria: "totalCharge",
+      dataCriteria: "premium",
       groupingCriteria: "seller",
       aggregation: "sum",
     },

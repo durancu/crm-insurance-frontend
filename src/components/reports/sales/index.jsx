@@ -57,11 +57,12 @@ export const Reports = ({
             keyField="_id"
             data={sales}
             columns={salesReportTableColumns(isAdmin)}
-            striped
+            /* striped */
             hover
             bordered={false}
             responsive
             filter={filterFactory()}
+            filterPosition="top"
             defaultSorted={salesReportDefaultSorted()}
             noDataIndication="No registered sales"
             // cellEdit={cellEditFactory({ mode: "click", blurToSave: false })}

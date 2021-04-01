@@ -17,6 +17,7 @@ import {
 import { userCreateRequest, userUpdateRequest } from "../../../redux/actions";
 import { USER_SETTINGS } from "../../../config/user";
 import { BUSINESS_SETTINGS } from "../../../config/company";
+import { userCreateValidate } from "./userCreateValidate";
 
 const UserCreate = ({
   loading,
@@ -37,13 +38,14 @@ const UserCreate = ({
     email: "",
     phone: "",
     position: "",
-    role: "",
+    roles: [],
     location: "",
     password: "",
     baseSalary: "",
   };
 
   const [form, setForm] = useState(defaultForm);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     edit ? setForm(user) : setForm(defaultForm);
@@ -51,20 +53,25 @@ const UserCreate = ({
   }, [edit, user]);
 
   const handleChange = ({ target }) => {
-    setForm((form) => ({ ...form, [target.name]: target.value }));
+    target.name === "roles"
+      ? setForm((form) => ({ ...form, [target.name]: [target.value] }))
+      : setForm((form) => ({ ...form, [target.name]: target.value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const result = userCreateValidate(form);
+    setErrors(result);
+    if (!Object.keys(result).length) {
+      edit ? userUpdateRequest(form, form._id) : userCreateRequest(form);
 
-    edit ? userUpdateRequest(form, form._id) : userCreateRequest(form);
-
-    setTimeout(() => {
-      if (!error) {
-        clearForm();
-        showModal();
-      }
-    }, 1000);
+      setTimeout(() => {
+        if (!error) {
+          clearForm();
+          showModal();
+        }
+      }, 1000);
+    }
   };
 
   const clearForm = () => {
@@ -73,15 +80,17 @@ const UserCreate = ({
 
   return (
     <Fragment>
-      <Modal show={modal} onHide={showModal} backdrop={"static"}>
+      <Modal show={modal} onHide={showModal} backdrop={"static"} size="lg">
         <Form onSubmit={handleSubmit}>
           <fieldset disabled={loading || loadingGetUser}>
             <Modal.Header>
-              <Modal.Title>Users {edit ? `Update` : `Create`}</Modal.Title>
+              <Modal.Title>
+                {edit ? `Update` : `Create New`} Employee
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>First Name
@@ -91,11 +100,14 @@ const UserCreate = ({
                       name="firstName"
                       value={form.firstName}
                       onChange={handleChange}
-                      required
+                      isInvalid={errors.firstName}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.firstName}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Last Name
@@ -105,13 +117,16 @@ const UserCreate = ({
                       name="lastName"
                       value={form.lastName}
                       onChange={handleChange}
-                      required
+                      isInvalid={errors.lastName}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.lastName}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Username
@@ -122,11 +137,14 @@ const UserCreate = ({
                       value={form.username}
                       onChange={handleChange}
                       disabled={edit}
-                      required
+                      isInvalid={errors.username}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.username}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Phone number
@@ -135,16 +153,18 @@ const UserCreate = ({
                       type="tel"
                       name="phone"
                       value={form.phone}
-                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                       onChange={handleChange}
                       placeholder="123-456-7890"
-                      required
+                      isInvalid={errors.phone}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.phone}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Location
@@ -155,10 +175,10 @@ const UserCreate = ({
                       value={form.location}
                       onChange={handleChange}
                       custom
-                      required
+                      isInvalid={errors.location}
                     >
                       <option value="" disabled>
-                        Choose Role
+                        Choose Location
                       </option>
                       {BUSINESS_SETTINGS.locations.map((location) => (
                         <option key={location.id} value={location.id}>
@@ -166,9 +186,12 @@ const UserCreate = ({
                         </option>
                       ))}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.location}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Position
@@ -177,74 +200,96 @@ const UserCreate = ({
                       type="text"
                       name="position"
                       value={form.position}
-                      required
                       onChange={handleChange}
+                      isInvalid={errors.position}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.position}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-              </Row>
-              <Row>
-                <Col>
+                <Col sm="6">
                   <Form.Group>
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Role
                     </Form.Label>
                     <Form.Control
                       as="select"
-                      name="role"
-                      value={form.role}
+                      name="roles"
+                      value={form.roles}
                       onChange={handleChange}
                       custom
-                      required
+                      isInvalid={errors.roles}
                     >
                       <option value="" disabled>
                         Choose Role
                       </option>
-                      {USER_SETTINGS.roles.map((role) => (
-                        <option key={role.id} value={role.id}>
-                          {role.name}
-                        </option>
-                      ))}
+                      {USER_SETTINGS.roles
+                        .filter(({ id }) => id !== "ADMIN" && id !== "OWNER")
+                        .map((role) => (
+                          <option key={role.id} value={role.id}>
+                            {role.name}
+                          </option>
+                        ))}
                     </Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.roles}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Salary
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="baseSalary"
+                      value={form.baseSalary}
+                      onChange={handleChange}
+                      isInvalid={errors.baseSalary}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.baseSalary}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Email
+                    </Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      isInvalid={errors.email}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.email}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+                <Col sm="6">
+                  <Form.Group>
+                    <Form.Label style={{ fontSize: "small" }}>
+                      <span style={{ color: "red" }}>* </span>Password
+                    </Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      value={edit ? undefined : form.password}
+                      onChange={handleChange}
+                      isInvalid={errors.password}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.password}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Base Salary
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="baseSalary"
-                  value={form.baseSalary}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Email
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Password
-                </Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  value={edit ? undefined : form.password}
-                  onChange={handleChange}
-                  required={!edit}
-                />
-              </Form.Group>
             </Modal.Body>
             <Modal.Footer>
               <Container>

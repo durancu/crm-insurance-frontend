@@ -9,6 +9,9 @@ export const dashboardGetRequest = (payload,queryParams={}) => ({
 export const dashboardGetFail = () => ({
   type: types.DASHBOARD_GET_FAIL,
 });
+export const dashboardGetError = () => ({
+  type: types.DASHBOARD_GET_ERROR,
+});
 
 export const dashboardGetSuccess = (payload) => ({
   type: types.DASHBOARD_GET_SUCCESS,

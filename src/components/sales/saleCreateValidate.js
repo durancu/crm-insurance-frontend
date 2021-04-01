@@ -6,33 +6,33 @@ export const salesCreateValidate = (values) => {
   !values.soldAt && (errors.soldAt = "Sale Date is required");
   !values.customer && (errors.customer = "Customer is required");
 
-  !values.liabilityInsurer &&
+/*   !values.liabilityInsurer &&
     !values.cargoInsurer &&
     !values.physicalDamageInsurer &&
     !values.wcGlUmbInsurer &&
-    (errors.insurers = "Please choose at least one insurance company");
+    (errors.insurers = "Please choose at least one insurance company"); */
 
   if (values.liabilityInsurer)
     if (isInvalidNumber(values.liabilityCharge))
-      errors.liabilityCharge = "Liability Charge Insurer is required";
+      errors.liabilityCharge = "Charge is required";
     else if (values.liabilityCharge <= 0)
       errors.liabilityCharge = "Value must be greater than 0";
 
   if (values.cargoInsurer)
     if (isInvalidNumber(values.cargoCharge))
-      errors.cargoCharge = "Motor Cargo Insurer is required";
+      errors.cargoCharge = "Charge is required";
     else if (values.cargoCharge <= 0)
       errors.cargoCharge = "Value must be greater than 0";
 
   if (values.physicalDamageInsurer)
     if (isInvalidNumber(values.physicalDamageCharge))
-      errors.physicalDamageCharge = "Physical Damage Charge is required";
+      errors.physicalDamageCharge = "Charge is required";
     else if (values.physicalDamageCharge <= 0)
       errors.physicalDamageCharge = "Value must be greater than 0";
 
   if (values.wcGlUmbInsurer)
     if (isInvalidNumber(values.wcGlUmbCharge))
-      errors.wcGlUmbCharge = "WC/GL/UMB Charge is required";
+      errors.wcGlUmbCharge = "Charge is required";
     else if (values.wcGlUmbCharge <= 0)
       errors.wcGlUmbCharge = "Value must be greater than 0";
 
@@ -47,8 +47,8 @@ export const salesCreateValidate = (values) => {
 
   if (isInvalidNumber(values.totalCharge))
     errors.totalCharge = "Down payment is required";
-  else if (values.totalCharge <= 0)
-    errors.totalCharge = "Down payment must be greater than 0";
+  else if (values.totalCharge < 0)
+    errors.totalCharge = "Value must be greater or equal than 0";
 
   if (isInvalidNumber(values.chargesPaid))
     errors.chargesPaid = "Charges is required";

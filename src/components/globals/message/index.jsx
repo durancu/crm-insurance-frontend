@@ -21,35 +21,31 @@ const Messages = ({ config, time }) => {
     <div
       aria-live="polite"
       aria-atomic="true"
-      className="d-flex justify-content-center align-items-center"
+      style={{
+        position: "absolute",
+        top: "20px",
+        right: "10px",
+        marginBottom: "10px",
+        zIndex: 10000000,
+      }}
     >
       <Toast
-        /*  className={`bg-${color[config.type]}`} */
         aria-live="assertive"
         aria-atomic="true"
         role="alert"
         onClose={() => setShow(false)}
         show={show}
-        /* delay={3000}
-        autohide */
+        delay={3000}
+        autohide
       >
         <Toast.Header>
           <configData.icon className={`mr-1 text-${configData.color}`} />
           <strong className={`mr-auto text-${configData.color}`}>
             {config.title}
           </strong>
-          {/* <small className="text-muted">
-            {config.hasOwnProperty("time") &&
-              moment(time).startOf("hour").fromNow()}
-          </small> */}
         </Toast.Header>
         {config.hasOwnProperty("messages") && (
           <Toast.Body>
-            {config.hasOwnProperty("statusCode") && (
-              <>
-                <strong>Error:</strong> config.statusCode
-              </>
-            )}
             {Object.keys(config.messages).length > 0 && (
               <MessageList messages={config.messages} />
             )}

@@ -4,7 +4,7 @@ import Messages from "./message";
 
 export default function Body({ children }) {
   return (
-    <Container fluid style={{ maxWidth: "98%", fontSize: "0.9rem" }}>
+    <Container fluid style={{ maxWidth: "98%", marginBottom:"80px" }}>
       <Messages />
       {children}
     </Container>

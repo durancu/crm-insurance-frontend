@@ -19,6 +19,12 @@ export const customerUpdateRequest = (payload, _id) => {
 export const customerUpdateFail = () => ({
   type: types.CUSTOMERS_UPDATE_FAIL,
 });
+/** Action creator
+ * @returns {string} Action
+ */
+export const customerUpdateError = () => ({
+  type: types.CUSTOMERS_UPDATE_ERROR,
+});
 
 /** Action creator
  * @param {object} payload

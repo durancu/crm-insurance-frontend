@@ -1,20 +1,43 @@
 import { call, put, spawn, takeLatest } from "redux-saga/effects";
 
 import * as types from "../../actions/actionTypes";
-import { customerDeleteFail, customerDeleteSuccess } from "../../actions";
+import {
+  customerDeleteFail,
+  customerDeleteSuccess,
+  customerDeleteError,
+  customerLoadRequest,
+  messageLaunchRequest,
+} from "../../actions";
 
 import { apiDelete } from "../../../global/apiMethods";
-
-const apiCall = (id) =>
-  apiDelete(`customers/${id}`, true).catch((err) => console.log(err));
+import { formatterMessage } from "../../../config/messageConfig";
 
 const sagaRequest = function* sagaRequest({ payload }) {
+  let config = {};
+  const apiCall = (id) =>
+    apiDelete(`customers/${id}`, true).catch(({ response }) => {
+      config = formatterMessage(response, "customer", "delete");
+      return console.log(response);
+    });
+
   try {
     const response = yield call(apiCall, payload);
-    yield put(customerDeleteSuccess(response.data._id));
+    config = formatterMessage(response, "customer", "delete");
+    switch (config.type) {
+      case "success":
+        yield put(customerDeleteSuccess(response.data));
+        yield put(customerLoadRequest());
+        break;
+      case "error":
+        yield put(customerDeleteError());
+        break;
+      default:
+        break;
+    }
   } catch (e) {
     yield put(customerDeleteFail());
   }
+  yield put(messageLaunchRequest(config));
 };
 
 const customerDeleteRequest = function* customerDeleteRequest() {

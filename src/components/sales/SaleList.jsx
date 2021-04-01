@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import moment from "moment";
 
 //Actions
 import {
@@ -13,7 +14,7 @@ import {
 } from "../../redux/actions";
 
 //Components
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import Spinner from "../globals/spinner";
 
 //import SalesFilters from "./SalesFilters";
@@ -42,6 +43,7 @@ export const SaleList = ({
   insurers,
   user,
 }) => {
+
   const [isAdmin] = useState(false);
   const [modal, setModal] = useState(false);
   const [id, setId] = useState("");
@@ -49,7 +51,6 @@ export const SaleList = ({
     userLoadRequest();
     customerLoadRequest();
     insurerListRequest();
-    //user.hasOwnProperty("roles") && ADMIN_ROLES.includes(user.roles[0]) && setIsAdmin(true);
   }, [
     saleListRequest,
     customerLoadRequest,
@@ -66,101 +67,114 @@ export const SaleList = ({
   const showModal = () => {
     setModal(!modal);
   };
+  
   return (
     <>
-      <Row className="mb-2">
-        <Col lg="10" sm="6">
-          {/*  <SalesFilters model={'sale'}/> */}
-          <DateRangeFilter model={"sale"} />
-        </Col>
-        <Col lg="2" sm="6" align="right">
-          <SaleCreate />
-        </Col>
-      </Row>
+      <Card>
+        <Card.Body>
+          <Row className="mb-2">
+            <Col lg="8" sm="6">
+              <DateRangeFilter model={"sale"} />
+            </Col>
+            <Col lg="4" sm="6" align="right">
+              <SaleCreate />
+            </Col>
+          </Row>
+          {loadingCreate || loadingDelete || loadingUpdate ? (
+            <Row className="justify-content-md-center">
+              <Col md="auto">
+                <Spinner />
+              </Col>
+            </Row>
+          ) : (
+            <Row>
+              <Col>
+                <DeleteModelAlert
+                  id={id}
+                  modal={modal}
+                  handleModal={showModal}
+                  deleteElement={saleDeleteRequest}
+                >
+                  Sale
+                </DeleteModelAlert>
+                <BootstrapTable
+                  bootstrap4
+                  keyField="_id"
+                  data={sales}
+                  columns={salesTableColumns(
+                    isAdmin,
+                    setId,
+                    showModal,
+                    customers,
+                    sellers,
+                    insurers
+                  )}
+                  /* striped */
+                  hover
+                  bordered={false}
+                  responsive
+                  filter={filterFactory()}
+                  filterPosition="top"
+                  defaultSorted={salesDefaultSorted()}
+                  noDataIndication="No registered sales"
+                  cellEdit={cellEditFactory({
+                    mode: "click",
+                    afterSaveCell: (oldValue, newValue, sale, column) => {
+                      const fieldName = column.dataField;
 
-      {loadingCreate || loadingDelete || loadingUpdate ? (
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            <Spinner />
-          </Col>
-        </Row>
-      ) : (
-        <Row>
-          <DeleteModelAlert
-            id={id}
-            modal={modal}
-            handleModal={showModal}
-            deleteElement={saleDeleteRequest}
-          >
-            Sale
-          </DeleteModelAlert>
-          <BootstrapTable
-            bootstrap4
-            keyField="_id"
-            data={sales}
-            columns={salesTableColumns(
-              isAdmin,
-              setId,
-              showModal,
-              customers,
-              sellers,
-              insurers
-            )}
-            striped
-            hover
-            bordered={false}
-            responsive
-            filter={filterFactory()}
-            defaultSorted={salesDefaultSorted()}
-            noDataIndication="No registered sales"
-            cellEdit={cellEditFactory({
-              mode: "click",
-              afterSaveCell: (oldValue, newValue, sale, column) => {
-                const fieldName = column.dataField;
+                      let payload = {
+                        _id: sale._id,
+                      };
 
-                let payload = {
-                  _id: sale._id,
-                };
+                      const numericFields = [
+                        "fees",
+                        "permits",
+                        "tips",
+                        "liabilityCharge",
+                        "cargoCharge",
+                        "physicalDamageCharge",
+                        "wcGlUmbCharge",
+                        "premium",
+                        "chargesPaid",
+                        "premium",
+                      ];
+                      const referenceFields = [
+                        "customer._id",
+                        "seller._id",
+                        "liabilityInsurer._id",
+                        "cargoInsurer._id",
+                        "physicalDamageInsurer._id",
+                        "wcGlUmbInsurer._id",
+                      ];
 
-                const numericFields = [
-                  "fees",
-                  "permits",
-                  "tips",
-                  "liabilityCharge",
-                  "cargoCharge",
-                  "physicalDamageCharge",
-                  "wcGlUmbCharge",
-                  "premium",
-                  "chargesPaid",
-                  "premium",
-                ];
-                const referenceFields = [
-                  "customer._id",
-                  "seller._id",
-                  "liabilityInsurer._id",
-                  "cargoInsurer._id",
-                  "physicalDamageInsurer._id",
-                  "wcGlUmbInsurer._id",
-                ];
+                      if (numericFields.includes(fieldName)) {
+                        payload = {
+                          ...payload,
+                          [fieldName]: Math.round(newValue * 100) / 100,
+                        };
+                      }
 
-                if (numericFields.includes(fieldName)) {
-                  payload = {
-                    ...payload,
-                    [fieldName]: Math.round(newValue * 100) / 100,
-                  };
-                }
+                      if (referenceFields.includes(fieldName)) {
+                        const referenceField = fieldName.split(".")[0];
+                        payload = { ...payload, [referenceField]: newValue };
+                      }
 
-                if (referenceFields.includes(fieldName)) {
-                  const referenceField = fieldName.split(".")[0];
-                  payload = { ...payload, [referenceField]: newValue };
-                }
+                      if (fieldName === "soldAt") {
+                        payload = {
+                          ...payload,
+                          soldAt: moment(newValue).toISOString(),
+                        };
+                      }
 
-                saleUpdateRequest(payload);
-              },
-            })}
-          />
-        </Row>
-      )}
+                      saleUpdateRequest(payload);
+                    },
+                  })}
+                />
+              </Col>
+            </Row>
+          )}
+        </Card.Body>
+      </Card>
     </>
   );
 };

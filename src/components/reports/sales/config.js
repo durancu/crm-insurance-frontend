@@ -4,7 +4,6 @@ import {
     priceFormatter,
     footerPriceFormatter,
     joinedInsurerNamesFormatter,
-    locationFormatter,
 } from "../../globals/functions";
 
 //Components
@@ -33,11 +32,10 @@ export const salesReportTableColumns = () =>
             headerAlign: "left",
             footer: (columnData) =>
                 `${columnData.reduce((acc, item) => acc + 1, 0)} records count`,
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "locationName",
-            formatter: locationFormatter,
             text: "Location",
             headerStyle: () => {
                 return { width: "10%" };
@@ -47,7 +45,7 @@ export const salesReportTableColumns = () =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "customerName",
@@ -58,7 +56,7 @@ export const salesReportTableColumns = () =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
             dataField: "insurerNames",
@@ -70,11 +68,11 @@ export const salesReportTableColumns = () =>
             align: "left",
             headerAlign: "left",
             footer: "",
-            filter: textFilter({ placeholder: "Search" }),
+            filter: textFilter({ placeholder: "search..." }),
         },
         {
-            dataField: "premium",
-            text: "Premium",
+            dataField: "totalCharge",
+            text: "Down Payment",
             headerAlign: "right",
             formatter: priceFormatter,
             sort: true,
@@ -117,8 +115,8 @@ export const salesReportTableColumns = () =>
             footerAlign: "right",
         },
         {
-            dataField: "totalCharge",
-            text: "Total",
+            dataField: "premium",
+            text: "Premium",
             headerAlign: "right",
             formatter: priceFormatter,
             sort: true,
@@ -127,6 +125,7 @@ export const salesReportTableColumns = () =>
             footerFormatter: footerPriceFormatter,
             footerAlign: "right",
         },
+
     ];
 
 

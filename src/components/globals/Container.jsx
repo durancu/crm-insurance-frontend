@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -7,8 +7,8 @@ import { userAuthCheckRequest } from "../../redux/actions";
 //components
 import Header from "./Header";
 import Body from "./Body";
-
-
+import Footer from "./Footer";
+import { userIpIsAllowed } from "./functions";
 function Containers({
   children,
   userAuthCheckRequest,
@@ -20,11 +20,27 @@ function Containers({
     userAuthCheckRequest();
   }, [userAuthCheckRequest]);
 
+  const [allowedIp, setAllowedIp] = useState(false);
+
+  useEffect(() => {
+    userIpIsAllowed().then(res => {
+      setAllowedIp(res);
+    }).catch(setAllowedIp("N/A"));
+
+  }, []);
+
   return (
     <>
-      {authCheck && <Redirect to="/" />}
-      {authCheck && <Header />}
-      <Body>{children}</Body>
+      {allowedIp ? (
+        <>
+          {authCheck && <Redirect to="/" />}
+          {authCheck && <Header />}
+          <Body>{children}</Body>
+          {authCheck && <Footer />}
+        </>
+      ) : (
+        <> Your IP is not allowed to access this website</>
+      )}
     </>
   );
 }

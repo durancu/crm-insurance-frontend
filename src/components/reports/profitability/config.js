@@ -17,7 +17,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
     headerAlign: "left",
     footer: "TOTALS",
     formatter: locationFormatter,
-    filter: textFilter({ placeholder: "Search" }),
+    filter: textFilter({ placeholder: "search..." }),
   },
   {
     dataField: "sellerName",
@@ -89,7 +89,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
     headerStyle: () => { return { width: "8%" } },
   },
   {
-    dataField: "totalCharge",
+    dataField: "premium",
     text: "Sales",
     headerAlign: "right",
     formatter: priceFormatter,

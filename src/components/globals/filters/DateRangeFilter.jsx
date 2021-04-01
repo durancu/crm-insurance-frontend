@@ -59,7 +59,6 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
         <Form.Label htmlFor="dateRangeName" className="my-1 mr-2">
           Date:
         </Form.Label>
-
         <Form.Control
           name="dateRangeName"
           as="select"
@@ -106,6 +105,7 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
             required
           />
         </Form.Group>
+
       </Form.Row>
     </Form>
   );

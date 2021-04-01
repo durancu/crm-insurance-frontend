@@ -3,8 +3,9 @@ import moment from "moment";
 import { BUSINESS_SETTINGS } from "../../config/company";
 import { Person, Building, Trash, Check, Key } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
-import { USER_SETTINGS } from "../../config/user";
+import { isAdminCheck, USER_SETTINGS } from "../../config/user";
 import { TooltipIcon } from "./TooltipIcon";
+import publicIp from 'public-ip';
 
 export const dataTransform = (element) => {
   let insurers = [];
@@ -67,6 +68,13 @@ export const componentDeleteFormatter = (cell, row) => {
   );
 };
 
+export const calculateMonthRange = (dateParams) => {
+  return {
+    start: moment({ "day": 21, "month": dateParams.month, "year": dateParams.year }).subtract(1, 'months').format("MMM Do"),
+    end: moment({ "day": 20, "month": dateParams.month, "year": dateParams.year }).format("MMM Do, YYYY")
+  }
+}
+
 //---------------------------------------
 
 //INSURERS FUNCTIONS
@@ -81,16 +89,17 @@ export const isConfirmFormatter = (cell) =>
   cell ? <Check color="royalblue" size={40} /> : <strong>-</strong>;
 
 export const componentPasswordFormatter = (cell, row) => {
-  return (
-    <Button
-      className="mt-1"
-      style={{ border: "none" }}
-      size="sm"
-      variant="outline-success"
-    >
-      <Key />
-    </Button>
-  );
+  if (!isAdminCheck(row))
+    return (
+      <Button
+        className="mt-1"
+        style={{ border: "none" }}
+        size="sm"
+        variant="outline-success"
+      >
+        <Key />
+      </Button>
+    );
 };
 
 export function baseSalaryFormatter(cell, row) {
@@ -106,13 +115,13 @@ export function baseSalaryFormatter(cell, row) {
 }
 
 export const userRolesFormatter = (cell, row) => {
-  const name = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).name;
+  const name = USER_SETTINGS.roles.find(({ id }) => id === cell).name;
   //const Icon = USER_SETTINGS.roles.find(({ id }) => id === cell[0]).icon;
-  
-    /* <TooltipIcon title={name}>
-      <Icon size="24px" />
-    </TooltipIcon> */
-  
+
+  /* <TooltipIcon title={name}>
+    <Icon size="24px" />
+  </TooltipIcon> */
+
   return <span>{name}</span>;
 };
 //---------------------------------------
@@ -128,7 +137,7 @@ export function totalPriceFormatter(cell, row) {
   if (cell) {
     return (
       <span>
-        <strong>{preciseNumber(cell, 2)}</strong>
+        {preciseNumber(cell, 2)}
       </span>
     );
   }
@@ -137,7 +146,7 @@ export function totalPriceFormatter(cell, row) {
 }
 
 export function footerPriceFormatter(column, colIndex, { text }) {
-  return <strong>{preciseNumber(text, 2)}</strong>;
+  return <span>{preciseNumber(text, 2)}</span>;
 }
 
 export function dateFormatter(cell, row) {
@@ -162,8 +171,12 @@ export function locationName(locationCode) {
   ).name;
 }
 
-export function customerFormatter(cell, row) {
-  return row.customer.name;
+export function saleCustomerFormatter(cell, row) {
+  return row.customerName;
+}
+
+export function customerCompanyFormatter(cell, row) {
+  return row.company || "-";
 }
 
 export function sellerFormatter(cell, row) {
@@ -220,6 +233,28 @@ export function insurerNameFormatter(cell, row) {
     .join(" / ");
 }
 
+export function rowIsNotAdmin(cell, row) {
+  return row.roles[0] !== "ADMIN";
+}
+
+export async function userPublicIPV4Address() {
+    return await publicIp.v4();
+}
+
+export async function userIpIsAllowed () {
+  const addresses = process.env.REACT_APP_IP_WHITELIST
+    ? process.env.REACT_APP_IP_WHITELIST.split(",")
+    : [];
+
+  console.log(addresses);
+
+  const ipAddress = await userPublicIPV4Address();
+
+  console.log(ipAddress);
+  return addresses.includes(ipAddress);
+
+}
+
 /** Return number
  * @param {number} number
  * @return {number} number
@@ -230,23 +265,23 @@ const transformNumber = (number) => (isNaN(number) ? 0 : number);
  * @param {object} formData
  * @returns {number} premium
  */
-export const premiumCalculate = ({
+export const totalPremiumCalculate = ({
   liabilityCharge,
   cargoCharge,
   physicalDamageCharge,
-  wcGlUmbCharge
+  wcGlUmbCharge,
 }) =>
   transformNumber(parseFloat(liabilityCharge)) +
   transformNumber(parseFloat(cargoCharge)) +
   transformNumber(parseFloat(physicalDamageCharge)) +
   transformNumber(parseFloat(wcGlUmbCharge));
-  //
-  //transformNumber(parseFloat(fees)) +
- // transformNumber(parseFloat(permits));
+//+
+//transformNumber(parseFloat(fees)) +
+// transformNumber(parseFloat(permits));
 
 /**Calc pendingPayment
  * @param {object} formData
  * @returns {number} pendingPayment
  */
 export const pendingPaymentCalculate = (form) =>
-transformNumber(parseFloat(form.totalCharge)) - transformNumber(parseFloat(form.chargesPaid));
+  transformNumber(parseFloat(form.totalCharge)) - transformNumber(parseFloat(form.chargesPaid));

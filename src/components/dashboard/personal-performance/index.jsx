@@ -18,9 +18,15 @@ const PersonalPerformance = ({
   dashboardPersonalPerformanceRequest,
 }) => {
   const [params] = useState({
-    month: moment().month() + 1,
+    month: moment().date() > 21 ? moment().month() + 2 : moment().month()+1,
     year: moment().year(),
   });
+
+  const [reportMonth] = useState(
+    moment().date() < 21
+      ? moment({ day: 21 }).subtract(1, "months").format("MMM Do")
+      : moment({ day: 21 }).format("MMM Do")
+  );
 
   useEffect(() => {
     !isAdmin && dashboardPersonalPerformanceRequest({}, params);
@@ -29,7 +35,10 @@ const PersonalPerformance = ({
     <>
       <Row>
         <Col>
-          <h5>Personal Performance</h5>
+          <h4>
+            Monthly Performance{" "}
+            <small>({reportMonth} - Today)</small>
+          </h4>
           <hr />
         </Col>
       </Row>
@@ -45,7 +54,7 @@ const PersonalPerformance = ({
             </Col>
             <Col sm="12" lg="12" style={{ textAlign: "center" }}>
               {data.metrics &&
-                data.metrics.map((metric,i) => (
+                data.metrics.map((metric, i) => (
                   <PersonalPerformanceItem key={i} metric={metric} />
                 ))}
             </Col>

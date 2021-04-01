@@ -6,31 +6,35 @@ import {
   insurerUpdateSuccess,
   insurerListRequest,
   messageLaunchRequest,
+  insurerUpdateError,
 } from "../../actions";
 
 import { apiUpdate } from "../../../global/apiMethods";
-import { LANGUAGE } from "../../../config/language";
+import { formatterMessage } from "../../../config/messageConfig";
 
 const sagaRequest = function* sagaRequest(action) {
-  const config = {};
+  let config = {};
   const apiCall = (data, _id) =>
     apiUpdate(`insurers/${_id}`, data, true).catch(({ response }) => {
-      config.title = LANGUAGE.en.message.fail.insurer.update;
-      config.visible = true;
-      config.type = "error";
-      config.statusCode = response.data.statusCode;
-      config.messages = [response.data.message];
+      config = formatterMessage(response, "insurer", "update");
       return console.log(response);
     });
   const { payload, _id } = action;
   try {
-    yield call(apiCall, payload, _id);
-    config.title = "Success";
-    config.visible = true;
-    config.type = "success";
-    config.messages = [LANGUAGE.en.message.success.insurer.update];
-    yield put(insurerUpdateSuccess());
-    yield put(insurerListRequest());
+    const response = yield call(apiCall, payload, _id);
+    config = formatterMessage(response, "insurer", "update");
+
+    switch (config.type) {
+      case "success":
+        yield put(insurerUpdateSuccess());
+        yield put(insurerListRequest());
+        break;
+      case "error":
+        yield put(insurerUpdateError());
+        break;
+      default:
+        break;
+    }
   } catch (e) {
     yield put(insurerUpdateFail());
   }

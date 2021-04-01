@@ -5,43 +5,53 @@ import { Link } from "react-router-dom";
 //Actions
 import { userLogoutRequest } from "../../redux/actions";
 //Components
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { isAdminCheck, isExecutiveCheck } from "../../config/user";
+import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
+import { PersonCircle, Book } from "react-bootstrap-icons";
+import {
+  isAdminCheck,
+  isExecutiveCheck,
+  isSellerCheck,
+} from "../../config/user";
 
 const Header = ({ user, userLogoutRequest }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
   const [isExecutive, setIsExecutive] = useState(false);
 
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
+    setIsSeller(isSellerCheck(user));
     setIsExecutive(isExecutiveCheck(user));
   }, [user]);
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top">
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" sticky="top" style={{fontSize:"1rem"}}>
       <Container fluid style={{ maxWidth: "98%" }}>
-        <Link className="navbar-brand" to="/">
-          VL17 Insurance Agency
-        </Link>
+        <Navbar.Brand href="/" style={{marginRight:"50px"}}>
+          <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-vl17-crm.png" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Link className="nav-link" to="/">
+          <Nav className="mr-auto fill justify">      
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/">
               Home
             </Link>
-            <Link className="nav-link" to="/manage/sales">
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/sales" hidden={!isAdmin && !isExecutive && !isSeller}>
               Sales
             </Link>
-            <Link className="nav-link" to="/manage/customers">
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/customers">
               Customers
             </Link>
 
-            <Link className="nav-link" to="/manage/users">
+            <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/users">
               Employees
             </Link>
-          </Nav>
-          <Nav className="ml-auto">
-            <NavDropdown title="Reports" id="collasible-nav-dropdown">
+            {(isAdmin || isExecutive) && (
+              <Link className="nav-link" style={{marginRight:"20px"}} to="/manage/insurers">
+                Insurers
+              </Link>
+            )}
+            <NavDropdown title="Reports" style={{marginRight:"20px"}} id="collasible-nav-dropdown">
               <Link className="dropdown-item" to="/reports/sales">
                 Sales
               </Link>
@@ -60,32 +70,24 @@ const Header = ({ user, userLogoutRequest }) => {
               <Link
                 className="dropdown-item"
                 to="/reports/payroll"
-                hidden={!isExecutive}
+                hidden={!isAdmin && !isExecutive}
               >
                 Payroll
               </Link>
             </NavDropdown>
-            {isAdmin && (
-              <NavDropdown title="Manage" id="basic-nav-dropdown">
-                <>
-                  {/* <Link className="dropdown-item" to="/manage/users">
-                    Users
-                  </Link> */}
-                  <Link className="dropdown-item" to="/manage/insurers">
-                    Insurers
-                  </Link>
-                  {/* <NavDropdown.Divider />
-                  <Link className="dropdown-item" to="/manage/company">
-                    Company
-                  </Link> */}
-                </>
-              </NavDropdown>
-            )}
-            <NavDropdown title="Account" id="basic-nav-dropdown">
+          </Nav>
+          <Nav className="ml-auto filled">
+            <Link className="nav-link" to="/training" style={{marginRight:"20px"}}>
+              <Book size={25} />
+            </Link>
+            <NavDropdown
+              title={<PersonCircle size={25} />}
+              id="basic-nav-dropdown"
+            >
               <Link className="dropdown-item" to="/profile">
-                My Profile
-                <NavDropdown.Divider />
+                Profile
               </Link>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/" onClick={userLogoutRequest}>
                 Logout
               </NavDropdown.Item>

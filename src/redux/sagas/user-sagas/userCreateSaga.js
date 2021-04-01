@@ -5,29 +5,33 @@ import {
   userCreateFail,
   userCreateSuccess,
   messageLaunchRequest,
+  userCreateError,
+  userLoadRequest,
 } from "../../actions";
 
 import { apiPost } from "../../../global/apiMethods";
-import { LANGUAGE } from "../../../config/language";
+import { formatterMessage } from "../../../config/messageConfig";
 
 const sagaRequest = function* sagaRequest({ payload }) {
-  const config = {};
+  let config = {};
   const apiCall = (data) =>
     apiPost("users", data, true).catch(({ response }) => {
-      config.title = LANGUAGE.en.message.fail.user.create;
-      config.visible = true;
-      config.type = "error";
-      config.statusCode = response.data.statusCode;
-      config.messages = [response.data.message];
-      return console.log(response);
+      config = formatterMessage(response, "user", "create");
     });
   try {
     const response = yield call(apiCall, payload);
-    config.title = "Success";
-    config.visible = true;
-    config.type = "success";
-    config.messages = [LANGUAGE.en.message.success.user.create];
-    yield put(userCreateSuccess(response.data));
+    config = formatterMessage(response, "user", "create");
+    switch (config.type) {
+      case "success":
+        yield put(userCreateSuccess(response.data));
+        yield put(userLoadRequest());
+        break;
+      case "error":
+        yield put(userCreateError());
+        break;
+      default:
+        break;
+    }
   } catch (e) {
     yield put(userCreateFail());
   }
