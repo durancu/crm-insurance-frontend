@@ -22,10 +22,11 @@ export async function userIpIsAllowed() {
 
   console.log(addresses);
   console.log(ipAddress);
-  console.log(process.env.REACT_APP_ENV);
+  console.log(process.env.REACT_APP_ENV)
 
   return (
-    
+    (process.env.REACT_APP_ENV === "dev" ||
+      process.env.REACT_APP_ENV === "pro") &&
     addresses.includes(ipAddress)
   );
 }

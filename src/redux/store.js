@@ -16,13 +16,13 @@ const composeEnhancers = composeWithDevTools({
 });
 
 let environment;
-
+/* 
 console.log(process.env.REACT_APP_ENV);
 if (process.env.REACT_APP_ENV === "dev") {
   environment = composeEnhancers(applyMiddleware(sagaMiddleware));
-} else if (process.env.REACT_APP_ENV === "pro") {
+} else if (process.env.REACT_APP_REACT_APP_ENV === "pro") {
   environment = applyMiddleware(sagaMiddleware);
-}
+} */
 
 export let store = createStore(
   reducers,
