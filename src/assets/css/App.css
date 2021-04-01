@@ -26,6 +26,13 @@ div.react-bootstrap-table tbody th select {
   height: 24px !important;
 }
 
+div.react-bootstrap-table tbody td input,
+div.react-bootstrap-table tbody td select {
+  padding: 0px 2px 0px 2px !important;
+  font-size: 0.8rem !important;
+  height: 24px !important;
+}
+
 .react-bootstrap-table th,
 tbody th {
   padding: 2px 5px 0px 5px !important;
