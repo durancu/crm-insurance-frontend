@@ -5,6 +5,12 @@ export {
   messageLaunchFail,
   messageLaunchSuccess,
 } from "./message-actions/messageActions";
+//ALLOWED-IP
+export {
+  allowedIpGetFail,
+  allowedIpGetRequest,
+  allowedIpGetSuccess,
+} from "./allowed-ip-actions/allowedIpSetAction";
 
 //User
 export {
