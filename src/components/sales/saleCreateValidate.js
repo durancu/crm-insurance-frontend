@@ -6,11 +6,11 @@ export const salesCreateValidate = (values) => {
   !values.soldAt && (errors.soldAt = "Sale Date is required");
   !values.customer && (errors.customer = "Customer is required");
 
-  !values.liabilityInsurer &&
+/*   !values.liabilityInsurer &&
     !values.cargoInsurer &&
     !values.physicalDamageInsurer &&
     !values.wcGlUmbInsurer &&
-    (errors.insurers = "Please choose at least one insurance company");
+    (errors.insurers = "Please choose at least one insurance company"); */
 
   if (values.liabilityInsurer)
     if (isInvalidNumber(values.liabilityCharge))
@@ -47,8 +47,8 @@ export const salesCreateValidate = (values) => {
 
   if (isInvalidNumber(values.totalCharge))
     errors.totalCharge = "Down payment is required";
-  else if (values.totalCharge <= 0)
-    errors.totalCharge = "Down payment must be greater than 0";
+  else if (values.totalCharge < 0)
+    errors.totalCharge = "Value must be greater or equal than 0";
 
   if (isInvalidNumber(values.chargesPaid))
     errors.chargesPaid = "Charges is required";
