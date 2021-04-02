@@ -236,24 +236,6 @@ export function rowIsNotAdmin(cell, row) {
   return row.roles[0] !== "ADMIN";
 }
 
-/* export async function userPublicIPV4Address() {
-    return await publicIp.v4();
-}
-
-export async function checkUserIpStatus () {
-  const addresses = process.env.REACT_APP_IP_WHITELIST
-    ? process.env.REACT_APP_IP_WHITELIST.split(",")
-    : [];
-
-  console.log(addresses);
-
-  const ipAddress = await userPublicIPV4Address();
-
-  console.log(ipAddress);
-  return addresses.includes(ipAddress);
-
-} */
-
 /** Return number
  * @param {number} number
  * @return {number} number

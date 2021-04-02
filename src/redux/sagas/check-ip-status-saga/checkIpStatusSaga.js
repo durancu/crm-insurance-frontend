@@ -1,27 +1,27 @@
 import { put, call, takeLatest, spawn } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
-import { ipCheckStatusGetFail, ipCheckStatusGetSuccess } from "../../actions";
+import { checkIpStatusGetFail, checkIpStatusGetSuccess } from "../../actions";
 import { checkUserIpStatus, userPublicIPV4Address } from "../../../global/utils";
 
 const sagaRequest = function* sagaRequest() {
   const ipData = {};
   try {
     ipData.ipAddress = yield call(userPublicIPV4Address);
-    ipData.ipCheckStatus = yield call(checkUserIpStatus);
+    ipData.checkIpStatus = yield call(checkUserIpStatus);
 
     console.log(`ipData`, ipData)
-    yield put(ipCheckStatusGetSuccess(ipData));
+    yield put(checkIpStatusGetSuccess(ipData));
   } catch (e) {
-    yield put(ipCheckStatusGetFail());
+    yield put(checkIpStatusGetFail());
   }
 };
 
-const ipCheckStatusRequest = function* ipCheckStatusRequest() {
+const checkIpStatusRequest = function* checkIpStatusRequest() {
   yield takeLatest(types.ALLOWED_IP_GET_REQUEST, sagaRequest);
 };
 
-const ipCheckStatusGetSaga = function* ipCheckStatusGetSaga() {
-  yield spawn(ipCheckStatusRequest);
+const checkIpStatusGetSaga = function* checkIpStatusGetSaga() {
+  yield spawn(checkIpStatusRequest);
 };
 
-export default ipCheckStatusGetSaga;
+export default checkIpStatusGetSaga;

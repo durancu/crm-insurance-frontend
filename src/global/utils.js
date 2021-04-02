@@ -1,4 +1,5 @@
 import publicIp from "public-ip";
+import { checkIpStatusCodes } from "./config";
 
 export const queryStringFromObject = function (object) {
   var parameters = [];
@@ -23,6 +24,6 @@ export async function checkUserIpStatus() {
   return (
     (process.env.REACT_APP_ENV === "local" || process.env.REACT_APP_ENV === "dev") ||
       (process.env.REACT_APP_ENV === "pro" &&
-    addresses.includes(ipAddress))
+    addresses.includes(ipAddress)) ? checkIpStatusCodes.AUTHORIZED : checkIpStatusCodes.UNAUTHORIZED
   );
 }

@@ -5,51 +5,51 @@ import { connect } from "react-redux";
 //Actions
 import {
   userAuthCheckRequest,
-  ipCheckStatusGetRequest,
+  checkIpStatusGetRequest,
 } from "../../redux/actions";
 //components
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
 import Page403 from "./Page403";
-import { IpCheckStatusCodes } from "../../global/config";
+import { checkIpStatusCodes } from "../../global/config";
 function Containers({
   children,
   userAuthCheckRequest,
-  ipCheckStatusGetRequest,
+  checkIpStatusGetRequest,
   error,
   loading,
   authCheck,
-  ipCheckStatus,
-  loadingIpCheckStatus,
+  checkIpStatus,
+  loadingcheckIpStatus,
 }) {
   useEffect(() => {
     userAuthCheckRequest();
   }, [userAuthCheckRequest]);
 
   useEffect(() => {
-    ipCheckStatusGetRequest();
-  }, [ipCheckStatusGetRequest]);
+    checkIpStatusGetRequest();
+  }, [checkIpStatusGetRequest]);
 
   useEffect(() => {
-    console.log(ipCheckStatus);
-  }, [ipCheckStatus]);
+    console.log(checkIpStatus);
+  }, [checkIpStatus]);
 
   return (
     <>
-      {authCheck && ipCheckStatus === IpCheckStatusCodes.AUTHORIZED && (
+      {authCheck && checkIpStatus === checkIpStatusCodes.AUTHORIZED && (
         <Redirect to="/" />
       )}
-      {authCheck && ipCheckStatus === IpCheckStatusCodes.AUTHORIZED && (
+      {authCheck && checkIpStatus === checkIpStatusCodes.AUTHORIZED && (
         <Header />
       )}
-      {ipCheckStatus === IpCheckStatusCodes.AUTHORIZED ? (
+      {checkIpStatus === checkIpStatusCodes.AUTHORIZED ? (
         <Body>{children}</Body>
       ) : (
         <Page403></Page403>
       )}
 
-      {authCheck && ipCheckStatus === IpCheckStatusCodes.AUTHORIZED && (
+      {authCheck && checkIpStatus === checkIpStatusCodes.AUTHORIZED && (
         <Footer />
       )}
     </>
@@ -67,13 +67,13 @@ const mapStateToProps = (state) => ({
   authCheck: state.userProfileReducer.authCheck,
   loading: state.userProfileGetStatusReducer.loading,
   error: state.userProfileGetStatusReducer.error,
-  ipCheckStatus: state.ipCheckStatusReducer.ipCheckStatus,
-  loadingIpCheckStatus: state.ipCheckStatusGetStatusReducer.loading,
+  checkIpStatus: state.checkIpStatusReducer.checkIpStatus,
+  loadingcheckIpStatus: state.checkIpStatusGetStatusReducer.loading,
 });
 
 const mapDispatchToProps = {
   userAuthCheckRequest,
-  ipCheckStatusGetRequest,
+  checkIpStatusGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Containers);

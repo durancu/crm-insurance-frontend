@@ -1,12 +1,12 @@
 import * as types from "../actionTypes";
 
-export const ipCheckStatusGetRequest = () => ({
+export const checkIpStatusGetRequest = () => ({
   type: types.ALLOWED_IP_GET_REQUEST,
 });
-export const ipCheckStatusGetFail = () => ({
+export const checkIpStatusGetFail = () => ({
   type: types.ALLOWED_IP_GET_FAIL,
 });
-export const ipCheckStatusGetSuccess = (payload) => ({
+export const checkIpStatusGetSuccess = (payload) => ({
   type: types.ALLOWED_IP_GET_SUCCESS,
   payload,
 });

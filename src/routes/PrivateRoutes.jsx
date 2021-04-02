@@ -7,24 +7,24 @@ import { Route, Redirect } from "react-router-dom";
 
 import {
   userAuthCheckRequest,
-  ipCheckStatusGetRequest,
+  checkIpStatusGetRequest,
 } from "../redux/actions";
 import Page403 from "../components/globals/Page403";
-import { IpCheckStatusCodes } from "../global/config";
+import { checkIpStatusCodes } from "../global/config";
 
 export const PrivateRoutes = ({
   component: Component,
   authCheck,
-  ipCheckStatus,
+  checkIpStatus,
   ...rest
 }) => {
   useEffect(() => {
-    ipCheckStatusGetRequest();
+    checkIpStatusGetRequest();
   }, []);
 
   useEffect(() => {
-    console.log(ipCheckStatus);
-  }, [ipCheckStatus]);
+    console.log(checkIpStatus);
+  }, [checkIpStatus]);
 
   useEffect(() => {
     userAuthCheckRequest();
@@ -34,9 +34,9 @@ export const PrivateRoutes = ({
     <Route
       {...rest}
       render={(props) => {
-        if (ipCheckStatus === IpCheckStatusCodes.UNCHECKED) {
+        if (checkIpStatus === checkIpStatusCodes.UNCHECKED) {
           return <Component />;
-        } else if (ipCheckStatus === IpCheckStatusCodes.AUTHORIZED) {
+        } else if (checkIpStatus === checkIpStatusCodes.AUTHORIZED) {
           if (authCheck) {
             return <Component {...props} />;
           } else {
@@ -56,12 +56,12 @@ PrivateRoutes.propTypes = {
 
 const mapStateToProps = (state) => ({
   authCheck: state.userProfileReducer.authCheck,
-  ipCheckStatus: state.ipCheckStatusReducer.ipCheckStatus,
+  checkIpStatus: state.checkIpStatusReducer.checkIpStatus,
 });
 
 const mapDispatchToProps = {
   userAuthCheckRequest,
-  ipCheckStatusGetRequest,
+  checkIpStatusGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoutes);
