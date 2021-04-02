@@ -542,7 +542,7 @@ export const SaleCreate = ({
                   <Col>
                     <hr />
                     <p className="mb-3">
-                      <strong>Summary:</strong>
+                      <strong>Others:</strong>
                     </p>
                   </Col>
                 </Form.Row>

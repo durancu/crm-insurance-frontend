@@ -21,6 +21,7 @@ import {
 
 export const salesTableColumns = (
   isAdmin = false,
+  isExecutive = false,
   setId,
   showModal,
   customers = [],
@@ -48,7 +49,7 @@ export const salesTableColumns = (
       return { width: "10%" };
     },
     sort: true,
-    hidden: true, //!isAdmin,
+    hidden: !isAdmin &&  !isExecutive,
     align: "left",
     headerAlign: "left",
     footer: "",

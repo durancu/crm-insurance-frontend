@@ -35,7 +35,7 @@ const Messages = ({ config, time }) => {
         role="alert"
         onClose={() => setShow(false)}
         show={show}
-        delay={3000}
+        delay={5000}
         autohide
       >
         <Toast.Header>

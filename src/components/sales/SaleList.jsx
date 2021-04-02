@@ -25,6 +25,7 @@ import { salesTableColumns, salesDefaultSorted } from "./config";
 import DateRangeFilter from "../globals/filters/DateRangeFilter";
 import SaleCreate from "./SaleCreate";
 import DeleteModelAlert from "../globals/DeleteModelAlert";
+import { isAdminCheck, isExecutiveCheck } from "../../config/user";
 
 export const SaleList = ({
   userLoadRequest,
@@ -44,13 +45,20 @@ export const SaleList = ({
   user,
 }) => {
 
-  const [isAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isExecutive, setIsExecutive] = useState(false);
+  //Functions
+  
+
   const [modal, setModal] = useState(false);
   const [id, setId] = useState("");
   useEffect(() => {
     userLoadRequest();
     customerLoadRequest();
     insurerListRequest();
+    console.log(user);
+    setIsAdmin(isAdminCheck(user));
+    setIsExecutive(isExecutiveCheck(user));
   }, [
     saleListRequest,
     customerLoadRequest,
@@ -103,6 +111,7 @@ export const SaleList = ({
                   data={sales}
                   columns={salesTableColumns(
                     isAdmin,
+                    isExecutive,
                     setId,
                     showModal,
                     customers,

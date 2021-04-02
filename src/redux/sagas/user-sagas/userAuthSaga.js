@@ -15,7 +15,7 @@ const sagaRequest = function* sagaRequest(action) {
 
   const apiCall = (data) =>
     apiPost("auth/login", data).catch(({ response }) => {
-      config.title = response.data.error;
+      config.title = "Error";
       config.visible = true;
       config.type = "error";
       config.messages = [LANGUAGE.en.message.fail.user.login];

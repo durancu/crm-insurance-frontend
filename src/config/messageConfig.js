@@ -26,11 +26,11 @@ export const formatterMessage = (response, type, action) => {
   const { status, data } = response;
 
   if (status >= 200 && status < 300) {
-    config.title = LANGUAGE.en.message.success[type][action];
+    config.title = "Sucess";
     config.type = "success";
     config.messages = [LANGUAGE.en.message.success[type][action]];
   } else {
-    config.title = LANGUAGE.en.message.fail[type][action];
+    config.title = "Error";
     config.type = "error";
     config.messages = [LANGUAGE.en.message.error[type][action], data.message];
   }
