@@ -82,7 +82,6 @@ export const SaleCreate = ({
   useEffect(() => {
     setPremium(totalPremiumCalculate(formStates));
     setPendingPayment(pendingPaymentCalculate(formValues));
-    console.log("chargeShow", chargeShow);
   }, [chargeShow, formStates, formValues]);
 
   //Load data of formValues

@@ -23,10 +23,6 @@ export const PrivateRoutes = ({
   }, []);
 
   useEffect(() => {
-    console.log(checkIpStatus);
-  }, [checkIpStatus]);
-
-  useEffect(() => {
     userAuthCheckRequest();
   });
 

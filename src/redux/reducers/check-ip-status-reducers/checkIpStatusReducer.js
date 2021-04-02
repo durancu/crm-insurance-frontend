@@ -8,7 +8,6 @@ const initialState = {
 const checkIpStatusReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.ALLOWED_IP_GET_SUCCESS:
-      console.log(payload);
       return {
         ...state,
         checkIpStatus: payload.checkIpStatus,

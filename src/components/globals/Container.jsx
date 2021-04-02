@@ -21,7 +21,6 @@ function Containers({
   loading,
   authCheck,
   checkIpStatus,
-  loadingcheckIpStatus,
 }) {
   useEffect(() => {
     userAuthCheckRequest();
@@ -30,10 +29,6 @@ function Containers({
   useEffect(() => {
     checkIpStatusGetRequest();
   }, [checkIpStatusGetRequest]);
-
-  useEffect(() => {
-    console.log(checkIpStatus);
-  }, [checkIpStatus]);
 
   return (
     <>

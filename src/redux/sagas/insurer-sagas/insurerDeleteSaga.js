@@ -17,7 +17,7 @@ const sagaRequest = function* sagaRequest({ payload }) {
   const apiCall = (id) =>
     apiDelete(`insurers/${id}`, true).catch(({ response }) => {
       config = formatterMessage(response, "insurer", "delete");
-      console.log(response);
+      return console.log(response);
     });
   try {
     const response = yield call(apiCall, payload);

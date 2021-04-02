@@ -50,7 +50,6 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
       ...dateRange,
       [target.name]: moment(target.value).format("YYYY-MM-DD"),
     }));
-    console.log(dateRange);
   };
 
   return (

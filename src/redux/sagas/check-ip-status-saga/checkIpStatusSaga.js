@@ -8,8 +8,6 @@ const sagaRequest = function* sagaRequest() {
   try {
     ipData.ipAddress = yield call(userPublicIPV4Address);
     ipData.checkIpStatus = yield call(checkUserIpStatus);
-
-    console.log(`ipData`, ipData)
     yield put(checkIpStatusGetSuccess(ipData));
   } catch (e) {
     yield put(checkIpStatusGetFail());

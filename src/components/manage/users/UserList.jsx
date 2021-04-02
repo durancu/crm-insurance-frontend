@@ -123,7 +123,6 @@ function UserList({
                 cellEdit={cellEditFactory({
                   mode: "click",
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    console.log(column);
                     const fieldName = column.dataField;
                     let payload = {};
                     if (fieldName === "roles[0]") {

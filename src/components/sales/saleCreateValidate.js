@@ -1,16 +1,8 @@
 export const salesCreateValidate = (values) => {
   const errors = {};
 
-  console.log(values);
-
   !values.soldAt && (errors.soldAt = "Sale Date is required");
   !values.customer && (errors.customer = "Customer is required");
-
-/*   !values.liabilityInsurer &&
-    !values.cargoInsurer &&
-    !values.physicalDamageInsurer &&
-    !values.wcGlUmbInsurer &&
-    (errors.insurers = "Please choose at least one insurance company"); */
 
   if (values.liabilityInsurer)
     if (isInvalidNumber(values.liabilityCharge))
