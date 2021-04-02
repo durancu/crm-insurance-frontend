@@ -5,7 +5,7 @@ const initialState = {
   error: false,
 };
 
-const allowedIpGetStatusReducer = (state = initialState, { type }) => {
+const ipCheckStatusGetStatusReducer = (state = initialState, { type }) => {
   switch (type) {
     case types.ALLOWED_IP_GET_REQUEST:
       return { loading: true, error: false };
@@ -21,4 +21,4 @@ const allowedIpGetStatusReducer = (state = initialState, { type }) => {
   }
 };
 
-export default allowedIpGetStatusReducer;
+export default ipCheckStatusGetStatusReducer;

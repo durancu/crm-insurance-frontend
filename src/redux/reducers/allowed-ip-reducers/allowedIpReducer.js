@@ -1,17 +1,17 @@
 import * as types from "../../actions/actionTypes";
 
 const initialState = {
-  allowedIp: false,
+  ipCheckStatus: 2,
   ipAddress: "",
 };
 
-const allowedIpReducer = (state = initialState, { type, payload }) => {
+const ipCheckStatusReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.ALLOWED_IP_GET_SUCCESS:
       console.log(payload);
       return {
         ...state,
-        allowedIp: payload.allowedIp,
+        ipCheckStatus: payload.ipCheckStatus,
         ipAddress: payload.ipAddress,
       };
 
@@ -20,4 +20,4 @@ const allowedIpReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default allowedIpReducer;
+export default ipCheckStatusReducer;

@@ -154,7 +154,7 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => ({
   user: state.userProfileReducer.user,
-  ipAddress: state.allowedIpReducer.ipAddress,
+  ipAddress: state.ipCheckStatusReducer.ipAddress,
 });
 
 const mapDispatchToProps = {

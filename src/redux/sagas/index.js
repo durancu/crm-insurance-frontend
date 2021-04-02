@@ -1,7 +1,7 @@
 import { spawn } from "redux-saga/effects";
 //GLOBAL
 import messageSaga from "./message-saga/messageSaga";
-import allowedIpGetSaga from "./allowed-ip-saga/allowedIpGetSaga";
+import ipCheckStatusGetSaga from "./allowed-ip-saga/ipCheckStatusGetSaga";
 //AUTH
 import userAuthSaga from "./user-sagas/userAuthSaga";
 import userLogoutSaga from "./user-sagas/userLogoutSaga";
@@ -47,7 +47,7 @@ import filterSaga from "./filter-sagas/filterSaga";
 const sagas = function* sagas() {
   //GLOBAL
   yield spawn(messageSaga);
-  yield spawn(allowedIpGetSaga);
+  yield spawn(ipCheckStatusGetSaga);
   //AUTH
   yield spawn(userAuthSaga);
   yield spawn(userLogoutSaga);

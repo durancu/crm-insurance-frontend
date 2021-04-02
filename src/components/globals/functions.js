@@ -240,7 +240,7 @@ export function rowIsNotAdmin(cell, row) {
     return await publicIp.v4();
 }
 
-export async function userIpIsAllowed () {
+export async function checkUserIpStatus () {
   const addresses = process.env.REACT_APP_IP_WHITELIST
     ? process.env.REACT_APP_IP_WHITELIST.split(",")
     : [];

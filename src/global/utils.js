@@ -13,7 +13,7 @@ export const queryStringFromObject = function (object) {
 
 export async function userPublicIPV4Address() { return await publicIp.v4() };
 
-export async function userIpIsAllowed() {
+export async function checkUserIpStatus() {
   const addresses = process.env.REACT_APP_IP_WHITELIST
     ? process.env.REACT_APP_IP_WHITELIST.split(",")
     : [];

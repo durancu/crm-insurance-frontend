@@ -7,10 +7,10 @@ export {
 } from "./message-actions/messageActions";
 //ALLOWED-IP
 export {
-  allowedIpGetFail,
-  allowedIpGetRequest,
-  allowedIpGetSuccess,
-} from "./allowed-ip-actions/allowedIpActions";
+  ipCheckStatusGetFail,
+  ipCheckStatusGetRequest,
+  ipCheckStatusGetSuccess,
+} from "./allowed-ip-actions/ipCheckStatusActions";
 
 //User
 export {

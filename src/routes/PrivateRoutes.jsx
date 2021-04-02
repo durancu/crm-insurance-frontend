@@ -5,23 +5,26 @@ import { Route, Redirect } from "react-router-dom";
 
 //actions
 
-import { userAuthCheckRequest, allowedIpGetRequest } from "../redux/actions";
+import {
+  userAuthCheckRequest,
+  ipCheckStatusGetRequest,
+} from "../redux/actions";
 import Page403 from "../components/globals/Page403";
+import { IpCheckStatusCodes } from "../global/config";
 
 export const PrivateRoutes = ({
   component: Component,
   authCheck,
-  allowedIp,
+  ipCheckStatus,
   ...rest
 }) => {
+  useEffect(() => {
+    ipCheckStatusGetRequest();
+  }, []);
 
   useEffect(() => {
-    allowedIpGetRequest();
-  }, []);
-  
-  useEffect(() => {
-    console.log(allowedIp);
-  }, [allowedIp]);
+    console.log(ipCheckStatus);
+  }, [ipCheckStatus]);
 
   useEffect(() => {
     userAuthCheckRequest();
@@ -30,17 +33,19 @@ export const PrivateRoutes = ({
   return (
     <Route
       {...rest}
-      render={(props) =>
-        allowedIp ? (
-          authCheck ? (
-            <Component {...props} />
-          ) : (
-            <Redirect to="/auth" />
-          )
-        ) : (
-          <Page403></Page403>
-        )
-      }
+      render={(props) => {
+        if (ipCheckStatus === IpCheckStatusCodes.UNCHECKED) {
+          return <Component />;
+        } else if (ipCheckStatus === IpCheckStatusCodes.AUTHORIZED) {
+          if (authCheck) {
+            return <Component {...props} />;
+          } else {
+            return <Redirect to="/auth" />;
+          }
+        } else {
+          return <Page403></Page403>;
+        }
+      }}
     />
   );
 };
@@ -51,12 +56,12 @@ PrivateRoutes.propTypes = {
 
 const mapStateToProps = (state) => ({
   authCheck: state.userProfileReducer.authCheck,
-  allowedIp: state.allowedIpReducer.allowedIp,
+  ipCheckStatus: state.ipCheckStatusReducer.ipCheckStatus,
 });
 
 const mapDispatchToProps = {
   userAuthCheckRequest,
-  allowedIpGetRequest,
+  ipCheckStatusGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoutes);

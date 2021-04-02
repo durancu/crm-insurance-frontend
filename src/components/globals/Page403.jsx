@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Row, Col, Card } from "react-bootstrap";
 import { ShieldLock } from "react-bootstrap-icons";
 
-const Page403 = ({ loadingAllowedIp, ipAddress, allowedIp }) => {
+const Page403 = ({ ipAddress }) => {
   return (
     <>
       <Row style={{ padding: "0 0 0 0", marginTop: "10%" }}>
@@ -29,9 +29,8 @@ const Page403 = ({ loadingAllowedIp, ipAddress, allowedIp }) => {
 };
 
 const mapStateToProps = (state) => ({
-  loadingAllowedIp: state.allowedIpGetStatusReducer.loading,
-  ipAddress: state.allowedIpReducer.ipAddress,
-  allowedIp: state.allowedIpReducer.allowedIp,
+  loadingIpCheckStatus: state.ipCheckStatusGetStatusReducer.loading,
+  ipAddress: state.ipCheckStatusReducer.ipAddress,
 });
 
 export default connect(mapStateToProps)(Page403);
