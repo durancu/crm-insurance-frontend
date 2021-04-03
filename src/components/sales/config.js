@@ -76,9 +76,8 @@ export const salesTableColumns = (
     align: "left",
     headerAlign: "left",
     footer: "",
-    editable: true,
     filter: textFilter({ placeholder: "search..." }),
-    editable: false, // Not editable, because is a sell
+    editable: false, // Not editable, because is a value taken from seller
   },
   {
     dataField: "customer._id",
