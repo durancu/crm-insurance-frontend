@@ -256,9 +256,6 @@ export const totalPremiumCalculate = ({
   transformNumber(parseFloat(cargoCharge)) +
   transformNumber(parseFloat(physicalDamageCharge)) +
   transformNumber(parseFloat(wcGlUmbCharge));
-//+
-//transformNumber(parseFloat(fees)) +
-// transformNumber(parseFloat(permits));
 
 /**Calc pendingPayment
  * @param {object} formData
