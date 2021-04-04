@@ -77,11 +77,11 @@ export const SaleCreate = ({
   //Show modal edit mode
   useEffect(() => {
     if (onEditMode) {
-      setShowSaleModal(onEditMode);
+      setShowSaleModal(true);
       saleGetRequest(saleId);
       setFormValues(saleItem);
     }
-  }, [onEditMode]);
+  }, [onEditMode, saleItem, saleId]);
   //Load Insurer List
   useEffect(() => {
     insurerListRequest();
@@ -169,7 +169,7 @@ export const SaleCreate = ({
                     <Form.Control
                       type="date"
                       name="soldAt"
-                      value={formValues.soldAt}
+                      value={moment(formValues.soldAt).format("YYYY-MM-DD")}
                       isInvalid={errors.soldAt}
                       onChange={handleChange}
                     />
