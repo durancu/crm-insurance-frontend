@@ -44,19 +44,20 @@ export const SaleList = ({
   insurers,
   user,
 }) => {
-
   const [isAdmin, setIsAdmin] = useState(false);
   const [isExecutive, setIsExecutive] = useState(false);
   //Functions
-  
 
+  //Modals
   const [modal, setModal] = useState(false);
+  const [onEditMode, setOnEditMode] = useState(false);
   const [id, setId] = useState("");
+
+  //Functions
   useEffect(() => {
     userLoadRequest();
     customerLoadRequest();
     insurerListRequest();
-    console.log(user);
     setIsAdmin(isAdminCheck(user));
     setIsExecutive(isExecutiveCheck(user));
   }, [
@@ -75,7 +76,12 @@ export const SaleList = ({
   const showModal = () => {
     setModal(!modal);
   };
-  
+
+  const launchEditForm = () => {
+    setOnEditMode(!onEditMode);
+    console.log(`onEditMode`, onEditMode);
+  };
+
   return (
     <>
       <Card>
@@ -85,7 +91,7 @@ export const SaleList = ({
               <DateRangeFilter model={"sale"} />
             </Col>
             <Col lg="4" sm="6" align="right">
-              <SaleCreate />
+              <SaleCreate editState={{onEditMode,setOnEditMode}} saleId={id} />
             </Col>
           </Row>
           {loadingCreate || loadingDelete || loadingUpdate ? (
@@ -110,10 +116,11 @@ export const SaleList = ({
                   keyField="_id"
                   data={sales}
                   columns={salesTableColumns(
-                    isAdmin,
-                    isExecutive,
                     setId,
                     showModal,
+                    launchEditForm,
+                    isAdmin,
+                    isExecutive,
                     customers,
                     sellers,
                     insurers

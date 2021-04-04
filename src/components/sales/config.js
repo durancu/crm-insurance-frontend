@@ -17,13 +17,26 @@ import {
   sellerFormatter,
   totalPriceFormatter,
   wcGlUmbInsurerFormatter,
+  componentEditFormatter,
 } from "../globals/functions";
 
+/**salesTableColumns
+ * @param {string} setId
+ * @param {Function} showModal 
+ * @param {Function} showEdit
+ * @param {boolean} isAdmin
+ * @param {boolean} isExecutive
+ * @param {Array} customers
+ * @param {Array} sellers
+ * @param {Array} insurers
+ * @returns {Array} Objects Array
+ */
 export const salesTableColumns = (
+  setId,
+  showModal = Function,
+  showEdit = Function,
   isAdmin = false,
   isExecutive = false,
-  setId,
-  showModal,
   customers = [],
   sellers = [],
   insurers = []
@@ -37,7 +50,8 @@ export const salesTableColumns = (
     },
     sort: true,
     editable: true,
-    footer: (columnData) =>`${columnData.reduce((acc, item) => acc + 1, 0)} sales`,
+    footer: (columnData) =>
+      `${columnData.reduce((acc, item) => acc + 1, 0)} sales`,
     editor: {
       type: Type.DATE,
     },
@@ -50,7 +64,7 @@ export const salesTableColumns = (
       return { width: "10%" };
     },
     sort: true,
-    hidden: !isAdmin &&  !isExecutive,
+    hidden: !isAdmin && !isExecutive,
     align: "left",
     headerAlign: "left",
     footer: "",
@@ -130,7 +144,7 @@ export const salesTableColumns = (
     },
     sort: true,
     align: "right",
-    editable: true, 
+    editable: true,
     footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
     footerFormatter: footerPriceFormatter,
     footerAlign: "right",
@@ -321,6 +335,30 @@ export const salesTableColumns = (
     editable: false,
   },
   {
+    dataField: "button-edit",
+    text: "",
+    editable: false,
+    headerStyle: buttonHeaderFormatter,
+    style: buttonCellFormatter,
+    align: "center",
+    headerAlign: "center",
+    formatter: componentEditFormatter,
+    events: {
+      onClick: (e, column, columnIndex, row, rowIndex) => {
+        setId(row._id);
+        showEdit();
+      },
+    },
+  },
+  {
+    dataField: "separator-2",
+    text: "",
+    headerStyle: () => {
+      return { margin: "0px", padding: "0px", width: "3px" };
+    },
+    editable: false,
+  },
+  {
     dataField: "button-delete",
     text: "",
     editable: false,
@@ -339,7 +377,10 @@ export const salesTableColumns = (
 ];
 
 export const customersOptions = (customers) =>
-  customers.map((customer) => ({ value: customer._id, label: `${customer.company||customer.name}` }));
+  customers.map((customer) => ({
+    value: customer._id,
+    label: `${customer.company || customer.name}`,
+  }));
 
 export const sellersOptions = (sellers) =>
   sellers.map((seller) => ({

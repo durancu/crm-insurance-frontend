@@ -1,7 +1,7 @@
 import moment from "moment";
 
 import { BUSINESS_SETTINGS } from "../../config/company";
-import { Person, Building, Trash, Check, Key } from "react-bootstrap-icons";
+import { Person, Building, Trash, Check, Key, Pencil } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 import { isAdminCheck, USER_SETTINGS } from "../../config/user";
 import { TooltipIcon } from "./TooltipIcon";
@@ -63,6 +63,18 @@ export const componentDeleteFormatter = (cell, row) => {
       variant="outline-danger"
     >
       <Trash />
+    </Button>
+  );
+};
+export const componentEditFormatter = (cell, row) => {
+  return (
+    <Button
+      className="mt-1"
+      style={{ border: "none" }}
+      size="sm"
+      variant="outline-success"
+    >
+      <Pencil />
     </Button>
   );
 };
