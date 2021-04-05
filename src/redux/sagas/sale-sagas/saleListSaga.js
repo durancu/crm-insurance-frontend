@@ -2,15 +2,20 @@ import { call, put, takeLatest, spawn } from "redux-saga/effects";
 import * as types from "../../actions/actionTypes";
 import { saleListSuccess, saleListFail } from "../../actions";
 import { apiGet } from "../../../global/apiMethods";
-import { queryStringFromObject } from '../../../global/utils'
+import { queryStringFromObject } from "../../../global/utils";
+import { salesResponseToSalesListTransformer } from "../../../components/sales/transformers/salesResponseToSalesList.transformer";
 
 const apiCall = (queryParams = {}) =>
-  apiGet(`sales?${queryStringFromObject(queryParams)}`, true).catch((error) => console.log(error));
+  apiGet(`sales?${queryStringFromObject(queryParams)}`, true).catch((error) =>
+    console.log(error)
+  );
 
 const sagaRequest = function* sagaRequest({ queryParams }) {
   try {
     const response = yield call(apiCall, queryParams);
-    yield put(saleListSuccess(response.data));
+    yield put(
+      saleListSuccess(salesResponseToSalesListTransformer(response.data))
+    );
   } catch (e) {
     yield put(saleListFail());
   }

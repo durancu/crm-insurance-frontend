@@ -8,7 +8,6 @@ import {
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
-  saleGetRequest,
   saleUpdateRequest,
 } from "../../redux/actions";
 //Functions
@@ -32,14 +31,6 @@ import CustomerCreate from "../manage/customers/CustomerCreate";
 const defaultForm = {
   soldAt: moment().format("YYYY-MM-DD"),
   customer: "",
-  liabilityInsurer: "",
-  liabilityCharge: 0,
-  cargoInsurer: "",
-  cargoCharge: 0,
-  physicalDamageInsurer: "",
-  physicalDamageCharge: 0,
-  wcGlUmbInsurer: "",
-  wcGlUmbCharge: 0,
   fees: 0,
   permits: 0,
   premium: 0,
@@ -54,10 +45,9 @@ export const SaleCreate = ({
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
-  saleGetRequest,
+  saleUpdateRequest,
   lastCustomer,
   editState,
-  saleId,
   saleItem,
 }) => {
   //--STATES--//
@@ -78,10 +68,9 @@ export const SaleCreate = ({
   useEffect(() => {
     if (onEditMode) {
       setShowSaleModal(true);
-      saleGetRequest(saleId);
       setFormValues(saleItem);
     }
-  }, [onEditMode, saleItem, saleId]);
+  }, [onEditMode, saleItem]);
   //Load Insurer List
   useEffect(() => {
     insurerListRequest();
@@ -97,6 +86,7 @@ export const SaleCreate = ({
   }, [lastCustomer]);
   //Calculate premium
   useEffect(() => {
+    //Actualizar el valor del premium si la aseguranza es === "" asignar el cargo = 0 
     setPremium(totalPremiumCalculate(formValues));
     setPendingPayment(pendingPaymentCalculate(formValues));
   }, [formValues]);
@@ -112,7 +102,9 @@ export const SaleCreate = ({
     setErrors(result);
     console.log(errors);
     if (!Object.keys(result).length) {
-      saleCreateRequest(formValues);
+      onEditMode
+        ? saleUpdateRequest(formValues)
+        : saleCreateRequest(formValues);
       !addMore && handleModalSale();
       clearForm();
     }
@@ -136,9 +128,7 @@ export const SaleCreate = ({
 
   return (
     <>
-      <Button onClick={handleModalSale}>
-        {editState.onEditMode ? "Edit" : "Add New"} Sale
-      </Button>
+      <Button onClick={handleModalSale}>{"Add New"} Sale</Button>
       <CustomerCreate
         edit={false}
         modal={showCustomerModal}
@@ -154,7 +144,7 @@ export const SaleCreate = ({
         <fieldset>
           <Form onSubmit={handleSubmit}>
             <Modal.Header>
-              <Modal.Title>Add New Sale</Modal.Title>
+              <Modal.Title>{onEditMode ? "Edit" : "Add New"} Sale</Modal.Title>
               <Button variant="outline-danger" onClick={clearForm}>
                 Reset
               </Button>
@@ -241,7 +231,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       isInvalid={errors.insurers}
-                      value={formValues.liabilityInsurer || ""}
+                      value={formValues.liabilityInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -294,7 +284,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       isInvalid={errors.insurers}
-                      value={formValues.cargoInsurer || ""}
+                      value={formValues.cargoInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -341,7 +331,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       isInvalid={errors.insurers}
-                      value={formValues.physicalDamageInsurer || ""}
+                      value={formValues.physicalDamageInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -391,7 +381,7 @@ export const SaleCreate = ({
                       custom
                       onChange={handleChange}
                       isInvalid={errors.insurers}
-                      value={formValues.wcGlUmbInsurer || ""}
+                      value={formValues.wcGlUmbInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -598,7 +588,7 @@ export const SaleCreate = ({
                       }}
                       variant="outline-dark"
                       block
-                      hidden={editState}
+                      hidden={onEditMode}
                     >
                       Save and New
                     </Button>
@@ -633,7 +623,6 @@ SaleCreate.propTypes = {
   insurerListRequest: PropTypes.func.isRequired,
   customerLoadRequest: PropTypes.func.isRequired,
   saleCreateRequest: PropTypes.func.isRequired,
-  saleGetRequest: PropTypes.func.isRequired,
   saleUpdateRequest: PropTypes.func.isRequired,
 };
 
@@ -652,7 +641,6 @@ const mapDispatchToProps = {
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
-  saleGetRequest,
   saleUpdateRequest,
 };
 

@@ -11,6 +11,7 @@ import {
   saleUpdateRequest,
   saleListRequest,
   saleDeleteRequest,
+  saleGetRequest,
 } from "../../redux/actions";
 
 //Components
@@ -32,6 +33,7 @@ export const SaleList = ({
   saleListRequest,
   saleUpdateRequest,
   saleDeleteRequest,
+  saleGetRequest,
   customerLoadRequest,
   insurerListRequest,
   params,
@@ -73,13 +75,18 @@ export const SaleList = ({
     saleListRequest({}, params);
   }, [params, saleListRequest]);
 
+  useEffect(() => {
+    onEditMode && saleGetRequest(id);
+  }, [id, onEditMode, saleGetRequest]);
+
   const showModal = () => {
     setModal(!modal);
   };
 
   const launchEditForm = () => {
     setOnEditMode(!onEditMode);
-    console.log(`onEditMode`, onEditMode);
+
+    console.log(`launchEditForm`, onEditMode);
   };
 
   return (
@@ -91,7 +98,7 @@ export const SaleList = ({
               <DateRangeFilter model={"sale"} />
             </Col>
             <Col lg="4" sm="6" align="right">
-              <SaleCreate editState={{onEditMode,setOnEditMode}} saleId={id} />
+              <SaleCreate editState={{ onEditMode, setOnEditMode }} />
             </Col>
           </Row>
           {loadingCreate || loadingDelete || loadingUpdate ? (
@@ -133,7 +140,7 @@ export const SaleList = ({
                   filterPosition="top"
                   defaultSorted={salesDefaultSorted()}
                   noDataIndication="No registered sales"
-                  cellEdit={cellEditFactory({
+                  /* cellEdit={cellEditFactory({
                     mode: "click",
                     afterSaveCell: (oldValue, newValue, sale, column) => {
                       const fieldName = column.dataField;
@@ -184,7 +191,7 @@ export const SaleList = ({
 
                       saleUpdateRequest(payload);
                     },
-                  })}
+                  })} */
                 />
               </Col>
             </Row>
@@ -229,6 +236,7 @@ const mapDispatchToProps = {
   insurerListRequest,
   saleListRequest,
   saleDeleteRequest,
+  saleGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaleList);

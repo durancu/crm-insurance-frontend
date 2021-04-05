@@ -18,6 +18,7 @@ import {
   totalPriceFormatter,
   wcGlUmbInsurerFormatter,
   componentEditFormatter,
+  insurerNameFormatter,
 } from "../globals/functions";
 
 /**salesTableColumns
@@ -90,7 +91,6 @@ export const salesTableColumns = (
     align: "left",
     headerAlign: "left",
     footer: "",
-    editable: true,
     filter: textFilter({ placeholder: "search..." }),
     editable: false, // Not editable, because is a sell
   },
@@ -115,6 +115,28 @@ export const salesTableColumns = (
     },
   },
   {
+    dataField: "insurers",
+    text: "Insurers",
+    formatter: insurerNameFormatter,
+    headerStyle: () => {
+      return { width: "8%" };
+    },
+    align: "left",
+    headerAlign: "left",
+    footer: "",
+    filter: textFilter({ placeholder: "search..." }),
+    /* filter: selectFilter({
+      placeholder: "search...",
+      options: insurersOptions(insurers),
+    }), */
+    editable: false,
+    editor: {
+      type: Type.SELECT,
+      options: insurersOptions(insurers),
+    },
+  },
+  {
+    hidden:true,
     dataField: "liabilityInsurer._id",
     text: "Liability Insurer",
     formatter: liabilityInsurerFormatter,
@@ -134,13 +156,14 @@ export const salesTableColumns = (
       options: insurersOptions(insurers),
     },
   },
+  
   {
     dataField: "liabilityCharge",
-    text: "Charge",
+    text: "Liability",
     headerAlign: "right",
     formatter: priceFormatter,
     headerStyle: () => {
-      return { width: "5%" };
+      return { width: "7%" };
     },
     sort: true,
     align: "right",
@@ -150,6 +173,7 @@ export const salesTableColumns = (
     footerAlign: "right",
   },
   {
+    hidden:true,
     dataField: "cargoInsurer._id",
     text: "Cargo Insurer",
     formatter: cargoInsurerFormatter,
@@ -171,11 +195,11 @@ export const salesTableColumns = (
   },
   {
     dataField: "cargoCharge",
-    text: "Charge",
+    text: "Cargo",
     headerAlign: "right",
     formatter: priceFormatter,
     headerStyle: () => {
-      return { width: "5%" };
+      return { width: "7%" };
     },
     sort: true,
     align: "right",
@@ -185,6 +209,7 @@ export const salesTableColumns = (
     footerAlign: "right",
   },
   {
+    hidden:true,
     dataField: "physicalDamageInsurer._id",
     text: "Damage Insurer",
     formatter: physicalDamageInsurerFormatter,
@@ -206,11 +231,11 @@ export const salesTableColumns = (
   },
   {
     dataField: "physicalDamageCharge",
-    text: "Charge",
+    text: "Damage",
     headerAlign: "right",
     formatter: priceFormatter,
     headerStyle: () => {
-      return { width: "5%" };
+      return { width: "8%" };
     },
     sort: true,
     align: "right",
@@ -220,6 +245,7 @@ export const salesTableColumns = (
     footerAlign: "right",
   },
   {
+    hidden:true,
     dataField: "wcGlUmbInsurer._id",
     text: "WCGLUMB Insurer",
     formatter: wcGlUmbInsurerFormatter,
@@ -241,11 +267,11 @@ export const salesTableColumns = (
   },
   {
     dataField: "wcGlUmbCharge",
-    text: "Charge",
+    text: "WCGLUMB",
     headerAlign: "right",
     formatter: priceFormatter,
     headerStyle: () => {
-      return { width: "5%" };
+      return { width: "7%" };
     },
     sort: true,
     align: "right",
@@ -315,6 +341,7 @@ export const salesTableColumns = (
     editable: true,
   },
   {
+    hidden:true,
     dataField: "chargesPaid",
     text: "Paid",
     headerAlign: "right",

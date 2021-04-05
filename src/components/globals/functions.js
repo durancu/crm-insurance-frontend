@@ -1,7 +1,14 @@
 import moment from "moment";
 
 import { BUSINESS_SETTINGS } from "../../config/company";
-import { Person, Building, Trash, Check, Key, Pencil } from "react-bootstrap-icons";
+import {
+  Person,
+  Building,
+  Trash,
+  Check,
+  Key,
+  Pencil,
+} from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 import { isAdminCheck, USER_SETTINGS } from "../../config/user";
 import { TooltipIcon } from "./TooltipIcon";
@@ -81,10 +88,16 @@ export const componentEditFormatter = (cell, row) => {
 
 export const calculateMonthRange = (dateParams) => {
   return {
-    start: moment({ "day": 21, "month": dateParams.month, "year": dateParams.year }).subtract(1, 'months').format("MMM Do"),
-    end: moment({ "day": 20, "month": dateParams.month, "year": dateParams.year }).format("MMM Do, YYYY")
-  }
-}
+    start: moment({ day: 21, month: dateParams.month, year: dateParams.year })
+      .subtract(1, "months")
+      .format("MMM Do"),
+    end: moment({
+      day: 20,
+      month: dateParams.month,
+      year: dateParams.year,
+    }).format("MMM Do, YYYY"),
+  };
+};
 
 //---------------------------------------
 
@@ -146,11 +159,7 @@ export function salaryFormatter(cell, row) {
 
 export function totalPriceFormatter(cell, row) {
   if (cell) {
-    return (
-      <span>
-        {preciseNumber(cell, 2)}
-      </span>
-    );
+    return <span>{preciseNumber(cell, 2)}</span>;
   }
 
   return <span>-</span>;
@@ -252,7 +261,7 @@ export function rowIsNotAdmin(cell, row) {
  * @param {number} number
  * @return {number} number
  */
-const transformNumber = (number) => (isNaN(number) ? 0 : number);
+export const transformNumber = (number) => (isNaN(number) ? 0 : parseFloat(number));
 
 /**Calc premium
  * @param {object} formData
@@ -274,4 +283,5 @@ export const totalPremiumCalculate = ({
  * @returns {number} pendingPayment
  */
 export const pendingPaymentCalculate = (form) =>
-  transformNumber(parseFloat(form.totalCharge)) - transformNumber(parseFloat(form.chargesPaid));
+  transformNumber(parseFloat(form.totalCharge)) -
+  transformNumber(parseFloat(form.chargesPaid));
