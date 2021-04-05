@@ -93,6 +93,23 @@ export const SaleCreate = ({
 
   //Load data of formValues
   const handleChange = ({ target }) => {
+
+    if (target.name==="liabilityInsurer" && target.value===""){
+      formValues.liabilityCharge = 0;
+    }
+
+    if (target.name==="cargoInsurer" && target.value===""){
+      formValues.cargoCharge = 0;
+    }
+
+    if (target.name==="physicalDamageInsurer" && target.value===""){
+      formValues.physicalDamageCharge = 0;
+    }
+
+    if (target.name==="wcGlUmbInsurer" && target.value===""){
+      formValues.wcGlUmbCharge = 0;
+    }
+
     setFormValues({ ...formValues, [target.name]: target.value });
   };
 
