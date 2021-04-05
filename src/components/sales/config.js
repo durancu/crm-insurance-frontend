@@ -47,7 +47,7 @@ export const salesTableColumns = (
     text: "Date",
     formatter: dateFormatter,
     headerStyle: () => {
-      return { width: "5%" };
+      return { width: "7%" };
     },
     sort: true,
     editable: true,
