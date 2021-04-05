@@ -20,6 +20,7 @@ import Spinner from "../globals/spinner";
 //import SalesFilters from "./SalesFilters";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
+/* import cellEditFactory from "react-bootstrap-table2-editor"; */
 import { salesTableColumns, salesDefaultSorted } from "./config";
 import DateRangeFilter from "../globals/filters/DateRangeFilter";
 import SaleCreate from "./SaleCreate";
