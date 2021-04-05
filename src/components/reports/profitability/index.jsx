@@ -25,12 +25,12 @@ export const Reports = ({
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [params, setParams] = useState({
-    month: moment().month(),
+    month: moment().month()+1,
     year: moment().year(),
   });
 
   const [monthRange, setMonthRange] = useState(calculateMonthRange({
-    month: moment().month(),
+    month: moment().month()+1,
     year: moment().year(),
   }));
 
@@ -39,6 +39,7 @@ export const Reports = ({
   }, [user, user.roles]);
 
   useEffect(() => {
+    console.log(params);
     reportProfitRequest({}, params);
     setMonthRange(calculateMonthRange(params));
   }, [params, reportProfitRequest]);

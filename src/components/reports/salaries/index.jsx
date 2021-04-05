@@ -27,12 +27,16 @@ export const Reports = ({
   user,
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+
   const [params, setParams] = useState({
-    month: moment().subtract(0, "month").month(),
-    year: moment().subtract(1, "month").year(),
+    month: moment().month()+1,
+    year: moment().year(),
   });
 
-  const [monthRange, setMonthRange] = useState({ start: "", end: "" });
+  const [monthRange, setMonthRange] = useState(calculateMonthRange({
+    month: moment().month()+1,
+    year: moment().year(),
+  }));
 
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));

@@ -69,8 +69,8 @@ export const componentDeleteFormatter = (cell, row) => {
 
 export const calculateMonthRange = (dateParams) => {
   return {
-    start: moment({ "day": 21, "month": dateParams.month, "year": dateParams.year }).subtract(1, 'months').format("MMM Do"),
-    end: moment({ "day": 20, "month": dateParams.month, "year": dateParams.year }).format("MMM Do, YYYY")
+    start: moment({ "day": 21, "month": dateParams.month, "year": dateParams.year }).subtract(2, 'months').format("MMM Do"),
+    end: moment({ "day": 20, "month": dateParams.month, "year": dateParams.year }).subtract(1, 'months').format("MMM Do, YYYY")
   }
 }
 

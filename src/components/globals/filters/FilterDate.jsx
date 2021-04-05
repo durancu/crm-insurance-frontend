@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 
 //Components
@@ -13,7 +13,7 @@ const FilterDate = ({ setParams }) => {
 
   const handleChange = (date) => {
     setState(date);
-    setParams({ month: moment(date).month(), year: moment(date).year() });
+    setParams({ month: moment(date).month()+1, year: moment(date).year() });
   };
 
   return (
@@ -26,7 +26,7 @@ const FilterDate = ({ setParams }) => {
           onChange={handleChange}
           dateFormat="MM/yyyy"
           showMonthYearPicker
-          maxDate={new Date()}
+          //maxDate={new Date()}
           className="form-control xl"
         />
       </Form.Group>
