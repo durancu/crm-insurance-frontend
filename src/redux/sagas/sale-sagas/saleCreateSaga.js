@@ -11,14 +11,17 @@ import {
 
 import { apiPost } from "../../../global/apiMethods";
 import { formatterMessage } from "../../../config/messageConfig";
+import { saleItemToSaleRequestPayloadTransformer } from "../../../components/sales/transformers/saleItemToSaleRequestPayload.transformer";
 
 const sagaRequest = function* sagaRequest({ payload }) {
   let config = {};
-  const apiCall = (data) =>
-    apiPost("sales", data, true).catch(({ response }) => {
+  const apiCall = (data) => {
+    const dataTransformValue = saleItemToSaleRequestPayloadTransformer(data);
+    return apiPost("sales", dataTransformValue, true).catch(({ response }) => {
       config = formatterMessage(response, "sale", "create");
       return console.log(response);
     });
+  };
   try {
     const response = yield call(apiCall, payload);
     config = formatterMessage(response, "sale", "create");

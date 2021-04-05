@@ -11,6 +11,7 @@ import {
   saleUpdateRequest,
   saleListRequest,
   saleDeleteRequest,
+  saleGetRequest,
 } from "../../redux/actions";
 
 //Components
@@ -32,6 +33,7 @@ export const SaleList = ({
   saleListRequest,
   saleUpdateRequest,
   saleDeleteRequest,
+  saleGetRequest,
   customerLoadRequest,
   insurerListRequest,
   params,
@@ -44,19 +46,20 @@ export const SaleList = ({
   insurers,
   user,
 }) => {
-
   const [isAdmin, setIsAdmin] = useState(false);
   const [isExecutive, setIsExecutive] = useState(false);
   //Functions
-  
 
+  //Modals
   const [modal, setModal] = useState(false);
+  const [onEditMode, setOnEditMode] = useState(false);
   const [id, setId] = useState("");
+
+  //Functions
   useEffect(() => {
     userLoadRequest();
     customerLoadRequest();
     insurerListRequest();
-    console.log(user);
     setIsAdmin(isAdminCheck(user));
     setIsExecutive(isExecutiveCheck(user));
   }, [
@@ -72,10 +75,20 @@ export const SaleList = ({
     saleListRequest({}, params);
   }, [params, saleListRequest]);
 
+  useEffect(() => {
+    onEditMode && saleGetRequest(id);
+  }, [id, onEditMode, saleGetRequest]);
+
   const showModal = () => {
     setModal(!modal);
   };
-  
+
+  const launchEditForm = () => {
+    setOnEditMode(!onEditMode);
+
+    console.log(`launchEditForm`, onEditMode);
+  };
+
   return (
     <>
       <Card>
@@ -85,7 +98,7 @@ export const SaleList = ({
               <DateRangeFilter model={"sale"} />
             </Col>
             <Col lg="4" sm="6" align="right">
-              <SaleCreate />
+              <SaleCreate editState={{ onEditMode, setOnEditMode }} />
             </Col>
           </Row>
           {loadingCreate || loadingDelete || loadingUpdate ? (
@@ -110,10 +123,11 @@ export const SaleList = ({
                   keyField="_id"
                   data={sales}
                   columns={salesTableColumns(
-                    isAdmin,
-                    isExecutive,
                     setId,
                     showModal,
+                    launchEditForm,
+                    isAdmin,
+                    isExecutive,
                     customers,
                     sellers,
                     insurers
@@ -126,7 +140,7 @@ export const SaleList = ({
                   filterPosition="top"
                   defaultSorted={salesDefaultSorted()}
                   noDataIndication="No registered sales"
-                  cellEdit={cellEditFactory({
+                  /* cellEdit={cellEditFactory({
                     mode: "click",
                     afterSaveCell: (oldValue, newValue, sale, column) => {
                       const fieldName = column.dataField;
@@ -177,7 +191,7 @@ export const SaleList = ({
 
                       saleUpdateRequest(payload);
                     },
-                  })}
+                  })} */
                 />
               </Col>
             </Row>
@@ -222,6 +236,7 @@ const mapDispatchToProps = {
   insurerListRequest,
   saleListRequest,
   saleDeleteRequest,
+  saleGetRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaleList);

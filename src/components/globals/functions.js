@@ -1,7 +1,14 @@
 import moment from "moment";
 
 import { BUSINESS_SETTINGS } from "../../config/company";
-import { Person, Building, Trash, Check, Key } from "react-bootstrap-icons";
+import {
+  Person,
+  Building,
+  Trash,
+  Check,
+  Key,
+  Pencil,
+} from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 import { isAdminCheck, USER_SETTINGS } from "../../config/user";
 import { TooltipIcon } from "./TooltipIcon";
@@ -66,13 +73,38 @@ export const componentDeleteFormatter = (cell, row) => {
     </Button>
   );
 };
+export const componentEditFormatter = (cell, row) => {
+  return (
+    <Button
+      className="mt-1"
+      style={{ border: "none" }}
+      size="sm"
+      variant="outline-success"
+    >
+      <Pencil />
+    </Button>
+  );
+};
 
 export const calculateMonthRange = (dateParams) => {
   return {
+<<<<<<< HEAD
     start: moment({ "day": 21, "month": dateParams.month, "year": dateParams.year }).subtract(2, 'months').format("MMM Do"),
     end: moment({ "day": 20, "month": dateParams.month, "year": dateParams.year }).subtract(1, 'months').format("MMM Do, YYYY")
   }
 }
+=======
+    start: moment({ day: 21, month: dateParams.month, year: dateParams.year })
+      .subtract(1, "months")
+      .format("MMM Do"),
+    end: moment({
+      day: 20,
+      month: dateParams.month,
+      year: dateParams.year,
+    }).format("MMM Do, YYYY"),
+  };
+};
+>>>>>>> e5d6a2b6a43e297fbaca8606da48c3d8731286cf
 
 //---------------------------------------
 
@@ -134,11 +166,7 @@ export function salaryFormatter(cell, row) {
 
 export function totalPriceFormatter(cell, row) {
   if (cell) {
-    return (
-      <span>
-        {preciseNumber(cell, 2)}
-      </span>
-    );
+    return <span>{preciseNumber(cell, 2)}</span>;
   }
 
   return <span>-</span>;
@@ -240,7 +268,7 @@ export function rowIsNotAdmin(cell, row) {
  * @param {number} number
  * @return {number} number
  */
-const transformNumber = (number) => (isNaN(number) ? 0 : number);
+export const transformNumber = (number) => (isNaN(number) ? 0 : parseFloat(number));
 
 /**Calc premium
  * @param {object} formData
@@ -262,4 +290,5 @@ export const totalPremiumCalculate = ({
  * @returns {number} pendingPayment
  */
 export const pendingPaymentCalculate = (form) =>
-  transformNumber(parseFloat(form.totalCharge)) - transformNumber(parseFloat(form.chargesPaid));
+  transformNumber(parseFloat(form.totalCharge)) -
+  transformNumber(parseFloat(form.chargesPaid));

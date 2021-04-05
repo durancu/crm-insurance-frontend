@@ -11,13 +11,18 @@ import {
 
 import { apiUpdate } from "../../../global/apiMethods";
 import { formatterMessage } from "../../../config/messageConfig";
+import { saleItemToSaleRequestPayloadTransformer } from "../../../components/sales/transformers/saleItemToSaleRequestPayload.transformer";
 
 const sagaRequest = function* sagaRequest(action) {
   let config = {};
-  const apiCall = (data, _id) =>
-    apiUpdate(`sales/${_id}`, data, true).catch(({ response }) => {
-      config = formatterMessage(response, "sale", "update");
-    });
+  const apiCall = (data, _id) => {
+    const dataTransformValue = saleItemToSaleRequestPayloadTransformer(data);
+    return apiUpdate(`sales/${_id}`, dataTransformValue, true).catch(
+      ({ response }) => {
+        config = formatterMessage(response, "sale", "update");
+      }
+    );
+  };
   const { payload } = action;
   try {
     const id = payload._id;

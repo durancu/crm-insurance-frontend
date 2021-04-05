@@ -8,13 +8,14 @@ import {
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
+  saleUpdateRequest,
 } from "../../redux/actions";
 //Functions
 import {
   pendingPaymentCalculate,
   totalPremiumCalculate,
 } from "../globals/functions";
-
+//Validations
 import { salesCreateValidate } from "./saleCreateValidate";
 //components
 import {
@@ -44,27 +45,32 @@ export const SaleCreate = ({
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
+  saleUpdateRequest,
   lastCustomer,
+  editState,
+  saleItem,
 }) => {
   //--STATES--//
   //Modals
-  const [modalSale, setModalSale] = useState(false);
-  const [modalCustomer, setModalCustomer] = useState(false);
+  const [showSaleModal, setShowSaleModal] = useState(false);
+  const [showCustomerModal, setShowCustomerModal] = useState(false);
   //Date and Values
   const [formValues, setFormValues] = useState(defaultForm);
-  const [formStates, setFormStates] = useState(defaultForm);
-  const [chargeShow, setChargeShow] = useState({
-    liabilityCharge: true,
-    cargoCharge: false,
-    physicalDamageCharge: false,
-    wcGlUmbCharge: false,
-  });
+
   //Auto Calculate
   const [premium, setPremium] = useState(0);
   const [pendingPayment, setPendingPayment] = useState(0);
+  const { onEditMode } = editState;
   //ValidateForms
   const [errors, setErrors] = useState({ errors: [] });
 
+  //Show modal edit mode
+  useEffect(() => {
+    if (onEditMode) {
+      setShowSaleModal(true);
+      setFormValues(saleItem);
+    }
+  }, [onEditMode, saleItem]);
   //Load Insurer List
   useEffect(() => {
     insurerListRequest();
@@ -80,93 +86,14 @@ export const SaleCreate = ({
   }, [lastCustomer]);
   //Calculate premium
   useEffect(() => {
-    setPremium(totalPremiumCalculate(formStates));
+    //Actualizar el valor del premium si la aseguranza es === "" asignar el cargo = 0 
+    setPremium(totalPremiumCalculate(formValues));
     setPendingPayment(pendingPaymentCalculate(formValues));
-  }, [chargeShow, formStates, formValues]);
+  }, [formValues]);
 
   //Load data of formValues
   const handleChange = ({ target }) => {
-    setFormStates({ ...formStates, [target.name]: target.value });
-    switch (target.name) {
-      case "soldAt":
-        setFormStates({
-          ...formStates,
-          [target.name]: moment(target.value).format("YYYY-MM-DD"),
-        });
-        setFormValues((formValues) => ({
-          ...formValues,
-          [target.name]: target.value,
-        }));
-        break;
-      case "liabilityCharge":
-      case "cargoCharge":
-      case "physicalDamageCharge":
-      case "wcGlUmbCharge":
-      case "fees":
-      case "permits":
-      case "tips":
-      case "chargesPaid":
-      case "totalCharge":
-        setFormValues({
-          ...formValues,
-          [target.name]: parseFloat(target.value),
-        });
-        break;
-
-      default:
-        setFormValues((formValues) => ({
-          ...formValues,
-          [target.name]: target.value,
-        }));
-        break;
-    }
-    switch (target.name) {
-      case "liabilityInsurer":
-        target.value === "" &&
-          setFormStates({ ...formStates, liabilityCharge: 0 });
-        setChargeShow({ ...chargeShow, liabilityCharge: true });
-
-        target.value !== "" &&
-          setChargeShow({ ...chargeShow, liabilityCharge: false });
-        break;
-      case "cargoInsurer":
-        target.value === "" &&
-          setFormStates({ ...formStates, cargoCharge: "" });
-
-        target.value !== "" &&
-          setChargeShow({ ...chargeShow, liabilityCharge: false });
-        break;
-      case "physicalDamageInsurer":
-        target.value === "" &&
-          setFormStates({ ...formStates, physicalDamageCharge: "" });
-        break;
-      case "wcGlUmbInsurer":
-        target.value === "" &&
-          setFormStates({ ...formStates, wcGlUmbCharge: "" });
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleBlur = ({ target }) => {
-    switch (target.name) {
-      case "liabilityInsurer":
-        target.value === "" && delete formValues["liabilityCharge"];
-        break;
-      case "cargoInsurer":
-        target.value === "" && delete formValues["cargoCharge"];
-        break;
-      case "physicalDamageInsurer":
-        target.value === "" && delete formValues["physicalDamageCharge"];
-        break;
-      case "wcGlUmbInsurer":
-        target.value === "" && delete formValues["wcGlUmbCharge"];
-        break;
-      default:
-        break;
-    }
-    target.value === "" && delete formValues[target.name];
+    setFormValues({ ...formValues, [target.name]: target.value });
   };
 
   const handleSubmit = (e = false, addMore = false) => {
@@ -175,72 +102,49 @@ export const SaleCreate = ({
     setErrors(result);
     console.log(errors);
     if (!Object.keys(result).length) {
-      setFormValues({
-        ...formValues,
-        soldAt: new Date(formStates.soldAt).toISOString(),
-      });
-
-      saleCreateRequest(formValues);
+      onEditMode
+        ? saleUpdateRequest(formValues)
+        : saleCreateRequest(formValues);
       !addMore && handleModalSale();
       clearForm();
     }
   };
 
   const clearForm = () => {
-    setFormStates({
-      soldAt: moment().format("YYYY-MM-DD"),
-      customer: "",
-      fees: 0,
-      permits: 0,
-      chargesPaid: 0,
-      totalCharge: 0,
-      tips: 0,
-      premium: 0,
-    });
-
+    setFormValues(defaultForm);
     setErrors([]);
-
-    setFormValues({
-      soldAt: moment().format("YYYY-MM-DD"),
-      customer: "",
-      fees: 0,
-      permits: 0,
-      chargesPaid: 0,
-      totalCharge: 0,
-      tips: 0,
-      premium: 0,
-    });
   };
 
   const handleModalSale = () => {
     clearForm();
     setErrors({ errors: [] });
-    setModalSale(!modalSale);
+    editState.setOnEditMode(false);
+    setShowSaleModal(!showSaleModal);
   };
 
   const handleModalCustomer = () => {
-    setModalCustomer(!modalCustomer);
+    setShowCustomerModal(!showCustomerModal);
   };
 
   return (
     <>
-      <Button onClick={handleModalSale}>Add New Sale</Button>
+      <Button onClick={handleModalSale}>{"Add New"} Sale</Button>
       <CustomerCreate
         edit={false}
-        modal={modalCustomer}
+        modal={showCustomerModal}
         showModal={handleModalCustomer}
       />
       <Modal
-        hidden={modalCustomer}
+        hidden={showCustomerModal}
         size="xl"
-        show={modalSale}
+        show={showSaleModal}
         onHide={handleModalSale}
         backdrop={"static"}
       >
         <fieldset>
           <Form onSubmit={handleSubmit}>
             <Modal.Header>
-              <Modal.Title>Add New Sale</Modal.Title>
+              <Modal.Title>{onEditMode ? "Edit" : "Add New"} Sale</Modal.Title>
               <Button variant="outline-danger" onClick={clearForm}>
                 Reset
               </Button>
@@ -255,7 +159,7 @@ export const SaleCreate = ({
                     <Form.Control
                       type="date"
                       name="soldAt"
-                      value={formStates.soldAt}
+                      value={moment(formValues.soldAt).format("YYYY-MM-DD")}
                       isInvalid={errors.soldAt}
                       onChange={handleChange}
                     />
@@ -289,7 +193,7 @@ export const SaleCreate = ({
                         <Button
                           variant="primary"
                           onClick={() => {
-                            setModalCustomer(!modalCustomer);
+                            setShowCustomerModal(!showCustomerModal);
                           }}
                         >
                           <b>+</b>
@@ -326,9 +230,8 @@ export const SaleCreate = ({
                       name="liabilityInsurer"
                       custom
                       onChange={handleChange}
-                      onBlur={handleBlur}
                       isInvalid={errors.insurers}
-                      value={formStates.liabilityInsurer || ""}
+                      value={formValues.liabilityInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -345,7 +248,7 @@ export const SaleCreate = ({
                   <Form.Group
                     as={Col}
                     sm="2"
-                    hidden={chargeShow.liabilityCharge}
+                    hidden={!formValues.liabilityInsurer}
                   >
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Charge:
@@ -360,7 +263,7 @@ export const SaleCreate = ({
                         min="0"
                         onChange={handleChange}
                         isInvalid={errors.liabilityCharge}
-                        value={formStates.liabilityCharge || 0}
+                        value={formValues.liabilityCharge}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -380,9 +283,8 @@ export const SaleCreate = ({
                       name="cargoInsurer"
                       custom
                       onChange={handleChange}
-                      onBlur={handleBlur}
                       isInvalid={errors.insurers}
-                      value={formStates.cargoInsurer || ""}
+                      value={formValues.cargoInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -395,7 +297,7 @@ export const SaleCreate = ({
                       )}
                     </Form.Control>
                   </Form.Group>
-                  <Form.Group hidden={!formStates.cargoInsurer} as={Col} sm="2">
+                  <Form.Group hidden={!formValues.cargoInsurer} as={Col} sm="2">
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>
                       Charge:
@@ -408,7 +310,7 @@ export const SaleCreate = ({
                         name="cargoCharge"
                         onChange={handleChange}
                         isInvalid={errors.cargoCharge}
-                        value={formStates.cargoCharge || 0}
+                        value={formValues.cargoCharge}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -428,9 +330,8 @@ export const SaleCreate = ({
                       name="physicalDamageInsurer"
                       custom
                       onChange={handleChange}
-                      onBlur={handleBlur}
                       isInvalid={errors.insurers}
-                      value={formStates.physicalDamageInsurer || ""}
+                      value={formValues.physicalDamageInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -447,7 +348,7 @@ export const SaleCreate = ({
                   <Form.Group
                     as={Col}
                     sm="2"
-                    hidden={!formStates.physicalDamageInsurer}
+                    hidden={!formValues.physicalDamageInsurer}
                   >
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>
@@ -461,7 +362,7 @@ export const SaleCreate = ({
                         name="physicalDamageCharge"
                         onChange={handleChange}
                         isInvalid={errors.physicalDamageCharge}
-                        value={formStates.physicalDamageCharge || 0}
+                        value={formValues.physicalDamageCharge}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -479,9 +380,8 @@ export const SaleCreate = ({
                       name="wcGlUmbInsurer"
                       custom
                       onChange={handleChange}
-                      onBlur={handleBlur}
                       isInvalid={errors.insurers}
-                      value={formStates.wcGlUmbInsurer || ""}
+                      value={formValues.wcGlUmbInsurer}
                     >
                       <option value="">N/A</option>
                       {insurers.map(
@@ -498,7 +398,7 @@ export const SaleCreate = ({
                   <Form.Group
                     as={Col}
                     sm="2"
-                    hidden={!formStates.wcGlUmbInsurer}
+                    hidden={!formValues.wcGlUmbInsurer}
                   >
                     <Form.Label style={{ fontSize: "small" }}>
                       <span style={{ color: "red" }}>* </span>Charge:
@@ -511,7 +411,7 @@ export const SaleCreate = ({
                         name="wcGlUmbCharge"
                         onChange={handleChange}
                         isInvalid={errors.wcGlUmbCharge}
-                        value={formStates.wcGlUmbCharge || 0}
+                        value={formValues.wcGlUmbCharge}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -558,9 +458,8 @@ export const SaleCreate = ({
                       <Form.Control
                         name="fees"
                         onChange={handleChange}
-                        onBlur={handleBlur}
                         isInvalid={errors.fees}
-                        value={formStates.fees}
+                        value={formValues.fees}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -580,9 +479,8 @@ export const SaleCreate = ({
                       <Form.Control
                         name="permits"
                         onChange={handleChange}
-                        onBlur={handleBlur}
                         isInvalid={errors.permits}
-                        value={formStates.permits}
+                        value={formValues.permits}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -602,9 +500,8 @@ export const SaleCreate = ({
                       <Form.Control
                         name="tips"
                         onChange={handleChange}
-                        onBlur={handleBlur}
                         isInvalid={errors.tips}
-                        value={formStates.tips}
+                        value={formValues.tips}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -626,9 +523,8 @@ export const SaleCreate = ({
                       <Form.Control
                         name="totalCharge"
                         onChange={handleChange}
-                        onBlur={handleBlur}
                         isInvalid={errors.totalCharge}
-                        value={formStates.totalCharge}
+                        value={formValues.totalCharge}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -647,9 +543,8 @@ export const SaleCreate = ({
                       <Form.Control
                         name="chargesPaid"
                         onChange={handleChange}
-                        onBlur={handleBlur}
                         isInvalid={errors.chargesPaid}
-                        value={formStates.chargesPaid}
+                        value={formValues.chargesPaid}
                         style={{ textAlign: "right" }}
                       />
                       <Form.Control.Feedback type="invalid">
@@ -693,12 +588,17 @@ export const SaleCreate = ({
                       }}
                       variant="outline-dark"
                       block
+                      hidden={onEditMode}
                     >
                       Save and New
                     </Button>
                   </Col>
                   <Col sm="3">
-                    <Button type="submit" variant="primary" block>
+                    <Button
+                      type="submit"
+                      variant={editState.onEditMode ? "success" : "primary"}
+                      block
+                    >
                       Save
                     </Button>
                   </Col>
@@ -717,11 +617,13 @@ SaleCreate.propTypes = {
   errorInsurer: PropTypes.bool.isRequired,
   loadingCustomer: PropTypes.bool.isRequired,
   errorCustomer: PropTypes.bool.isRequired,
+  saleItem: PropTypes.object.isRequired,
   insurers: PropTypes.array.isRequired,
   customers: PropTypes.array.isRequired,
   insurerListRequest: PropTypes.func.isRequired,
   customerLoadRequest: PropTypes.func.isRequired,
   saleCreateRequest: PropTypes.func.isRequired,
+  saleUpdateRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -732,12 +634,14 @@ const mapStateToProps = (state) => ({
   insurers: state.insurerReducer.list,
   customers: state.customerReducer.list,
   lastCustomer: state.customerReducer.item,
+  saleItem: state.saleReducer.item,
 });
 
 const mapDispatchToProps = {
   insurerListRequest,
   customerLoadRequest,
   saleCreateRequest,
+  saleUpdateRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaleCreate);
