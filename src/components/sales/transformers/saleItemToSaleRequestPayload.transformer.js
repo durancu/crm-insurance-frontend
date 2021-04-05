@@ -4,6 +4,7 @@ import moment from "moment";
 export const saleItemToSaleRequestPayloadTransformer = (sale) => {
   const saleValues = {
     soldAt: moment(sale.soldAt).toISOString(),
+    customer: sale.customer,
     fees: transformNumber(sale.fees),
     permits: transformNumber(sale.permits),
     premium: transformNumber(sale.premium),
@@ -38,7 +39,7 @@ export const saleItemToSaleRequestPayloadTransformer = (sale) => {
     saleValues.physicalDamageInsurer = null;
     saleValues.physicalDamageCharge = null;
   }
-  
+
   if (sale.wcGlUmbInsurer !== "") {
     saleValues.wcGlUmbInsurer = sale.wcGlUmbInsurer;
     saleValues.wcGlUmbCharge = transformNumber(sale.wcGlUmbCharge, 2);
