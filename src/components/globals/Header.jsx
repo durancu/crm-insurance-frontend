@@ -53,7 +53,7 @@ const Header = ({ user, userLogoutRequest, ipAddress }) => {
         sticky="top"
         className="nav-environment"
 >
-        <Container fluid style={{ maxWidth: "98%" }}>
+        <Container fluid>
           <Navbar.Brand className="mr-5" href="/" >
             <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-vl17-crm.png" />
           </Navbar.Brand>
