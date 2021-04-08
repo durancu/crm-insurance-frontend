@@ -33,11 +33,16 @@ const Header = ({ user, userLogoutRequest, ipAddress }) => {
           expand="lg"
           fixed="top"
           sticky="top"
-          style={{ fontSize: "0.8rem", color:"#ffffff", fontWeight:"300", lineHeight:1, height:"24px"}}
+          className="nav-header text-light"
         >
-
-         <div className="mr-auto fill text-center"> <strong>{ipAddress}</strong></div>
-         <div className="ml-auto fill text-center"> <strong>{process.env.REACT_APP_ENV.toUpperCase()}</strong></div>
+          <div className="mr-auto fill text-center">
+            {" "}
+            <strong>{ipAddress}</strong>
+          </div>
+          <div className="ml-auto fill text-center">
+            {" "}
+            <strong>{process.env.REACT_APP_ENV.toUpperCase()}</strong>
+          </div>
         </Navbar>
       )}
       <Navbar
@@ -46,53 +51,40 @@ const Header = ({ user, userLogoutRequest, ipAddress }) => {
         expand="lg"
         fixed="top"
         sticky="top"
-        style={{ fontSize: "1rem" }}
-      >
+        className="nav-environment"
+>
         <Container fluid style={{ maxWidth: "98%" }}>
-          <Navbar.Brand href="/" style={{ marginRight: "50px" }}>
+          <Navbar.Brand className="mr-5" href="/" >
             <Image src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-vl17-crm.png" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto fill justify">
-              <Link className="nav-link" style={{ marginRight: "20px" }} to="/">
+              <Link className="nav-link" to="/">
                 Home
               </Link>
               <Link
-                className="nav-link"
-                style={{ marginRight: "20px" }}
+                className="nav-link mr-2"
                 to="/manage/sales"
                 hidden={!isAdmin && !isExecutive && !isSeller}
               >
                 Sales
               </Link>
-              <Link
-                className="nav-link"
-                style={{ marginRight: "20px" }}
-                to="/manage/customers"
-              >
+              <Link className="nav-link mr-2" to="/manage/customers">
                 Customers
               </Link>
 
-              <Link
-                className="nav-link"
-                style={{ marginRight: "20px" }}
-                to="/manage/users"
-              >
+              <Link className="nav-link mr-2" to="/manage/users">
                 Employees
               </Link>
               {(isAdmin || isExecutive) && (
-                <Link
-                  className="nav-link"
-                  style={{ marginRight: "20px" }}
-                  to="/manage/insurers"
-                >
+                <Link className="nav-link mr-2" to="/manage/insurers">
                   Insurers
                 </Link>
               )}
               <NavDropdown
                 title="Reports"
-                style={{ marginRight: "20px" }}
+                className="mr-2"
                 id="collasible-nav-dropdown"
               >
                 <Link className="dropdown-item" to="/reports/sales">
@@ -120,11 +112,7 @@ const Header = ({ user, userLogoutRequest, ipAddress }) => {
               </NavDropdown>
             </Nav>
             <Nav className="ml-auto filled">
-              <Link
-                className="nav-link"
-                to="/training"
-                style={{ marginRight: "20px" }}
-              >
+              <Link className="nav-link mr-2" to="/training">
                 <Book size={25} />
               </Link>
               <NavDropdown

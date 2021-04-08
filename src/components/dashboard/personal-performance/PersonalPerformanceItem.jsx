@@ -10,11 +10,11 @@ const PersonalPerformanceItem = ({ metric }) => {
         <Row>
 
         {/* <Card.Title>{metric.label}</Card.Title> */}
-          <Col style={{textAlign:"left"}}>
-            <span style={{ fontSize: "24px" }}>{metric.label}</span>
+          <Col className="text-left">
+            <span className="personal-performance-metric-label">{metric.label}</span>
           </Col>
-          {/* <Col style={{ textAlign: "right" }}>
-            <span style={{ fontSize: "14px" }}>
+          {/* <Col className="text-right" >
+            <span className="personal-performance-metric-subtitle">
               <i>{metric.subtitle}</i>
             </span>
           </Col> */}
@@ -22,10 +22,10 @@ const PersonalPerformanceItem = ({ metric }) => {
       </Card.Header>
       <Card.Body>
         {/* <Card.Title>{metric.label}</Card.Title> */}
-        <Card.Text style={{ textAlign: "center" }}>
-          <span style={{ fontSize: "35px" }}>{metric.valuePrefix}</span>
-          <span style={{ fontSize: "50px" }}>{metric.value}</span>
-          <span style={{ fontSize: "30px" }}>{metric.valueSuffix}</span>
+        <Card.Text className="text-center">
+          <span className="personal-performance-metric-prefix">{metric.valuePrefix}</span>
+          <span className="personal-performance-metric-value">{metric.value}</span>
+          <span className="personal-performance-metric-suffix">{metric.valueSuffix}</span>
         </Card.Text>
         <hr />
         <Card.Text>{metric.description}</Card.Text>

@@ -66,7 +66,7 @@ function UserList({
               &nbsp;
             </Col>
             <Col lg="4" sm="6" align="right"
-              style={{ textAlign: "right" }}
+              className="text-right"
               hidden={!isAdmin && !isExecutive}
             >
               <Button variant="primary" onClick={showCreateEmployeeModal}>

@@ -4,10 +4,10 @@ import { Search } from "react-bootstrap-icons";
 
 const Page404 = () => {
   return (
-    <Row style={{ padding: "0 0 0 0", marginTop: "10%" }}>
+    <Row className="p-0 auth-form ">
       <Col md={{ span: 6, offset: 3 }}>
         <Card>
-          <Card.Body style={{ textAlign: "center" }}>
+          <Card.Body className="text-center">
             <h1>
               <Search size="50" />
             </h1>

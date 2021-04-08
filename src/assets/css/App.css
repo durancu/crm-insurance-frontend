@@ -2,7 +2,85 @@ body {
   font-weight: 300 !important;
   font-size: 1rem;
 }
+.nav-header {
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1;
+  height: 24px;
+}
 
+.container {
+  max-width: "98%";
+}
+.container .personalized {
+  margin-bottom: "80px";
+}
+
+.nav-footer {
+  font-size: 0.7rem;
+}
+.nav-environment {
+  font-size: 1rem;
+}
+
+/*FORMS*/
+label {
+  font-size: small;
+}
+
+label span {
+  color: red;
+}
+/*PROFILE*/
+.card-profile {
+  width: 20rem;
+}
+/*Form Auth*/
+.auth-loading {
+  margin-top: 20%;
+}
+.auth-form {
+  margin-top: 10%;
+}
+
+/*Personal Performance Item*/
+.personal-performance-metric-label {
+  font-size: 1.5rem;
+}
+.personal-performance-metric-subtitle {
+  font-size: 0.875rem;
+}
+
+.personal-performance-metric-prefix {
+  font-size: 2.188rem;
+}
+.personal-performance-metric-value {
+  font-size: 3.125rem;
+}
+.personal-performance-metric-suffix {
+  font-size: 1.875rem;
+}
+/*Message*/
+.message {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  margin-bottom: 0px;
+  z-index: 10000000;
+}
+
+/*Paragraph*/
+span .alert {
+  font-weight: bold;
+  color: red;
+}
+
+/*TABLE STYLES*/
+
+.salary-formatter {
+  color: green;
+  font-weight: bold;
+}
 .react-bootstrap-table th {
   /* text-transform: uppercase; */
   font-weight: 300;

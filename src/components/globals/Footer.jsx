@@ -13,18 +13,13 @@ const Footer = () => {
       variant="dark"
       fixed="bottom"
       sticky="bottom"
-      style={{
-        padding: "0 20px 0 20px",
-        marginTop: "80px",
-        fontSize: "0.7rem",
-        color: "#f0f0f0",
-      }}
+      className="nav-footer text-light pt-0 pb-1 pl-0 pr-1 mt-5"
     >
       <div className="ml-auto">
         Powered by ARANE Consulting LLC, 2021. All Rights Reserved.
         <Navbar.Brand
           href="https://araneconsulting.com"
-          style={{ marginLeft: "50px", padding: "0" }}
+          className="ml-2 pt-0"
         >
           <Image
             src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/logo-arane-small.png"

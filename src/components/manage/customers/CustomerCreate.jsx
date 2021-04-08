@@ -82,9 +82,9 @@ const CustomerCreate = ({
             </Modal.Header>
             <Modal.Body>
               <Form.Row>
-              <Form.Group as={Col} sm="6">
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Customer type
+                <Form.Group as={Col} sm="6">
+                  <Form.Label>
+                    <span>* </span>Customer type
                   </Form.Label>
                   <Form.Control
                     as="select"
@@ -104,10 +104,9 @@ const CustomerCreate = ({
                 </Form.Group>
               </Form.Row>
               <Form.Row>
-
-              <Form.Group as={Col} sm="6">
-                  <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Company Name
+                <Form.Group as={Col} sm="6">
+                  <Form.Label>
+                    <span>* </span>Company Name
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -119,8 +118,8 @@ const CustomerCreate = ({
                 </Form.Group>
 
                 <Form.Group as={Col} sm="6">
-                  <Form.Label style={{ fontSize: "small" }}>
-                    <span style={{ color: "red" }}>* </span>Email
+                  <Form.Label>
+                    <span>* </span>Email
                   </Form.Label>
                   <Form.Control
                     type="email"
@@ -135,12 +134,10 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
 
-              
-
-
                 <Form.Group as={Col} sm="6">
-                  <Form.Label style={{ fontSize: "small" }}>
-                    {/* <span style={{ color: "red" }}>* </span> */}Contact Person
+                  <Form.Label >
+                    {/* <span>* </span> */}Contact
+                    Person
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -155,10 +152,8 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                
-
                 <Form.Group as={Col} sm="6">
-                  <Form.Label style={{ fontSize: "small" }}>Phone</Form.Label>
+                  <Form.Label >Phone</Form.Label>
                   <Form.Control
                     type="tel"
                     name="phone"
@@ -172,10 +167,11 @@ const CustomerCreate = ({
                     {errors.phone}
                   </Form.Control.Feedback>
                 </Form.Group>
-                
 
                 <Form.Group as={Col} sm="6">
-                  <Form.Label style={{ fontSize: "small" }}>US DOT Number</Form.Label>
+                  <Form.Label >
+                    US DOT Number
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     name="dot"
@@ -184,10 +180,8 @@ const CustomerCreate = ({
                   />
                 </Form.Group>
 
-                
-
                 <Form.Group as={Col} sm="6">
-                  <Form.Label style={{ fontSize: "small" }}>Fax</Form.Label>
+                  <Form.Label >Fax</Form.Label>
                   <Form.Control
                     type="tel"
                     name="fax"
@@ -201,11 +195,10 @@ const CustomerCreate = ({
                     {errors.fax}
                   </Form.Control.Feedback>
                 </Form.Group>
-                
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col}>
-                  <Form.Label style={{ fontSize: "small" }}>Address</Form.Label>
+                  <Form.Label >Address</Form.Label>
                   <Form.Control
                     type="text"
                     name="address"
@@ -221,7 +214,7 @@ const CustomerCreate = ({
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col} sm="4">
-                  <Form.Label style={{ fontSize: "small" }}>City</Form.Label>
+                  <Form.Label >City</Form.Label>
                   <Form.Control
                     type="text"
                     name="city"
@@ -236,7 +229,7 @@ const CustomerCreate = ({
                 </Form.Group>
 
                 <Form.Group as={Col} sm="4">
-                  <Form.Label style={{ fontSize: "small" }}>State</Form.Label>
+                  <Form.Label >State</Form.Label>
                   <Form.Control
                     as="select"
                     name="state"
@@ -261,7 +254,7 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} sm="4">
-                  <Form.Label style={{ fontSize: "small" }}>Zip</Form.Label>
+                  <Form.Label >Zip</Form.Label>
                   <Form.Control
                     type="text"
                     name="zip"
@@ -275,7 +268,7 @@ const CustomerCreate = ({
                   </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group as={Col} hidden={true}>
-                  <Form.Label style={{ fontSize: "small" }}>Country</Form.Label>
+                  <Form.Label >Country</Form.Label>
                   <Form.Control
                     type="text"
                     name="country"

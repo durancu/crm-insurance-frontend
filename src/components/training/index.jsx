@@ -40,7 +40,7 @@ const Training = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                         src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/login.png"
                         thumbnail
@@ -86,7 +86,7 @@ const Training = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                         src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/home.png"
                         thumbnail
@@ -138,14 +138,14 @@ const Training = () => {
                           <li><b>Tips:</b> Monto recibido por el vendedor en concepto de propina.</li>
                           <li><b>Down Payment:</b> Monto cobrado al comprador por concepto de down payment.</li>
                           <li><b>Paid:</b> Valor pagado por el comprador (siempre menor o igual al valor del Down Payment).</li>
-                          <li><b>(Icono de cesto):</b> Permite eliminar una venta <span style={{fontWeight:"bold", color:"red"}}>Tenga precaución al eliminar una venta. Este proceso es irreversible.</span></li>
+                          <li><b>(Icono de cesto):</b> Permite eliminar una venta <span className="alert">Tenga precaución al eliminar una venta. Este proceso es irreversible.</span></li>
                         </ul>
                       </p>
                       <p>Al final de la tabla, podrá consultar los acumulados de datos para cada columna, así como el total de ventas asociado al período seleccionado.</p>
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                         src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/sales-management.png"
                         thumbnail
@@ -198,7 +198,7 @@ const Training = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                         src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-sale.png"
                         thumbnail
@@ -239,7 +239,7 @@ const Training = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                         src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/customers.jpeg"
                          
@@ -285,7 +285,7 @@ const Training = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                         
                        src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/create-customer.jpeg"
@@ -322,7 +322,7 @@ const Training = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                         src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/employees.jpeg"
                         thumbnail
@@ -371,7 +371,7 @@ const Training = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col style={{ textAlign: "left" }}>
+                    <Col className="text-left">
                       <Image
                          src="https://arane-crm-resources.s3.us-east-2.amazonaws.com/training/sales-report.jpeg"
                         thumbnail

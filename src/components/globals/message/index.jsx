@@ -18,17 +18,7 @@ const Messages = ({ config, time }) => {
   }, [config]);
 
   return configData ? (
-    <div
-      aria-live="polite"
-      aria-atomic="true"
-      style={{
-        position: "absolute",
-        top: "20px",
-        right: "10px",
-        marginBottom: "10px",
-        zIndex: 10000000,
-      }}
-    >
+    <div aria-live="polite" aria-atomic="true" className="message">
       <Toast
         aria-live="assertive"
         aria-atomic="true"

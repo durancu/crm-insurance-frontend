@@ -27,10 +27,10 @@ const Profile = ({ userProfileGetRequest, user }) => {
       </Row>
       <Row>
         <Col className="pl-4 pr-4" sm="8" lg="8">
-          <Card className="sm-8" style={{ border: "none" }}>
+          <Card className="sm-8 border-0" >
           <h4>My Activity</h4>
           <br/>
-          <h3 style={{color:"#999999"}}>Something pretty cool is coming here soon...</h3>
+          <h3 className="text-secondary">Something pretty cool is coming here soon...</h3>
           {/* <BootstrapTable
             bootstrap4
             keyField="_id"
@@ -48,7 +48,7 @@ const Profile = ({ userProfileGetRequest, user }) => {
           </Card>
         </Col>
         <Col sm="4" lg="4">
-          <Card className="sm-4" style={{ width: "20rem", border: "none" }}>
+          <Card className="sm-4 border-0 card-profile">
             <Card.Img variant="top" src="assets/images/user-thumbnail.jpg" />
             <Card.Body>
               <Card.Title>

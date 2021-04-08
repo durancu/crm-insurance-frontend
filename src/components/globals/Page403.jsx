@@ -8,10 +8,10 @@ const Page403 = ({ ipAddress, checkIpStatus }) => {
   return (
     checkIpStatus === checkIpStatusCodes.UNAUTHORIZED && (
       <>
-        <Row style={{ padding: "0 0 0 0", marginTop: "10%" }}>
+        <Row className="p-0 auth-form ">
           <Col md={{ span: 6, offset: 3 }}>
             <Card>
-              <Card.Body style={{ textAlign: "center" }}>
+              <Card.Body className="text-center">
                 <h1>
                   <ShieldLock size="50" />
                 </h1>

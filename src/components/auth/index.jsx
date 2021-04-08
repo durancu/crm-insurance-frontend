@@ -37,14 +37,14 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
   
 
   return loadingAuthCheck ? (
-    <Row style={{ marginTop: "20%" }} className="justify-content-md-center">
+    <Row className="justify-content-md-center auth-form">
       <Col md="auto">
         <Spinner2 size={60} />
       </Col>
     </Row>
   ) : (
-    <Row style={{ marginTop: "10%" }}>
-      <Col className="ml-auto mr-auto" md="6" sm="10" lg="3" style={{minWidth:"24rem"}}>
+    <Row className="auth-form">
+      <Col className="ml-auto mr-auto" md="6" sm="10" lg="3" >
         <Card>
           <Form onSubmit={handleSubmit}>
             <Card.Header>
@@ -105,9 +105,9 @@ function Auth({ userAuthRequest, loading, error, loadingAuthCheck }) {
                 </Col>
               </Row>
             </Card.Body>
-            <Card.Footer style={{ textAlign: "center" }}>
+            <Card.Footer className="text-center">
               <Row>
-                <Col style={{ fontSize: "13px" }}>
+                <Col className="nav-footer">
                   <small>
                     Powered by{" "}
                     <a href="https://araneconsulting.com">

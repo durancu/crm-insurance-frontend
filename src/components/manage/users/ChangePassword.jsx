@@ -72,8 +72,8 @@ const ChangePassword = ({
             </Modal.Header>
             <Modal.Body>
               <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Password
+                <Form.Label >
+                  <span >* </span>Password
                 </Form.Label>
                 <Form.Control
                   type="password"
@@ -94,8 +94,8 @@ const ChangePassword = ({
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group>
-                <Form.Label style={{ fontSize: "small" }}>
-                  <span style={{ color: "red" }}>* </span>Password Confirm
+                <Form.Label >
+                  <span >* </span>Password Confirm
                 </Form.Label>
                 <Form.Control
                   type="password"

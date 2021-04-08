@@ -92,8 +92,8 @@ const UserCreate = ({
               <Row>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>First Name
+                    <Form.Label >
+                      <span >* </span>First Name
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -109,8 +109,8 @@ const UserCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Last Name
+                    <Form.Label >
+                      <span >* </span>Last Name
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -128,8 +128,8 @@ const UserCreate = ({
               <Row>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Username
+                    <Form.Label >
+                      <span >* </span>Username
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -146,8 +146,8 @@ const UserCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Phone number
+                    <Form.Label >
+                      <span >* </span>Phone number
                     </Form.Label>
                     <Form.Control
                       type="tel"
@@ -166,8 +166,8 @@ const UserCreate = ({
               <Row>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Location
+                    <Form.Label >
+                      <span >* </span>Location
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -193,8 +193,8 @@ const UserCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Position
+                    <Form.Label >
+                      <span >* </span>Position
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -210,8 +210,8 @@ const UserCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Role
+                    <Form.Label >
+                      <span >* </span>Role
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -240,8 +240,8 @@ const UserCreate = ({
 
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Salary
+                    <Form.Label >
+                      <span >* </span>Salary
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -257,8 +257,8 @@ const UserCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Email
+                    <Form.Label >
+                      <span >* </span>Email
                     </Form.Label>
                     <Form.Control
                       type="email"
@@ -274,8 +274,8 @@ const UserCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span>Password
+                    <Form.Label >
+                      <span >* </span>Password
                     </Form.Label>
                     <Form.Control
                       type="password"

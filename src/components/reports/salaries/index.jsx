@@ -60,7 +60,7 @@ export const Reports = ({
           <FilterDate setParams={setParams} />
         </Col>
         <Col sm="4">
-          <h5 style={{ textAlign: "right" }}>
+          <h5 className="text-right">
           {`${monthRange.start} - ${monthRange.end}`}
           </h5>
         </Col>

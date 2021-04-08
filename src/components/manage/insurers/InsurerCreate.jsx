@@ -106,8 +106,8 @@ const InsurerCreate = ({
               <Row>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> Name
+                    <Form.Label >
+                      <span >* </span> Name
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -121,8 +121,8 @@ const InsurerCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> Email
+                    <Form.Label >
+                      <span >* </span> Email
                     </Form.Label>
                     <Form.Control
                       type="email"
@@ -135,8 +135,8 @@ const InsurerCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}>* </span> Phone
+                    <Form.Label >
+                      <span >* </span> Phone
                     </Form.Label>
                     <Form.Control
                       type="tel"
@@ -149,8 +149,8 @@ const InsurerCreate = ({
                 </Col>
                 <Col sm="6">
                   <Form.Group>
-                    <Form.Label style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}> </span> Fax
+                    <Form.Label >
+                      <span > </span> Fax
                     </Form.Label>
                     <Form.Control
                       type="tel"
@@ -170,8 +170,8 @@ const InsurerCreate = ({
               <Row hidden={!isAdmin}>
                 <Col sm="6">
                   <FormGroup>
-                    <FormLabel style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}> </span> Liability
+                    <FormLabel >
+                      <span > </span> Liability
                     </FormLabel>
                     <InputGroup className="mb-3">
                       <FormControl
@@ -179,7 +179,7 @@ const InsurerCreate = ({
                         name="liabilityCommission"
                         value={form.liabilityCommission}
                         onChange={handleChange}
-                        style={{ textAlign: "right" }}
+                        className="text-right"
                       />
                       <InputGroup.Append>
                         <InputGroup.Text>%</InputGroup.Text>
@@ -189,8 +189,8 @@ const InsurerCreate = ({
                 </Col>
                 <Col sm="6">
                   <FormGroup>
-                    <FormLabel style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}></span> Motor Cargo
+                    <FormLabel >
+                      <span ></span> Motor Cargo
                     </FormLabel>
                     <InputGroup className="mb-3">
                       <FormControl
@@ -198,7 +198,7 @@ const InsurerCreate = ({
                         name="cargoCommission"
                         value={form.cargoCommission}
                         onChange={handleChange}
-                        style={{ textAlign: "right" }}
+                        className="text-right"
                       />
                       <InputGroup.Append>
                         <InputGroup.Text>%</InputGroup.Text>
@@ -208,8 +208,8 @@ const InsurerCreate = ({
                 </Col>
                 <Col sm="6">
                   <FormGroup>
-                    <FormLabel style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}> </span> Physical Damage
+                    <FormLabel >
+                      <span > </span> Physical Damage
                     </FormLabel>
                     <InputGroup className="mb-3">
                       <FormControl
@@ -217,7 +217,7 @@ const InsurerCreate = ({
                         name="physicalDamageCommission"
                         value={form.physicalDamageCommission}
                         onChange={handleChange}
-                        style={{ textAlign: "right" }}
+                        className="text-right"
                       />
                       <InputGroup.Append>
                         <InputGroup.Text>%</InputGroup.Text>
@@ -227,8 +227,8 @@ const InsurerCreate = ({
                 </Col>
                 <Col sm="6">
                   <FormGroup>
-                    <FormLabel style={{ fontSize: "small" }}>
-                      <span style={{ color: "red" }}> </span> WC/GL/UMB
+                    <FormLabel >
+                      <span > </span> WC/GL/UMB
                     </FormLabel>
                     <InputGroup className="mb-3">
                       <FormControl
@@ -236,7 +236,7 @@ const InsurerCreate = ({
                         name="wcGlUmbCommission"
                         value={form.wcGlUmbCommission}
                         onChange={handleChange}
-                        style={{ textAlign: "right" }}
+                        className="text-right"
                       />
                       <InputGroup.Append>
                         <InputGroup.Text>%</InputGroup.Text>

@@ -63,24 +63,14 @@ export const companyTypeFormatter = (cell, row) =>
 
 export const componentDeleteFormatter = (cell, row) => {
   return (
-    <Button
-      className="mt-1"
-      style={{ border: "none" }}
-      size="sm"
-      variant="outline-danger"
-    >
+    <Button className="mt-1 border-0" size="sm" variant="outline-danger">
       <Trash />
     </Button>
   );
 };
 export const componentEditFormatter = (cell, row) => {
   return (
-    <Button
-      className="mt-1"
-      style={{ border: "none" }}
-      size="sm"
-      variant="outline-success"
-    >
+    <Button className="mt-1 border-0" size="sm" variant="outline-success">
       <Pencil />
     </Button>
   );
@@ -88,10 +78,14 @@ export const componentEditFormatter = (cell, row) => {
 
 export const calculateMonthRange = (dateParams) => {
   return {
-    start: moment({ "day": 21, "month": dateParams.month, "year": dateParams.year }).subtract(2, 'months').format("MMM Do"),
-    end: moment({ "day": 20, "month": dateParams.month, "year": dateParams.year }).subtract(1, 'months').format("MMM Do, YYYY")
-  }
-}
+    start: moment({ day: 21, month: dateParams.month, year: dateParams.year })
+      .subtract(2, "months")
+      .format("MMM Do"),
+    end: moment({ day: 20, month: dateParams.month, year: dateParams.year })
+      .subtract(1, "months")
+      .format("MMM Do, YYYY"),
+  };
+};
 
 //---------------------------------------
 
@@ -109,12 +103,7 @@ export const isConfirmFormatter = (cell) =>
 export const componentPasswordFormatter = (cell, row) => {
   if (!isAdminCheck(row))
     return (
-      <Button
-        className="mt-1"
-        style={{ border: "none" }}
-        size="sm"
-        variant="outline-success"
-      >
+      <Button className="mt-1 border-0" size="sm" variant="outline-success">
         <Key />
       </Button>
     );
@@ -123,7 +112,7 @@ export const componentPasswordFormatter = (cell, row) => {
 export function baseSalaryFormatter(cell, row) {
   if (cell) {
     return (
-      <span style={{ color: "black", fontWeight: "bold" }}>
+      <span className="text-dark text-bold">
         {Math.round(cell * 100) / 100}
       </span>
     );
@@ -145,7 +134,7 @@ export const userRolesFormatter = (cell, row) => {
 //---------------------------------------
 export function salaryFormatter(cell, row) {
   if (cell) {
-    return <span style={{ color: "green", fontWeight: "bold" }}>{cell}</span>;
+    return <span className="salary-formatter">{cell}</span>;
   }
 
   return <span>-</span>;
@@ -255,7 +244,8 @@ export function rowIsNotAdmin(cell, row) {
  * @param {number} number
  * @return {number} number
  */
-export const transformNumber = (number) => (isNaN(number) ? 0 : parseFloat(number));
+export const transformNumber = (number) =>
+  isNaN(number) ? 0 : parseFloat(number);
 
 /**Calc premium
  * @param {object} formData

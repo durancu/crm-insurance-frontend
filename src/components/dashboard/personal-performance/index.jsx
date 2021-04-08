@@ -18,7 +18,7 @@ const PersonalPerformance = ({
   dashboardPersonalPerformanceRequest,
 }) => {
   const [params] = useState({
-    month: moment().date() > 21 ? moment().month() + 2 : moment().month()+1,
+    month: moment().date() > 21 ? moment().month() + 2 : moment().month() + 1,
     year: moment().year(),
   });
 
@@ -36,15 +36,14 @@ const PersonalPerformance = ({
       <Row>
         <Col>
           <h4>
-            Monthly Performance{" "}
-            <small>({reportMonth} - Today)</small>
+            Monthly Performance <small>({reportMonth} - Today)</small>
           </h4>
           <hr />
         </Col>
       </Row>
       <Row>
         {loading ? (
-          <Col style={{ textAlign: "center" }}>
+          <Col className="text-center">
             <Spinner />
           </Col>
         ) : (
@@ -52,7 +51,7 @@ const PersonalPerformance = ({
             <Col sm="12" lg="12">
               <p>{data.message}</p>
             </Col>
-            <Col sm="12" lg="12" style={{ textAlign: "center" }}>
+            <Col sm="12" lg="12" className="text-center">
               {data.metrics &&
                 data.metrics.map((metric, i) => (
                   <PersonalPerformanceItem key={i} metric={metric} />
