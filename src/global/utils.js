@@ -12,7 +12,10 @@ export const queryStringFromObject = function (object) {
   return parameters.join("&");
 };
 
-export async function userPublicIPV4Address() { return await publicIp.v4() };
+export async function userPublicIPV4Address() {
+  if (process.env.REACT_APP_ENV === "local") return "127.0.0.1";
+  return await publicIp.v4();
+}
 
 export async function checkUserIpStatus() {
   const addresses = process.env.REACT_APP_IP_WHITELIST
@@ -21,9 +24,9 @@ export async function checkUserIpStatus() {
 
   const ipAddress = await userPublicIPV4Address();
 
-  return (
-    (process.env.REACT_APP_ENV === "local" || process.env.REACT_APP_ENV === "dev") ||
-      (process.env.REACT_APP_ENV === "pro" &&
-    addresses.includes(ipAddress)) ? checkIpStatusCodes.AUTHORIZED : checkIpStatusCodes.UNAUTHORIZED
-  );
+  return process.env.REACT_APP_ENV === "local" ||
+    process.env.REACT_APP_ENV === "dev" ||
+    (process.env.REACT_APP_ENV === "pro" && addresses.includes(ipAddress))
+    ? checkIpStatusCodes.AUTHORIZED
+    : checkIpStatusCodes.UNAUTHORIZED;
 }
