@@ -52,28 +52,6 @@ export const payrollReportTableColumns = (isAdmin = false) => [
     footerFormatter: footerPriceFormatter,
     footerAlign: "right",
   },
-  /* {
-    dataField: "permits",
-    text: "Permits",
-    headerAlign: "right",
-    formatter: priceFormatter,
-    sort: true,
-    align: "right",
-    footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
-    footerFormatter: footerPriceFormatter,
-    footerAlign: "right",
-  },
-  {
-    dataField: "tips",
-    text: "Tips",
-    headerAlign: "right",
-    formatter: priceFormatter,
-    sort: true,
-    align: "right",
-    footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
-    footerFormatter: footerPriceFormatter,
-    footerAlign: "right",
-  }, */
   {
     dataField: "bonus",
     text: "Bonus",
