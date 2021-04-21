@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import moment from "moment";
 
 //Components
 import DatePicker from "react-datepicker";
@@ -9,15 +8,14 @@ import { Form } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 
 const FilterDate = ({ setParams, params }) => {
-  const [state, setState] = useState(new Date());
+  const [state, setState] = useState(new Date().setMonth(params.month-1));
 
   const handleChange = (date) => {
     setState(date);
-    console.log(params);
     setParams({
       ...params,
-      month: moment(date).month() + 1,
-      year: moment(date).year(),
+      month: date.getMonth()+1,
+      year: date.getFullYear(),
     });
   };
 

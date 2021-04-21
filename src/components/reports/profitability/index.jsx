@@ -26,13 +26,13 @@ export const Reports = ({
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [params, setParams] = useState({
-    month: moment().month()+1,
+    month: moment().date() > 20 ? moment().month() + 2 : moment().month()+1,
     year: moment().year(),
-    location: "MEXICO-I",
+    location: user.location,
   });
 
   const [monthRange, setMonthRange] = useState(calculateMonthRange({
-    month: moment().month()+1,
+    month: moment().date() > 20 ? moment().month() + 2 : moment().month()+1,
     year: moment().year(),
   }));
 

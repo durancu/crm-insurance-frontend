@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 
 const FilterLocation = ({ setParams, params }) => {
-  const [location, setLocation] = useState('MEXICO-I');
+  const [location, setLocation] = useState(params.location);
 
   const handleLocationDropdownChange =  ({ target }) => {
     setLocation(target.value);

@@ -30,14 +30,14 @@ export const Reports = ({
   const [isAdmin, setIsAdmin] = useState(false);
 
   const [params, setParams] = useState({
-    month: moment().month() + 1,
+    month: moment().date() > 20 ? moment().month() + 2 : moment().month()+1,
     year: moment().year(),
-    location: "MEXICO-I",
+    location: user.location,
   });
 
   const [monthRange, setMonthRange] = useState(
     calculateMonthRange({
-      month: moment().month() + 1,
+      month: moment().date() > 20 ? moment().month() + 2 : moment().month()+1,
       year: moment().year(),
     })
   );
@@ -48,6 +48,7 @@ export const Reports = ({
 
   useEffect(() => {
     reportSalaryRequest({}, params);
+    console.log(params);
     setMonthRange(calculateMonthRange(params));
   }, [params, reportSalaryRequest]);
 
@@ -64,10 +65,10 @@ export const Reports = ({
           <FilterDate setParams={setParams} params={params} />
         </Col>
         <Col sm="3">
-          <FilterLocation setParams={setParams} params={params} />
+        { (isAdminCheck(user) && <FilterLocation setParams={setParams} params={params} />) }
         </Col>
-        <Col sm="4">
-          <h5 style={{ textAlign: "right" }}>
+        <Col sm="6" style={{ textAlign: "right" }}>
+          <h5>
             {`${monthRange.start} - ${monthRange.end}`}
           </h5>
         </Col>
