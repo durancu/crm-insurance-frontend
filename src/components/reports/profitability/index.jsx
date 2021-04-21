@@ -11,7 +11,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import { isAdminCheck } from "../../../config/user";
-import FilterDate from "../../globals/filters/FilterDate";
+import FilterDate from "../../globals/filters/FilterLocation";
 import moment from "moment";
 import Spinner from "../../globals/spinner";
 import { calculateMonthRange } from "../../globals/functions";

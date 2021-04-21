@@ -18,6 +18,7 @@ import FilterDate from "../../globals/filters/FilterDate";
 import moment from "moment";
 import Spinner from "../../globals/spinner";
 import { calculateMonthRange } from "../../globals/functions";
+import FilterLocation from "../../globals/filters/FilterLocation";
 
 export const Reports = ({
   reportSalaryRequest,
@@ -31,6 +32,7 @@ export const Reports = ({
   const [params, setParams] = useState({
     month: moment().month()+1,
     year: moment().year(),
+    location: 'MEXICO-I'
   });
 
   const [monthRange, setMonthRange] = useState(calculateMonthRange({
@@ -56,8 +58,11 @@ export const Reports = ({
         <Col></Col>
       </Row>
       <Row className="mt-3 mb-3">
-        <Col sm="8">
-          <FilterDate setParams={setParams} />
+        <Col sm="3" >
+          <FilterDate setParams={setParams} />          
+        </Col>
+        <Col sm="3">
+          <FilterLocation setParams={setParams} />
         </Col>
         <Col sm="4">
           <h5 style={{ textAlign: "right" }}>

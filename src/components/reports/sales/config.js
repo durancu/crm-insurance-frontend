@@ -70,9 +70,20 @@ export const salesReportTableColumns = () =>
             footer: "",
             filter: textFilter({ placeholder: "search..." }),
         },
-        {
+/*         {
             dataField: "totalCharge",
             text: "Down Payment",
+            headerAlign: "right",
+            formatter: priceFormatter,
+            sort: true,
+            align: "right",
+            footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
+            footerFormatter: footerPriceFormatter,
+            footerAlign: "right",
+        }, */
+        {
+            dataField: "premium",
+            text: "Premium",
             headerAlign: "right",
             formatter: priceFormatter,
             sort: true,
@@ -114,17 +125,7 @@ export const salesReportTableColumns = () =>
             footerFormatter: footerPriceFormatter,
             footerAlign: "right",
         },
-        {
-            dataField: "premium",
-            text: "Premium",
-            headerAlign: "right",
-            formatter: priceFormatter,
-            sort: true,
-            align: "right",
-            footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
-            footerFormatter: footerPriceFormatter,
-            footerAlign: "right",
-        },
+        
 
     ];
 
