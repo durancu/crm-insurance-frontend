@@ -3,12 +3,12 @@ import React, { useState } from "react";
 //Components
 import { Form } from "react-bootstrap";
 
-const FilterLocation = ({ setParams }) => {
+const FilterLocation = ({ setParams, params }) => {
   const [location, setLocation] = useState('MEXICO-I');
 
   const handleLocationDropdownChange =  ({ target }) => {
     setLocation(target.value);
-    setParams({ location: target.value });
+    setParams({...params, location: target.value });
   };
 
   return (

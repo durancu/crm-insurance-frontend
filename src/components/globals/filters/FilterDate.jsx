@@ -8,12 +8,17 @@ import { Form } from "react-bootstrap";
 //Assets
 import "react-datepicker/dist/react-datepicker.css";
 
-const FilterDate = ({ setParams }) => {
+const FilterDate = ({ setParams, params }) => {
   const [state, setState] = useState(new Date());
 
   const handleChange = (date) => {
     setState(date);
-    setParams({ month: moment(date).month()+1, year: moment(date).year() });
+    console.log(params);
+    setParams({
+      ...params,
+      month: moment(date).month() + 1,
+      year: moment(date).year(),
+    });
   };
 
   return (

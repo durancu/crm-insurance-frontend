@@ -11,10 +11,11 @@ import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import { isAdminCheck } from "../../../config/user";
-import FilterDate from "../../globals/filters/FilterLocation";
+import FilterDate from "../../globals/filters/FilterDate";
 import moment from "moment";
 import Spinner from "../../globals/spinner";
 import { calculateMonthRange } from "../../globals/functions";
+import FilterLocation from "../../globals/filters/FilterLocation";
 
 export const Reports = ({
   reportProfitRequest,
@@ -27,6 +28,7 @@ export const Reports = ({
   const [params, setParams] = useState({
     month: moment().month()+1,
     year: moment().year(),
+    location: "MEXICO-I",
   });
 
   const [monthRange, setMonthRange] = useState(calculateMonthRange({
@@ -39,7 +41,6 @@ export const Reports = ({
   }, [user, user.roles]);
 
   useEffect(() => {
-    console.log(params);
     reportProfitRequest({}, params);
     setMonthRange(calculateMonthRange(params));
   }, [params, reportProfitRequest]);
@@ -53,10 +54,13 @@ export const Reports = ({
         <Col></Col>
       </Row>
       <Row className="mt-3 mb-3">
-        <Col sm="8">
-          <FilterDate setParams={setParams} />
+        <Col sm="3">
+          <FilterDate setParams={setParams} params={params} />
         </Col>
-        <Col sm="4">
+        <Col sm="3">
+          <FilterLocation setParams={setParams} params={params} />
+        </Col>
+        <Col sm="6">
           <h5 style={{ textAlign: "right" }}>
             {`${monthRange.start} - ${monthRange.end}`}
           </h5>

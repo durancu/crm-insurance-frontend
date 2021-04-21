@@ -42,7 +42,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
   },
   {
     dataField: "premium",
-    text: "Total Sales",
+    text: "Total Premium",
     headerAlign: "right",
     formatter: priceFormatter,
     sort: true,
@@ -114,7 +114,7 @@ export const salesReportTableColumns = (isAdmin = false) => [
   },
   {
     dataField: "totalSaleGrossProfit",
-    text: "Sales Gross",
+    text: "Gross Profits",
     headerAlign: "right",
     //formatter: totalGrossProfitFormatter,
     sort: true,
@@ -126,13 +126,14 @@ export const salesReportTableColumns = (isAdmin = false) => [
   },
   {
     dataField: "totalSaleNetProfit",
-    text: "Sales Net",
+    text: "Net Profits",
     headerAlign: "right",
     //formatter: totalGrossProfitFormatter,
     sort: true,
     align: "right",
     footer: (columnData) => columnData.reduce((acc, item) => acc + item, 0),
     //footerFormatter: footerTotalGrossProfitFormatter,
+    footerFormatter: footerPriceFormatter,
     footerAlign: "right",
   },
 ];

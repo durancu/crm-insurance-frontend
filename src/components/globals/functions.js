@@ -41,7 +41,7 @@ export function priceFormatter(cell, row) {
 }
 
 export function preciseNumber(number, precision) {
-  if (!Number(number)) {
+  if (!Number(number) || number<1) {
     return "0.00";
   }
   return Number.parseFloat(number).toPrecision(
