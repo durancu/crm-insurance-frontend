@@ -11,41 +11,31 @@ import { filterGetSuccess } from "../../../redux/actions";
 
 import { DateRange, dateRangeByName } from "../date-factory";
 
-const defaultDateRange = dateRangeByName(DateRange.MONTH_TO_DATE);
-const DateRangeFilter = ({ filterGetSuccess, params }) => {
-
-  const defaultForm = {
-    dateRangeName: DateRange.ALL,
-    startDate: defaultDateRange.startDate,
-    endDate: defaultDateRange.endDate,
-  };
+const defaultDateRange = dateRangeByName(DateRange.THIS_FISCAL_MONTH);
+const DateRangeFilter = ({ filterGetSuccess, setParams }) => {
 
   const [dateRange, setDateRange] = useState({
-    startDate: defaultForm.startDate,
-    endDate: defaultForm.endDate,
+    startDate: defaultDateRange.startDate,
+    endDate: defaultDateRange.endDate,
   });
-  const [dateRangeName, setDateRangeName] = useState(defaultForm.dateRangeName);
-  const [currentDateRange, setCurrentDateRange] = useState("");
+  const [dateRangeName, setDateRangeName] = useState(DateRange.THIS_FISCAL_MONTH);
 
   useEffect(() => {
-    setDateRange(currentDateRange);
-  }, [currentDateRange]);
-
-  useEffect(() => {
-    filterGetSuccess({
+    console.log(dateRange);
+    setParams({
       "start_date": dateRange.startDate,
       "end_date": dateRange.endDate,
     });
-  }, [dateRange, filterGetSuccess]);
+  }, [dateRange, filterGetSuccess, setParams]);
 
   const handleDateRangeDropdownChange = ({ target }) => {
     setDateRangeName(target.value);
-    setCurrentDateRange(dateRangeByName(target.value));
+    setDateRange(dateRangeByName(target.value))
   };
 
   //Load data of form
   const handleChangeDate = ({ target }) => {
-    setDateRangeName("CUSTOM");
+    setDateRangeName(DateRange.CUSTOM);
     setDateRange((dateRange) => ({
       ...dateRange,
       [target.name]: moment(target.value).format("YYYY-MM-DD"),
@@ -64,18 +54,21 @@ const DateRangeFilter = ({ filterGetSuccess, params }) => {
           onChange={handleDateRangeDropdownChange}
           value={dateRangeName}
           className="my-2 mr-sm-2"
+          readOnly={true}
           custom
         >
           <option value="">All</option>
-          <option value="TODAY">Today</option>
-          <option value="YESTERDAY">Yesterday</option>
-          <option value="WTD">This Week</option>
-          <option value="LAST_WEEK">Last Week</option>
-          <option value="MTD">This Month</option>
-          <option value="LAST_MONTH">Last Month</option>
-          <option value="YTD">This Year</option>
-          <option value="LAST_YEAR">Last Year</option>
-          <option value="CUSTOM">Custom</option>
+          <option value={DateRange.THIS_FISCAL_MONTH}>This Payment Month</option>
+          <option value={DateRange.LAST_FISCAL_MONTH}>Last Payment Month</option>
+          <option value={DateRange.TODAY}>Today</option>
+          <option value={DateRange.YESTERDAY}>Yesterday</option>
+          <option value={DateRange.WEEK_TO_DATE}>This Week</option>
+          <option value={DateRange.LAST_WEEK}>Last Week</option>
+          <option value={DateRange.MONTH_TO_DATE}>This Month</option>
+          <option value={DateRange.LAST_MONTH}>Last Month</option>
+          <option value={DateRange.YEAR_TO_DATE}>This Year</option>
+          <option value={DateRange.LAST_YEAR}>Last Year</option>
+          <option value={DateRange.CUSTOM}>Custom</option>
         </Form.Control>
 
         <Form.Group hidden={dateRangeName === ""}>

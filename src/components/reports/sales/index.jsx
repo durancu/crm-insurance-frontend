@@ -13,6 +13,7 @@ import Spinner from "../../globals/spinner";
 import { Row, Col } from "react-bootstrap";
 import { salesReportTableColumns, salesReportDefaultSorted } from "./config";
 import { isAdminCheck } from "../../../config/user";
+import { DateRange, dateRangeByName } from "../../globals/date-factory";
 
 export const Reports = ({
   reportListRequest,
@@ -20,9 +21,14 @@ export const Reports = ({
   errorReport,
   sales,
   user,
-  params,
 }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const defaultDateRange = dateRangeByName(DateRange.THIS_FISCAL_MONTH);
+  const [params, setParams] = useState({
+    startDate: defaultDateRange.startDate,
+    endDate: defaultDateRange.endDate,
+  });
+
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
   }, [user, user.roles]);
@@ -30,6 +36,7 @@ export const Reports = ({
   useEffect(() => {
     reportListRequest({}, params);
   }, [params, reportListRequest]);
+  
 
   return (
     <>
@@ -40,7 +47,7 @@ export const Reports = ({
       </Row>
       <Row className="mb-2">
         <Col lg="10" sm="6">
-          <DateRangeFilter />
+          <DateRangeFilter setParams={setParams} params={params} />
         </Col>
       </Row>
 

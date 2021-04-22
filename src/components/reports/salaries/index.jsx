@@ -30,15 +30,27 @@ export const Reports = ({
   const [isAdmin, setIsAdmin] = useState(false);
 
   const [params, setParams] = useState({
-    month: moment().date() > 20 ? moment().month() + 2 : moment().month()+1,
-    year: moment().year(),
+    month:
+      moment().date() > 20
+        ? moment().add(2, "months").month()
+        : moment().add(1, "months").month(),
+    year:
+      moment().date() > 20
+        ? moment().add(2, "months").year()
+        : moment().add(1, "months").year(),
     location: user.location,
   });
 
   const [monthRange, setMonthRange] = useState(
     calculateMonthRange({
-      month: moment().date() > 20 ? moment().month() + 2 : moment().month()+1,
-      year: moment().year(),
+      month:
+        moment().date() > 20
+          ? moment().add(2, "months").month()
+          : moment().add(1, "months").month(),
+      year:
+        moment().date() > 20
+          ? moment().add(2, "months").year()
+          : moment().add(1, "months").year(),
     })
   );
 
@@ -48,7 +60,6 @@ export const Reports = ({
 
   useEffect(() => {
     reportSalaryRequest({}, params);
-    console.log(params);
     setMonthRange(calculateMonthRange(params));
   }, [params, reportSalaryRequest]);
 
@@ -65,12 +76,12 @@ export const Reports = ({
           <FilterDate setParams={setParams} params={params} />
         </Col>
         <Col sm="3">
-        { (isAdminCheck(user) && <FilterLocation setParams={setParams} params={params} />) }
+          {isAdminCheck(user) && (
+            <FilterLocation setParams={setParams} params={params} />
+          )}
         </Col>
         <Col sm="6" style={{ textAlign: "right" }}>
-          <h5>
-            {`${monthRange.start} - ${monthRange.end}`}
-          </h5>
+          <h5>{`${monthRange.start} - ${monthRange.end}`}</h5>
         </Col>
       </Row>
 

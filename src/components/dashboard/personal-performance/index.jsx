@@ -8,6 +8,7 @@ import PersonalPerformanceItem from "./PersonalPerformanceItem";
 //Actions
 import { dashboardPersonalPerformanceRequest } from "../../../redux/actions";
 import Spinner from "../../globals/spinner";
+import { calculateMonthRange } from "../../globals/functions";
 
 const PersonalPerformance = ({
   user,
@@ -17,15 +18,28 @@ const PersonalPerformance = ({
   isAdmin,
   dashboardPersonalPerformanceRequest,
 }) => {
+
   const [params] = useState({
-    month: moment().date() > 21 ? moment().month() + 2 : moment().month()+1,
-    year: moment().year(),
+    month:
+      moment().date() > 20
+        ? moment().add(2, "months").month()
+        : moment().add(1, "months").month(),
+    year:
+      moment().date() > 20 ? moment().add(2, "months").year()
+      : moment().add(1, "months").year(),
+    location: user.location,
   });
 
-  const [reportMonth] = useState(
-    moment().date() < 21
-      ? moment({ day: 21 }).subtract(1, "months").format("MMM Do")
-      : moment({ day: 21 }).format("MMM Do")
+  const [monthRange] = useState(
+    calculateMonthRange({
+      month:
+      moment().date() > 20
+        ? moment().add(2, "months").month()
+        : moment().add(1, "months").month(),
+    year:
+      moment().date() > 20 ? moment().add(2, "months").year()
+      : moment().add(1, "months").year(),
+    })
   );
 
   useEffect(() => {
@@ -36,8 +50,8 @@ const PersonalPerformance = ({
       <Row>
         <Col>
           <h4>
-            Monthly Performance{" "}
-            <small>({reportMonth} - Today)</small>
+            Performance{" "}
+            <small>({monthRange.start} - {monthRange.end})</small>
           </h4>
           <hr />
         </Col>

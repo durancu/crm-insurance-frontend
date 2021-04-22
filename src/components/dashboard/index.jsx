@@ -9,11 +9,18 @@ import DateRangeFilter from "../globals/filters/DateRangeFilter";
 
 import { dashboardGetRequest } from "../../redux/actions";
 import PersonalPerformance from "./personal-performance";
+import { DateRange, dateRangeByName } from "../globals/date-factory";
 
-export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
+export const Dashboard = ({ charts, user, dashboardGetRequest }) => {
+  const defaultDateRange = dateRangeByName(DateRange.THIS_FISCAL_MONTH);
   const [dashboardConfig, setDashboardConfig] = useState();
 
+
   const [isAdmin, setIsAdmin] = useState(true);
+  const [params, setParams] = useState({
+    startDate: defaultDateRange.startDate,
+    endDate: defaultDateRange.endDate,
+  });
 
   useEffect(() => {
     setIsAdmin(isAdminCheck(user));
@@ -24,7 +31,10 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
   }, [user]);
 
   useEffect(() => {
-    dashboardConfig && dashboardGetRequest(dashboardConfig, params);
+    console.log(params);
+    if (dashboardConfig && params) {
+      dashboardGetRequest(dashboardConfig, params);
+    }
   }, [dashboardConfig, dashboardGetRequest, params]);
 
   return (
@@ -44,7 +54,8 @@ export const Dashboard = ({ charts, user, dashboardGetRequest, params }) => {
             for different date range.
           </p>
 
-          <DateRangeFilter />
+          <DateRangeFilter setParams={setParams} params={params}/>
+
           <Row>
             {charts &&
               charts.map((chartData, key) => (

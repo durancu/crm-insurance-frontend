@@ -26,6 +26,7 @@ import DateRangeFilter from "../globals/filters/DateRangeFilter";
 import SaleCreate from "./SaleCreate";
 import DeleteModelAlert from "../globals/DeleteModelAlert";
 import { isAdminCheck, isExecutiveCheck } from "../../config/user";
+import { DateRange, dateRangeByName } from "../globals/date-factory";
 
 export const SaleList = ({
   userLoadRequest,
@@ -35,7 +36,6 @@ export const SaleList = ({
   saleGetRequest,
   customerLoadRequest,
   insurerListRequest,
-  params,
   loadingCreate,
   loadingDelete,
   loadingUpdate,
@@ -45,6 +45,7 @@ export const SaleList = ({
   insurers,
   user,
 }) => {
+  const defaultDateRange = dateRangeByName(DateRange.THIS_FISCAL_MONTH);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isExecutive, setIsExecutive] = useState(false);
   //Functions
@@ -53,6 +54,19 @@ export const SaleList = ({
   const [modal, setModal] = useState(false);
   const [onEditMode, setOnEditMode] = useState(false);
   const [id, setId] = useState("");
+
+  const showModal = () => {
+    setModal(!modal);
+  };
+
+  const launchEditForm = () => {
+    setOnEditMode(!onEditMode);
+  };
+
+  const [params, setParams] = useState({
+    startDate: defaultDateRange.startDate,
+    endDate: defaultDateRange.endDate,
+  });
 
   //Functions
   useEffect(() => {
@@ -78,23 +92,13 @@ export const SaleList = ({
     onEditMode && saleGetRequest(id);
   }, [id, onEditMode, saleGetRequest]);
 
-  const showModal = () => {
-    setModal(!modal);
-  };
-
-  const launchEditForm = () => {
-    setOnEditMode(!onEditMode);
-
-    console.log(`launchEditForm`, onEditMode);
-  };
-
   return (
     <>
       <Card>
         <Card.Body>
           <Row className="mb-2">
             <Col lg="8" sm="6">
-              <DateRangeFilter model={"sale"} />
+              <DateRangeFilter setParams={setParams} params={params} />
             </Col>
             <Col lg="4" sm="6" align="right">
               <SaleCreate editState={{ onEditMode, setOnEditMode }} />

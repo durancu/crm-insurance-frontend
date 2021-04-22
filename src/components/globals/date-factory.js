@@ -15,6 +15,8 @@ export const DateRange = {
     YEAR_TO_DATE: 'YTD',
     LAST_YEAR: 'LAST_YEAR',
     CUSTOM: 'CUSTOM',
+    THIS_FISCAL_MONTH: 'THIS_FISCAL_MONTH',
+    LAST_FISCAL_MONTH: 'LAST_FISCAL_MONTH',
 }
 
 export function dateRangeByName(rangeName = DateRange.MONTH_TO_DATE, format = 'YYYY-MM-DD') {
@@ -23,6 +25,10 @@ export function dateRangeByName(rangeName = DateRange.MONTH_TO_DATE, format = 'Y
 
         case DateRange.YESTERDAY:
             return yesterday(format);
+        case DateRange.THIS_FISCAL_MONTH:
+            return thisPayPeriod(format);
+        case DateRange.LAST_FISCAL_MONTH:
+            return lastPayPeriod(format);
         case DateRange.WEEK_TO_DATE:
             return weekToDate(format);
         case DateRange.LAST_WEEK:
@@ -49,6 +55,43 @@ export function dateRangeByName(rangeName = DateRange.MONTH_TO_DATE, format = 'Y
             }
     }
 
+}
+
+export function thisPayPeriod(format = DateRange.MONTH_TO_DATE) {
+
+    const range = {
+        start:
+        moment().date() > 20 ? moment().set('date', 21)
+            : moment().subtract(1, "months").set('date', 21),
+        end:
+            moment().date() > 20
+                ? moment().add(1, "months").set('date', 20)
+                : moment().set('date', 20),
+
+    };
+
+    return {
+        "startDate": range.start.format(format ? format : DEFAULT_FORMAT),
+        "endDate": range.end.format(format ? format : DEFAULT_FORMAT)
+    };
+}
+
+export function lastPayPeriod(format = DateRange.MONTH_TO_DATE) {
+    const range = {
+        start:
+        moment().date() > 20 ? moment().subtract(1, "months").set('date', 21)
+            : moment().subtract(2, "months").set('date', 21),
+        end:
+            moment().date() > 20
+                ? moment().set('date', 20)
+                : moment().subtract(1, "months").set('date', 20),
+
+    };
+
+    return {
+        "startDate": range.start.format(format ? format : DEFAULT_FORMAT),
+        "endDate": range.end.format(format ? format : DEFAULT_FORMAT)
+    };
 }
 
 export function today(format = DateRange.MONTH_TO_DATE) {
